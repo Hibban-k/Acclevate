@@ -1,0 +1,366 @@
+{
+    "categories": [
+        {
+            "id": "all",
+            "name": "All Services"
+        },
+        {
+            "id": "strategy",
+            "name": "Strategy"
+        },
+        {
+            "id": "digital",
+            "name": "Digital"
+        },
+        {
+            "id": "operations",
+            "name": "Operations"
+        },
+        {
+            "id": "people",
+            "name": "People & Organization"
+        }
+    ],
+    "services": [
+        {
+            "id": "strategy-consulting",
+            "title": "Strategy Consulting",
+            "tagline": "Shape your future with clarity",
+            "category": "strategy",
+            "description": "We partner with organizations to develop comprehensive strategies that drive sustainable growth and competitive advantage.",
+            "features": [
+                {
+                    "icon": "🎯",
+                    "title": "Market Analysis",
+                    "description": "Deep-dive analysis of market dynamics and competitive landscape."
+                },
+                {
+                    "icon": "📊",
+                    "title": "Growth Strategy",
+                    "description": "Actionable roadmaps for organic growth and market expansion."
+                },
+                {
+                    "icon": "🔄",
+                    "title": "Transformation",
+                    "description": "Guide organizational change with strategic frameworks."
+                },
+                {
+                    "icon": "💡",
+                    "title": "Innovation",
+                    "description": "Identify breakthrough opportunities and build innovation capabilities."
+                }
+            ],
+            "benefits": [
+                "Accelerated decision-making",
+                "Clear alignment across leadership",
+                "Sustainable competitive advantages"
+            ]
+        },
+        {
+            "id": "digital-transformation",
+            "title": "Digital Transformation",
+            "tagline": "Reimagine your business for the digital age",
+            "category": "digital",
+            "description": "Navigate digital disruption with end-to-end transformation strategies that modernize operations and enhance customer experiences.",
+            "features": [
+                {
+                    "icon": "☁️",
+                    "title": "Cloud Migration",
+                    "description": "Seamless transition to cloud infrastructure."
+                },
+                {
+                    "icon": "🤖",
+                    "title": "AI & Automation",
+                    "description": "Intelligent automation solutions for efficiency."
+                },
+                {
+                    "icon": "📱",
+                    "title": "Digital Products",
+                    "description": "Design digital products that delight customers."
+                },
+                {
+                    "icon": "🔐",
+                    "title": "Cybersecurity",
+                    "description": "Robust security frameworks and compliance."
+                }
+            ],
+            "benefits": [
+                "Reduced operational costs",
+                "Enhanced customer experiences",
+                "Future-proof technology"
+            ]
+        },
+        {
+            "id": "operations-excellence",
+            "title": "Operations Excellence",
+            "tagline": "Optimize every dimension of performance",
+            "category": "operations",
+            "description": "Drive operational excellence through process optimization and continuous improvement methodologies.",
+            "features": [
+                {
+                    "icon": "⚙️",
+                    "title": "Process Optimization",
+                    "description": "Streamline workflows and eliminate inefficiencies."
+                },
+                {
+                    "icon": "📦",
+                    "title": "Supply Chain",
+                    "description": "Build resilient, efficient supply chains."
+                },
+                {
+                    "icon": "🏭",
+                    "title": "Manufacturing",
+                    "description": "Lean manufacturing and Industry 4.0."
+                },
+                {
+                    "icon": "💰",
+                    "title": "Cost Reduction",
+                    "description": "Identify cost savings across the value chain."
+                }
+            ],
+            "benefits": [
+                "Significant cost reduction",
+                "Enhanced operational agility",
+                "Improved quality"
+            ]
+        },
+        {
+            "id": "leadership-advisory",
+            "title": "Leadership Advisory",
+            "tagline": "Empower leaders to drive change",
+            "category": "people",
+            "description": "Develop exceptional leaders through executive coaching and leadership development programs.",
+            "features": [
+                {
+                    "icon": "👥",
+                    "title": "Executive Coaching",
+                    "description": "One-on-one coaching for C-suite executives."
+                },
+                {
+                    "icon": "🎓",
+                    "title": "Leadership Development",
+                    "description": "Programs to develop next-generation leaders."
+                },
+                {
+                    "icon": "🏢",
+                    "title": "Organizational Design",
+                    "description": "Optimize structures for agility."
+                },
+                {
+                    "icon": "🎯",
+                    "title": "Talent Strategy",
+                    "description": "Strategic workforce planning."
+                }
+            ],
+            "benefits": [
+                "Stronger leadership bench",
+                "Higher employee engagement",
+                "Accelerated execution"
+            ]
+        },
+        {
+            "id": "mergers-acquisitions",
+            "title": "Mergers & Acquisitions",
+            "tagline": "Unlock value through strategic transactions",
+            "category": "strategy",
+            "description": "End-to-end M&A support from target identification through post-merger integration.",
+            "features": [
+                {
+                    "icon": "🔍",
+                    "title": "Due Diligence",
+                    "description": "Comprehensive target assessment and valuation."
+                },
+                {
+                    "icon": "🤝",
+                    "title": "Deal Execution",
+                    "description": "Transaction structuring and negotiation support."
+                },
+                {
+                    "icon": "🔄",
+                    "title": "Integration Planning",
+                    "description": "Post-merger integration roadmaps."
+                },
+                {
+                    "icon": "📈",
+                    "title": "Synergy Capture",
+                    "description": "Realize projected deal synergies."
+                }
+            ],
+            "benefits": [
+                "Informed deal decisions",
+                "Successful integrations",
+                "Full synergy realization"
+            ]
+        },
+        {
+            "id": "data-analytics",
+            "title": "Data & Analytics",
+            "tagline": "Turn data into competitive advantage",
+            "category": "digital",
+            "description": "Build analytics capabilities that transform data into actionable insights and business value.",
+            "features": [
+                {
+                    "icon": "📊",
+                    "title": "Analytics Strategy",
+                    "description": "Define your data and analytics roadmap."
+                },
+                {
+                    "icon": "🧠",
+                    "title": "Advanced Analytics",
+                    "description": "Predictive and prescriptive analytics."
+                },
+                {
+                    "icon": "📈",
+                    "title": "BI & Reporting",
+                    "description": "Modern dashboards and reporting."
+                },
+                {
+                    "icon": "🗄️",
+                    "title": "Data Governance",
+                    "description": "Data quality and governance frameworks."
+                }
+            ],
+            "benefits": [
+                "Data-driven decision making",
+                "Improved forecasting",
+                "Enhanced insights"
+            ]
+        },
+        {
+            "id": "customer-experience",
+            "title": "Customer Experience",
+            "tagline": "Create experiences that inspire loyalty",
+            "category": "digital",
+            "description": "Design and deliver exceptional customer experiences across all touchpoints.",
+            "features": [
+                {
+                    "icon": "🎨",
+                    "title": "CX Design",
+                    "description": "Human-centered experience design."
+                },
+                {
+                    "icon": "📱",
+                    "title": "Omnichannel",
+                    "description": "Seamless cross-channel experiences."
+                },
+                {
+                    "icon": "💬",
+                    "title": "Voice of Customer",
+                    "description": "Customer feedback and insights programs."
+                },
+                {
+                    "icon": "🔄",
+                    "title": "Journey Mapping",
+                    "description": "End-to-end customer journey optimization."
+                }
+            ],
+            "benefits": [
+                "Increased customer satisfaction",
+                "Higher retention rates",
+                "Revenue growth"
+            ]
+        },
+        {
+            "id": "supply-chain-logistics",
+            "title": "Supply Chain & Logistics",
+            "tagline": "Build resilient, efficient supply networks",
+            "category": "operations",
+            "description": "Optimize your supply chain for efficiency, resilience, and sustainability.",
+            "features": [
+                {
+                    "icon": "🌐",
+                    "title": "Network Design",
+                    "description": "Optimize distribution network structure."
+                },
+                {
+                    "icon": "📦",
+                    "title": "Inventory Optimization",
+                    "description": "Right-size inventory across the network."
+                },
+                {
+                    "icon": "🚚",
+                    "title": "Logistics Excellence",
+                    "description": "Transportation and warehouse optimization."
+                },
+                {
+                    "icon": "🌱",
+                    "title": "Sustainable Supply Chain",
+                    "description": "Reduce environmental footprint."
+                }
+            ],
+            "benefits": [
+                "Lower logistics costs",
+                "Improved service levels",
+                "Supply chain resilience"
+            ]
+        },
+        {
+            "id": "change-management",
+            "title": "Change Management",
+            "tagline": "Navigate transformation with confidence",
+            "category": "people",
+            "description": "Lead organizational change with proven methodologies and stakeholder engagement.",
+            "features": [
+                {
+                    "icon": "📣",
+                    "title": "Communication Strategy",
+                    "description": "Compelling change narratives."
+                },
+                {
+                    "icon": "👥",
+                    "title": "Stakeholder Engagement",
+                    "description": "Build coalition for change."
+                },
+                {
+                    "icon": "📚",
+                    "title": "Training & Enablement",
+                    "description": "Capability building programs."
+                },
+                {
+                    "icon": "📊",
+                    "title": "Adoption Tracking",
+                    "description": "Measure and sustain change."
+                }
+            ],
+            "benefits": [
+                "Faster adoption rates",
+                "Reduced resistance",
+                "Sustainable change"
+            ]
+        },
+        {
+            "id": "sustainability-esg",
+            "title": "Sustainability & ESG",
+            "tagline": "Create value through sustainable practices",
+            "category": "strategy",
+            "description": "Develop and execute ESG strategies that create business and societal value.",
+            "features": [
+                {
+                    "icon": "🌱",
+                    "title": "ESG Strategy",
+                    "description": "Define sustainability roadmap."
+                },
+                {
+                    "icon": "📊",
+                    "title": "ESG Reporting",
+                    "description": "Transparent stakeholder reporting."
+                },
+                {
+                    "icon": "🏭",
+                    "title": "Decarbonization",
+                    "description": "Net-zero pathway development."
+                },
+                {
+                    "icon": "🤝",
+                    "title": "Social Impact",
+                    "description": "Community and social programs."
+                }
+            ],
+            "benefits": [
+                "Enhanced reputation",
+                "Regulatory compliance",
+                "Long-term value creation"
+            ]
+        }
+    ]
+}
