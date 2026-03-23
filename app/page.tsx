@@ -1,65 +1,243 @@
-import Image from "next/image";
+import Link from 'next/link';
+import ServicesCarousel from './components/ServicesCarousel';
 
-export default function Home() {
+async function getServices() {
+  const response = await fetch('http://localhost:3000/data/services.json', {
+    cache: 'no-store',
+  }).catch(() => null);
+
+  if (!response) {
+    return { services: [], categories: [] };
+  }
+
+  return response.json();
+}
+
+export default async function Home() {
+  let data = { services: [], categories: [] };
+
+  try {
+    data = await getServices();
+  } catch {
+    // Use empty data if fetch fails
+  }
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="animate-fadeInUp">
+      {/* Hero Section */}
+      <section className="relative min-h-[90vh] flex items-center justify-center text-center overflow-hidden bg-transparent">
+        {/* Background Effects */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <div className="absolute w-[600px] h-[600px] bg-navy-600/10 rounded-full blur-[80px] opacity-50 -top-[200px] -right-[100px] animate-orbFloat" />
+          <div className="absolute w-[400px] h-[400px] bg-navy-600/15 rounded-full blur-[80px] opacity-50 -bottom-[100px] -left-[100px] animate-orbFloat-reverse" />
+          <div className="absolute w-[300px] h-[300px] bg-slate-100 rounded-full blur-[80px] opacity-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-orbFloat-slow" />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: 'linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px)',
+              backgroundSize: '60px 60px'
+            }}
+          />
+        </div>
+
+        <div className="container max-w-[900px] mx-auto px-6 relative z-10">
+          {/* Badge */}
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-navy-600/5 border border-navy-600/20 rounded-full text-sm text-navy-600 mb-6">
+            <span className="w-2 h-2 bg-navy-600 rounded-full animate-dotPulse" />
+            <span>Trusted by Fortune 500 companies</span>
+          </span>
+
+          {/* Title */}
+          <h1 className="text-[clamp(3rem,7vw,5.5rem)] font-bold leading-none tracking-[-0.03em] mb-6">
+            Transforming businesses
+            <span className="block bg-linear-to-br from-navy-600 to-navy-800 bg-clip-text text-transparent">
+              for tomorrow
+            </span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+
+          {/* Subtitle */}
+          <p className="text-xl text-slate-600 leading-relaxed mb-10 max-w-[640px] mx-auto">
+            We partner with visionary leaders to solve their most complex challenges
+            and create lasting impact through strategic insight and operational excellence.
           </p>
+
+          {/* Actions */}
+          <div className="flex gap-4 justify-center flex-wrap">
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-2 px-8 py-4 text-base font-medium text-white bg-linear-to-br from-navy-600 to-navy-800 rounded-lg shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all relative overflow-hidden btn-glow"
+            >
+              <span>Explore Our Services</span>
+              <span className="transition-transform group-hover:translate-x-1">→</span>
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 px-8 py-4 text-base font-medium text-slate-900 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 hover:border-navy-600 transition-all"
+            >
+              Get in Touch
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Section Divider */}
+      <div className="py-16 flex justify-center items-center">
+        <div className="w-full max-w-[120px] h-px bg-linear-to-r from-transparent via-slate-300 to-transparent" />
+      </div>
+
+      {/* Our Work & Why Us Grid */}
+      <section className="py-24 bg-white">
+        <div className="max-w-[1280px] mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Our Work Card */}
+            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-10 transition-all hover:border-navy-600/30 hover:shadow-lg">
+              <div className="mb-8">
+                <span className="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full uppercase tracking-wider bg-navy-600/10 text-navy-600">
+                  Portfolio
+                </span>
+                <h2 className="text-3xl font-semibold mt-3 mb-3">Our Work</h2>
+                <p className="text-slate-600">Delivering transformative results across industries and geographies.</p>
+              </div>
+
+              <div className="flex flex-col gap-4 mb-8">
+                {[
+                  { icon: '🏦', title: 'Global Bank Transformation', result: '$2.3B cost savings through digital transformation' },
+                  { icon: '🏭', title: 'Manufacturing Excellence', result: '45% improvement in operational efficiency' },
+                  { icon: '🛒', title: 'Retail Reinvention', result: '3x increase in e-commerce revenue' },
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center gap-4 p-4 bg-white rounded-xl transition-all hover:translate-x-1 hover:shadow-md">
+                    <div className="w-12 h-12 bg-navy-600/5 rounded-lg flex items-center justify-center text-xl shrink-0">
+                      {item.icon}
+                    </div>
+                    <div>
+                      <h4 className="text-base font-semibold mb-1">{item.title}</h4>
+                      <p className="text-sm text-navy-600 font-medium">{item.result}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <Link href="/services" className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-slate-900 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 hover:border-navy-600 transition-all">
+                View All Case Studies →
+              </Link>
+            </div>
+
+            {/* Why Us Card */}
+            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-10 transition-all hover:border-navy-600/30 hover:shadow-lg">
+              <div className="mb-8">
+                <span className="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full uppercase tracking-wider bg-navy-600/10 text-navy-600">
+                  Difference
+                </span>
+                <h2 className="text-3xl font-semibold mt-3 mb-3">Why Us</h2>
+                <p className="text-slate-600">What sets us apart from traditional consulting firms.</p>
+              </div>
+
+              <div className="flex flex-col gap-4 mb-8">
+                {[
+                  { num: '01', title: 'Results-Driven Partnership', desc: "We're invested in your success, not just deliverables." },
+                  { num: '02', title: 'Deep Industry Expertise', desc: 'Our consultants have lived your challenges firsthand.' },
+                  { num: '03', title: 'Lasting Capability Building', desc: 'We transfer knowledge, not just recommendations.' },
+                  { num: '04', title: 'Global Reach, Local Touch', desc: '35+ countries with deep local market understanding.' },
+                ].map((item, index) => (
+                  <div key={index} className="flex gap-4 p-4 bg-white rounded-xl transition-all hover:translate-x-1 hover:shadow-md">
+                    <div className="w-10 h-10 bg-linear-to-br from-navy-600 to-navy-800 text-white rounded-lg flex items-center justify-center text-sm font-bold shrink-0">
+                      {item.num}
+                    </div>
+                    <div>
+                      <h4 className="text-base font-semibold mb-1">{item.title}</h4>
+                      <p className="text-sm text-slate-600">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <Link href="/about" className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-slate-900 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 hover:border-navy-600 transition-all">
+                Learn More About Us →
+              </Link>
+            </div>
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* Services Carousel Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-[1280px] mx-auto px-6">
+          <div className="text-center max-w-[640px] mx-auto mb-16">
+            <span className="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full uppercase tracking-wider bg-navy-600/10 text-navy-600">
+              What We Do
+            </span>
+            <h2 className="text-[clamp(1.875rem,4vw,3rem)] font-semibold mt-4 mb-4">
+              Strategic solutions for complex challenges
+            </h2>
+            <p className="text-slate-600">
+              Our integrated approach combines deep industry expertise with cutting-edge methodologies.
+            </p>
+          </div>
+
+          <ServicesCarousel services={data.services} />
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-24 bg-slate-50">
+        <div className="max-w-[1280px] mx-auto px-6">
+          <div className="text-center max-w-[640px] mx-auto mb-16">
+            <span className="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full uppercase tracking-wider bg-navy-600/10 text-navy-600">
+              Capabilities
+            </span>
+            <h2 className="text-[clamp(1.875rem,4vw,3rem)] font-semibold mt-4 mb-4">
+              A different kind of consultancy
+            </h2>
+            <p className="text-slate-600">
+              We don&apos;t just advise—we partner with you to implement solutions that create measurable impact.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { icon: '🎯', title: 'Results-Driven', desc: 'Our success is measured by your outcomes. We set clear metrics and deliver on our promises.' },
+              { icon: '🤝', title: 'True Partnership', desc: 'We embed with your teams, transfer knowledge, and build lasting capabilities within your organization.' },
+              { icon: '💡', title: 'Innovation Focus', desc: 'We bring fresh perspectives and cutting-edge approaches to solve your most pressing challenges.' },
+              { icon: '🌍', title: 'Global Reach', desc: 'With experts across 35 countries, we combine global best practices with local market insights.' },
+              { icon: '📊', title: 'Data-Informed', desc: 'Every recommendation is backed by rigorous analysis and industry-leading research.' },
+              { icon: '⚡', title: 'Agile Delivery', desc: 'We move fast without sacrificing quality, adapting to your needs in real-time.' },
+            ].map((item, index) => (
+              <div key={index} className="bg-white border border-slate-200 rounded-xl p-8 transition-all hover:border-navy-600 hover:shadow-lg hover:-translate-y-1">
+                <div className="w-12 h-12 bg-navy-600/5 rounded-lg flex items-center justify-center mb-4 text-xl">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                <p className="text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 bg-linear-to-br from-navy-600 to-navy-800 text-white text-center relative overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: `radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+                              radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.15) 0%, transparent 50%)`
+          }}
+        />
+        <div className="relative z-10">
+          <h2 className="text-[clamp(1.875rem,4vw,3rem)] font-semibold text-white mb-4">
+            Ready to transform your business?
+          </h2>
+          <p className="text-white/70 mb-8 max-w-[500px] mx-auto">
+            Let&apos;s discuss how we can help you achieve your strategic objectives and drive sustainable growth.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 px-8 py-4 text-base font-medium text-navy-600 bg-white rounded-lg hover:bg-slate-100 transition-all"
+          >
+            Start a Conversation
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
