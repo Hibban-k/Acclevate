@@ -10,7 +10,7 @@ export default function AboutPage() {
     return (
         <div className="animate-fadeInUp">
             {/* Page Hero */}
-            <section className="py-20 bg-slate-50 relative">
+            <section className="pt-[112px] pb-20 bg-slate-50 relative">
                 <div className="max-w-[1280px] mx-auto px-6">
                     <div className="max-w-[720px]">
                         <span className="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full uppercase tracking-wider bg-navy-600/10 text-navy-600">

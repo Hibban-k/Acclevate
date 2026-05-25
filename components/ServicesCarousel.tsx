@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect, useCallback, useRef } from 'react';
+import ServiceCard from '@/components/ServiceCard';
 
 interface Service {
     id: string;
@@ -22,6 +23,8 @@ export default function ServicesCarousel({ services }: ServicesCarouselProps) {
     const [isTransitioning, setIsTransitioning] = useState(false);
     const carouselRef = useRef<HTMLDivElement>(null);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
+    const touchStartX = useRef(0);
+    const touchEndX = useRef(0);
 
     // Show all 12 services (or however many are passed)
     const displayServices = services.slice(0, 12);
@@ -110,6 +113,27 @@ export default function ServicesCarousel({ services }: ServicesCarouselProps) {
         startAutoSlide();
     };
 
+    const handleTouchStart = (e: React.TouchEvent) => {
+        touchStartX.current = e.changedTouches[0].screenX;
+        if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+
+    const handleTouchMove = (e: React.TouchEvent) => {
+        touchEndX.current = e.changedTouches[0].screenX;
+    };
+
+    const handleTouchEnd = () => {
+        startAutoSlide();
+        const distance = touchStartX.current - touchEndX.current;
+        const SWIPE_THRESHOLD = 50;
+
+        if (distance > SWIPE_THRESHOLD) {
+            nextSlide();
+        } else if (distance < -SWIPE_THRESHOLD) {
+            prevSlide();
+        }
+    };
+
     const displaySlide = currentSlide % totalSlides;
 
     return (
@@ -123,36 +147,31 @@ export default function ServicesCarousel({ services }: ServicesCarouselProps) {
                 {/* Prev Button */}
                 <button
                     onClick={() => { prevSlide(); startAutoSlide(); }}
-                    className="w-12 h-12 shrink-0 flex items-center justify-center bg-white border border-slate-200 rounded-xl text-xl text-slate-600 cursor-pointer transition-all hover:bg-navy-600 hover:border-navy-600 hover:text-white hover:scale-105 active:scale-95 z-10"
+                    className="hidden md:flex w-12 h-12 shrink-0 items-center justify-center bg-white border border-slate-200 rounded-xl text-xl text-slate-600 cursor-pointer transition-all hover:bg-navy-600 hover:border-navy-600 hover:text-white hover:scale-105 active:scale-95 z-10"
                     aria-label="Previous"
                 >
                     ←
                 </button>
 
                 {/* Viewport */}
-                <div className="flex-1 overflow-hidden py-8">
+                <div 
+                    className="flex-1 overflow-hidden py-8 touch-pan-y"
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
+                    onTouchEnd={handleTouchEnd}
+                >
                     <div
                         ref={carouselRef}
                         className="flex gap-6"
                         onTransitionEnd={handleTransitionEnd}
                     >
                         {extendedServices.map((service, index) => (
-                            <Link
+                            <ServiceCard
                                 key={`${service.id}-${index}`}
-                                href={`/service/${service.id}`}
-                                className="shrink-0 w-[calc(25%-18px)] min-w-[calc(25%-18px)] max-lg:w-[calc(33.333%-16px)] max-lg:min-w-[calc(33.333%-16px)] max-md:w-[calc(50%-12px)] max-md:min-w-[calc(50%-12px)] max-sm:w-full max-sm:min-w-full group"
-                            >
-                                <div className="bg-slate-50 border border-slate-200 rounded-xl p-8 h-full min-h-[220px] flex flex-col relative transition-all hover:border-navy-600 hover:shadow-lg hover:-translate-y-1">
-                                    {/* <span className="absolute top-4 right-4 text-4xl font-bold text-slate-100 leading-none">
-                                        {String(((index % displayServices.length) + 1)).padStart(2, '0')}
-                                    </span> */}
-                                    <h3 className="text-xl font-semibold text-slate-900 mb-2 group-hover:text-navy-600 transition-colors">{service.title}</h3>
-                                    <p className="text-sm text-slate-600 grow">{service.tagline}</p>
-                                    <span className="mt-4 text-sm font-medium text-navy-600 inline-flex items-center gap-2">
-                                        Learn more →
-                                    </span>
-                                </div>
-                            </Link>
+                                service={service}
+                                variant="simple"
+                                className="shrink-0 w-[calc(25%-18px)] min-w-[calc(25%-18px)] max-lg:w-[calc(33.333%-16px)] max-lg:min-w-[calc(33.333%-16px)] max-md:w-[calc(50%-12px)] max-md:min-w-[calc(50%-12px)] max-sm:w-full max-sm:min-w-full"
+                            />
                         ))}
                     </div>
                 </div>
@@ -160,7 +179,7 @@ export default function ServicesCarousel({ services }: ServicesCarouselProps) {
                 {/* Next Button */}
                 <button
                     onClick={() => { nextSlide(); startAutoSlide(); }}
-                    className="w-12 h-12 shrink-0 flex items-center justify-center bg-white border border-slate-200 rounded-xl text-xl text-slate-600 cursor-pointer transition-all hover:bg-navy-600 hover:border-navy-600 hover:text-white hover:scale-105 active:scale-95 z-10"
+                    className="hidden md:flex w-12 h-12 shrink-0 items-center justify-center bg-white border border-slate-200 rounded-xl text-xl text-slate-600 cursor-pointer transition-all hover:bg-navy-600 hover:border-navy-600 hover:text-white hover:scale-105 active:scale-95 z-10"
                     aria-label="Next"
                 >
                     →

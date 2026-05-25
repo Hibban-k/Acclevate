@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import ThreeScene from "./components/ThreeScene";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import ThreeScene from "@/components/ThreeScene";
 
 export const metadata: Metadata = {
   title: {

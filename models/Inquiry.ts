@@ -7,6 +7,7 @@ export interface IInquiry extends Document {
     company?: string;
     message: string;
     status: 'new' | 'read' | 'replied';
+    phone:string;
     createdAt: Date;
 }
 
@@ -41,6 +42,11 @@ const InquirySchema = new Schema<IInquiry>(
             enum: ['new', 'read', 'replied'],
             default: 'new',
         },
+        phone: {
+            type: String,
+            trim: true,
+            required: [true, 'Phone number is required'],
+        }
     },
     {
         timestamps: true,

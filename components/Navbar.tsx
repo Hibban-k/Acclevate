@@ -3,11 +3,21 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navItems = [
     { href: '/', label: 'Home' },
@@ -22,16 +32,18 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 left-0 right-0 h-[72px] bg-white/95 backdrop-blur-xl border-b border-slate-200 z-[1000] flex items-center">
+    <header className={`fixed top-0 left-0 right-0 h-[72px] z-1000 flex items-center transition-all duration-300 ${
+      isScrolled ? 'bg-white/80 backdrop-blur-lg border-b border-slate-200 shadow-sm' : 'bg-transparent border-b border-transparent'
+    }`}>
       <div className="flex justify-between items-center w-full max-w-[1280px] mx-auto px-6">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
+        <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity py-2">
           <Image
             src="/logo.jpg"
             alt="Acclevate Business Solutions"
             width={150}
-            height={80}
-            className="h-15 w-auto object-cover"
+            height={48}
+            className="h-12 w-auto object-contain"
             priority
           />
         </Link>
@@ -57,7 +69,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-4">
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium text-white bg-navy-600 rounded-lg shadow-sm hover:bg-[#252f5a] hover:-translate-y-0.5 hover:shadow-md transition-all"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium text-white bg-navy-600 rounded-lg shadow-sm hover:bg-navy-700 hover:-translate-y-0.5 hover:shadow-md transition-all"
           >
             Get Started
           </Link>
@@ -75,7 +87,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <nav className="md:hidden fixed top-[72px] left-0 right-0 bg-white border-b border-slate-200 p-6 flex flex-col gap-4 z-[999]">
+        <nav className="md:hidden fixed top-[72px] left-0 right-0 bg-white border-b border-slate-200 p-6 flex flex-col gap-4 z-999">
           {navItems.map((item) => (
             <Link
               key={item.href}

@@ -48,10 +48,10 @@ export default function ContactPage() {
     return (
         <div className="animate-fadeInUp">
             {/* Page Hero */}
-            <section className="py-20 bg-slate-50 relative">
+            <section className="pt-[112px] pb-20 bg-slate-50 relative">
                 <div className="max-w-[1280px] mx-auto px-6">
                     <div className="max-w-[720px]">
-                        <span className="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full uppercase tracking-wider bg-[#2B3674]/10 text-[#2B3674]">
+                        <span className="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full uppercase tracking-wider bg-navy-600/10 text-navy-600">
                             Get in Touch
                         </span>
                         <h1 className="text-[clamp(2rem,4vw,3rem)] font-bold mt-4 mb-4">Contact Us</h1>
@@ -82,7 +82,7 @@ export default function ContactPage() {
                                     { icon: '📍', label: 'Headquarters', value: '123 Business Avenue\nSan Francisco, CA 94102' },
                                 ].map((item, index) => (
                                     <div key={index} className="flex gap-4">
-                                        <div className="w-12 h-12 bg-[#2B3674]/5 rounded-lg flex items-center justify-center text-[#2B3674] flex-shrink-0">
+                                        <div className="w-12 h-12 bg-navy-600/5 rounded-lg flex items-center justify-center text-navy-600 shrink-0">
                                             {item.icon}
                                         </div>
                                         <div>
@@ -134,7 +134,7 @@ export default function ContactPage() {
                                             id="firstName"
                                             value={formData.firstName}
                                             onChange={handleChange}
-                                            className="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-[#2B3674] focus:ring-2 focus:ring-[#2B3674]/10 transition-all"
+                                            className="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-navy-600 focus:ring-2 focus:ring-navy-600/10 transition-all"
                                             placeholder="John"
                                             required
                                         />
@@ -148,7 +148,7 @@ export default function ContactPage() {
                                             id="lastName"
                                             value={formData.lastName}
                                             onChange={handleChange}
-                                            className="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-[#2B3674] focus:ring-2 focus:ring-[#2B3674]/10 transition-all"
+                                            className="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-navy-600 focus:ring-2 focus:ring-navy-600/10 transition-all"
                                             placeholder="Doe"
                                             required
                                         />
@@ -164,7 +164,7 @@ export default function ContactPage() {
                                         id="email"
                                         value={formData.email}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-[#2B3674] focus:ring-2 focus:ring-[#2B3674]/10 transition-all"
+                                        className="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-navy-600 focus:ring-2 focus:ring-navy-600/10 transition-all"
                                         placeholder="john@company.com"
                                         required
                                     />
@@ -179,7 +179,7 @@ export default function ContactPage() {
                                         id="company"
                                         value={formData.company}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-[#2B3674] focus:ring-2 focus:ring-[#2B3674]/10 transition-all"
+                                        className="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-navy-600 focus:ring-2 focus:ring-navy-600/10 transition-all"
                                         placeholder="Your Company"
                                     />
                                 </div>
@@ -192,7 +192,7 @@ export default function ContactPage() {
                                         id="message"
                                         value={formData.message}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg min-h-[150px] resize-y focus:outline-none focus:border-[#2B3674] focus:ring-2 focus:ring-[#2B3674]/10 transition-all"
+                                        className="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg min-h-[150px] resize-y focus:outline-none focus:border-navy-600 focus:ring-2 focus:ring-navy-600/10 transition-all"
                                         placeholder="Tell us about your project or inquiry..."
                                         required
                                     />
@@ -203,7 +203,7 @@ export default function ContactPage() {
                                     disabled={formStatus === 'sending'}
                                     className={`w-full px-8 py-4 text-base font-medium text-white rounded-lg transition-all ${formStatus === 'sending'
                                             ? 'bg-slate-400 cursor-not-allowed'
-                                            : 'bg-gradient-to-br from-[#2B3674] to-[#1e254a] hover:-translate-y-0.5 hover:shadow-lg'
+                                            : 'bg-linear-to-br from-navy-600 to-navy-800 hover:-translate-y-0.5 hover:shadow-lg'
                                         }`}
                                 >
                                     {formStatus === 'sending' ? 'Sending...' : 'Send Message'}

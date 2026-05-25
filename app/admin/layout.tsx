@@ -41,7 +41,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
                             key={item.href}
                             href={item.href}
                             className={`flex items-center gap-3 px-4 py-3 rounded-lg mb-1 transition-colors ${pathname === item.href
-                                    ? 'bg-[#2B3674] text-white'
+                                    ? 'bg-navy-600 text-white'
                                     : 'text-slate-600 hover:bg-slate-100'
                                 }`}
                         >

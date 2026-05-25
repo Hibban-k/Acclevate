@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import ServicesCarousel from './components/ServicesCarousel';
+import ServicesCarousel from '@/components/ServicesCarousel';
+import CTASection from '@/components/CTASection';
 
 async function getServices() {
   const response = await fetch('http://localhost:3000/data/services.json', {
@@ -25,17 +26,16 @@ export default async function Home() {
   return (
     <div className="animate-fadeInUp">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center text-center overflow-hidden bg-transparent">
+      <section className="relative min-h-[70vh] md:min-h-screen flex items-center justify-center text-center overflow-hidden bg-linear-to-br from-slate-50 via-white to-blue-50/50 pt-[72px]">
         {/* Background Effects */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          <div className="absolute w-[600px] h-[600px] bg-navy-600/10 rounded-full blur-[80px] opacity-50 -top-[200px] -right-[100px] animate-orbFloat" />
-          <div className="absolute w-[400px] h-[400px] bg-navy-600/15 rounded-full blur-[80px] opacity-50 -bottom-[100px] -left-[100px] animate-orbFloat-reverse" />
-          <div className="absolute w-[300px] h-[300px] bg-slate-100 rounded-full blur-[80px] opacity-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-orbFloat-slow" />
+          <div className="absolute top-0 right-0 w-[40vw] h-[40vw] max-w-[600px] bg-sky-200/20 rounded-full blur-[100px] -translate-y-1/4 translate-x-1/4 animate-orbFloat" />
+          <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] max-w-[800px] bg-indigo-100/30 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4 animate-orbFloat-reverse" />
           <div
             className="absolute inset-0"
             style={{
-              backgroundImage: 'linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px)',
-              backgroundSize: '60px 60px'
+              backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(43, 54, 116, 0.02) 1px, transparent 1px)',
+              backgroundSize: '32px 32px'
             }}
           />
         </div>
@@ -99,13 +99,13 @@ export default async function Home() {
                 <p className="text-slate-600">Delivering transformative results across industries and geographies.</p>
               </div>
 
-              <div className="flex flex-col gap-4 mb-8">
+              <div className="flex flex-row md:flex-col gap-4 mb-8 overflow-x-auto snap-x snap-mandatory pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 md:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {[
                   { icon: '🏦', title: 'Global Bank Transformation', result: '$2.3B cost savings through digital transformation' },
                   { icon: '🏭', title: 'Manufacturing Excellence', result: '45% improvement in operational efficiency' },
                   { icon: '🛒', title: 'Retail Reinvention', result: '3x increase in e-commerce revenue' },
                 ].map((item, index) => (
-                  <div key={index} className="flex items-center gap-4 p-4 bg-white rounded-xl transition-all hover:translate-x-1 hover:shadow-md">
+                  <div key={index} className="snap-start shrink-0 w-[85%] md:w-auto flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 bg-white rounded-xl transition-all hover:translate-x-1 hover:shadow-md">
                     <div className="w-12 h-12 bg-navy-600/5 rounded-lg flex items-center justify-center text-xl shrink-0">
                       {item.icon}
                     </div>
@@ -132,14 +132,14 @@ export default async function Home() {
                 <p className="text-slate-600">What sets us apart from traditional consulting firms.</p>
               </div>
 
-              <div className="flex flex-col gap-4 mb-8">
+              <div className="flex flex-row md:flex-col gap-4 mb-8 overflow-x-auto snap-x snap-mandatory pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 md:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {[
                   { num: '01', title: 'Results-Driven Partnership', desc: "We're invested in your success, not just deliverables." },
                   { num: '02', title: 'Deep Industry Expertise', desc: 'Our consultants have lived your challenges firsthand.' },
                   { num: '03', title: 'Lasting Capability Building', desc: 'We transfer knowledge, not just recommendations.' },
                   { num: '04', title: 'Global Reach, Local Touch', desc: '35+ countries with deep local market understanding.' },
                 ].map((item, index) => (
-                  <div key={index} className="flex gap-4 p-4 bg-white rounded-xl transition-all hover:translate-x-1 hover:shadow-md">
+                  <div key={index} className="snap-start shrink-0 w-[85%] md:w-auto flex flex-col sm:flex-row gap-4 p-4 bg-white rounded-xl transition-all hover:translate-x-1 hover:shadow-md">
                     <div className="w-10 h-10 bg-linear-to-br from-navy-600 to-navy-800 text-white rounded-lg flex items-center justify-center text-sm font-bold shrink-0">
                       {item.num}
                     </div>
@@ -215,29 +215,12 @@ export default async function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-linear-to-br from-navy-600 to-navy-800 text-white text-center relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
-                              radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.15) 0%, transparent 50%)`
-          }}
-        />
-        <div className="relative z-10">
-          <h2 className="text-[clamp(1.875rem,4vw,3rem)] font-semibold text-white mb-4">
-            Ready to transform your business?
-          </h2>
-          <p className="text-white/70 mb-8 max-w-[500px] mx-auto">
-            Let&apos;s discuss how we can help you achieve your strategic objectives and drive sustainable growth.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 text-base font-medium text-navy-600 bg-white rounded-lg hover:bg-slate-100 transition-all"
-          >
-            Start a Conversation
-          </Link>
-        </div>
-      </section>
+      <CTASection
+        title="Ready to transform your business?"
+        description="Let's discuss how we can help you achieve your strategic objectives and drive sustainable growth."
+        primaryButtonText="Start a Conversation"
+        primaryButtonHref="/contact"
+      />
     </div>
   );
 }
