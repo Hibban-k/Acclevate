@@ -1,9 +1,8 @@
 import { connectDB } from '@/lib/db';
 import Service, { IService } from '@/models/Service';
-import { FilterQuery } from 'mongoose';
 
 export class ServiceRepository {
-    async findAll(filter: FilterQuery<IService> = {}): Promise<IService[]> {
+    async findAll(filter: Record<string, any> = {}): Promise<IService[]> {
         await connectDB();
         return Service.find(filter).sort({ order: 1, createdAt: -1 });
     }
