@@ -1,8 +1,6 @@
-import Link from 'next/link';
-import ServicesCarousel from '@/components/ServicesCarousel';
-import CTASection from '@/components/CTASection';
+import { Seo, defaultMetadata } from '@/components/Seo';
 
-async function getServices() {
+export default async function Home() {
   const response = await fetch('http://localhost:3000/data/services.json', {
     cache: 'no-store',
   }).catch(() => null);
@@ -26,9 +24,19 @@ export default async function Home() {
   return (
     <div className="animate-fadeInUp">
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] md:min-h-screen flex items-center justify-center text-center overflow-hidden bg-linear-to-br from-slate-50 via-white to-blue-50/50 pt-[72px]">
+      <section className="relative min-h-[70vh] md:min-h-screen flex items-center justify-center text-center overflow-hidden pt-[72px] shadow-[0_15px_30px_-15px_rgba(0,0,0,0.03)] border-b border-slate-200/30">
         {/* Background Effects */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          {/* Fixed Background Image (Scroll Parallax) */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-fixed opacity-100 transition-opacity duration-1000"
+            style={{
+              backgroundImage: "url('/hero_bg_consult.png')"
+            }}
+          />
+          {/* Subtle light glass overlay to keep text highly readable */}
+          <div className="absolute inset-0 bg-linear-to-b from-white/30 via-white/50 to-white/80" />
+          
           <div className="absolute top-0 right-0 w-[40vw] h-[40vw] max-w-[600px] bg-sky-200/20 rounded-full blur-[100px] -translate-y-1/4 translate-x-1/4 animate-orbFloat" />
           <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] max-w-[800px] bg-indigo-100/30 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4 animate-orbFloat-reverse" />
           <div
@@ -42,9 +50,8 @@ export default async function Home() {
 
         <div className="container max-w-[900px] mx-auto px-6 relative z-10">
           {/* Badge */}
-          <span className="inline-flex items-center gap-2 px-4 py-2 bg-navy-600/5 border border-navy-600/20 rounded-full text-sm text-navy-600 mb-6">
-            <span className="w-2 h-2 bg-navy-600 rounded-full animate-dotPulse" />
-            <span>Trusted by Fortune 500 companies</span>
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-md border border-navy-600/10 rounded-full text-sm text-navy-600 mb-6 shadow-xs">
+            <span>Expert Tax Consulting for your business</span>
           </span>
 
           {/* Title */}

@@ -24,17 +24,36 @@ async function getService(slug: string): Promise<{ service: Service | null; allS
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-    const { slug } = await params;
-    const { service } = await getService(slug);
+  const { slug } = await params;
+  const { service } = await getService(slug);
 
-    if (!service) {
-        return { title: 'Service Not Found' };
-    }
+  if (!service) {
+    return { title: 'Service Not Found' };
+  }
 
-    return {
-        title: service.title,
-        description: service.description,
-    };
+  const title = service.metaTitle ?? `${service.title} – Acclevate`;
+  const description = service.metaDescription ?? service.description;
+  const keywords = service.keywords?.join(', ');
+  const image = service.ogImage ?? 'https://via.placeholder.com/1200x630.png?text=Acclevate+Service';
+
+  return {
+    title,
+    description,
+    keywords,
+    openGraph: {
+      title,
+      description,
+      url: `https://www.acclevate.com/service/${service.slug}`,
+      images: [{ url: image }],
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [image],
+    },
+  };
 }
 
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {

@@ -8,6 +8,7 @@ interface IFeature {
 
 export interface IService extends Document {
     title: string;
+    slug: string;
     tagline: string;
     description: string;
     category: string;
@@ -15,6 +16,14 @@ export interface IService extends Document {
     benefits: string[];
     isActive: boolean;
     order: number;
+    // ---------- SEO fields ----------
+    shortDescription?: string;
+    metaTitle?: string;
+    metaDescription?: string;
+    keywords?: string[];
+    ogTitle?: string;
+    ogDescription?: string;
+    ogImage?: string;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -31,6 +40,11 @@ const ServiceSchema = new Schema<IService>(
             type: String,
             required: [true, 'Title is required'],
             trim: true,
+        },
+        slug: {
+            type: String,
+            required: true,
+            unique: true,
         },
         tagline: {
             type: String,
@@ -62,19 +76,19 @@ const ServiceSchema = new Schema<IService>(
             type: Number,
             default: 0,
         },
+        // ---------- SEO fields ----------
+        shortDescription: { type: String },
+        metaTitle: { type: String },
+        metaDescription: { type: String },
+        keywords: { type: [String] },
+        ogTitle: { type: String },
+        ogDescription: { type: String },
+        ogImage: { type: String },
     },
     {
         timestamps: true,
     }
 );
-
-// Create a URL-friendly slug from title
-ServiceSchema.virtual('slug').get(function () {
-    return this.title
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/(^-|-$)/g, '');
-});
 
 ServiceSchema.set('toJSON', { virtuals: true });
 ServiceSchema.set('toObject', { virtuals: true });

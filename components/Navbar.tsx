@@ -12,7 +12,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 20);
     };
     
     window.addEventListener('scroll', handleScroll);
@@ -32,13 +32,13 @@ export default function Navbar() {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 h-[72px] z-1000 flex items-center transition-all duration-300 ${
-      isScrolled ? 'bg-white/80 backdrop-blur-lg border-b border-slate-200 shadow-sm' : 'bg-transparent border-b border-transparent'
-    }`}>
+    <header className={`fixed top-0 left-0 right-0 h-[72px] z-1000 flex items-center transition-all duration-300
+    ${isScrolled ? 'bg-white/50 backdrop-blur-lg border-b border-slate-200 shadow-sm' : 'bg-transparent border-b border-transparent'}`}>
       <div className="flex justify-between items-center w-full max-w-[1280px] mx-auto px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity py-2">
           <Image
+          
             src="/logo.jpg"
             alt="Acclevate Business Solutions"
             width={150}

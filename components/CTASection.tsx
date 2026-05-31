@@ -36,7 +36,7 @@ export default function CTASection({
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link
                         href={primaryButtonHref}
-                        className="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-medium text-navy-600 bg-white rounded-xl hover:bg-slate-100 hover:shadow-xl transition-all duration-300"
+                        className="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-medium text-navy-600 rounded-xl hover:bg-slate-100 hover:shadow-xl transition-all duration-300"
                     >
                         {primaryButtonText}
                     </Link>

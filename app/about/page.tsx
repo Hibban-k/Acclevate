@@ -1,13 +1,9 @@
 import Link from 'next/link';
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-    title: 'About',
-    description: 'For over 25 years, we\'ve been at the forefront of business transformation, helping organizations navigate complexity and achieve breakthrough results.',
-};
+import { Seo } from '@/components/Seo';
 
 export default function AboutPage() {
-    return (
+    return (<>
+        <Seo {...defaultMetadata} />
         <div className="animate-fadeInUp">
             {/* Page Hero */}
             <section className="pt-[112px] pb-20 bg-slate-50 relative">
