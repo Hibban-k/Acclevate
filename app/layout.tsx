@@ -33,16 +33,29 @@ export default function RootLayout({
           type="image/svg+xml"
           href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%232B3674' rx='20' width='100' height='100'/><text x='50' y='70' font-size='60' text-anchor='middle' fill='white'>A</text></svg>"
         />
-        <!-- Organization Structured Data -->
-        <script type="application/ld+json">
-          {"@context":"https://schema.org","@type":"Organization","name":"Acclevate Business Solutions","url":"https://www.acclevate.com","logo":"https://www.acclevate.com/logo.png","sameAs":["https://www.linkedin.com/company/acclevate","https://twitter.com/acclevate"]}
-        </script>
+        {/* Organization Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Acclevate Business Solutions",
+              "url": "https://www.acclevate.com",
+              "logo": "https://www.acclevate.com/logo.png",
+              "sameAs": [
+                "https://www.linkedin.com/company/acclevate",
+                "https://twitter.com/acclevate"
+              ]
+            })
+          }}
+        />
       </head>
       <body className="font-sans antialiased">
         <ThreeScene />
         <div className="relative z-1">
           <Navbar />
-          <main className="min-h-screen"><Seo {...defaultMetadata} />{children}</main>
+          <main className="min-h-screen">{children}</main>
           <Footer />
         </div>
       </body>

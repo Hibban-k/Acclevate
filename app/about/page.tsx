@@ -3,7 +3,10 @@ import { Seo } from '@/components/Seo';
 
 export default function AboutPage() {
     return (<>
-        <Seo {...defaultMetadata} />
+        <Seo 
+            title="About Us" 
+            description="Learn more about Acclevate Business Solutions, our story, our guiding values, and our executive leadership team." 
+        />
         <div className="animate-fadeInUp">
             {/* Page Hero */}
             <section className="pt-[112px] pb-20 bg-slate-50 relative">
@@ -132,5 +135,5 @@ export default function AboutPage() {
                 </div>
             </section>
         </div>
-    );
+    </>);
 }

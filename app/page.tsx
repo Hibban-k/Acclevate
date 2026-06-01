@@ -1,7 +1,10 @@
+import Link from 'next/link';
+import ServicesCarousel from '@/components/ServicesCarousel';
+import CTASection from '@/components/CTASection';
 import { Seo, defaultMetadata } from '@/components/Seo';
 
-export default async function Home() {
-  const response = await fetch('http://localhost:3000/data/services.json', {
+async function getServices() {
+  const response = await fetch('/api/services', { cache: 'no-store' }).catch(() => null);
     cache: 'no-store',
   }).catch(() => null);
 

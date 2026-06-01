@@ -5,11 +5,20 @@ import { notFound } from 'next/navigation';
 interface Service {
     id: string;
     title: string;
+    slug: string;
     tagline: string;
     description: string;
     category: string;
     features: { icon: string; title: string; description: string }[];
     benefits: string[];
+    // ---------- SEO fields ----------
+    shortDescription?: string;
+    metaTitle?: string;
+    metaDescription?: string;
+    keywords?: string[];
+    ogTitle?: string;
+    ogDescription?: string;
+    ogImage?: string;
 }
 
 async function getService(slug: string): Promise<{ service: Service | null; allServices: Service[] }> {
