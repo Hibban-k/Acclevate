@@ -1,20 +1,6 @@
-import { NextResponse } from 'next/server';
-import Service from '@/models/Service';
-import { connectDB } from '@/lib/db';
+import { NextRequest } from 'next/server';
+import { handleGetActiveServices } from '@/lib/controllers/service.controller';
 
-export async function GET() {
-  await connectDB();
-  const services = await Service.find({ isActive: true }).lean();
-  // Build categories list from distinct categories
-  const categorySet = new Set<string>();
-  services.forEach((s) => {
-    if (s.category) categorySet.add(s.category);
-  });
-  const categories = Array.from(categorySet).map((cat) => ({ id: cat, name: cat }));
-
-  const payload = { services, categories };
-  return new NextResponse(JSON.stringify(payload), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
-  });
+export async function GET(request: NextRequest) {
+  return handleGetActiveServices(request);
 }

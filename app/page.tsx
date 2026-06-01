@@ -5,8 +5,6 @@ import { Seo, defaultMetadata } from '@/components/Seo';
 
 async function getServices() {
   const response = await fetch('/api/services', { cache: 'no-store' }).catch(() => null);
-    cache: 'no-store',
-  }).catch(() => null);
 
   if (!response) {
     return { services: [], categories: [] };

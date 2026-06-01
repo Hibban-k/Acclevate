@@ -9,6 +9,11 @@ export const handleGetServices = catchAsync(async (request: NextRequest) => {
     return NextResponse.json(services);
 });
 
+export const handleGetActiveServices = catchAsync(async (request: NextRequest) => {
+    const payload = await serviceService.getActiveServicesWithCategories();
+    return NextResponse.json(payload);
+});
+
 export const handlePostService = catchAsync(async (request: NextRequest) => {
     const session = await getServerSession(authOptions);
 

@@ -6,6 +6,16 @@ export class ServiceService {
         return serviceRepository.findAll();
     }
 
+    async getActiveServicesWithCategories() {
+        const services = await serviceRepository.findAll({ isActive: true });
+        const categorySet = new Set<string>();
+        services.forEach((s) => {
+            if (s.category) categorySet.add(s.category);
+        });
+        const categories = Array.from(categorySet).map((cat) => ({ id: cat, name: cat }));
+        return { services, categories };
+    }
+
     async getServiceById(id: string) {
         return serviceRepository.findById(id);
     }
@@ -27,4 +37,4 @@ export class ServiceService {
     }
 }
 
-export const serviceService = new ServiceService();
+export const service = new ServiceService();

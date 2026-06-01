@@ -35,15 +35,20 @@ export default function ServicesPage() {
     const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
-        fetch('/data/services.json')
-            .then(res => res.json())
-            .then(data => {
-                setServices(data.services);
-                setCategories(data.categories);
-                setLoading(false);
-            })
-            .catch(() => setLoading(false));
-    }, []);
+    fetch('/api/services')
+      .then(res => res.json())
+      .then(data => {
+        // Map MongoDB _id to a client-friendly id field
+        const servicesWithId = data.services.map((s: any) => ({
+          ...s,
+          id: s._id?.toString() ?? s.id ?? '',
+        }));
+        setServices(servicesWithId);
+        setCategories(data.categories);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
 
     const filteredServices = services.filter(service => {
         const matchesCategory = activeCategory === 'all' || service.category === activeCategory;
