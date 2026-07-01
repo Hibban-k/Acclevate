@@ -4,7 +4,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { serviceService } from '@/lib/services/service.service';
 import { categoryService } from '@/lib/services/category.service';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, unstable_cache } from 'next/cache';
 import slugify from 'slugify';
 import Subcategory from '@/models/Subcategory';
 
@@ -15,6 +15,51 @@ async function checkAdminAuth() {
     }
     return session;
 }
+
+const getCachedActiveServicesData = unstable_cache(
+    async (page: number, limit: number, category: string, subcategory: string, search: string) => {
+        const query: any = {};
+        if (category !== 'all') {
+            query.category = category;
+        }
+        if (subcategory !== 'all') {
+            query.subcategory = subcategory;
+        }
+        if (search) {
+            query.$or = [
+                { title: { $regex: search, $options: 'i' } },
+                { tagline: { $regex: search, $options: 'i' } }
+            ];
+        }
+
+        const { services, total } = await serviceService.getActiveServicesPaginated(query, page, limit);
+
+        // Build category-subcategory hierarchy for sidebar
+        const categoriesDocs = await categoryService.getAllCategories();
+        const subcategoriesDocs = await Subcategory.find({ isActive: true }).lean();
+
+        const categories = categoriesDocs.map((cat: any) => ({
+            id: cat._id.toString(),
+            name: cat.name,
+            slug: cat.slug,
+            subcategories: subcategoriesDocs
+                .filter((sub: any) => sub.category.toString() === cat._id.toString())
+                .map((sub: any) => ({
+                    id: sub._id.toString(),
+                    name: sub.name,
+                    slug: sub.slug
+                }))
+        }));
+
+        // Deep serialize Mongoose documents to pure JSON objects 
+        // This drops methods and safely converts ObjectIds to strings for Next.js caching
+        const serializedServices = JSON.parse(JSON.stringify(services));
+
+        return { services: serializedServices, total, categories };
+    },
+    ['services-action-data'], // Cache key
+    { revalidate: 604800, tags: ['services'] } // 1 week
+);
 
 export async function getActiveServicesAction(params?: {
     page?: number;
@@ -29,44 +74,13 @@ export async function getActiveServicesAction(params?: {
     const subcategory = params?.subcategory ?? 'all';
     const search = params?.search ?? '';
 
-    const query: any = {};
-    if (category !== 'all') {
-        query.category = category;
-    }
-    if (subcategory !== 'all') {
-        query.subcategory = subcategory;
-    }
-    if (search) {
-        query.$or = [
-            { title: { $regex: search, $options: 'i' } },
-            { tagline: { $regex: search, $options: 'i' } }
-        ];
-    }
-
-    const { services, total } = await serviceService.getActiveServicesPaginated(query, page, limit);
-
-    // Build category-subcategory hierarchy for sidebar
-    const categoriesDocs = await categoryService.getAllCategories();
-    const subcategoriesDocs = await Subcategory.find({ isActive: true }).lean();
-
-    const categories = categoriesDocs.map((cat: any) => ({
-        id: cat._id.toString(),
-        name: cat.name,
-        slug: cat.slug,
-        subcategories: subcategoriesDocs
-            .filter((sub: any) => sub.category.toString() === cat._id.toString())
-            .map((sub: any) => ({
-                id: sub._id.toString(),
-                name: sub.name,
-                slug: sub.slug
-            }))
-    }));
+    const { services, total, categories } = await getCachedActiveServicesData(page, limit, category, subcategory, search);
 
     return {
         success: true,
-        services: JSON.parse(JSON.stringify(services)),
-        categories: JSON.parse(JSON.stringify(categories)),
-        hasMore: (page - 1) * limit + services.length < total,
+        services,
+        categories,
+        hasMore: page * limit < total,
         total
     };
 }

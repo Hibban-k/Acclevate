@@ -3,8 +3,7 @@ import { getActiveServicesAction } from '@/lib/actions/services';
 import ServicesClient from './ServicesClient';
 
 // Enable Incremental Static Regeneration (ISR)
-// Revalidate the cache every 60 seconds (or immediately if triggered on-demand)
-export const revalidate = 60;
+export const revalidate = 604800; // 1 week
 
 export default async function ServicesPage() {
     // 1. Fetch the default first page of services statically at build/ISR time

@@ -6,6 +6,8 @@ import { serviceService } from '@/lib/services/service.service';
 import Subcategory from '@/models/Subcategory';
 import ServicesSidebar from '@/components/ServicesSidebar';
 
+export const revalidate = 604800; // 1 week
+
 interface PageProps {
     params: Promise<{ category: string }>;
     searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
