@@ -75,18 +75,7 @@ export default function ServicesSidebar({ categories, activeCategorySlug }: Serv
                                 {/* Subcategory Nesting List */}
                                 {isCatActive && cat.subcategories && cat.subcategories.length > 0 && (
                                     <div className="pl-9 pr-2 py-2 flex flex-col gap-1 border-l border-slate-200 ml-7 mt-2 mb-4 animate-fadeInUp">
-                                        <Link
-                                            href={`/services/${cat.slug}`}
-                                            className={`
-                                                text-left px-4 py-2 rounded-lg text-sm transition-all duration-200 block
-                                                ${activeSubcategorySlug === 'all'
-                                                    ? 'text-navy-900 font-bold bg-slate-50'
-                                                    : 'text-slate-500 hover:text-navy-900 hover:bg-slate-50 font-medium'
-                                                }
-                                            `}
-                                        >
-                                            Overview
-                                        </Link>
+
                                         {cat.subcategories.map((subcat) => (
                                             <Link
                                                 key={subcat.id}

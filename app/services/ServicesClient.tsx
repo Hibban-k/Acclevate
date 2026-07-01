@@ -89,7 +89,7 @@ export default function ServicesClient({ initialServices, initialCategories, ini
         try {
             const res = await getActiveServicesAction({
                 page: pageNum,
-                limit: 6,
+                limit: 12,
                 category: activeCategory,
                 subcategory: activeSubcategoryId,
                 search: debouncedSearch
@@ -139,7 +139,7 @@ export default function ServicesClient({ initialServices, initialCategories, ini
         try {
             const res = await getActiveServicesAction({
                 page: pageNum,
-                limit: 6,
+                limit: 12,
                 category: activeCategory,
                 subcategory: activeSubcategoryId,
                 search: debouncedSearch
