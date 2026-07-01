@@ -105,7 +105,7 @@ export default async function Home() {
             </div>
 
             {/* Right: Why Us / Value Prop Grid (Typography Only) */}
-            <div className="bg-slate-50 border border-slate-200 rounded-[2rem] p-10 md:p-12">
+            <div className="bg-slate-50 border border-slate-200 rounded-4xl p-10 md:p-12">
               <span className="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full uppercase tracking-wider bg-navy-50 text-navy-600 mb-10 border border-navy-100">
                 The Acclevate Difference
               </span>

@@ -62,7 +62,7 @@ export default function AboutPage() {
                                 </p>
                             </div>
                         </div>
-                        <div className="relative h-[600px] w-full rounded-[2rem] overflow-hidden shadow-2xl border border-slate-200">
+                        <div className="relative h-[600px] w-full rounded-4xl overflow-hidden shadow-2xl border border-slate-200">
                             <Image 
                                 src="/images/about/office.png" 
                                 alt="Acclevate Corporate Boardroom" 
@@ -84,7 +84,7 @@ export default function AboutPage() {
                     <div className="flex flex-col lg:flex-row items-start">
                         
                         {/* Sticky Left Column */}
-                        <div className="lg:w-1/3 py-24 lg:py-32 lg:sticky lg:top-0 h-auto lg:h-[100vh] flex flex-col justify-center">
+                        <div className="lg:w-1/3 py-24 lg:py-32 lg:sticky lg:top-0 h-auto lg:h-screen flex flex-col justify-center">
                             <span className="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full uppercase tracking-wider bg-white/10 text-sky-300 mb-8 border border-white/10 w-max">
                                 Our Methodology
                             </span>
@@ -107,7 +107,7 @@ export default function AboutPage() {
                                 ].map((val, idx) => (
                                     <div key={idx} className="relative group">
                                         {/* Massive Background Number */}
-                                        <div className="absolute -top-12 -left-8 text-[140px] md:text-[180px] font-bold text-white/[0.03] leading-none select-none font-mono tracking-tighter transition-all group-hover:text-sky-400/[0.05] group-hover:-translate-y-2 pointer-events-none">
+                                        <div className="absolute -top-12 -left-8 text-[140px] md:text-[180px] font-bold text-white/3 leading-none select-none font-mono tracking-tighter transition-all group-hover:text-sky-400/5 group-hover:-translate-y-2 pointer-events-none">
                                             {val.num}
                                         </div>
                                         

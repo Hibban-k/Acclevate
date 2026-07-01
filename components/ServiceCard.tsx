@@ -51,7 +51,7 @@ export default function ServiceCard({
 
                 {/* Card Content */}
                 <div className="p-6 flex flex-col grow">
-                    <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-navy-600 transition-colors line-clamp-2 min-h-[3.5rem]">
+                    <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-navy-600 transition-colors line-clamp-2 min-h-14">
                         {service.title}
                     </h3>
                     <p className="text-sm text-slate-500 mb-4 line-clamp-2 grow">
