@@ -61,6 +61,10 @@ export default function ServicesClient({ initialServices, initialCategories, ini
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(initialHasMore);
 
+    const prefetchedDataRef = useRef<{ services: Service[], hasMore: boolean, page: number | null }>({ services: [], hasMore: false, page: null });
+    const isPrefetchingRef = useRef(false);
+    const initialPrefetchDone = useRef(false);
+
     useEffect(() => {
         const timer = setTimeout(() => {
             setDebouncedSearch(searchTerm);
@@ -90,9 +94,55 @@ export default function ServicesClient({ initialServices, initialCategories, ini
         return { activeSubcategoryName: subcatSlug, activeSubcategoryId: subcatSlug };
     }, [subcatSlug, categories]);
 
+    const prefetchServices = useCallback(async (pageNum: number) => {
+        if (isPrefetchingRef.current) return;
+        isPrefetchingRef.current = true;
+        try {
+            const res = await getActiveServicesAction({
+                page: pageNum,
+                limit: 6,
+                category: activeCategory,
+                subcategory: activeSubcategoryId,
+                search: debouncedSearch
+            });
+
+            if (res && res.success) {
+                const servicesWithId = res.services.map((s: any) => ({
+                    ...s,
+                    id: s._id?.toString() ?? s.id ?? '',
+                }));
+                prefetchedDataRef.current = { services: servicesWithId, hasMore: res.hasMore, page: pageNum };
+            }
+        } catch (error) {
+            console.error('Error prefetching services:', error);
+        } finally {
+            isPrefetchingRef.current = false;
+        }
+    }, [activeCategory, activeSubcategoryId, debouncedSearch]);
+
     const loadServices = useCallback(async (pageNum: number, isInitial = false) => {
+        // Instant lookahead buffer hit
+        if (!isInitial && prefetchedDataRef.current.page === pageNum) {
+            setServices(prev => {
+                const existingIds = new Set(prev.map(s => s.id));
+                const newServices = prefetchedDataRef.current.services.filter((s: any) => !existingIds.has(s.id));
+                return [...prev, ...newServices];
+            });
+            setHasMore(prefetchedDataRef.current.hasMore);
+            setPage(pageNum);
+            
+            const nextHasMore = prefetchedDataRef.current.hasMore;
+            prefetchedDataRef.current = { services: [], hasMore: false, page: null };
+            
+            if (nextHasMore) {
+                prefetchServices(pageNum + 1);
+            }
+            return;
+        }
+
         if (isInitial) {
             setLoading(true);
+            prefetchedDataRef.current = { services: [], hasMore: false, page: null };
         } else {
             setLoadingMore(true);
         }
@@ -122,6 +172,10 @@ export default function ServicesClient({ initialServices, initialCategories, ini
                 });
                 setHasMore(res.hasMore);
                 setPage(pageNum);
+
+                if (res.hasMore) {
+                    prefetchServices(pageNum + 1);
+                }
             }
         } catch (error) {
             console.error('Error loading services:', error);
@@ -129,7 +183,15 @@ export default function ServicesClient({ initialServices, initialCategories, ini
             setLoading(false);
             setLoadingMore(false);
         }
-    }, [activeCategory, activeSubcategoryName, debouncedSearch]);
+    }, [activeCategory, activeSubcategoryId, debouncedSearch, prefetchServices]);
+
+    // Initial prefetch for page 2 on mount (since page 1 is SSR'd)
+    useEffect(() => {
+        if (!initialPrefetchDone.current && initialHasMore) {
+            initialPrefetchDone.current = true;
+            prefetchServices(2);
+        }
+    }, [initialHasMore, prefetchServices]);
 
 
 
