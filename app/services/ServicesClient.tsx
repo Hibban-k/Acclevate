@@ -72,17 +72,6 @@ export default function ServicesClient({ initialServices, initialCategories, ini
         return () => clearTimeout(timer);
     }, [searchTerm]);
 
-    const isInitialMount = useRef(true);
-
-    useEffect(() => {
-        if (isInitialMount.current) {
-            isInitialMount.current = false;
-            return;
-        }
-        
-        setPage(1);
-        loadServices(1, true);
-    }, [activeCategory, activeSubcategoryName, debouncedSearch, loadServices]);
 
     const subcatSlug = searchParams.get('subcat') || 'all';
     const { activeSubcategoryName, activeSubcategoryId } = useMemo(() => {
@@ -184,6 +173,18 @@ export default function ServicesClient({ initialServices, initialCategories, ini
             setLoadingMore(false);
         }
     }, [activeCategory, activeSubcategoryId, debouncedSearch, prefetchServices]);
+
+    const isInitialMount = useRef(true);
+
+    useEffect(() => {
+        if (isInitialMount.current) {
+            isInitialMount.current = false;
+            return;
+        }
+        
+        setPage(1);
+        loadServices(1, true);
+    }, [activeCategory, activeSubcategoryName, debouncedSearch, loadServices]);
 
     // Initial prefetch for page 2 on mount (since page 1 is SSR'd)
     useEffect(() => {
