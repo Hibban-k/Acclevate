@@ -3,6 +3,7 @@ import 'dotenv/config';
 import { connectDB } from '@/lib/db';
 import { serviceService } from '@/lib/services/service.service';
 import slugify from 'slugify';
+import Category from '@/models/Category';
 
 // Utility to generate a slug
 const generateSlug = (title: string) =>
@@ -127,6 +128,21 @@ const serviceTitles: string[] = [
 
 const seed = async () => {
   await connectDB();
+
+  // Find or create 'strategy' category for seeding
+  let categoryObj = await Category.findOne({ slug: 'strategy' });
+  if (!categoryObj) {
+    categoryObj = await Category.create({
+      name: 'Strategy',
+      slug: 'strategy',
+      description: 'Strategy services',
+      isActive: true,
+      order: 1,
+    });
+  }
+
+  const categoryId = categoryObj._id;
+
   for (const title of serviceTitles) {
     const slug = generateSlug(title);
     const shortDescription = placeholderDesc(title);
@@ -143,7 +159,7 @@ const seed = async () => {
       title,
       slug,
       tagline: `${title} by Acclevate`,
-      category: 'strategy',
+      category: categoryId,
       shortDescription,
       description,
       metaTitle,

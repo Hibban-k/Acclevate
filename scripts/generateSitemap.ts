@@ -1,15 +1,24 @@
 // scripts/generateSitemap.ts
 import mongoose from 'mongoose';
 import Service from '../models/Service';
+import Category from '../models/Category';
 import fs from 'fs';
 import path from 'path';
 
 (async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/acclevate');
-    const services = await Service.find({ slug: { $ne: null } }).select('slug');
+    const services = await Service.find({ slug: { $ne: null } })
+      .select('slug category')
+      .populate('category', 'slug')
+      .lean();
     const baseUrl = 'https://www.acclevate.com';
-    const urls = services.map(s => `${baseUrl}/service/${s.slug}`);
+    const urls = services.map(s => {
+      const categorySlug = (s.category && typeof s.category === 'object' && 'slug' in s.category)
+        ? (s.category as any).slug
+        : 'service';
+      return `${baseUrl}/services/${categorySlug}/${s.slug}`;
+    });
     const sitemapEntries = urls
       .map(url => `  <url>\n    <loc>${url}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>`)
       .join('\n');

@@ -1,12 +1,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { getInquiriesAction } from '@/lib/actions/inquiries';
 
 interface Inquiry {
     _id: string;
-    firstName: string;
-    lastName: string;
+    fullName?: string;
+    firstName?: string; // For backward compatibility with old entries
+    lastName?: string;
     email: string;
+    phone: string;
+    service?: string;
     company?: string;
     message: string;
     status: 'new' | 'read' | 'replied';
@@ -20,8 +24,7 @@ export default function AdminInquiriesPage() {
     useEffect(() => {
         async function fetchInquiries() {
             try {
-                const res = await fetch('/api/admin/inquiries');
-                const data = await res.json();
+                const data = await getInquiriesAction();
                 setInquiries(Array.isArray(data) ? data : []);
             } catch (error) {
                 console.error('Error fetching inquiries:', error);
@@ -58,9 +61,9 @@ export default function AdminInquiriesPage() {
                         <div key={inquiry._id} className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
                             <div className="flex justify-between items-start mb-4">
                                 <div>
-                                    <h3 className="font-semibold text-slate-900">
-                                        {inquiry.firstName} {inquiry.lastName}
-                                    </h3>
+                                    <div className="font-medium text-navy-900">
+                                        {inquiry.fullName || `${inquiry.firstName || ''} ${inquiry.lastName || ''}`.trim()}
+                                    </div>
                                     <p className="text-sm text-slate-600">{inquiry.email}</p>
                                     {inquiry.company && (
                                         <p className="text-sm text-slate-500">{inquiry.company}</p>

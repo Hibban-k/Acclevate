@@ -12,9 +12,10 @@ export class InquiryService {
 
         // Send email notification
         await sendContactEmail({
-            firstName: data.firstName!,
-            lastName: data.lastName!,
+            fullName: data.fullName!,
             email: data.email!,
+            phone: data.phone!,
+            service: data.service,
             company: data.company,
             message: data.message!,
         });

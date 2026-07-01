@@ -1,26 +1,25 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
 export interface IInquiry extends Document {
-    firstName: string;
-    lastName: string;
+    fullName: string;
     email: string;
+    phone: string;
+    service?: string;
     company?: string;
     message: string;
     status: 'new' | 'read' | 'replied';
-    phone:string;
     createdAt: Date;
 }
 
 const InquirySchema = new Schema<IInquiry>(
     {
-        firstName: {
+        fullName: {
             type: String,
-            required: [true, 'First name is required'],
+            required: [true, 'Full name is required'],
             trim: true,
         },
-        lastName: {
+        service: {
             type: String,
-            required: [true, 'Last name is required'],
             trim: true,
         },
         email: {

@@ -22,7 +22,7 @@ export const handlePostService = catchAsync(async (request: NextRequest) => {
     }
 
     const body = await request.json();
-    const { title, tagline, description, category, features, benefits } = body;
+    const { title, tagline, description, category, subcategory, relatedServices, features, faqs } = body;
 
     if (!title || !tagline || !description || !category) {
         return NextResponse.json(
@@ -36,8 +36,10 @@ export const handlePostService = catchAsync(async (request: NextRequest) => {
         tagline,
         description,
         category,
+        subcategory,
+        relatedServices,
         features,
-        benefits,
+        faqs,
     });
 
     return NextResponse.json(service, { status: 201 });
@@ -49,6 +51,20 @@ export const handleGetServiceById = catchAsync(async (
 ) => {
     const { id } = await params;
     const service = await serviceService.getServiceById(id);
+
+    if (!service) {
+        return NextResponse.json({ error: 'Service not found' }, { status: 404 });
+    }
+
+    return NextResponse.json(service);
+});
+
+export const handleGetServiceBySlug = catchAsync(async (
+    request: NextRequest,
+    { params }: { params: Promise<{ slug: string }> }
+) => {
+    const { slug } = await params;
+    const service = await serviceService.getServiceWithPopulatedFieldsBySlug(slug);
 
     if (!service) {
         return NextResponse.json({ error: 'Service not found' }, { status: 404 });

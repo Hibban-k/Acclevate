@@ -69,7 +69,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-4">
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium text-white bg-navy-600 rounded-lg shadow-sm hover:bg-navy-700 hover:-translate-y-0.5 hover:shadow-md transition-all"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium text-white bg-linear-to-r from-navy-900 via-navy-800 to-sky-900 rounded-lg shadow-sm hover:from-navy-800 hover:via-navy-700 hover:to-sky-800 hover:-translate-y-0.5 hover:shadow-md hover:shadow-sky-900/20 transition-all"
           >
             Get Started
           </Link>

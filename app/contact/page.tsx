@@ -1,216 +1,101 @@
-'use client';
+import { Metadata } from 'next';
+import Link from 'next/link';
+import Image from 'next/image';
+import ContactForm from '@/components/ContactForm';
 
-import { useState } from 'react';
-import { Seo } from '@/components/Seo';
-import { defaultMetadata } from '@/components/Seo';
+export const metadata: Metadata = {
+    title: 'Contact Acclevate | Top Business Consulting in Bengaluru',
+    description: 'Transform your corporate strategy with Acclevate Business Solutions. Based in Bengaluru, our expert consultants provide elite financial and operational guidance to scale your enterprise.',
+    keywords: ['contact Acclevate', 'business consulting Bengaluru', 'corporate strategy consultants', 'financial advisory', 'BTM layout business consultants'],
+    openGraph: {
+        title: 'Contact Acclevate | Top Business Consulting in Bengaluru',
+        description: 'Transform your corporate strategy with Acclevate Business Solutions. Our expert consultants provide elite financial and operational guidance.',
+        url: 'https://www.acclevate.com/contact',
+    },
+    twitter: {
+        title: 'Contact Acclevate | Top Business Consulting in Bengaluru',
+        description: 'Transform your corporate strategy with Acclevate Business Solutions.',
+    },
+};
 
 export default function ContactPage() {
-    const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        company: '',
-        message: '',
-    });
-    const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
-    const [errorMessage, setErrorMessage] = useState('');
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData({ ...formData, [e.target.id]: e.target.value });
-    };
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setFormStatus('sending');
-        setErrorMessage('');
-
-        try {
-            const response = await fetch('/api/email/send', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                setFormStatus('sent');
-                setFormData({ firstName: '', lastName: '', email: '', company: '', message: '' });
-                setTimeout(() => setFormStatus('idle'), 5000);
-            } else {
-                setFormStatus('error');
-                setErrorMessage(data.error || 'Something went wrong');
-            }
-        } catch {
-            setFormStatus('error');
-            setErrorMessage('Network error. Please try again.');
-        }
-    };
-
     return (
-        <div className="animate-fadeInUp">
-            {/* Page Hero */}
-            <section className="pt-[112px] pb-20 bg-slate-50 relative">
-                <div className="max-w-[1280px] mx-auto px-6">
-                    <div className="max-w-[720px]">
-                        <span className="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full uppercase tracking-wider bg-navy-600/10 text-navy-600">
-                            Get in Touch
-                        </span>
-                        <h1 className="text-[clamp(2rem,4vw,3rem)] font-bold mt-4 mb-4">Contact Us</h1>
-                        <p className="text-lg text-slate-600">
-                            Ready to start a conversation? We&apos;d love to hear about your challenges
-                            and explore how we can help.
-                        </p>
+        <div className="bg-white">
+            {/* Hero Section */}
+            <section className="min-h-[85vh] lg:min-h-screen flex flex-col justify-center pt-24 pb-16 bg-linear-to-br from-slate-100 via-slate-50 to-slate-200 relative overflow-hidden border-b border-slate-200/50 shadow-[inset_0_0_100px_rgba(255,255,255,0.5)]">
+                {/* Royal Light Theme Orbs (Champagne & Sky) */}
+                <div className="absolute top-0 right-0 w-[50vw] h-[50vw] max-w-[800px] bg-sky-100/40 rounded-full blur-[100px] -translate-y-1/4 translate-x-1/4 animate-orbFloat pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] max-w-[600px] bg-amber-50/50 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4 animate-orbFloat-reverse pointer-events-none" />
+
+                <div className="max-w-[1280px] w-full mx-auto px-6 relative z-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+                        <div className="lg:col-span-7">
+                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 border border-slate-200 shadow-sm backdrop-blur-md rounded-full text-xs font-medium mb-8">
+                                <Link href="/" className="text-slate-500 hover:text-navy-900 transition-colors">
+                                    Home
+                                </Link>
+                                <span className="text-slate-300">/</span>
+                                <span className="text-navy-900">Contact</span>
+                            </div>
+                            <h1 className="text-[clamp(3.5rem,6vw,5.5rem)] font-bold leading-[1.05] tracking-tight">
+                                Transform your <br className="hidden lg:block"/>
+                                <span className="bg-linear-to-r from-navy-600 to-sky-500 bg-clip-text text-transparent">
+                                    growth trajectory.
+                                </span>
+                            </h1>
+                        </div>
+                        <div className="lg:col-span-5">
+                            <p className="text-xl md:text-2xl text-slate-700 font-light leading-relaxed">
+                                We bypass theoretical presentations and focus entirely on actionable financial and operational strategies. Partner with elite operators who understand the complexities of modern business scaling.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
 
             {/* Contact Grid */}
-            <section className="py-24">
+            <section className="py-32">
                 <div className="max-w-[1280px] mx-auto px-6">
-                    <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-16">
+                    <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-16 lg:gap-24">
                         {/* Contact Info */}
-                        <div>
-                            <h3 className="text-2xl font-semibold mb-6">Let&apos;s connect</h3>
-                            <p className="text-slate-600 mb-8">
-                                Whether you have a specific project in mind or just want to learn more
-                                about what we do, we&apos;re here to help.
+                        <div className="flex flex-col h-full">
+                            <h2 className="text-[clamp(2.5rem,4vw,3.5rem)] font-bold mb-6 tracking-tight leading-tight text-slate-900">
+                                Start the <br/> conversation.
+                            </h2>
+                            <p className="text-lg text-slate-600 font-light leading-relaxed mb-12">
+                                Every significant corporate transformation begins with a critical diagnosis. Reach out to discuss your specific operational challenges and discover how our methodologies can safeguard your bottom line.
                             </p>
 
-                            <div className="space-y-6">
+                            <div className="space-y-8 mb-12 border-t border-b border-slate-200 py-10">
                                 {[
-                                    { icon: '📧', label: 'Email', value: 'hello@acclevate.com' },
-                                    { icon: '📞', label: 'Phone', value: '+1 (555) 123-4567' },
-                                    { icon: '📍', label: 'Headquarters', value: '123 Business Avenue\nSan Francisco, CA 94102' },
+                                    { icon: '📧', label: 'Direct Inquiry', value: 'hello@acclevate.com' },
+                                    { icon: '📞', label: 'Consultation Line', value: '+1 (555) 123-4567' },
+                                    { icon: '📍', label: 'Headquarters', value: 'BTM 2nd Stage\nBengaluru, Karnataka' },
                                 ].map((item, index) => (
-                                    <div key={index} className="flex gap-4">
-                                        <div className="w-12 h-12 bg-navy-600/5 rounded-lg flex items-center justify-center text-navy-600 shrink-0">
+                                    <div key={index} className="flex gap-5">
+                                        <div className="w-14 h-14 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center text-xl shrink-0 shadow-sm">
                                             {item.icon}
                                         </div>
-                                        <div>
-                                            <h5 className="text-base font-semibold mb-1">{item.label}</h5>
-                                            <p className="text-sm text-slate-600 whitespace-pre-line">{item.value}</p>
+                                        <div className="pt-1">
+                                            <h5 className="text-base font-bold text-slate-900 mb-1 tracking-wide">{item.label}</h5>
+                                            <p className="text-sm text-slate-600 font-medium whitespace-pre-line leading-relaxed">{item.value}</p>
                                         </div>
                                     </div>
                                 ))}
                             </div>
 
-                            <div className="mt-8">
-                                <h5 className="font-semibold mb-4">Global Offices</h5>
-                                <div className="flex flex-wrap gap-4 text-sm text-slate-600">
-                                    <span>New York</span>
-                                    <span>•</span>
-                                    <span>London</span>
-                                    <span>•</span>
-                                    <span>Singapore</span>
-                                    <span>•</span>
-                                    <span>Dubai</span>
-                                </div>
+                            {/* Trust Pillar */}
+                            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-8 mt-auto">
+                                <h5 className="font-bold text-navy-900 mb-3 tracking-wide">Direct Access Guarantee</h5>
+                                <p className="text-sm text-slate-600 font-light leading-relaxed">
+                                    You won&apos;t be passed off to junior account managers. When you engage with Acclevate, you speak directly with the senior strategic experts actively executing your corporate roadmap.
+                                </p>
                             </div>
                         </div>
 
-                        {/* Contact Form */}
-                        <div className="bg-slate-50 p-10 rounded-2xl">
-                            <h3 className="text-2xl font-semibold mb-6">Send us a message</h3>
-
-                            {formStatus === 'sent' && (
-                                <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6">
-                                    Thank you for your message! We&apos;ll get back to you soon.
-                                </div>
-                            )}
-
-                            {formStatus === 'error' && (
-                                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
-                                    {errorMessage}
-                                </div>
-                            )}
-
-                            <form onSubmit={handleSubmit}>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-                                    <div>
-                                        <label className="block text-sm font-medium text-slate-900 mb-2" htmlFor="firstName">
-                                            First Name
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="firstName"
-                                            value={formData.firstName}
-                                            onChange={handleChange}
-                                            className="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-navy-600 focus:ring-2 focus:ring-navy-600/10 transition-all"
-                                            placeholder="John"
-                                            required
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-slate-900 mb-2" htmlFor="lastName">
-                                            Last Name
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="lastName"
-                                            value={formData.lastName}
-                                            onChange={handleChange}
-                                            className="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-navy-600 focus:ring-2 focus:ring-navy-600/10 transition-all"
-                                            placeholder="Doe"
-                                            required
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="mb-6">
-                                    <label className="block text-sm font-medium text-slate-900 mb-2" htmlFor="email">
-                                        Email
-                                    </label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-navy-600 focus:ring-2 focus:ring-navy-600/10 transition-all"
-                                        placeholder="john@company.com"
-                                        required
-                                    />
-                                </div>
-
-                                <div className="mb-6">
-                                    <label className="block text-sm font-medium text-slate-900 mb-2" htmlFor="company">
-                                        Company
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="company"
-                                        value={formData.company}
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg focus:outline-none focus:border-navy-600 focus:ring-2 focus:ring-navy-600/10 transition-all"
-                                        placeholder="Your Company"
-                                    />
-                                </div>
-
-                                <div className="mb-6">
-                                    <label className="block text-sm font-medium text-slate-900 mb-2" htmlFor="message">
-                                        Message
-                                    </label>
-                                    <textarea
-                                        id="message"
-                                        value={formData.message}
-                                        onChange={handleChange}
-                                        className="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg min-h-[150px] resize-y focus:outline-none focus:border-navy-600 focus:ring-2 focus:ring-navy-600/10 transition-all"
-                                        placeholder="Tell us about your project or inquiry..."
-                                        required
-                                    />
-                                </div>
-
-                                <button
-                                    type="submit"
-                                    disabled={formStatus === 'sending'}
-                                    className={`w-full px-8 py-4 text-base font-medium text-white rounded-lg transition-all ${formStatus === 'sending'
-                                            ? 'bg-slate-400 cursor-not-allowed'
-                                            : 'bg-linear-to-br from-navy-600 to-navy-800 hover:-translate-y-0.5 hover:shadow-lg'
-                                        }`}
-                                >
-                                    {formStatus === 'sending' ? 'Sending...' : 'Send Message'}
-                                </button>
-                            </form>
+                        {/* Client Component: Interactive Form */}
+                        <div className="bg-white rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/50 p-8 md:p-12">
+                            <ContactForm />
                         </div>
                     </div>
                 </div>
