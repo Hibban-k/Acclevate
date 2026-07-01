@@ -30,6 +30,7 @@ interface Subcategory {
 interface Category {
     id: string;
     name: string;
+    slug: string;
     subcategories: Subcategory[];
 }
 
