@@ -2,15 +2,27 @@ import { serviceRepository } from '@/lib/repositories/service.repository';
 import { IService } from '@/models/Service';
 
 export class ServiceService {
-    async getAllServices() {
-        return serviceRepository.findAll();
+    async getAllServices(filter: Record<string, any> = {}) {
+        return serviceRepository.findAll(filter);
+    }
+
+    async getServiceBySlug(slug: string) {
+        return serviceRepository.findOne({ slug });
+    }
+
+    async getServiceWithPopulatedFieldsBySlug(slug: string) {
+        return serviceRepository.findOnePopulatedBySlug(slug);
+    }
+
+    async getActiveServicesPaginated(filter: Record<string, any>, page: number, limit: number) {
+        return serviceRepository.findPaginated({ isActive: true, ...filter }, page, limit);
     }
 
     async getActiveServicesWithCategories() {
         const services = await serviceRepository.findAll({ isActive: true });
         const categorySet = new Set<string>();
         services.forEach((s) => {
-            if (s.category) categorySet.add(s.category);
+            if (s.category) categorySet.add(s.category.toString());
         });
         const categories = Array.from(categorySet).map((cat) => ({ id: cat, name: cat }));
         return { services, categories };
@@ -23,12 +35,23 @@ export class ServiceService {
     async createService(data: Partial<IService>) {
         // Ensure arrays are initialized if missing
         if (!data.features) data.features = [];
-        if (!data.benefits) data.benefits = [];
+        if (!data.faqs) data.faqs = [];
+
+        // Generate slug if not provided
+        if (!data.slug && data.title) {
+            const slugify = (await import('slugify')).default;
+            data.slug = slugify(data.title, { lower: true, strict: true });
+        }
 
         return serviceRepository.create(data);
     }
 
     async updateService(id: string, data: Partial<IService>) {
+        // Generate slug if not provided
+        if (!data.slug && data.title) {
+            const slugify = (await import('slugify')).default;
+            data.slug = slugify(data.title, { lower: true, strict: true });
+        }
         return serviceRepository.update(id, data);
     }
 
@@ -37,4 +60,4 @@ export class ServiceService {
     }
 }
 
-export const service = new ServiceService();
+export const serviceService = new ServiceService();

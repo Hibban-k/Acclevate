@@ -7,18 +7,24 @@ import ServiceCard from '@/components/ServiceCard';
 interface Service {
     id: string;
     title: string;
+    slug: string;
     tagline: string;
-    category: string;
+    category: {
+        id?: string;
+        name: string;
+        slug: string;
+    } | string;
 }
 
 interface ServicesCarouselProps {
     services: Service[];
+    theme?: 'light' | 'dark';
 }
 
 const ITEMS_PER_SLIDE = 4;
 const AUTO_SLIDE_DELAY = 5000;
 
-export default function ServicesCarousel({ services }: ServicesCarouselProps) {
+export default function ServicesCarousel({ services, theme = 'light' }: ServicesCarouselProps) {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(false);
     const carouselRef = useRef<HTMLDivElement>(null);
@@ -147,7 +153,11 @@ export default function ServicesCarousel({ services }: ServicesCarouselProps) {
                 {/* Prev Button */}
                 <button
                     onClick={() => { prevSlide(); startAutoSlide(); }}
-                    className="hidden md:flex w-12 h-12 shrink-0 items-center justify-center bg-white border border-slate-200 rounded-xl text-xl text-slate-600 cursor-pointer transition-all hover:bg-navy-600 hover:border-navy-600 hover:text-white hover:scale-105 active:scale-95 z-10"
+                    className={`hidden md:flex w-12 h-12 shrink-0 items-center justify-center border rounded-xl text-xl cursor-pointer transition-all hover:scale-105 active:scale-95 z-10 ${
+                        theme === 'dark' 
+                        ? 'bg-white/5 border-white/10 text-white hover:bg-sky-500 hover:border-sky-500' 
+                        : 'bg-white border-slate-200 text-slate-600 hover:bg-navy-600 hover:border-navy-600 hover:text-white'
+                    }`}
                     aria-label="Previous"
                 >
                     ←
@@ -162,14 +172,14 @@ export default function ServicesCarousel({ services }: ServicesCarouselProps) {
                 >
                     <div
                         ref={carouselRef}
-                        className="flex gap-6"
+                        className="flex gap-6 items-stretch"
                         onTransitionEnd={handleTransitionEnd}
                     >
                         {extendedServices.map((service, index) => (
                             <ServiceCard
                                 key={`${service.id}-${index}`}
                                 service={service}
-                                variant="simple"
+                                variant="gradient"
                                 className="shrink-0 w-[calc(25%-18px)] min-w-[calc(25%-18px)] max-lg:w-[calc(33.333%-16px)] max-lg:min-w-[calc(33.333%-16px)] max-md:w-[calc(50%-12px)] max-md:min-w-[calc(50%-12px)] max-sm:w-full max-sm:min-w-full"
                             />
                         ))}
@@ -179,7 +189,11 @@ export default function ServicesCarousel({ services }: ServicesCarouselProps) {
                 {/* Next Button */}
                 <button
                     onClick={() => { nextSlide(); startAutoSlide(); }}
-                    className="hidden md:flex w-12 h-12 shrink-0 items-center justify-center bg-white border border-slate-200 rounded-xl text-xl text-slate-600 cursor-pointer transition-all hover:bg-navy-600 hover:border-navy-600 hover:text-white hover:scale-105 active:scale-95 z-10"
+                    className={`hidden md:flex w-12 h-12 shrink-0 items-center justify-center border rounded-xl text-xl cursor-pointer transition-all hover:scale-105 active:scale-95 z-10 ${
+                        theme === 'dark' 
+                        ? 'bg-white/5 border-white/10 text-white hover:bg-sky-500 hover:border-sky-500' 
+                        : 'bg-white border-slate-200 text-slate-600 hover:bg-navy-600 hover:border-navy-600 hover:text-white'
+                    }`}
                     aria-label="Next"
                 >
                     →
@@ -192,10 +206,11 @@ export default function ServicesCarousel({ services }: ServicesCarouselProps) {
                     <button
                         key={index}
                         onClick={() => { goToSlide(index); startAutoSlide(); }}
-                        className={`h-2.5 rounded-full border-none cursor-pointer transition-all ${displaySlide === index
-                            ? 'w-6 bg-navy-600'
-                            : 'w-2.5 bg-slate-200 hover:bg-navy-600/30'
-                            }`}
+                        className={`h-2.5 rounded-full border-none cursor-pointer transition-all ${
+                            displaySlide === index
+                                ? (theme === 'dark' ? 'w-6 bg-sky-400' : 'w-6 bg-navy-600')
+                                : (theme === 'dark' ? 'w-2.5 bg-white/20 hover:bg-white/40' : 'w-2.5 bg-slate-200 hover:bg-navy-600/30')
+                        }`}
                         aria-label={`Go to slide ${index + 1}`}
                     />
                 ))}

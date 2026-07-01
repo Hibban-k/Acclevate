@@ -1,11 +1,21 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import {
+    getServicesAction,
+    createServiceAction,
+    updateServiceAction,
+    deleteServiceAction
+} from '@/lib/actions/services';
 
 interface Feature {
-    icon: string;
     title: string;
     description: string;
+}
+
+interface FAQ {
+    question: string;
+    answer: string;
 }
 
 interface Service {
@@ -14,8 +24,11 @@ interface Service {
     tagline: string;
     description: string;
     category: string;
+    subcategory?: string;
+    serviceGroup?: string;
+    relatedServices?: string[];
     features: Feature[];
-    benefits: string[];
+    faqs: FAQ[];
     isActive: boolean;
     order: number;
     createdAt: string;
@@ -27,8 +40,11 @@ interface FormData {
     tagline: string;
     description: string;
     category: string;
+    subcategory: string;
+    serviceGroup: string;
+    relatedServices: string[];
     features: Feature[];
-    benefits: string[];
+    faqs: FAQ[];
     isActive: boolean;
     order: number;
 }
@@ -38,16 +54,23 @@ const emptyFormData: FormData = {
     tagline: '',
     description: '',
     category: 'strategy',
+    subcategory: '',
+    serviceGroup: '',
+    relatedServices: [],
     features: [],
-    benefits: [],
+    faqs: [],
     isActive: true,
     order: 0,
 };
 
 const emptyFeature: Feature = {
-    icon: '',
     title: '',
     description: '',
+};
+
+const emptyFAQ: FAQ = {
+    question: '',
+    answer: '',
 };
 
 const categories: Record<string, string> = {
@@ -57,13 +80,6 @@ const categories: Record<string, string> = {
     people: 'People & Org',
 };
 
-// Common Lucide icon names for features
-const iconOptions = [
-    'CheckCircle', 'Star', 'Zap', 'Shield', 'Target', 'TrendingUp',
-    'BarChart', 'Users', 'Settings', 'Award', 'Briefcase', 'Clock',
-    'Globe', 'Heart', 'Lightbulb', 'Lock', 'PieChart', 'Rocket',
-];
-
 export default function AdminServicesPage() {
     const [services, setServices] = useState<Service[]>([]);
     const [loading, setLoading] = useState(true);
@@ -71,13 +87,12 @@ export default function AdminServicesPage() {
     const [editingId, setEditingId] = useState<string | null>(null);
     const [formData, setFormData] = useState<FormData>(emptyFormData);
     const [saving, setSaving] = useState(false);
-    const [newBenefit, setNewBenefit] = useState('');
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
+    const [relatedServicesStr, setRelatedServicesStr] = useState<string>('');
 
     async function fetchServices() {
         try {
-            const res = await fetch('/api/admin/services');
-            const data = await res.json();
+            const data = await getServicesAction();
             setServices(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error('Error fetching services:', error);
@@ -94,29 +109,28 @@ export default function AdminServicesPage() {
         e.preventDefault();
         setSaving(true);
 
+        const dataToSave = {
+            ...formData,
+            relatedServices: relatedServicesStr
+                .split(',')
+                .map((s) => s.trim())
+                .filter(Boolean),
+        };
+
         try {
-            const url = editingId
-                ? `/api/admin/services/${editingId}`
-                : '/api/admin/services';
-            const method = editingId ? 'PUT' : 'POST';
-
-            const res = await fetch(url, {
-                method,
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
-            });
-
-            if (res.ok) {
-                setShowForm(false);
-                setEditingId(null);
-                setFormData(emptyFormData);
-                fetchServices();
+            if (editingId) {
+                await updateServiceAction(editingId, dataToSave);
             } else {
-                const error = await res.json();
-                alert(error.error || 'Failed to save service');
+                await createServiceAction(dataToSave);
             }
-        } catch (error) {
+            setShowForm(false);
+            setEditingId(null);
+            setFormData(emptyFormData);
+            setRelatedServicesStr('');
+            fetchServices();
+        } catch (error: any) {
             console.error('Error saving service:', error);
+            alert(error.message || 'Failed to save service');
         } finally {
             setSaving(false);
         }
@@ -128,11 +142,15 @@ export default function AdminServicesPage() {
             tagline: service.tagline,
             description: service.description,
             category: service.category,
+            subcategory: service.subcategory || '',
+            serviceGroup: service.serviceGroup || '',
+            relatedServices: service.relatedServices || [],
             features: service.features || [],
-            benefits: service.benefits || [],
+            faqs: service.faqs || [],
             isActive: service.isActive,
             order: service.order,
         });
+        setRelatedServicesStr(service.relatedServices ? service.relatedServices.join(', ') : '');
         setEditingId(service._id);
         setShowForm(true);
     };
@@ -141,13 +159,8 @@ export default function AdminServicesPage() {
         if (!confirm('Are you sure you want to delete this service?')) return;
 
         try {
-            const res = await fetch(`/api/admin/services/${id}`, {
-                method: 'DELETE',
-            });
-
-            if (res.ok) {
-                fetchServices();
-            }
+            await deleteServiceAction(id);
+            fetchServices();
         } catch (error) {
             console.error('Error deleting service:', error);
         }
@@ -155,15 +168,8 @@ export default function AdminServicesPage() {
 
     const handleToggleStatus = async (service: Service) => {
         try {
-            const res = await fetch(`/api/admin/services/${service._id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...service, isActive: !service.isActive }),
-            });
-
-            if (res.ok) {
-                fetchServices();
-            }
+            await updateServiceAction(service._id, { ...service, isActive: !service.isActive });
+            fetchServices();
         } catch (error) {
             console.error('Error toggling status:', error);
         }
@@ -173,6 +179,7 @@ export default function AdminServicesPage() {
         setShowForm(false);
         setEditingId(null);
         setFormData(emptyFormData);
+        setRelatedServicesStr('');
     };
 
     // Feature management
@@ -196,21 +203,24 @@ export default function AdminServicesPage() {
         });
     };
 
-    // Benefits management
-    const addBenefit = () => {
-        if (newBenefit.trim()) {
-            setFormData({
-                ...formData,
-                benefits: [...formData.benefits, newBenefit.trim()],
-            });
-            setNewBenefit('');
-        }
-    };
-
-    const removeBenefit = (index: number) => {
+    // FAQ management
+    const addFaq = () => {
         setFormData({
             ...formData,
-            benefits: formData.benefits.filter((_, i) => i !== index),
+            faqs: [...formData.faqs, { ...emptyFAQ }],
+        });
+    };
+
+    const updateFaq = (index: number, field: keyof FAQ, value: string) => {
+        const updatedFaqs = [...formData.faqs];
+        updatedFaqs[index] = { ...updatedFaqs[index], [field]: value };
+        setFormData({ ...formData, faqs: updatedFaqs });
+    };
+
+    const removeFaq = (index: number) => {
+        setFormData({
+            ...formData,
+            faqs: formData.faqs.filter((_, i) => i !== index),
         });
     };
 
@@ -270,6 +280,46 @@ export default function AdminServicesPage() {
                                     ))}
                                 </select>
                             </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <label className="block text-sm font-medium text-slate-700 mb-1">
+                                    Subcategory
+                                </label>
+                                <input
+                                    type="text"
+                                    value={formData.subcategory}
+                                    onChange={(e) => setFormData({ ...formData, subcategory: e.target.value })}
+                                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-navy-600 outline-none"
+                                    placeholder="e.g., Return Filings, Registrations"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-slate-700 mb-1">
+                                    Service Group
+                                </label>
+                                <input
+                                    type="text"
+                                    value={formData.serviceGroup}
+                                    onChange={(e) => setFormData({ ...formData, serviceGroup: e.target.value })}
+                                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-navy-600 outline-none"
+                                    placeholder="e.g., Compliance, Advisory"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="mb-6">
+                            <label className="block text-sm font-medium text-slate-700 mb-1">
+                                Related Services (Comma-separated slugs or names)
+                            </label>
+                            <input
+                                type="text"
+                                value={relatedServicesStr}
+                                onChange={(e) => setRelatedServicesStr(e.target.value)}
+                                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-navy-600 outline-none"
+                                placeholder="e.g., audit-services, tax-consulting"
+                            />
                         </div>
 
                         <div className="mb-6">
@@ -358,20 +408,7 @@ export default function AdminServicesPage() {
                                                     Remove
                                                 </button>
                                             </div>
-                                            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                                                <div>
-                                                    <label className="block text-xs text-slate-500 mb-1">Icon</label>
-                                                    <select
-                                                        value={feature.icon}
-                                                        onChange={(e) => updateFeature(index, 'icon', e.target.value)}
-                                                        className="w-full px-2 py-1.5 text-sm border border-slate-300 rounded-lg"
-                                                    >
-                                                        <option value="">Select icon...</option>
-                                                        {iconOptions.map(icon => (
-                                                            <option key={icon} value={icon}>{icon}</option>
-                                                        ))}
-                                                    </select>
-                                                </div>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                                 <div>
                                                     <label className="block text-xs text-slate-500 mb-1">Title</label>
                                                     <input
@@ -399,46 +436,59 @@ export default function AdminServicesPage() {
                             )}
                         </div>
 
-                        {/* Benefits Section */}
+                        {/* FAQs Section */}
                         <div className="mb-6">
-                            <label className="block text-sm font-medium text-slate-700 mb-3">
-                                Benefits
-                            </label>
-                            <div className="flex gap-2 mb-3">
-                                <input
-                                    type="text"
-                                    value={newBenefit}
-                                    onChange={(e) => setNewBenefit(e.target.value)}
-                                    onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addBenefit())}
-                                    className="flex-1 px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-navy-600 outline-none"
-                                    placeholder="Type a benefit and press Enter or click Add"
-                                />
+                            <div className="flex justify-between items-center mb-3">
+                                <label className="block text-sm font-medium text-slate-700">
+                                    FAQs (Frequently Asked Questions)
+                                </label>
                                 <button
                                     type="button"
-                                    onClick={addBenefit}
-                                    className="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors"
+                                    onClick={addFaq}
+                                    className="text-sm text-navy-600 hover:text-navy-700 font-medium"
                                 >
-                                    Add
+                                    + Add FAQ
                                 </button>
                             </div>
-                            {formData.benefits.length === 0 ? (
-                                <p className="text-sm text-slate-500 italic">No benefits added yet</p>
+                            {formData.faqs.length === 0 ? (
+                                <p className="text-sm text-slate-500 italic">No FAQs added yet</p>
                             ) : (
-                                <div className="flex flex-wrap gap-2">
-                                    {formData.benefits.map((benefit, index) => (
-                                        <span
-                                            key={index}
-                                            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-50 text-green-700 rounded-full text-sm"
-                                        >
-                                            {benefit}
-                                            <button
-                                                type="button"
-                                                onClick={() => removeBenefit(index)}
-                                                className="text-green-500 hover:text-green-700"
-                                            >
-                                                ×
-                                            </button>
-                                        </span>
+                                <div className="space-y-4">
+                                    {formData.faqs.map((faq, index) => (
+                                        <div key={index} className="p-4 bg-slate-50 rounded-lg border border-slate-200">
+                                            <div className="flex justify-between items-start mb-3">
+                                                <span className="text-sm font-medium text-slate-600">FAQ {index + 1}</span>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => removeFaq(index)}
+                                                    className="text-red-500 hover:text-red-700 text-sm"
+                                                >
+                                                    Remove
+                                                </button>
+                                            </div>
+                                            <div className="space-y-3">
+                                                <div>
+                                                    <label className="block text-xs text-slate-500 mb-1">Question</label>
+                                                    <input
+                                                        type="text"
+                                                        value={faq.question}
+                                                        onChange={(e) => updateFaq(index, 'question', e.target.value)}
+                                                        className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-navy-600 focus:border-navy-600 outline-none bg-white"
+                                                        placeholder="e.g., What documents are required?"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs text-slate-500 mb-1">Answer</label>
+                                                    <textarea
+                                                        value={faq.answer}
+                                                        onChange={(e) => updateFaq(index, 'answer', e.target.value)}
+                                                        className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-navy-600 focus:border-navy-600 outline-none bg-white"
+                                                        rows={2}
+                                                        placeholder="e.g., You will need a PAN Card, Aadhaar Card, and address proof..."
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
                                     ))}
                                 </div>
                             )}
@@ -611,7 +661,7 @@ export default function AdminServicesPage() {
                                     </td>
                                     <td className="px-6 py-4">
                                         <span className="text-sm text-slate-600">
-                                            {service.features?.length || 0} features, {service.benefits?.length || 0} benefits
+                                            {service.features?.length || 0} features, {service.faqs?.length || 0} FAQs
                                         </span>
                                     </td>
                                     <td className="px-6 py-4">

@@ -2,6 +2,8 @@
 
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import { getServicesAction } from '@/lib/actions/services';
+import { getInquiriesAction } from '@/lib/actions/inquiries';
 
 interface Stats {
     totalServices: number;
@@ -21,13 +23,10 @@ export default function AdminDashboard() {
     useEffect(() => {
         async function fetchStats() {
             try {
-                const [servicesRes, inquiriesRes] = await Promise.all([
-                    fetch('/api/admin/services'),
-                    fetch('/api/admin/inquiries'),
+                const [services, inquiries] = await Promise.all([
+                    getServicesAction(),
+                    getInquiriesAction(),
                 ]);
-
-                const services = await servicesRes.json();
-                const inquiries = await inquiriesRes.json();
 
                 setStats({
                     totalServices: Array.isArray(services) ? services.length : 0,

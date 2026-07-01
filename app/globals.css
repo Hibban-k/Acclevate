@@ -149,3 +149,61 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* Secondary Button with Transparent Background & Gradient Border */
+.btn-secondary {
+  position: relative;
+  background: transparent;
+  z-index: 1;
+  overflow: hidden; /* Contains the shine effect */
+}
+
+.btn-secondary-text {
+  background: linear-gradient(to right, var(--color-navy-900), var(--color-sky-900));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gradient Border Mask */
+.btn-secondary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.5rem; /* Matches Tailwind's rounded-lg */
+  padding: 1px; /* Thinner border thickness */
+  background: linear-gradient(to right, var(--color-navy-900), var(--color-sky-900));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+.btn-secondary:hover::before {
+  opacity: 1;
+}
+
+/* Left to right light shine on hover */
+.btn-secondary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.15), transparent);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.btn-secondary:hover::after {
+  animation: secondaryShine 1.2s ease-in-out forwards;
+}
+
+@keyframes secondaryShine {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
