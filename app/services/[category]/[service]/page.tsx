@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { serviceService } from '@/lib/services/service.service';
 import ServiceCard from '@/components/ServiceCard';
 
+export const revalidate = 60;
+
 interface PageProps {
     params: Promise<{ category: string; service: string }>;
 }
