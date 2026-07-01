@@ -6,10 +6,11 @@ import { catchAsync } from '@/lib/utils/catchAsync';
 
 export const handlePostInquiry = catchAsync(async (request: NextRequest) => {
     const body = await request.json();
-    const { firstName, lastName, email, company, message } = body;
+    const { firstName, lastName, fullName: bodyFullName, email, phone, company, message } = body;
+    const fullName = bodyFullName || `${firstName || ''} ${lastName || ''}`.trim();
 
     // Validation
-    if (!firstName || !lastName || !email || !message) {
+    if (!fullName || !email || !phone || !message) {
         return NextResponse.json(
             { error: 'Please fill in all required fields' },
             { status: 400 }
@@ -26,9 +27,9 @@ export const handlePostInquiry = catchAsync(async (request: NextRequest) => {
     }
 
     const inquiry = await inquiryService.handleNewInquiry({
-        firstName,
-        lastName,
+        fullName,
         email,
+        phone,
         company,
         message,
     });
