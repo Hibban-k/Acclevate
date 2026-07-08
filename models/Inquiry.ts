@@ -7,8 +7,19 @@ export interface IInquiry extends Document {
     service?: string;
     company?: string;
     message: string;
-    status: 'new' | 'read' | 'replied';
+    status: 'new' | 'read' | 'replied' | 'archived';
+    metadata?: {
+        sourcePage?: string;
+        referral?: string;
+        ipAddress?: string;
+        userAgent?: string;
+    };
+    emailStatus?: {
+        customerConfirmation: 'pending' | 'sent' | 'failed';
+        adminNotification: 'pending' | 'sent' | 'failed';
+    };
     createdAt: Date;
+    updatedAt: Date;
 }
 
 const InquirySchema = new Schema<IInquiry>(
@@ -38,13 +49,31 @@ const InquirySchema = new Schema<IInquiry>(
         },
         status: {
             type: String,
-            enum: ['new', 'read', 'replied'],
+            enum: ['new', 'read', 'replied', 'archived'],
             default: 'new',
         },
         phone: {
             type: String,
             trim: true,
             required: [true, 'Phone number is required'],
+        },
+        metadata: {
+            sourcePage: String,
+            referral: String,
+            ipAddress: String,
+            userAgent: String,
+        },
+        emailStatus: {
+            customerConfirmation: {
+                type: String,
+                enum: ['pending', 'sent', 'failed'],
+                default: 'pending'
+            },
+            adminNotification: {
+                type: String,
+                enum: ['pending', 'sent', 'failed'],
+                default: 'pending'
+            }
         }
     },
     {

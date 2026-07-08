@@ -1,38 +1,47 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { inquiryService } from '@/lib/services/inquiry.service';
+import { submitInquirySchema } from '@/lib/validators/inquiry.schema';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { catchAsync } from '@/lib/utils/catchAsync';
 
 export const handlePostInquiry = catchAsync(async (request: NextRequest) => {
     const body = await request.json();
-    const { firstName, lastName, fullName: bodyFullName, email, phone, company, message } = body;
-    const fullName = bodyFullName || `${firstName || ''} ${lastName || ''}`.trim();
 
-    // Validation
-    if (!fullName || !email || !phone || !message) {
+    // 1. Zod Validation
+    const validation = submitInquirySchema.safeParse(body);
+    
+    if (!validation.success) {
         return NextResponse.json(
-            { error: 'Please fill in all required fields' },
+            {
+                success: false,
+                message: 'Validation failed',
+                errors: validation.error.format(),
+            },
             { status: 400 }
         );
     }
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        return NextResponse.json(
-            { error: 'Please provide a valid email address' },
-            { status: 400 }
-        );
-    }
+    // Extract metadata (IP, User Agent) for tracking
+    const ipAddress = request.headers.get('x-forwarded-for') || undefined;
+    const userAgent = request.headers.get('user-agent') || undefined;
 
-    const inquiry = await inquiryService.handleNewInquiry({
-        fullName,
-        email,
-        phone,
-        company,
-        message,
+    // 2. Pass to Service Layer
+    const inquiry = await inquiryService.handleNewInquiry(validation.data, {
+        ipAddress,
+        userAgent
     });
+
+    // 3. Return Success
+    if ('success' in inquiry) {
+        return NextResponse.json(
+            {
+                success: true,
+                message: 'Thank you for your message. We will get back to you soon!',
+            },
+            { status: 201 }
+        );
+    }
 
     return NextResponse.json(
         {

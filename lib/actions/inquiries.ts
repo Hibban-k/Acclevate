@@ -3,6 +3,7 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { inquiryService } from '@/lib/services/inquiry.service';
+import { submitInquirySchema, SubmitInquiryInput } from '@/lib/validators/inquiry.schema';
 
 async function checkAdminAuth() {
     const session = await getServerSession(authOptions);
@@ -12,39 +13,33 @@ async function checkAdminAuth() {
     return session;
 }
 
-export async function sendInquiryAction(data: {
-    fullName: string;
-    email: string;
-    phone: string;
-    service?: string;
-    company?: string;
-    message: string;
-}) {
-    const { fullName, email, phone, service, company, message } = data;
-
-    if (!fullName || !email || !phone || !message) {
-        return { success: false, error: 'Please fill in all required fields' };
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        return { success: false, error: 'Please provide a valid email address' };
+export async function sendInquiryAction(data: SubmitInquiryInput) {
+    // 1. Zod Validation (Unifying logic with the REST API)
+    const validation = submitInquirySchema.safeParse(data);
+    
+    if (!validation.success) {
+        // Return the first validation error message to the frontend
+        const firstError = validation.error.issues[0]?.message || 'Validation failed';
+        return { success: false, error: firstError };
     }
 
     try {
-        const inquiry = await inquiryService.handleNewInquiry({
-            fullName,
-            email,
-            phone,
-            service,
-            company,
-            message,
-        });
+        // 2. Pass to Service Layer
+        const inquiry = await inquiryService.handleNewInquiry(validation.data);
 
+        // Service returns a fake success if honeypot is filled
+        if ('success' in inquiry && inquiry.success) {
+            return {
+                success: true,
+                message: 'Thank you for your message. We will get back to you soon!',
+            };
+        }
+
+        // Return real success
         return {
             success: true,
             message: 'Thank you for your message. We will get back to you soon!',
-            inquiryId: JSON.parse(JSON.stringify(inquiry._id)),
+            inquiryId: JSON.parse(JSON.stringify((inquiry as any)._id)),
         };
     } catch (error: any) {
         return {
