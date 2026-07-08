@@ -6,7 +6,7 @@ import { Seo, defaultMetadata } from '@/components/Seo';
 import { getActiveServicesAction } from '@/lib/actions/services';
 
 export default async function Home() {
-  let data = { services: [], categories: [] };
+  let data: { services: any[]; categories: any[] } = { services: [], categories: [] };
 
   try {
     const res = await getActiveServicesAction({ limit: 12 });
