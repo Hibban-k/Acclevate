@@ -1,25 +1,36 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
 export interface IInquiry extends Document {
-    firstName: string;
-    lastName: string;
+    fullName: string;
     email: string;
+    phone: string;
+    service?: string;
     company?: string;
     message: string;
-    status: 'new' | 'read' | 'replied';
+    status: 'new' | 'read' | 'replied' | 'archived';
+    metadata?: {
+        sourcePage?: string;
+        referral?: string;
+        ipAddress?: string;
+        userAgent?: string;
+    };
+    emailStatus?: {
+        customerConfirmation: 'pending' | 'sent' | 'failed';
+        adminNotification: 'pending' | 'sent' | 'failed';
+    };
     createdAt: Date;
+    updatedAt: Date;
 }
 
 const InquirySchema = new Schema<IInquiry>(
     {
-        firstName: {
+        fullName: {
             type: String,
-            required: [true, 'First name is required'],
+            required: [true, 'Full name is required'],
             trim: true,
         },
-        lastName: {
+        service: {
             type: String,
-            required: [true, 'Last name is required'],
             trim: true,
         },
         email: {
@@ -38,9 +49,32 @@ const InquirySchema = new Schema<IInquiry>(
         },
         status: {
             type: String,
-            enum: ['new', 'read', 'replied'],
+            enum: ['new', 'read', 'replied', 'archived'],
             default: 'new',
         },
+        phone: {
+            type: String,
+            trim: true,
+            required: [true, 'Phone number is required'],
+        },
+        metadata: {
+            sourcePage: String,
+            referral: String,
+            ipAddress: String,
+            userAgent: String,
+        },
+        emailStatus: {
+            customerConfirmation: {
+                type: String,
+                enum: ['pending', 'sent', 'failed'],
+                default: 'pending'
+            },
+            adminNotification: {
+                type: String,
+                enum: ['pending', 'sent', 'failed'],
+                default: 'pending'
+            }
+        }
     },
     {
         timestamps: true,

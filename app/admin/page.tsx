@@ -2,6 +2,8 @@
 
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import { getServicesAction } from '@/lib/actions/services';
+import { getInquiriesAction } from '@/lib/actions/inquiries';
 
 interface Stats {
     totalServices: number;
@@ -21,13 +23,10 @@ export default function AdminDashboard() {
     useEffect(() => {
         async function fetchStats() {
             try {
-                const [servicesRes, inquiriesRes] = await Promise.all([
-                    fetch('/api/admin/services'),
-                    fetch('/api/admin/inquiries'),
+                const [services, inquiries] = await Promise.all([
+                    getServicesAction(),
+                    getInquiriesAction(),
                 ]);
-
-                const services = await servicesRes.json();
-                const inquiries = await inquiriesRes.json();
 
                 setStats({
                     totalServices: Array.isArray(services) ? services.length : 0,
@@ -65,7 +64,7 @@ export default function AdminDashboard() {
                                 <p className="text-slate-600 text-sm">Total Services</p>
                                 <p className="text-3xl font-bold text-slate-900 mt-1">{stats.totalServices}</p>
                             </div>
-                            <div className="w-12 h-12 bg-[#2B3674]/10 rounded-lg flex items-center justify-center text-2xl">
+                            <div className="w-12 h-12 bg-navy-600/10 rounded-lg flex items-center justify-center text-2xl">
                                 🔧
                             </div>
                         </div>
@@ -77,7 +76,7 @@ export default function AdminDashboard() {
                                 <p className="text-slate-600 text-sm">Total Inquiries</p>
                                 <p className="text-3xl font-bold text-slate-900 mt-1">{stats.totalInquiries}</p>
                             </div>
-                            <div className="w-12 h-12 bg-[#2B3674]/10 rounded-lg flex items-center justify-center text-2xl">
+                            <div className="w-12 h-12 bg-navy-600/10 rounded-lg flex items-center justify-center text-2xl">
                                 📧
                             </div>
                         </div>
