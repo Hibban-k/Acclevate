@@ -4,7 +4,7 @@ import Inquiry, { IInquiry } from '@/models/Inquiry';
 export class InquiryRepository {
     async findAll(filter: Record<string, any> = {}): Promise<IInquiry[]> {
         await connectDB();
-        return Inquiry.find(filter).sort({ createdAt: -1 });
+        return Inquiry.find(filter).sort({ createdAt: -1 }).lean();
     }
 
     async create(data: Partial<IInquiry>): Promise<IInquiry> {
@@ -14,7 +14,7 @@ export class InquiryRepository {
 
     async findById(id: string): Promise<IInquiry | null> {
         await connectDB();
-        return Inquiry.findById(id);
+        return Inquiry.findById(id).lean();
     }
 
     async updateEmailStatus(

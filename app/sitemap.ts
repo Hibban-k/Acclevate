@@ -1,41 +1,29 @@
 import { MetadataRoute } from 'next';
-import dbConnect from '@/lib/db';
-import Service from '@/models/Service';
-import Category from '@/models/Category';
-import ProgrammaticPage from '@/models/ProgrammaticPage';
-import Industry from '@/models/Industry';
+import { serviceRepository } from '@/lib/repositories/service.repository';
+import { categoryRepository } from '@/lib/repositories/category.repository';
+import { programmaticPageRepository } from '@/lib/repositories/programmatic.repository';
+import { industryRepository } from '@/lib/repositories/industry.repository';
 
 const BASE_URL = 'https://www.acclevate.com';
 
 /**
  * Dynamic Sitemap Generator
  * ─────────────────────────────────────────────────────────────────────────────
- * Next.js automatically serves this at /sitemap.xml
- *
- * WHY THIS MATTERS:
- * A sitemap is like a "map" you hand directly to Google, saying:
- * "Here are all my pages, how important they are, and when they were last
- * updated." Without a sitemap, Google has to discover your pages by crawling,
- * which can take weeks. With a sitemap, new pages get indexed within hours.
- *
  * Priority Guide (0.0 - 1.0):
- *   1.0 = Homepage — most important
- *   0.9 = Static core pages (About, Contact, Services listing)
- *   0.8 = Individual service pages
+ *   1.0 = Homepage
+ *   0.9 = Static core pages & Main Directories (Industries hub, Services hub)
+ *   0.8 = Core Service & Core Industry pages
  *   0.7 = Category pages
- *   0.6 = Programmatic city pages
+ *   0.6 = Programmatic GEO/AEO niche pages (service + industry crossover)
  *   0.5 = Everything else
  *
  * changeFrequency Guide:
- *   "daily"   = Content changes often (news, blog)
- *   "weekly"  = Service pages (updated occasionally)
- *   "monthly" = Static pages (About, Contact)
- *   "yearly"  = Rarely changing pages
+ *   "daily"   = Content changes often
+ *   "weekly"  = Service/Industry pages (updated occasionally for SEO)
+ *   "monthly" = Static pages
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    await dbConnect();
-
-    // Static Pages 
+    // 1. Static Pages & Hubs
     const staticPages: MetadataRoute.Sitemap = [
         {
             url: BASE_URL,
@@ -56,6 +44,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.9,
         },
         {
+            url: `${BASE_URL}/industries`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.9,
+        },
+        {
             url: `${BASE_URL}/contact`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
@@ -63,12 +57,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
     ];
 
-    // Dynamic Service Pages 
-    const services = await Service.find({ isActive: true })
-        .select('slug updatedAt category')
-        .populate('category', 'slug')
-        .lean();
+    // 2. Parallel Database Fetching (via strict repository layer)
+    const [services, categories, industries, progPages] = await Promise.all([
+        serviceRepository.findAllForSitemap(),
+        categoryRepository.findAllForSitemap(),
+        industryRepository.findAllForSitemap(),
+        programmaticPageRepository.findAllForSitemap()
+    ]);
 
+    // 3. Dynamic Service Pages 
     const servicePages: MetadataRoute.Sitemap = services.map((service) => {
         const categorySlug = (service.category && typeof service.category === 'object' && 'slug' in service.category)
             ? (service.category as any).slug
@@ -81,11 +78,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         };
     });
 
-    // Dynamic Category Pages 
-    const categories = await Category.find({ isActive: true })
-        .select('slug updatedAt')
-        .lean();
-
+    // 4. Dynamic Category Pages 
     const categoryPages: MetadataRoute.Sitemap = categories.map((cat) => ({
         url: `${BASE_URL}/services/${cat.slug}`,
         lastModified: cat.updatedAt,
@@ -93,18 +86,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
     }));
 
-    // Programmatic Industry Pages
-    const progPages = await ProgrammaticPage.find({ isActive: true })
-        .select('slug updatedAt')
-        .populate('service', 'slug')
-        .populate('industry', 'slug')
-        .lean() as unknown as Array<{
-            slug: string;
-            updatedAt: Date;
-            service: { slug: string };
-            industry: { slug: string };
-        }>;
+    // 5. Dynamic Industry Pages
+    const industryPages: MetadataRoute.Sitemap = industries.map((ind) => ({
+        url: `${BASE_URL}/industries/${ind.slug}`,
+        lastModified: ind.updatedAt,
+        changeFrequency: 'weekly',
+        priority: 0.8,
+    }));
 
+    // 6. Programmatic (GEO / AEO) Intersection Pages
+    // Extremely powerful for SEO (e.g. "financial-advisory-for-healthcare")
     const programmaticPages: MetadataRoute.Sitemap = progPages.map((page) => ({
         url: `${BASE_URL}/service/${page.service?.slug}/${page.industry?.slug}`,
         lastModified: page.updatedAt,
@@ -116,6 +107,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ...staticPages,
         ...servicePages,
         ...categoryPages,
+        ...industryPages,
         ...programmaticPages,
     ];
 }

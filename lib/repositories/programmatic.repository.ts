@@ -7,21 +7,33 @@ export class ProgrammaticPageRepository {
         await connectDB();
         return ProgrammaticPage.find({ isActive: true, ...filter })
             .populate('service', 'title slug')
-            .populate('industry', 'name slug icon');
+            .populate('industry', 'name slug icon')
+            .lean();
+    }
+
+    async findAllForSitemap(): Promise<any[]> {
+        await connectDB();
+        return ProgrammaticPage.find({ isActive: true })
+            .select('slug updatedAt service industry')
+            .populate('service', 'slug')
+            .populate('industry', 'slug')
+            .lean();
     }
 
     async findById(id: string): Promise<IProgrammaticPage | null> {
         await connectDB();
         return ProgrammaticPage.findById(id)
             .populate('service')
-            .populate('industry');
+            .populate('industry')
+            .lean();
     }
 
     async findBySlug(slug: string): Promise<IProgrammaticPage | null> {
         await connectDB();
         return ProgrammaticPage.findOne({ slug, isActive: true })
             .populate('service')
-            .populate('industry');
+            .populate('industry')
+            .lean();
     }
 
     async findByIndustryAndServiceSlugs(industrySlug: string, serviceSlug: string): Promise<IProgrammaticPage | null> {
@@ -29,12 +41,12 @@ export class ProgrammaticPageRepository {
         
         // Find industry by slug
         const Industry = (await import('@/models/Industry')).default;
-        const industry = await Industry.findOne({ slug: industrySlug, isActive: true });
+        const industry = await Industry.findOne({ slug: industrySlug, isActive: true }).lean();
         if (!industry) return null;
 
         // Find service by slug
         const Service = (await import('@/models/Service')).default;
-        const service = await Service.findOne({ slug: serviceSlug, isActive: true });
+        const service = await Service.findOne({ slug: serviceSlug, isActive: true }).lean();
         if (!service) return null;
 
         return ProgrammaticPage.findOne({ 
@@ -50,7 +62,8 @@ export class ProgrammaticPageRepository {
                 { path: 'internalLinks.targetService', select: 'title slug category' }
             ]
         })
-        .populate('industry');
+        .populate('industry')
+        .lean();
     }
 
     async create(data: Partial<IProgrammaticPage>): Promise<IProgrammaticPage> {

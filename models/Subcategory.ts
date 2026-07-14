@@ -43,6 +43,9 @@ const SubcategorySchema = new Schema<ISubcategory>(
     { timestamps: true }
 );
 
+// Optimize category lookups
+SubcategorySchema.index({ isActive: 1, category: 1, order: 1 });
+
 SubcategorySchema.set('toJSON', { virtuals: true });
 SubcategorySchema.set('toObject', { virtuals: true });
 

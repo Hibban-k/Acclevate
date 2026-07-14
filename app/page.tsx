@@ -3,13 +3,15 @@ import Link from 'next/link';
 import ServicesCarousel from '@/components/ServicesCarousel';
 import CTASection from '@/components/CTASection';
 import { Seo, defaultMetadata } from '@/components/Seo';
-import { getActiveServicesAction } from '@/lib/actions/services';
+import { getHomePageServicesAction } from '@/lib/actions/services';
+
+export const revalidate = 604800; // 1 week
 
 export default async function Home() {
   let data: { services: any[]; categories: any[] } = { services: [], categories: [] };
 
   try {
-    const res = await getActiveServicesAction({ limit: 12 });
+    const res = await getHomePageServicesAction();
     if (res && res.success) {
       data = {
         services: res.services,

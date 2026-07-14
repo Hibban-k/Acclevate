@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { cache } from 'react';
 import { serviceService } from '@/lib/services/service.service';
 import ServiceCard from '@/components/ServiceCard';
 
@@ -10,9 +11,14 @@ interface PageProps {
     params: Promise<{ category: string; service: string }>;
 }
 
+// Deduplicate DB queries across generateMetadata and the page component
+const getService = cache(async (slug: string) => {
+    return await serviceService.getServiceWithPopulatedFieldsBySlug(slug);
+});
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const resolvedParams = await params;
-    const serviceData = await serviceService.getServiceWithPopulatedFieldsBySlug(resolvedParams.service);
+    const serviceData = await getService(resolvedParams.service);
 
     if (!serviceData) {
         return {};
@@ -94,7 +100,7 @@ function renderDescriptionWithLinks(description: string, internalLinks: any[]) {
 export default async function CoreServicePage({ params }: PageProps) {
     const resolvedParams = await params;
     // We fetch directly from the DB service for server-side performance
-    const serviceData = await serviceService.getServiceWithPopulatedFieldsBySlug(resolvedParams.service);
+    const serviceData = await getService(resolvedParams.service);
 
     if (!serviceData) {
         notFound();
@@ -175,26 +181,34 @@ export default async function CoreServicePage({ params }: PageProps) {
                             <p className="text-slate-600 text-lg">Comprehensive solutions tailored to your business needs.</p>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {serviceData.relatedServices.slice(0, 4).map((related: any) => (
-                                <Link 
-                                    key={related._id || related.id}
-                                    href={`/services/${resolvedParams.category}/${related.slug}`}
-                                    className="group block h-full bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:border-navy-200 transition-all duration-300 flex flex-col"
-                                >
-                                    <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-navy-600 transition-colors">
-                                        {related.title}
-                                    </h3>
-                                    <p className="text-slate-500 text-sm flex-grow">
-                                        {related.shortDescription || 'Discover how this service can accelerate your growth.'}
-                                    </p>
-                                    <div className="mt-6 flex items-center text-navy-600 font-medium text-sm">
-                                        Learn More
-                                        <svg className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                        </svg>
+                            {serviceData.relatedServices.slice(0, 4).map((related: any, index: number) => {
+                                const cardGradients = [
+                                    'from-blue-400 via-purple-400 to-pink-400',
+                                    'from-cyan-400 via-blue-400 to-indigo-400',
+                                    'from-orange-300 via-pink-400 to-purple-400',
+                                    'from-green-400 via-cyan-400 to-blue-400',
+                                ];
+                                
+                                const mockService = {
+                                    id: related._id || related.id,
+                                    title: related.title,
+                                    slug: related.slug,
+                                    tagline: related.shortDescription || 'Discover how this service can accelerate your growth.',
+                                    category: resolvedParams.category
+                                };
+
+                                return (
+                                    <div key={mockService.id} className="h-full flex flex-col">
+                                        <ServiceCard
+                                            service={mockService}
+                                            variant="gradient"
+                                            gradientClass={cardGradients[index % cardGradients.length]}
+                                            hrefOverride={`/services/${resolvedParams.category}/${mockService.slug}`}
+                                            className="grow"
+                                        />
                                     </div>
-                                </Link>
-                            ))}
+                                );
+                            })}
                         </div>
                     </div>
                 </section>

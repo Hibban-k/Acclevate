@@ -18,18 +18,20 @@ interface ServiceCardProps {
     variant?: 'simple' | 'gradient';
     gradientClass?: string;
     className?: string;
+    hrefOverride?: string;
 }
 
 export default function ServiceCard({
     service,
     variant = 'simple',
     gradientClass = 'from-blue-400 via-purple-400 to-pink-400',
-    className = ''
+    className = '',
+    hrefOverride
 }: ServiceCardProps) {
     const categorySlug = typeof service.category === 'object' && service.category?.slug
         ? service.category.slug
         : 'service';
-    const href = `/services/${categorySlug}/${service.slug}`;
+    const href = hrefOverride || `/services/${categorySlug}/${service.slug}`;
 
     if (variant === 'gradient') {
         return (

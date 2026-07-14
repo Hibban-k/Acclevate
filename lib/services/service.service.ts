@@ -14,8 +14,8 @@ export class ServiceService {
         return serviceRepository.findOnePopulatedBySlug(slug);
     }
 
-    async getActiveServicesPaginated(filter: Record<string, any>, page: number, limit: number) {
-        return serviceRepository.findPaginated({ isActive: true, ...filter }, page, limit);
+    async getActiveServicesByOrderGroup(filter: Record<string, any> = {}, currentOrder: number | null) {
+        return serviceRepository.findByOrderGroup({ ...filter, isActive: true }, currentOrder);
     }
 
     async getActiveServicesWithCategories() {

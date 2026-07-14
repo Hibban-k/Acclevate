@@ -4,17 +4,24 @@ import Industry, { IIndustry } from '@/models/Industry';
 export class IndustryRepository {
     async findAll(filter: Record<string, any> = {}): Promise<IIndustry[]> {
         await connectDB();
-        return Industry.find({ isActive: true, ...filter }).sort({ priority: -1, name: 1 });
+        return Industry.find({ isActive: true, ...filter }).sort({ priority: -1, name: 1 }).lean();
+    }
+
+    async findAllForSitemap(): Promise<any[]> {
+        await connectDB();
+        return Industry.find({ isActive: true })
+            .select('slug updatedAt')
+            .lean();
     }
 
     async findById(id: string): Promise<IIndustry | null> {
         await connectDB();
-        return Industry.findById(id);
+        return Industry.findById(id).lean();
     }
 
     async findBySlug(slug: string): Promise<IIndustry | null> {
         await connectDB();
-        return Industry.findOne({ slug, isActive: true });
+        return Industry.findOne({ slug, isActive: true }).lean();
     }
 
     async create(data: Partial<IIndustry>): Promise<IIndustry> {

@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   }
 };
 
+export const revalidate = 604800; // 1 week
+
 export default async function IndustriesPage() {
   let industries = [];
 

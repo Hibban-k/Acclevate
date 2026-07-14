@@ -1,15 +1,10 @@
 'use server';
 
-import dbConnect from '@/lib/db';
-import Industry from '@/models/Industry';
+import { industryRepository } from '@/lib/repositories/industry.repository';
 
 export async function getActiveIndustriesAction() {
     try {
-        await dbConnect();
-        
-        const industries = await Industry.find({ isActive: true })
-            .sort({ priority: -1, createdAt: 1 })
-            .lean();
+        const industries = await industryRepository.findAll();
 
         return {
             success: true,

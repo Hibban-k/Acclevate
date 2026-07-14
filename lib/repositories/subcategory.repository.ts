@@ -4,15 +4,15 @@ import { connectDB } from '@/lib/db';
 export class SubcategoryRepository {
     async findAll(): Promise<ISubcategory[]> {
         await connectDB();
-        return Subcategory.find().sort({ order: 1 }).populate('category', 'name slug');
+        return Subcategory.find().sort({ order: 1 }).populate('category', 'name slug').lean();
     }
     async findById(id: string): Promise<ISubcategory | null> {
         await connectDB();
-        return Subcategory.findById(id).populate('category', 'name slug');
+        return Subcategory.findById(id).populate('category', 'name slug').lean();
     }
     async findByCategory(categoryId: string): Promise<ISubcategory[]> {
         await connectDB();
-        return Subcategory.find({ category: categoryId }).sort({ order: 1 });
+        return Subcategory.find({ category: categoryId }).sort({ order: 1 }).lean();
     }
     async create(data: Partial<ISubcategory>): Promise<ISubcategory> {
         await connectDB();

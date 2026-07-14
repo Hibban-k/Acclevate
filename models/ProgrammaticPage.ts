@@ -100,6 +100,9 @@ const ProgrammaticPageSchema = new Schema<IProgrammaticPage>(
 // Each Service + Industry combination must be unique
 ProgrammaticPageSchema.index({ service: 1, industry: 1 }, { unique: true });
 
+// Optimize lookups
+ProgrammaticPageSchema.index({ isActive: 1, industry: 1 });
+
 ProgrammaticPageSchema.set('toJSON', { virtuals: true });
 ProgrammaticPageSchema.set('toObject', { virtuals: true });
 

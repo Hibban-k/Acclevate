@@ -202,6 +202,12 @@ const ServiceSchema = new Schema<IService>(
     { timestamps: true }
 );
 
+// Performance & Pagination Indexes
+// Global unified sorting index.
+ServiceSchema.index({ isActive: 1, order: 1, category: 1, createdAt: -1, _id: 1 });
+
+// Text Index for Search
+ServiceSchema.index({ title: 'text', tagline: 'text' });
 
 const Service: Model<IService> = mongoose.models.Service || mongoose.model<IService>('Service', ServiceSchema);
 

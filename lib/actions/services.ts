@@ -6,7 +6,6 @@ import { serviceService } from '@/lib/services/service.service';
 import { categoryService } from '@/lib/services/category.service';
 import { revalidatePath, unstable_cache } from 'next/cache';
 import slugify from 'slugify';
-import Subcategory from '@/models/Subcategory';
 
 async function checkAdminAuth() {
     const session = await getServerSession(authOptions);
@@ -16,71 +15,85 @@ async function checkAdminAuth() {
     return session;
 }
 
-const getCachedActiveServicesData = unstable_cache(
-    async (page: number, limit: number, category: string, subcategory: string, search: string) => {
-        const query: any = {};
-        if (category !== 'all') {
-            query.category = category;
-        }
-        if (subcategory !== 'all') {
-            query.subcategory = subcategory;
-        }
-        if (search) {
-            query.$or = [
-                { title: { $regex: search, $options: 'i' } },
-                { tagline: { $regex: search, $options: 'i' } }
-            ];
-        }
+async function getActiveServicesData(currentOrder: number | null, category: string, subcategory: string, search: string) {
+    const query: any = {};
+    if (category !== 'all') {
+        query.category = category;
+    }
+    if (subcategory !== 'all') {
+        query.subcategory = subcategory;
+    }
+    if (search) {
+        query.$text = { $search: search };
+    }
 
-        const { services, total } = await serviceService.getActiveServicesPaginated(query, page, limit);
+    const [servicesData, categories] = await Promise.all([
+        serviceService.getActiveServicesByOrderGroup(query, currentOrder),
+        categoryService.getCachedCategoryHierarchy()
+    ]);
 
-        // Build category-subcategory hierarchy for sidebar
-        const categoriesDocs = await categoryService.getAllCategories();
-        const subcategoriesDocs = await Subcategory.find({ isActive: true }).lean();
+    const { services, nextOrder, total } = servicesData;
 
-        const categories = categoriesDocs.map((cat: any) => ({
-            id: cat._id.toString(),
-            name: cat.name,
-            slug: cat.slug,
-            subcategories: subcategoriesDocs
-                .filter((sub: any) => sub.category.toString() === cat._id.toString())
-                .map((sub: any) => ({
-                    id: sub._id.toString(),
-                    name: sub.name,
-                    slug: sub.slug
-                }))
-        }));
+    // Deep serialize Mongoose documents to pure JSON objects 
+    // This drops methods and safely converts ObjectIds to strings for Next.js caching
+    const serializedServices = JSON.parse(JSON.stringify(services));
 
-        // Deep serialize Mongoose documents to pure JSON objects 
-        // This drops methods and safely converts ObjectIds to strings for Next.js caching
-        const serializedServices = JSON.parse(JSON.stringify(services));
+    return { services: serializedServices, nextOrder, total, categories };
+}
 
-        return { services: serializedServices, total, categories };
-    },
-    ['services-action-data'], // Cache key
-    { revalidate: 604800, tags: ['services'] } // 1 week
-);
+export async function getHomePageServicesAction() {
+    const fetchHomeServices = unstable_cache(
+        async () => {
+            // Home page always fetches the very first order group
+            const { services, categories } = await getActiveServicesData(null, 'all', 'all', '');
+            return {
+                success: true,
+                services,
+                categories,
+            };
+        },
+        ['home-page-services'],
+        { revalidate: 604800, tags: ['services', 'categories'] }
+    );
+    return fetchHomeServices();
+}
+
+export async function getInitialServicesAction() {
+    const fetchInitialServices = unstable_cache(
+        async () => {
+            // Initial services page load fetches the very first order group
+            const { services, categories, nextOrder } = await getActiveServicesData(null, 'all', 'all', '');
+            return {
+                success: true,
+                services,
+                categories,
+                nextOrder
+            };
+        },
+        ['initial-services-page'],
+        { revalidate: 604800, tags: ['services', 'categories'] }
+    );
+    return fetchInitialServices();
+}
 
 export async function getActiveServicesAction(params?: {
-    page?: number;
-    limit?: number;
+    currentOrder?: number | null;
     category?: string;
     subcategory?: string;
     search?: string;
 }) {
-    const page = params?.page ?? 1;
-    const limit = params?.limit ?? 6;
+    const currentOrder = params?.currentOrder ?? null;
     const category = params?.category ?? 'all';
     const subcategory = params?.subcategory ?? 'all';
     const search = params?.search ?? '';
 
-    const { services, total, categories } = await getCachedActiveServicesData(page, limit, category, subcategory, search);
+    const { services, nextOrder, total, categories } = await getActiveServicesData(currentOrder, category, subcategory, search);
 
     return {
         success: true,
         services,
         categories,
-        hasMore: page * limit < total,
+        nextOrder,
         total
     };
 }

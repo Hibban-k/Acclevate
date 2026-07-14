@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { industryService } from '@/lib/services/industry.service';
+import ServiceCard from '@/components/ServiceCard';
 
 interface PageProps {
     params: Promise<{ 'industry-slug': string }>;
@@ -25,6 +26,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         },
     };
 }
+
+export const revalidate = 604800; // 1 week
 
 export default async function IndustryHubPage({ params }: PageProps) {
     const resolvedParams = await params;
@@ -102,33 +105,38 @@ export default async function IndustryHubPage({ params }: PageProps) {
                     </div>
 
                     {services && services.length > 0 ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {services.map((programmaticPage: any) => (
-                                <Link 
-                                    key={programmaticPage._id || programmaticPage.id}
-                                    href={`/industries/${industry.slug}/${programmaticPage.service?.slug}`}
-                                    className="group bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:border-navy-300 transition-all duration-300 flex flex-col h-full"
-                                >
-                                    <div className="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-xl bg-slate-50 text-navy-600 group-hover:bg-navy-600 group-hover:text-white transition-colors">
-                                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                        </svg>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+                            {services.map((programmaticPage: any, index: number) => {
+                                const cardGradients = [
+                                    'from-blue-400 via-purple-400 to-pink-400',
+                                    'from-cyan-400 via-blue-400 to-indigo-400',
+                                    'from-orange-300 via-pink-400 to-purple-400',
+                                    'from-green-400 via-cyan-400 to-blue-400',
+                                    'from-violet-400 via-purple-400 to-pink-400',
+                                    'from-amber-300 via-orange-400 to-red-400',
+                                ];
+                                
+                                // Construct a mock service object for the ServiceCard
+                                const mockService = {
+                                    id: programmaticPage._id || programmaticPage.id,
+                                    title: programmaticPage.customH1 || programmaticPage.service?.title || 'Expert Advisory',
+                                    slug: programmaticPage.service?.slug,
+                                    tagline: programmaticPage.customMetaDescription || `Specialized ${programmaticPage.service?.title} solutions optimized for the ${industry.name} sector.`,
+                                    category: programmaticPage.service?.category
+                                };
+
+                                return (
+                                    <div key={mockService.id} className="h-full flex flex-col">
+                                        <ServiceCard
+                                            service={mockService}
+                                            variant="gradient"
+                                            gradientClass={cardGradients[index % cardGradients.length]}
+                                            hrefOverride={`/industries/${industry.slug}/${mockService.slug}`}
+                                            className="grow"
+                                        />
                                     </div>
-                                    <h3 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-navy-700 transition-colors">
-                                        {programmaticPage.customH1 || programmaticPage.service?.title || 'Expert Advisory'}
-                                    </h3>
-                                    <p className="text-slate-500 flex-grow mb-8 leading-relaxed">
-                                        {programmaticPage.customMetaDescription || 
-                                         `Specialized ${programmaticPage.service?.title} solutions optimized for the ${industry.name} sector.`}
-                                    </p>
-                                    <div className="flex items-center text-navy-600 font-semibold text-sm">
-                                        View Service Details
-                                        <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                        </svg>
-                                    </div>
-                                </Link>
-                            ))}
+                                );
+                            })}
                         </div>
                     ) : (
                         <div className="bg-white rounded-2xl border border-slate-200 p-16 text-center shadow-sm">

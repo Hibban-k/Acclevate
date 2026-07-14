@@ -21,6 +21,7 @@ export async function connectDB(): Promise<Mongoose> {
         const opts = {
             dbName: 'acclevate',
             bufferCommands: false,
+            maxPoolSize: 10,
         };
 
         cached.promise = mongoose.connect(MONGODB_URI!, opts).then((mongoose) => {

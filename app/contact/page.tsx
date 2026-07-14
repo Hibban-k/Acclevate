@@ -67,21 +67,37 @@ export default function ContactPage() {
                             </p>
 
                             <div className="space-y-8 mb-12 border-t border-b border-slate-200 py-10">
-                                {[
-                                    { icon: '📧', label: 'Direct Inquiry', value: 'hello@acclevate.com' },
-                                    { icon: '📞', label: 'Consultation Line', value: '+1 (555) 123-4567' },
-                                    { icon: '📍', label: 'Headquarters', value: 'BTM 2nd Stage\nBengaluru, Karnataka' },
-                                ].map((item, index) => (
-                                    <div key={index} className="flex gap-5">
-                                        <div className="w-14 h-14 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center text-xl shrink-0 shadow-sm">
-                                            {item.icon}
-                                        </div>
-                                        <div className="pt-1">
-                                            <h5 className="text-base font-bold text-slate-900 mb-1 tracking-wide">{item.label}</h5>
-                                            <p className="text-sm text-slate-600 font-medium whitespace-pre-line leading-relaxed">{item.value}</p>
-                                        </div>
+                                <div className="flex gap-5">
+                                    <div className="w-14 h-14 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center text-xl shrink-0 shadow-sm">
+                                        📧
                                     </div>
-                                ))}
+                                    <div className="pt-1">
+                                        <h5 className="text-base font-bold text-slate-900 mb-1 tracking-wide">Direct Inquiry</h5>
+                                        <p className="text-sm text-slate-600 font-medium whitespace-pre-line leading-relaxed">hello@acclevate.com</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex gap-5">
+                                    <div className="w-14 h-14 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center text-xl shrink-0 shadow-sm">
+                                        📞
+                                    </div>
+                                    <div className="pt-1">
+                                        <h5 className="text-base font-bold text-slate-900 mb-1 tracking-wide">Consultation Line</h5>
+                                        <p className="text-sm text-slate-600 font-medium whitespace-pre-line leading-relaxed">+1 (555) 123-4567</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex gap-5">
+                                    <div className="w-14 h-14 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center text-xl shrink-0 shadow-sm">
+                                        📍
+                                    </div>
+                                    <div className="pt-1">
+                                        <h5 className="text-base font-bold text-slate-900 mb-1 tracking-wide">Headquarters</h5>
+                                        <p className="text-sm text-slate-600 font-medium whitespace-pre-line leading-relaxed">
+                                            BTM 2nd Stage{"\n"}Bengaluru, Karnataka
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
 
                             {/* Trust Pillar */}

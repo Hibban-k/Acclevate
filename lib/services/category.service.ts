@@ -1,9 +1,21 @@
 import { categoryRepository } from '@/lib/repositories/category.repository';
 import { ICategory } from '@/models/Category';
+import { unstable_cache } from 'next/cache';
 
 export class CategoryService {
     async getAllCategories() {
         return categoryRepository.findAll();
+    }
+
+    async getCachedCategoryHierarchy() {
+        const fetchCategories = unstable_cache(
+            async () => {
+                return categoryRepository.getCategoryHierarchy();
+            },
+            ['category-hierarchy'],
+            { revalidate: 604800, tags: ['categories'] } // Cache for 1 week
+        );
+        return fetchCategories();
     }
 
     async getCategoryById(id: string) {

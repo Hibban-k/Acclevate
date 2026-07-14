@@ -7,14 +7,16 @@ export class TopicalSiloRepository {
         await connectDB();
         return TopicalSilo.find({ isActive: true, ...filter })
             .populate('pillarService', 'title slug')
-            .populate('clusterServices', 'title slug');
+            .populate('clusterServices', 'title slug')
+            .lean();
     }
 
     async findById(id: string): Promise<ITopicalSilo | null> {
         await connectDB();
         return TopicalSilo.findById(id)
             .populate('pillarService', 'title slug')
-            .populate('clusterServices', 'title slug');
+            .populate('clusterServices', 'title slug')
+            .lean();
     }
 
     async create(data: Partial<ITopicalSilo>): Promise<ITopicalSilo> {

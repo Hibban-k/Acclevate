@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { categoryService } from '@/lib/services/category.service';
 import { serviceService } from '@/lib/services/service.service';
-import Subcategory from '@/models/Subcategory';
 import ServicesSidebar from '@/components/ServicesSidebar';
+import ServiceCard from '@/components/ServiceCard';
 
 export const revalidate = 604800; // 1 week
 
@@ -57,21 +57,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
     }
 
     // Fetch all categories to populate the sidebar hierarchy
-    const categoriesDocs = await categoryService.getAllCategories();
-    const subcategoriesDocs = await Subcategory.find({ isActive: true }).lean();
-
-    const allCategories = categoriesDocs.map((cat: any) => ({
-        id: cat._id.toString(),
-        name: cat.name,
-        slug: cat.slug,
-        subcategories: subcategoriesDocs
-            .filter((sub: any) => sub.category.toString() === cat._id.toString())
-            .map((sub: any) => ({
-                id: sub._id.toString(),
-                name: sub.name,
-                slug: sub.slug
-            }))
-    }));
+    const allCategories = await categoryService.getCachedCategoryHierarchy();
 
     // Find the active subcategory name if a subcat param exists
     let activeSubcategoryName = 'all';
@@ -153,39 +139,30 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
 
                             {services && services.length > 0 ? (
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {services.map((service: any) => (
-                                        <Link 
-                                            key={service._id}
-                                            href={`/services/${category.slug}/${service.slug}`}
-                                            className="group flex flex-col bg-white rounded-2xl border border-slate-200 overflow-hidden hover:border-navy-400 hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 relative"
-                                        >
-                                            {/* Top Accent Line */}
-                                            <div className="absolute top-0 left-0 w-full h-1 bg-navy-600/10 group-hover:bg-navy-600 transition-colors duration-500" />
-                                            
-                                            <div className="p-8 flex flex-col h-full">
-                                                <div className="mb-6 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-slate-50 text-navy-600 group-hover:bg-navy-600 group-hover:text-white group-hover:scale-110 transition-all duration-500">
-                                                    {/* Dynamic icon could go here, using a generic scalable icon for now */}
-                                                    <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                                    </svg>
-                                                </div>
-                                                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-navy-700 transition-colors line-clamp-2">
-                                                    {service.title}
-                                                </h3>
-                                                <p className="text-slate-500 text-sm leading-relaxed grow mb-6 line-clamp-3">
-                                                    {service.shortDescription || service.tagline || `Professional ${service.title} tailored for your specific needs.`}
-                                                </p>
-                                                <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between text-navy-600 font-semibold text-sm">
-                                                    <span>Learn more</span>
-                                                    <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-navy-50 transition-colors">
-                                                        <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                                        </svg>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    ))}
+                                    {services.map((service: any, index: number) => {
+                                        const mappedService = {
+                                            ...service,
+                                            id: service._id?.toString() || '',
+                                            category: category
+                                        };
+                                        const cardGradients = [
+                                            'from-blue-400 via-purple-400 to-pink-400',
+                                            'from-cyan-400 via-blue-400 to-indigo-400',
+                                            'from-orange-300 via-pink-400 to-purple-400',
+                                            'from-green-400 via-cyan-400 to-blue-400',
+                                            'from-violet-400 via-purple-400 to-pink-400',
+                                            'from-amber-300 via-orange-400 to-red-400',
+                                        ];
+                                        return (
+                                            <ServiceCard
+                                                key={mappedService.id}
+                                                service={mappedService}
+                                                variant="gradient"
+                                                gradientClass={cardGradients[index % cardGradients.length]}
+                                                className="grow h-full"
+                                            />
+                                        );
+                                    })}
                                 </div>
                             ) : (
                                 <div className="bg-white rounded-3xl border border-slate-200 p-20 text-center shadow-sm max-w-4xl mx-auto">

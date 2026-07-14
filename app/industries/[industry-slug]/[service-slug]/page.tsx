@@ -1,16 +1,22 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { cache } from 'react';
 import { programmaticPageService } from '@/lib/services/programmaticPage.service';
+import ServiceCard from '@/components/ServiceCard';
 
 interface PageProps {
     params: Promise<{ 'industry-slug': string; 'service-slug': string }>;
 }
 
+const getPageData = cache(async (industrySlug: string, serviceSlug: string) => {
+    return await programmaticPageService.getPageByIndustryAndServiceSlugs(industrySlug, serviceSlug);
+});
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const resolvedParams = await params;
     const { 'industry-slug': industrySlug, 'service-slug': serviceSlug } = resolvedParams;
-    const pageData = await programmaticPageService.getPageByIndustryAndServiceSlugs(industrySlug, serviceSlug);
+    const pageData = await getPageData(industrySlug, serviceSlug);
 
     if (!pageData) {
         return {};
@@ -82,7 +88,7 @@ function renderDescriptionWithLinks(description: string, internalLinks: any[], c
 export default async function ProgrammaticServicePage({ params }: PageProps) {
     const resolvedParams = await params;
     const { 'industry-slug': industrySlug, 'service-slug': serviceSlug } = resolvedParams;
-    const pageData = await programmaticPageService.getPageByIndustryAndServiceSlugs(industrySlug, serviceSlug);
+    const pageData = await getPageData(industrySlug, serviceSlug);
 
     if (!pageData) {
         notFound();
@@ -213,27 +219,35 @@ export default async function ProgrammaticServicePage({ params }: PageProps) {
                             </p>
                         </div>
                         
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {service.relatedServices.slice(0, 4).map((related: any) => (
-                                <Link 
-                                    key={related._id || related.id}
-                                    href={`/industries/${industrySlug}/${related.slug}`}
-                                    className="group block h-full bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-xl hover:border-navy-300 transition-all duration-300 flex flex-col"
-                                >
-                                    <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-navy-600 transition-colors">
-                                        {related.title}
-                                    </h3>
-                                    <p className="text-slate-500 text-sm flex-grow leading-relaxed">
-                                        {related.shortDescription || 'Discover how this specialized service can accelerate your growth.'}
-                                    </p>
-                                    <div className="mt-6 flex items-center text-navy-600 font-semibold text-sm">
-                                        Learn More
-                                        <svg className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                        </svg>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+                            {service.relatedServices.slice(0, 4).map((related: any, index: number) => {
+                                const cardGradients = [
+                                    'from-blue-400 via-purple-400 to-pink-400',
+                                    'from-cyan-400 via-blue-400 to-indigo-400',
+                                    'from-orange-300 via-pink-400 to-purple-400',
+                                    'from-green-400 via-cyan-400 to-blue-400',
+                                ];
+                                
+                                const mockService = {
+                                    id: related._id || related.id,
+                                    title: related.title,
+                                    slug: related.slug,
+                                    tagline: related.shortDescription || 'Discover how this specialized service can accelerate your growth.',
+                                    category: service.category
+                                };
+
+                                return (
+                                    <div key={mockService.id} className="h-full flex flex-col">
+                                        <ServiceCard
+                                            service={mockService}
+                                            variant="gradient"
+                                            gradientClass={cardGradients[index % cardGradients.length]}
+                                            hrefOverride={`/industries/${industrySlug}/${mockService.slug}`}
+                                            className="grow"
+                                        />
                                     </div>
-                                </Link>
-                            ))}
+                                );
+                            })}
                         </div>
                     </div>
                 </section>

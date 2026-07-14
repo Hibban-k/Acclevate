@@ -17,6 +17,7 @@ export default function ContactForm() {
         service: '',
         company: '',
         message: '',
+        honeypot: '',
     });
     const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
@@ -35,7 +36,7 @@ export default function ContactForm() {
 
             if (result && result.success) {
                 setFormStatus('sent');
-                setFormData({ fullName: '', email: '', phone: '', service: '', company: '', message: '' });
+                setFormData({ fullName: '', email: '', phone: '', service: '', company: '', message: '', honeypot: '' });
                 setTimeout(() => setFormStatus('idle'), 5000);
             } else {
                 setFormStatus('error');
@@ -66,6 +67,19 @@ export default function ContactForm() {
             )}
 
             <form onSubmit={handleSubmit}>
+                {/* Honeypot field - visually hidden to catch bots */}
+                <div style={{ display: 'none' }} aria-hidden="true">
+                    <input 
+                        type="text" 
+                        name="honeypot" 
+                        id="honeypot" 
+                        tabIndex={-1} 
+                        autoComplete="off"
+                        value={formData.honeypot || ''}
+                        onChange={handleChange}
+                    />
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                     <div>
                         <label className="block text-sm font-medium text-slate-900 mb-2" htmlFor="fullName">Full Name</label>
