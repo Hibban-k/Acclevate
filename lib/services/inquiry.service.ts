@@ -1,8 +1,6 @@
 import { inquiryRepository } from '@/lib/repositories/inquiry.repository';
 import { IInquiry } from '@/models/Inquiry';
 import { SubmitInquiryInput } from '@/lib/validators/inquiry.schema';
-import DOMPurify from 'dompurify';
-import { JSDOM } from 'jsdom';
 import { Client } from '@upstash/qstash';
 
 // Initialize QStash client
@@ -22,9 +20,9 @@ export class InquiryService {
         }
 
         // 2. Sanitize Message (Server-side XSS protection)
-        const window = new JSDOM('').window;
-        const purify = DOMPurify(window as any);
-        const sanitizedMessage = purify.sanitize(data.message);
+        // React natively escapes JSX strings to prevent XSS, so we only need basic HTML tag
+        // stripping here. This completely avoids JSDOM/canvas dependencies that crash in serverless.
+        const sanitizedMessage = data.message.replace(/<[^>]*>/g, '');
 
         // 3. Save to Database
         const inquiry = await inquiryRepository.create({
