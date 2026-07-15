@@ -28,11 +28,11 @@ export default function robots(): MetadataRoute.Robots {
                 allow: ['/'],
                 disallow: ['/admin/', '/api/', '/_next/'],
             },
-            // Block GPTBot (OpenAI crawler) — optional, prevents AI training on your content
-            {
-                userAgent: 'GPTBot',
-                disallow: ['/'],
-            },
+            // // Block GPTBot (OpenAI crawler) — optional, prevents AI training on your content
+            // {
+            //     userAgent: 'GPTBot',
+            //     disallow: ['/'],
+            // },
         ],
         sitemap: 'https://www.acclevate.com/sitemap.xml',
         host: 'https://www.acclevate.com',
