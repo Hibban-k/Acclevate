@@ -2,8 +2,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ServicesCarousel from '@/components/ServicesCarousel';
 import CTASection from '@/components/CTASection';
-import { Seo, defaultMetadata } from '@/components/Seo';
 import { getHomePageServicesAction } from '@/lib/actions/services';
+
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Acclevate Business Solutions | Top Corporate Consulting',
+  description: 'Transform your business with expert financial and operational consulting.',
+  alternates: {
+    canonical: 'https://www.acclevate.com/',
+  },
+};
 
 export const revalidate = 604800; // 1 week
 
