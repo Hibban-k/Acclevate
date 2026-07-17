@@ -35,6 +35,5 @@ export default function robots(): MetadataRoute.Robots {
             // },
         ],
         sitemap: 'https://www.acclevate.com/sitemap.xml',
-        host: 'https://www.acclevate.com',
     };
 }

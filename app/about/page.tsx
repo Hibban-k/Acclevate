@@ -1,13 +1,17 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Seo } from '@/components/Seo';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'About Us | Acclevate Business Solutions',
+    description: 'Our foundation is built on 8 years of deep, hands-on experience navigating the complex financial realities of growing businesses.',
+    alternates: {
+        canonical: 'https://www.acclevate.com/about',
+    },
+};
 
 export default function AboutPage() {
     return (<>
-        <Seo 
-            title="About Us" 
-            description="Our foundation is built on 8 years of deep, hands-on experience navigating the complex financial realities of growing businesses." 
-        />
         <div className="animate-fadeInUp bg-white">
             
             {/* Hero Section */}

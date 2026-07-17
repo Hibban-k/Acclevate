@@ -12,6 +12,9 @@ export const metadata: Metadata = {
         description: 'Transform your corporate strategy with Acclevate Business Solutions. Our expert consultants provide elite financial and operational guidance.',
         url: 'https://www.acclevate.com/contact',
     },
+    alternates: {
+        canonical: 'https://www.acclevate.com/contact',
+    },
     twitter: {
         title: 'Contact Acclevate | Top Business Consulting in Bengaluru',
         description: 'Transform your corporate strategy with Acclevate Business Solutions.',
