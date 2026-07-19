@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ThreeScene from "@/components/ThreeScene";
+import { GoogleTagManager } from '@next/third-parties/google'
 
 export const metadata: Metadata = {
   /**
@@ -111,6 +112,7 @@ export default function RootLayout({
           <Footer />
         </div>
       </body>
+      <GoogleTagManager gtmId="GTM-TKXNWQWZ" />
     </html>
   );
 }
