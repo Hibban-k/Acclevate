@@ -111,8 +111,8 @@ export default function RootLayout({
           <main className="min-h-screen">{children}</main>
           <Footer />
         </div>
+        <GoogleTagManager gtmId="GTM-TKXNWQWZ" />
       </body>
-      <GoogleTagManager gtmId="GTM-TKXNWQWZ" />
     </html>
   );
 }
