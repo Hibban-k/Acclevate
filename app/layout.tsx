@@ -104,15 +104,15 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-sans antialiased overflow-x-hidden">
+      <body className="font-sans antialiased">
         <ThreeScene />
         <div className="relative z-1">
           <Navbar />
           <main className="min-h-screen">{children}</main>
           <Footer />
         </div>
+        <GoogleTagManager gtmId="GTM-TKXNWQWZ" />
       </body>
-      <GoogleTagManager gtmId="GTM-TKXNWQWZ" />
     </html>
   );
 }
