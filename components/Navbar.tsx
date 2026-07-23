@@ -20,10 +20,9 @@ export default function Navbar() {
   }, []);
 
   const navItems = [
-    { href: '/', label: 'Home' },
     { href: '/services', label: 'Services' },
+    { href: '/industries', label: 'Industries' },
     { href: '/about', label: 'About' },
-    { href: '/contact', label: 'Contact' },
   ];
 
   const isActive = (href: string) => {
@@ -32,8 +31,8 @@ export default function Navbar() {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 h-[72px] z-1000 flex items-center transition-all duration-300
-    ${isScrolled ? 'bg-white/50 backdrop-blur-lg border-b border-slate-200 shadow-sm' : 'bg-transparent border-b border-transparent'}`}>
+    <header className={`fixed top-0 left-0 right-0 h-[72px] z-1000 flex items-center transition-all duration-300 border-b border-slate-300
+    ${isScrolled ? 'bg-white/90 backdrop-blur-lg shadow-sm' : 'bg-transparent'}`}>
       <div className="flex justify-between items-center w-full max-w-[1280px] mx-auto px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity py-2">
@@ -48,28 +47,27 @@ export default function Navbar() {
           />
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-10">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`text-sm font-medium py-2 relative transition-colors
-                ${isActive(item.href) ? 'text-navy-600' : 'text-slate-600 hover:text-navy-600'}
-                after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-navy-600 after:transition-all
-                ${isActive(item.href) ? 'after:w-full' : 'after:w-0 hover:after:w-full'}
-              `}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        {/* Desktop Nav & CTA Group (Right Aligned) */}
+        <div className="hidden md:flex items-center gap-10">
+          <nav className="flex gap-8">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`text-sm font-medium py-2 relative transition-colors
+                  ${isActive(item.href) ? 'text-slate-900' : 'text-slate-600 hover:text-slate-900'}
+                  after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-slate-900 after:transition-all
+                  ${isActive(item.href) ? 'after:w-full' : 'after:w-0 hover:after:w-full'}
+                `}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
 
-        {/* Desktop CTA */}
-        <div className="hidden md:flex items-center gap-4">
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium text-white bg-linear-to-r from-navy-900 via-navy-800 to-sky-900 rounded-lg shadow-sm hover:from-navy-800 hover:via-navy-700 hover:to-sky-800 hover:-translate-y-0.5 hover:shadow-md hover:shadow-sky-900/20 transition-all"
+            className="inline-flex items-center justify-center gap-2 px-6 py-2.5 text-sm font-medium text-white bg-slate-900 rounded-lg shadow-sm hover:bg-slate-800 hover:-translate-y-0.5 hover:shadow-md transition-all"
           >
             Get Started
           </Link>

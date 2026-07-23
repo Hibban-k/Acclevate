@@ -5,6 +5,7 @@ interface Service {
     title: string;
     slug: string;
     tagline: string;
+    description?: string;
     category?: {
         id?: string;
         name: string;
@@ -34,38 +35,34 @@ export default function ServiceCard({
     const href = hrefOverride || `/services/${categorySlug}/${service.slug}`;
 
     if (variant === 'gradient') {
+        const categoryName = typeof service.category === 'object' ? service.category?.name : service.category;
+        
         return (
             <Link
                 href={href}
-                className={`group bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-slate-300 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full ${className}`}
+                className={`group relative rounded-[2rem] bg-[#f0f5fa] shadow-[10px_10px_20px_#d1dbe8,_-10px_-10px_20px_#ffffff] hover:shadow-[inset_6px_6px_12px_#d1dbe8,_inset_-6px_-6px_12px_#ffffff] transition-all duration-300 p-8 flex flex-col h-[380px] overflow-hidden ${className}`}
             >
-                {/* Card Image Header with Gradient */}
-                <div className={`relative h-44 bg-linear-to-br ${gradientClass} p-6 overflow-hidden shrink-0`}>
-                    {/* Decorative shapes */}
-                    <div className="absolute top-4 right-4 w-24 h-24 bg-white/20 rounded-2xl rotate-12 backdrop-blur-sm"></div>
-                    <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-white/10 rounded-full"></div>
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white/30 rounded-xl rotate-45 backdrop-blur-sm flex items-center justify-center">
-                        <span className="text-white font-bold text-3xl -rotate-45">
-                            {service.title?.charAt(0) || ''}
-                        </span>
-                    </div>
+                {/* Category Badge */}
+                <div className="mb-6 shrink-0">
+                    <span className="inline-block px-4 py-1.5 text-xs font-bold tracking-widest text-sky-600 uppercase bg-sky-100/60 rounded-full border border-sky-200/50 shadow-sm">
+                        {categoryName || 'Service'}
+                    </span>
                 </div>
 
                 {/* Card Content */}
-                <div className="p-6 flex flex-col grow">
-                    <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-navy-600 transition-colors line-clamp-2 min-h-14">
+                <div className="flex flex-col grow relative z-10">
+                    <h3 className="text-xl md:text-2xl font-bold text-navy-900 mb-4 leading-snug group-hover:text-sky-600 transition-colors duration-300 line-clamp-2">
                         {service.title}
                     </h3>
-                    <p className="text-sm text-slate-500 mb-4 line-clamp-2 grow">
-                        {service.tagline}
-                    </p>
-                    <div className="mt-auto">
-                        <span className="inline-flex items-center text-sm font-semibold text-navy-600 uppercase tracking-wide group-hover:gap-2 transition-all">
-                            Read More
-                            <svg className="w-4 h-4 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </span>
+                    
+                    <div className="grow mb-6">
+                        <p className="text-slate-600 font-light leading-relaxed line-clamp-3">
+                            {service.description || service.tagline}
+                        </p>
+                    </div>
+
+                    <div className="mt-auto flex items-center text-sm font-bold text-navy-900 uppercase tracking-wider group-hover:text-sky-600 transition-colors duration-300 shrink-0">
+                        Explore <span className="ml-2 text-lg group-hover:translate-x-2 transition-transform duration-300">→</span>
                     </div>
                 </div>
             </Link>

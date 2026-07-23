@@ -45,3 +45,7 @@ next-env.d.ts
 
 # docs
 /docs/
+
+# gemini agents
+.gemini
+.agents
