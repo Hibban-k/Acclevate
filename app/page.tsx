@@ -5,6 +5,7 @@ import CTASection from '@/components/CTASection';
 import TestimonialSlider from '@/components/TestimonialSlider';
 import FaqAccordion from '@/components/FaqAccordion';
 import IndustryHub from '@/components/IndustryHub';
+import ProcessSlider from '@/components/ProcessSlider';
 import { getHomePageServicesAction } from '@/lib/actions/services';
 
 import { Metadata } from 'next';
@@ -37,48 +38,72 @@ export default async function Home() {
   return (
     <div className="animate-fadeInUp bg-white">
       {/* Hero Section */}
-      <section className="pt-24 lg:pt-32 bg-linear-to-br from-slate-100 via-slate-50 to-slate-200 relative flex flex-col items-center text-center border-b border-slate-200/50 shadow-[inset_0_0_100px_rgba(255,255,255,0.5)]">
+      <section className="relative w-full overflow-hidden bg-white">
+        
+        {/* Background Image Container */}
+        <div className="relative w-full h-[55vh] md:h-[60vh] lg:h-[65vh] min-h-[420px] md:min-h-[500px]">
+          <Image
+            src="/premium_office_interior.png"
+            alt="Premium Office Interior"
+            fill
+            className="object-cover"
+            priority
+          />
+          
+          {/* Rich dark overlay to guarantee readable white glassmorphism elements */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0d1538]/40 via-slate-950/30 to-navy-950/75 z-10 pointer-events-none" />
 
-        {/* Royal Light Theme Orbs (Champagne & Sky) */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 right-0 w-[50vw] h-[50vw] max-w-[800px] bg-sky-100/40 rounded-full blur-[100px] -translate-y-1/4 translate-x-1/4 animate-orbFloat" />
-          <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] max-w-[600px] bg-amber-50/50 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4 animate-orbFloat-reverse" />
+          {/* Centered logo badge and brand name overlay */}
+          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center pt-16 px-6 text-center">
+            {/* White Circle Logo Badge with glassmorphic backdrop and white stylized 'A' */}
+            <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center shadow-2xl mb-4 border border-white/20">
+              <svg viewBox="0 0 100 100" className="w-12 h-12 md:w-16 md:h-16 text-white" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Left thin slanted leg */}
+                <path d="M42 22 L20 78 H30 L48 22 Z" fill="currentColor" />
+                {/* Right thick slanted leg */}
+                <path d="M51 22 L73 78 H83 L61 22 Z" fill="currentColor" />
+                {/* Swooshing crossbar resembling user's logo */}
+                <path d="M25 58 C38 54 50 51 66 51 L64 55 C50 55 38 58 27 62 Z" fill="currentColor" />
+                {/* Small inner script-like detailing */}
+                <path d="M41 55 C43 49 48 46 51 49 C54 51 53 55 49 57 C45 59 42 57 41 55 Z" fill="currentColor" opacity="0.9" />
+              </svg>
+            </div>
+            
+            {/* Tagline inside a glassmorphic pill badge with white text */}
+            <div className="px-5 py-1.5 rounded-full bg-white/10 backdrop-blur-md shadow-lg border border-white/20 mt-2">
+              <p className="text-[10px] md:text-xs font-bold tracking-[0.25em] text-white uppercase">
+                Business Solutions
+              </p>
+            </div>
+          </div>          {/* Curved boundary transitioning into the white content below */}
+          <div className="absolute bottom-0 left-0 right-0 z-20 w-full select-none pointer-events-none">
+            <svg
+              viewBox="0 0 1440 100"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full h-auto block translate-y-[1px]"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,100 Q720,0 1440,100 Z"
+                fill="#ffffff"
+              />
+            </svg>
+          </div>
         </div>
 
-        <div className="sticky top-24 lg:top-32 w-full max-w-[1400px] mx-auto px-6 z-0 flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-16 pt-8 lg:pt-16 pb-8 lg:pb-12">
-          {/* Left Column: Heading */}
-          <div className="flex-1 flex justify-start lg:justify-end w-full">
-            <div className="inline-flex flex-col items-start justify-center gap-4">
-              <h2 className="text-[clamp(2.2rem,6.5vw,3.5rem)] font-light text-slate-800 tracking-[0.15em] mb-1 capitalize leading-tight whitespace-nowrap pl-[1vw]">
-                Acclerate with
-              </h2>
-              <h1 className="text-[clamp(3.2rem,6.5vw,5.2rem)] font-medium text-[#0d1538] tracking-[0.05em] uppercase leading-none whitespace-nowrap">
-                ACCLEVATE
-              </h1>
-            </div>
-          </div>
-
-          {/* Vertical Divider */}
-          <div className="hidden lg:block w-[1px] h-28 bg-slate-400 opacity-50"></div>
-
-          {/* Right Column: Description */}
-          <div className="flex-1 flex justify-start w-full">
-            <p className="text-xl md:text-2xl text-slate-700 font-medium leading-snug max-w-lg text-left">
+        {/* Content Container Below the Curved Image */}
+        <div className="bg-white pt-10 pb-16 px-6 text-center relative z-20">
+          <div className="max-w-[800px] mx-auto">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-[#0d1538] tracking-[0.05em] mb-6 uppercase">
+              Accelerate with ACCLEVATE
+            </h2>
+            <p className="text-lg md:text-xl text-slate-600 font-light leading-relaxed">
               Acclevate Business Solutions — Transforming businesses through strategic insight and operational excellence. We help you plug the leaks, optimize your taxes, and scale with absolute confidence.
             </p>
           </div>
         </div>
 
-        <div className="relative w-full shadow-2xl z-20 mt-14 md:mt-20 rounded-t-[2rem] overflow-hidden bg-slate-200">
-          <Image
-            src="/premium_office_interior.png"
-            alt="Premium Office Interior"
-            width={1920}
-            height={1080}
-            className="w-full h-[50vh] md:h-[60vh] lg:h-[75vh] object-cover"
-            priority
-          />
-        </div>
       </section>
 
       {/* High-Contrast Impact Section (Light Theme) */}
@@ -132,27 +157,14 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="pt-24 pb-24 md:pt-32 md:pb-32 bg-white text-slate-900 relative">
-        <div className="max-w-[1280px] mx-auto px-6 relative z-10">
-          <div className="text-center max-w-[800px] mx-auto mb-16">
-            <h2 className="text-[clamp(2.5rem,5vw,3.5rem)] font-bold tracking-tight leading-tight text-navy-900 uppercase">
-              Frequently Asked Questions
-            </h2>
-          </div>
-
-          <FaqAccordion />
-        </div>
-      </section>
-
-      {/* Services Carousel Section (Now Pure White) */}
-      <section className="py-32 bg-white relative overflow-hidden">
+      {/* Services Carousel Section (Now Ice Water Style) */}
+      <section className="py-32 bg-white relative overflow-hidden text-slate-900 border-t border-b border-slate-100">
         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
           <div className="text-center max-w-[700px] mx-auto mb-12">
-            <span className="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full uppercase tracking-wider bg-navy-50 text-navy-600 mb-6 border border-navy-100">
+            <span className="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full uppercase tracking-wider bg-sky-50 text-sky-600 mb-6 border border-sky-100/60 shadow-xs">
               What We Do
             </span>
-            <h2 className="text-[clamp(2rem,3vw,3rem)] font-bold mb-4 tracking-tight text-slate-900">
+            <h2 className="text-[clamp(2rem,3vw,3rem)] font-bold mb-4 tracking-tight text-slate-900 font-heading">
               Everything you need to scale.
             </h2>
             <p className="text-lg text-slate-600 font-light leading-relaxed">
@@ -164,22 +176,98 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-32 bg-slate-50 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-sky-200/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4 pointer-events-none" />
-        <div className="max-w-[800px] mx-auto px-6 relative z-10 text-center">
-          <h2 className="text-[clamp(2.5rem,5vw,4rem)] font-bold mb-8 tracking-tight text-slate-900 leading-tight">
-            Ready to take the <br className="hidden sm:block" /> next step?
+      {/* Methodology / Process Section */}
+      <section className="py-24 md:py-32 bg-slate-50 relative overflow-hidden">
+        {/* Decorative subtle background orbs */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-sky-100/30 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4" />
+          <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-amber-50/20 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4" />
+        </div>
+
+        <div className="max-w-[1280px] mx-auto px-6 relative z-10">
+          <div className="text-center max-w-[800px] mx-auto mb-16">
+            <span className="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full uppercase tracking-wider bg-navy-50 text-navy-600 mb-6 border border-navy-100">
+              Our Methodology
+            </span>
+            <h2 className="text-[clamp(2.5rem,5vw,3.5rem)] font-bold tracking-tight leading-tight text-navy-900 uppercase">
+              How We Work
+            </h2>
+            <p className="text-lg text-slate-600 mt-4 font-light max-w-xl mx-auto leading-relaxed">
+              A structured, transparent approach designed to deliver measurable growth and operational efficiency.
+            </p>
+          </div>
+
+          <ProcessSlider />
+        </div>
+      </section>
+
+      {/* FAQ & CTA Section */}
+      <section className="py-24 md:py-32 bg-white relative overflow-hidden text-slate-900 border-t border-slate-100">
+        <div className="max-w-[1280px] mx-auto px-6 relative z-10">
+          
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-16 text-slate-900 font-heading">
+            Frequently asked questions:
           </h2>
-          <p className="text-xl text-slate-600 mb-12 font-light leading-relaxed">
-            Let's sit down and figure out exactly how to hit your growth targets this year.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-linear-to-r from-navy-900 via-navy-800 to-sky-900 rounded-lg hover:from-navy-800 hover:via-navy-700 hover:to-sky-800 transition-all shadow-lg hover:-translate-y-0.5 hover:shadow-sky-900/20"
-          >
-            Start a Conversation
-          </Link>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start">
+            
+            {/* Left: FAQ Accordion */}
+            <div className="lg:col-span-8 w-full">
+              <FaqAccordion />
+            </div>
+
+            {/* Right: Contact Card */}
+            <div className="lg:col-span-4 w-full">
+              <div className="border border-slate-200/80 rounded-3xl p-8 bg-[#f8fafc] shadow-xs flex flex-col items-start text-left">
+                {/* Speech Bubble Icon */}
+                <div className="w-12 h-12 rounded-2xl bg-sky-50 flex items-center justify-center mb-6 text-sky-600 border border-sky-100">
+                  <svg 
+                    width="24" 
+                    height="24" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                  >
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                  </svg>
+                </div>
+
+                <h3 className="text-2xl font-bold text-slate-900 mb-4 font-heading">
+                  Still have questions?
+                </h3>
+
+                <p className="text-slate-600 mb-8 font-light leading-relaxed text-sm md:text-base">
+                  Let&apos;s talk. Our team is here to help you make the most of Acclevate. Whether it&apos;s onboarding, integration, or support.
+                </p>
+
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-between w-full py-3.5 px-6 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl text-slate-800 font-medium transition-all shadow-xs hover:-translate-y-0.5"
+                >
+                  <span>Contact With Us</span>
+                  <div className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center transition-colors group-hover:bg-slate-200">
+                    <svg 
+                      width="10" 
+                      height="10" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      strokeWidth="3" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                      className="text-slate-600"
+                    >
+                      <path d="m9 18 6-6-6-6"/>
+                    </svg>
+                  </div>
+                </Link>
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
     </div>

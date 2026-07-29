@@ -6,6 +6,7 @@ interface Service {
     slug: string;
     tagline: string;
     description?: string;
+    shortDescription?: string;
     category?: {
         id?: string;
         name: string;
@@ -37,32 +38,49 @@ export default function ServiceCard({
     if (variant === 'gradient') {
         const categoryName = typeof service.category === 'object' ? service.category?.name : service.category;
         
+        const shortDesc = service.shortDescription || service.description || service.tagline;
+
         return (
             <Link
                 href={href}
-                className={`group relative rounded-[2rem] bg-[#f0f5fa] shadow-[10px_10px_20px_#d1dbe8,_-10px_-10px_20px_#ffffff] hover:shadow-[inset_6px_6px_12px_#d1dbe8,_inset_-6px_-6px_12px_#ffffff] transition-all duration-300 p-8 flex flex-col h-[380px] overflow-hidden ${className}`}
+                className={`group relative uiverse-outer flex flex-col h-[320px] overflow-hidden ${className}`}
             >
-                {/* Category Badge */}
-                <div className="mb-6 shrink-0">
-                    <span className="inline-block px-4 py-1.5 text-xs font-bold tracking-widest text-sky-600 uppercase bg-sky-100/60 rounded-full border border-sky-200/50 shadow-sm">
-                        {categoryName || 'Service'}
-                    </span>
-                </div>
+                {/* Moving dot */}
+                <div className="uiverse-dot" />
 
-                {/* Card Content */}
-                <div className="flex flex-col grow relative z-10">
-                    <h3 className="text-xl md:text-2xl font-bold text-navy-900 mb-4 leading-snug group-hover:text-sky-600 transition-colors duration-300 line-clamp-2">
-                        {service.title}
-                    </h3>
-                    
-                    <div className="grow mb-6">
-                        <p className="text-slate-600 font-light leading-relaxed line-clamp-3">
-                            {service.description || service.tagline}
-                        </p>
+                {/* Inner Card Container */}
+                <div className="uiverse-card p-6 flex flex-col h-full w-full relative overflow-hidden">
+                    {/* Glowing light ray */}
+                    <div className="uiverse-ray" />
+
+                    {/* Reticle Lines */}
+                    <div className="uiverse-line uiverse-topl" />
+                    <div className="uiverse-line uiverse-bottoml" />
+                    <div className="uiverse-line uiverse-leftl" />
+                    <div className="uiverse-line uiverse-rightl" />
+
+                    {/* Category Badge */}
+                    <div className="mb-4 shrink-0 relative z-10 text-left">
+                        <span className="inline-block px-3.5 py-1 text-xs font-semibold tracking-wider text-sky-400 uppercase bg-white/5 rounded-full border border-white/10 shadow-xs">
+                            {categoryName || 'Service'}
+                        </span>
                     </div>
 
-                    <div className="mt-auto flex items-center text-sm font-bold text-navy-900 uppercase tracking-wider group-hover:text-sky-600 transition-colors duration-300 shrink-0">
-                        Explore <span className="ml-2 text-lg group-hover:translate-x-2 transition-transform duration-300">→</span>
+                    {/* Card Content */}
+                    <div className="flex flex-col grow relative z-10 text-left">
+                        <h3 className="text-lg md:text-xl font-bold text-white mb-2 leading-snug group-hover:text-sky-400 transition-colors duration-300 line-clamp-2">
+                            {service.title}
+                        </h3>
+                        
+                        <div className="grow mb-4">
+                            <p className="text-slate-300 font-light leading-relaxed line-clamp-3 text-xs md:text-sm">
+                                {shortDesc}
+                            </p>
+                        </div>
+
+                        <div className="mt-auto flex items-center text-xs font-bold text-white uppercase tracking-wider group-hover:text-sky-400 transition-colors duration-300 shrink-0">
+                            Explore <span className="ml-1.5 text-base group-hover:translate-x-1.5 transition-transform duration-300">→</span>
+                        </div>
                     </div>
                 </div>
             </Link>

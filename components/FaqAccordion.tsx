@@ -38,40 +38,42 @@ export default function FaqAccordion() {
   };
 
   return (
-    <div className="w-full max-w-[800px] mx-auto flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-4">
       {faqs.map((faq, index) => {
         const isOpen = openIndex === index;
 
         return (
           <div 
             key={index}
-            className={`rounded-2xl overflow-hidden transition-all duration-300 bg-[#eef8ff] ${
+            className={`rounded-2xl border transition-all duration-300 bg-white ${
               isOpen 
-                ? 'shadow-[inset_6px_6px_12px_#cbdae6,_inset_-6px_-6px_12px_#ffffff]' 
-                : 'shadow-[6px_6px_12px_#cbdae6,_-6px_-6px_12px_#ffffff] hover:shadow-[8px_8px_16px_#cbdae6,_-8px_-8px_16px_#ffffff]'
+                ? 'border-slate-300 shadow-xs' 
+                : 'border-slate-200/80 hover:border-slate-300 shadow-none'
             }`}
           >
             <button
               onClick={() => toggleOpen(index)}
-              className="w-full flex items-center justify-between p-6 md:p-8 text-left focus:outline-none"
+              className="w-full flex items-center justify-between p-6 md:p-7 text-left focus:outline-none cursor-pointer"
             >
-              <span className={`text-lg md:text-xl font-medium pr-8 transition-colors duration-300 ${isOpen ? 'text-navy-900' : 'text-slate-700'}`}>
+              <span className={`text-base md:text-lg font-semibold pr-8 transition-colors duration-300 ${isOpen ? 'text-slate-900 font-bold' : 'text-slate-700'}`}>
                 {faq.question}
               </span>
               <div 
-                className={`flex-shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-navy-900 border-navy-900 rotate-180 shadow-[0_0_15px_rgba(21,27,54,0.3)] text-white' : 'border-slate-400 text-slate-500'}`}
+                className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 bg-slate-50 text-slate-600"
               >
                 <svg 
-                  width="14" 
-                  height="14" 
+                  width="16" 
+                  height="16" 
                   viewBox="0 0 24 24" 
                   fill="none" 
                   stroke="currentColor" 
-                  strokeWidth="2" 
+                  strokeWidth="2.5" 
                   strokeLinecap="round" 
                   strokeLinejoin="round"
+                  className={`transition-transform duration-300 ${isOpen ? 'rotate-45 text-slate-950' : ''}`}
                 >
-                  <path d="m6 9 6 6 6-6"/>
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
               </div>
             </button>
@@ -84,7 +86,7 @@ export default function FaqAccordion() {
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
                 >
-                  <div className="px-6 pb-6 md:px-8 md:pb-8 text-slate-600 font-light leading-relaxed">
+                  <div className="px-6 pb-6 md:px-7 md:pb-7 text-slate-600 font-light leading-relaxed text-sm md:text-base">
                     {faq.answer}
                   </div>
                 </motion.div>

@@ -64,7 +64,7 @@ export class ServiceRepository {
         }
 
         const services = await Service.find({ ...filter, order: targetOrder })
-            .select('title slug category order createdAt _id shortDescription')
+            .select('title slug category order createdAt _id shortDescription tagline description')
             .populate('category', 'name slug')
             .sort({ createdAt: -1, _id: 1 })
             .lean();
