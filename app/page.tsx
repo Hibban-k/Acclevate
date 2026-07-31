@@ -108,40 +108,53 @@ export default async function Home() {
 
       {/* High-Contrast Impact Section (Light Theme) */}
       <section className="py-16 md:py-32 bg-white text-slate-900 relative overflow-hidden">
-        {/* Subtle background texture */}
-        <div className="absolute inset-0 opacity-[0.03] bg-[url('/grid-pattern.svg')]" />
+        {/* Soft background highlight blob */}
+        <div className="absolute top-1/2 left-0 w-[50vw] h-[50vw] bg-sky-50/40 rounded-full blur-[120px] -translate-y-1/2 -translate-x-1/3 pointer-events-none" />
 
         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
           
           {/* Top Row: Impact Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 xl:gap-10 mb-20 lg:mb-28">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-20 lg:mb-28 border-b border-slate-100 pb-16">
             <div>
-              <div className="text-4xl md:text-5xl font-light text-navy-900 mb-3 tracking-tighter">10+</div>
-              <div className="text-sm font-medium text-sky-600 uppercase tracking-widest">Years Expertise</div>
+              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-2 tracking-tight font-heading">10+</div>
+              <div className="text-xs font-semibold text-slate-500 uppercase tracking-widest leading-relaxed">Years Expertise</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl font-light text-navy-900 mb-3 tracking-tighter">150+</div>
-              <div className="text-sm font-medium text-sky-600 uppercase tracking-widest">Enterprises Scaled</div>
+              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-2 tracking-tight font-heading">150+</div>
+              <div className="text-xs font-semibold text-slate-500 uppercase tracking-widest leading-relaxed">Enterprises Scaled</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl font-light text-navy-900 mb-3 tracking-tighter">100%</div>
-              <div className="text-sm font-medium text-sky-600 uppercase tracking-widest">Compliance Record</div>
+              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-2 tracking-tight font-heading">100%</div>
+              <div className="text-xs font-semibold text-slate-500 uppercase tracking-widest leading-relaxed">Compliance Record</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl font-light text-navy-900 mb-3 tracking-tighter">98%</div>
-              <div className="text-sm font-medium text-sky-600 uppercase tracking-widest">Client Retention</div>
+              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-2 tracking-tight font-heading">98%</div>
+              <div className="text-xs font-semibold text-slate-500 uppercase tracking-widest leading-relaxed">Client Retention</div>
             </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             {/* Left: Heading & Paragraph */}
-            <div>
-              <h2 className="text-[clamp(2.5rem,5vw,3.5rem)] font-bold mb-8 tracking-tight leading-tight text-slate-900 uppercase">
-                Measurable Results
+            <div className="flex flex-col items-start text-left">
+              <span className="inline-flex items-center px-3.5 py-1 text-xs font-semibold rounded-full uppercase tracking-wider bg-sky-50 text-sky-600 mb-6 border border-sky-100/80 shadow-xs">
+                Acclevate Impact
+              </span>
+              
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-none text-slate-900 uppercase font-heading mb-6">
+                Measurable <br /> <span className="text-sky-600">Results</span>
               </h2>
-              <p className="text-xl text-slate-600 mb-8 max-w-lg leading-relaxed font-light">
-                We don&apos;t just hand you a 50-page PDF and walk away. We get our hands dirty to deliver real financial wins.
+              
+              <p className="text-lg text-slate-600 mb-8 max-w-lg leading-relaxed font-light">
+                We don&apos;t just hand you a 50-page PDF and walk away. We get our hands dirty to deliver real financial wins and operational stability.
               </p>
+
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 text-sm font-bold text-sky-600 hover:text-sky-700 transition-colors group cursor-pointer"
+              >
+                <span>Discover our approach</span>
+                <span className="group-hover:translate-x-1.5 transition-transform duration-300">→</span>
+              </Link>
             </div>
 
             {/* Right: Client Reviews Slider */}

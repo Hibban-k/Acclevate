@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { serviceService } from '@/lib/services/service.service';
 import { categoryService } from '@/lib/services/category.service';
+import { serviceRepository } from '@/lib/repositories/service.repository';
 import { revalidatePath, unstable_cache } from 'next/cache';
 import slugify from 'slugify';
 
@@ -76,26 +77,57 @@ export async function getInitialServicesAction() {
     return fetchInitialServices();
 }
 
+export async function getAllActiveServicesAction() {
+    const fetchAllActiveServices = unstable_cache(
+        async () => {
+            const [services, categories] = await Promise.all([
+                serviceService.getAllServices({ isActive: true }),
+                categoryService.getCachedCategoryHierarchy()
+            ]);
+            return {
+                success: true,
+                services: JSON.parse(JSON.stringify(services)),
+                categories: JSON.parse(JSON.stringify(categories))
+            };
+        },
+        ['all-active-services'],
+        { revalidate: 604800, tags: ['services', 'categories'] }
+    );
+    return fetchAllActiveServices();
+}
+
 export async function getActiveServicesAction(params?: {
     currentOrder?: number | null;
     category?: string;
     subcategory?: string;
     search?: string;
 }) {
-    const currentOrder = params?.currentOrder ?? null;
-    const category = params?.category ?? 'all';
-    const subcategory = params?.subcategory ?? 'all';
-    const search = params?.search ?? '';
+    try {
+        const currentOrder = params?.currentOrder ?? null;
+        const category = params?.category ?? 'all';
+        const subcategory = params?.subcategory ?? 'all';
+        const search = params?.search ?? '';
 
-    const { services, nextOrder, total, categories } = await getActiveServicesData(currentOrder, category, subcategory, search);
+        const { services, nextOrder, total, categories } = await getActiveServicesData(currentOrder, category, subcategory, search);
 
-    return {
-        success: true,
-        services,
-        categories,
-        nextOrder,
-        total
-    };
+        return {
+            success: true,
+            services,
+            categories,
+            nextOrder,
+            total
+        };
+    } catch (error: any) {
+        console.error('Error in getActiveServicesAction:', error);
+        return {
+            success: false,
+            services: [],
+            categories: [],
+            nextOrder: null,
+            total: 0,
+            error: error.message || 'Failed to fetch active services'
+        };
+    }
 }
 
 export async function getServiceBySlugAction(slug: string) {
@@ -152,6 +184,13 @@ export async function createServiceAction(data: any) {
 
     revalidatePath('/');
     revalidatePath('/services');
+    if (service) {
+        const populatedService = await serviceRepository.findOnePopulatedBySlug(service.slug);
+        const categorySlug = (populatedService?.category && typeof populatedService.category === 'object' && 'slug' in populatedService.category)
+            ? (populatedService.category as any).slug
+            : 'service';
+        revalidatePath(`/services/${categorySlug}/${service.slug}`);
+    }
     revalidatePath('/admin/services');
 
     return JSON.parse(JSON.stringify(service));
@@ -175,7 +214,11 @@ export async function updateServiceAction(id: string, data: any) {
     revalidatePath('/');
     revalidatePath('/services');
     if (service) {
-        revalidatePath(`/service/${service.slug}`);
+        const populatedService = await serviceRepository.findOnePopulatedBySlug(service.slug);
+        const categorySlug = (populatedService?.category && typeof populatedService.category === 'object' && 'slug' in populatedService.category)
+            ? (populatedService.category as any).slug
+            : 'service';
+        revalidatePath(`/services/${categorySlug}/${service.slug}`);
     }
     revalidatePath('/admin/services');
 

@@ -100,7 +100,7 @@ export default async function IndustryHubPage({ params }: PageProps) {
                     <div className="mb-12">
                         <h2 className="text-3xl font-bold text-slate-900 mb-4">Tailored Services for {industry.name}</h2>
                         <p className="text-slate-600 text-lg max-w-2xl">
-                            Explore our specialized financial, corporate, and tax advisory solutions designed specifically for your industry's unique operational requirements.
+                            Explore our specialized financial, corporate, and tax advisory solutions designed specifically for your industry&apos;s unique operational requirements.
                         </p>
                     </div>
 

@@ -58,12 +58,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ];
 
     // 2. Parallel Database Fetching (via strict repository layer)
-    const [services, categories, industries, progPages] = await Promise.all([
-        serviceRepository.findAllForSitemap(),
-        categoryRepository.findAllForSitemap(),
-        industryRepository.findAllForSitemap(),
-        programmaticPageRepository.findAllForSitemap()
-    ]);
+    let services: any[] = [];
+    let categories: any[] = [];
+    let industries: any[] = [];
+    let progPages: any[] = [];
+
+    try {
+        const [servicesRes, categoriesRes, industriesRes, progPagesRes] = await Promise.all([
+            serviceRepository.findAllForSitemap(),
+            categoryRepository.findAllForSitemap(),
+            industryRepository.findAllForSitemap(),
+            programmaticPageRepository.findAllForSitemap()
+        ]);
+        services = servicesRes || [];
+        categories = categoriesRes || [];
+        industries = industriesRes || [];
+        progPages = progPagesRes || [];
+    } catch (error) {
+        console.error('Failed to fetch data for sitemap generation:', error);
+    }
 
     // 3. Dynamic Service Pages 
     const servicePages: MetadataRoute.Sitemap = services.map((service) => {
@@ -97,7 +110,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // 6. Programmatic (GEO / AEO) Intersection Pages
     // Extremely powerful for SEO (e.g. "financial-advisory-for-healthcare")
     const programmaticPages: MetadataRoute.Sitemap = progPages.map((page) => ({
-        url: `${BASE_URL}/service/${page.service?.slug}/${page.industry?.slug}`,
+        url: `${BASE_URL}/industries/${page.industry?.slug}/${page.service?.slug}`,
         lastModified: page.updatedAt,
         changeFrequency: 'monthly',
         priority: 0.6,

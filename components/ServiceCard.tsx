@@ -26,7 +26,6 @@ interface ServiceCardProps {
 export default function ServiceCard({
     service,
     variant = 'simple',
-    gradientClass = 'from-blue-400 via-purple-400 to-pink-400',
     className = '',
     hrefOverride
 }: ServiceCardProps) {
@@ -61,24 +60,24 @@ export default function ServiceCard({
 
                     {/* Category Badge */}
                     <div className="mb-4 shrink-0 relative z-10 text-left">
-                        <span className="inline-block px-3.5 py-1 text-xs font-semibold tracking-wider text-sky-400 uppercase bg-white/5 rounded-full border border-white/10 shadow-xs">
+                        <span className="inline-block px-3.5 py-1 text-xs font-semibold tracking-wider text-sky-600 uppercase bg-sky-50 rounded-full border border-sky-100/80 shadow-xs">
                             {categoryName || 'Service'}
                         </span>
                     </div>
 
                     {/* Card Content */}
                     <div className="flex flex-col grow relative z-10 text-left">
-                        <h3 className="text-lg md:text-xl font-bold text-white mb-2 leading-snug group-hover:text-sky-400 transition-colors duration-300 line-clamp-2">
+                        <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-2 leading-snug group-hover:text-sky-600 transition-colors duration-300 line-clamp-2">
                             {service.title}
                         </h3>
                         
                         <div className="grow mb-4">
-                            <p className="text-slate-300 font-light leading-relaxed line-clamp-3 text-xs md:text-sm">
+                            <p className="text-slate-600 font-light leading-relaxed line-clamp-3 text-xs md:text-sm">
                                 {shortDesc}
                             </p>
                         </div>
 
-                        <div className="mt-auto flex items-center text-xs font-bold text-white uppercase tracking-wider group-hover:text-sky-400 transition-colors duration-300 shrink-0">
+                        <div className="mt-auto flex items-center text-xs font-bold text-slate-800 uppercase tracking-wider group-hover:text-sky-600 transition-colors duration-300 shrink-0">
                             Explore <span className="ml-1.5 text-base group-hover:translate-x-1.5 transition-transform duration-300">→</span>
                         </div>
                     </div>

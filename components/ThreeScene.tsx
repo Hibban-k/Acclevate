@@ -2,9 +2,9 @@
 
 import { useEffect, useRef } from 'react';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare global {
     interface Window {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         THREE: any;
     }
 }
@@ -15,12 +15,16 @@ export default function ThreeScene() {
     useEffect(() => {
         if (!containerRef.current) return;
 
+        let isUnmounted = false;
+        let cleanupFn: (() => void) | null = null;
+
         // Dynamically load Three.js
         const script = document.createElement('script');
         script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
         script.async = true;
 
         script.onload = () => {
+            if (isUnmounted) return;
             const THREE = window.THREE;
             if (!THREE || !containerRef.current) return;
 
@@ -99,8 +103,7 @@ export default function ThreeScene() {
 
             window.addEventListener('resize', handleResize);
 
-            // Cleanup
-            return () => {
+            cleanupFn = () => {
                 cancelAnimationFrame(animationId);
                 window.removeEventListener('resize', handleResize);
                 document.removeEventListener('mousemove', handleMouseMove);
@@ -116,6 +119,10 @@ export default function ThreeScene() {
         document.head.appendChild(script);
 
         return () => {
+            isUnmounted = true;
+            if (cleanupFn) {
+                cleanupFn();
+            }
             if (script.parentNode) {
                 script.parentNode.removeChild(script);
             }

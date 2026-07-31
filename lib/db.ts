@@ -1,4 +1,17 @@
 import mongoose, { Mongoose } from 'mongoose';
+import dns from 'node:dns';
+
+// Fix Node.js DNS SRV lookup issues (querySrv ECONNREFUSED) on Windows/local network resolvers for MongoDB Atlas
+try {
+    dns.setDefaultResultOrder('ipv4first');
+} catch {
+    // Ignore error
+}
+try {
+    dns.setServers(['8.8.8.8', '1.1.1.1', '8.8.4.4']);
+} catch {
+    // Ignore error
+}
 
 const MONGODB_URI = process.env.MONGODB_URI!;
 

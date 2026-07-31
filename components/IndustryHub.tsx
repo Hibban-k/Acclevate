@@ -42,8 +42,6 @@ const industries = [
   }
 ];
 
-const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI'];
-
 export default function IndustryHub() {
   const [activeIndex, setActiveIndex] = useState(0);
 

@@ -29,16 +29,16 @@ export default function Footer() {
                     <div>
                         <h5 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Services</h5>
                         <div className="flex flex-col gap-2">
-                            <Link href="/service/strategy-consulting" className="text-sm text-navy-200 hover:text-sky-400 transition-colors">
+                            <Link href="/services/strategy/strategy-consulting" className="text-sm text-navy-200 hover:text-sky-400 transition-colors">
                                 Strategy Consulting
                             </Link>
-                            <Link href="/service/digital-transformation" className="text-sm text-navy-200 hover:text-sky-400 transition-colors">
+                            <Link href="/services/digital/digital-transformation" className="text-sm text-navy-200 hover:text-sky-400 transition-colors">
                                 Digital Transformation
                             </Link>
-                            <Link href="/service/operations-excellence" className="text-sm text-navy-200 hover:text-sky-400 transition-colors">
+                            <Link href="/services/operations/operations-excellence" className="text-sm text-navy-200 hover:text-sky-400 transition-colors">
                                 Operations Excellence
                             </Link>
-                            <Link href="/service/leadership-advisory" className="text-sm text-navy-200 hover:text-sky-400 transition-colors">
+                            <Link href="/services/people/leadership-advisory" className="text-sm text-navy-200 hover:text-sky-400 transition-colors">
                                 Leadership Advisory
                             </Link>
                         </div>

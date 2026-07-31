@@ -1,15 +1,24 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
-import { getInitialServicesAction } from '@/lib/actions/services';
+import { getAllActiveServicesAction } from '@/lib/actions/services';
 import ServicesClient from './ServicesClient';
 
 // Enable Incremental Static Regeneration (ISR)
 export const revalidate = 604800; // 1 week
 
 export default async function ServicesPage() {
-    // 1. Fetch the default first page of services statically at build/ISR time
-    // This fetches all order 1 services (lowest available order)
-    const res = await getInitialServicesAction();
+    let initialServices: any[] = [];
+    let initialCategories: any[] = [];
+
+    try {
+        const res = await getAllActiveServicesAction();
+        if (res && res.success) {
+            initialServices = res.services || [];
+            initialCategories = res.categories || [];
+        }
+    } catch (error) {
+        console.error('Failed to load services:', error);
+    }
 
     return (
         <div className="min-h-screen bg-white">
@@ -48,9 +57,8 @@ export default async function ServicesPage() {
             {/* Interactive Client Section */}
             <Suspense fallback={<div className="min-h-screen bg-slate-50 flex items-center justify-center">Loading services...</div>}>
                 <ServicesClient 
-                    initialServices={res.services} 
-                    initialCategories={res.categories} 
-                    initialNextOrder={res.nextOrder} 
+                    initialServices={initialServices} 
+                    initialCategories={initialCategories} 
                 />
             </Suspense>
 
