@@ -25,95 +25,86 @@ export default function ContactPage() {
     return (
         <div className="bg-white">
             {/* Hero Section */}
-            <section className="min-h-[85vh] lg:min-h-screen flex flex-col justify-center pt-24 pb-16 bg-linear-to-br from-slate-100 via-slate-50 to-slate-200 relative overflow-hidden border-b border-slate-200/50 shadow-[inset_0_0_100px_rgba(255,255,255,0.5)]">
-                {/* Royal Light Theme Orbs (Champagne & Sky) */}
-                <div className="absolute top-0 right-0 w-[50vw] h-[50vw] max-w-[800px] bg-sky-100/40 rounded-full blur-[100px] -translate-y-1/4 translate-x-1/4 animate-orbFloat pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] max-w-[600px] bg-amber-50/50 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4 animate-orbFloat-reverse pointer-events-none" />
+            <section className="relative pt-32 pb-20 bg-slate-900 overflow-hidden text-center">
+                {/* Background Image with opacity overlay */}
+                <div className="absolute inset-0 z-0">
+                    <img
+                        src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop"
+                        alt="Office building"
+                        className="w-full h-full object-cover opacity-20"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-b from-navy-950/85 to-navy-900" />
+                </div>
 
-                <div className="max-w-[1280px] w-full mx-auto px-6 relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
-                        <div className="lg:col-span-7">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 border border-slate-200 shadow-sm backdrop-blur-md rounded-full text-xs font-medium mb-8">
-                                <Link href="/" className="text-slate-500 hover:text-navy-900 transition-colors">
-                                    Home
-                                </Link>
-                                <span className="text-slate-300">/</span>
-                                <span className="text-navy-900">Contact</span>
-                            </div>
-                            <h1 className="text-[clamp(3.5rem,6vw,5.5rem)] font-bold leading-[1.05] tracking-tight">
-                                Transform your <br className="hidden lg:block"/>
-                                <span className="bg-linear-to-r from-navy-600 to-sky-500 bg-clip-text text-transparent">
-                                    growth trajectory.
-                                </span>
-                            </h1>
-                        </div>
-                        <div className="lg:col-span-5">
-                            <p className="text-xl md:text-2xl text-slate-700 font-light leading-relaxed">
-                                We bypass theoretical presentations and focus entirely on actionable financial and operational strategies. Partner with elite operators who understand the complexities of modern business scaling.
-                            </p>
-                        </div>
+                <div className="max-w-[1280px] mx-auto px-6 relative z-10 text-center">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 border border-white/10 backdrop-blur-md rounded-full text-xs font-semibold uppercase tracking-wider text-sky-300 mb-6">
+                        <Link href="/" className="hover:text-white transition-colors">
+                            Home
+                        </Link>
+                        <span className="text-white/30">/</span>
+                        <span className="text-white">Contact</span>
                     </div>
+                    <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight mb-4 uppercase font-heading">
+                        Contact Us
+                    </h1>
+                    <p className="text-lg text-slate-300 font-light max-w-lg mx-auto">
+                        We&apos;d love to hear what you think
+                    </p>
                 </div>
             </section>
 
             {/* Contact Grid */}
-            <section className="py-32">
+            <section className="py-24 md:py-32 bg-white">
                 <div className="max-w-[1280px] mx-auto px-6">
-                    <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-16 lg:gap-24">
-                        {/* Contact Info */}
-                        <div className="flex flex-col h-full">
-                            <h2 className="text-[clamp(2.5rem,4vw,3.5rem)] font-bold mb-6 tracking-tight leading-tight text-slate-900">
-                                Start the <br/> conversation.
-                            </h2>
-                            <p className="text-lg text-slate-600 font-light leading-relaxed mb-12">
-                                Every significant corporate transformation begins with a critical diagnosis. Reach out to discuss your specific operational challenges and discover how our methodologies can safeguard your bottom line.
-                            </p>
-
-                            <div className="space-y-8 mb-12 border-t border-b border-slate-200 py-10">
-                                <div className="flex gap-5">
-                                    <div className="w-14 h-14 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center text-xl shrink-0 shadow-sm">
-                                        📧
-                                    </div>
-                                    <div className="pt-1">
-                                        <h5 className="text-base font-bold text-slate-900 mb-1 tracking-wide">Direct Inquiry</h5>
-                                        <p className="text-sm text-slate-600 font-medium whitespace-pre-line leading-relaxed">hello@acclevate.com</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex gap-5">
-                                    <div className="w-14 h-14 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center text-xl shrink-0 shadow-sm">
-                                        📞
-                                    </div>
-                                    <div className="pt-1">
-                                        <h5 className="text-base font-bold text-slate-900 mb-1 tracking-wide">Consultation Line</h5>
-                                        <p className="text-sm text-slate-600 font-medium whitespace-pre-line leading-relaxed">+1 (555) 123-4567</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex gap-5">
-                                    <div className="w-14 h-14 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center text-xl shrink-0 shadow-sm">
-                                        📍
-                                    </div>
-                                    <div className="pt-1">
-                                        <h5 className="text-base font-bold text-slate-900 mb-1 tracking-wide">Headquarters</h5>
-                                        <p className="text-sm text-slate-600 font-medium whitespace-pre-line leading-relaxed">
-                                            BTM 2nd Stage{"\n"}Bengaluru, Karnataka
-                                        </p>
-                                    </div>
-                                </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-16 lg:gap-24 items-start">
+                        {/* Contact Info (Left Side) */}
+                        <div className="flex flex-col text-left">
+                            <div className="mb-12">
+                                <span className="text-[10px] font-bold text-sky-600 uppercase tracking-widest mb-3 block">Email Us</span>
+                                <a 
+                                    href="mailto:hello@acclevate.com" 
+                                    className="text-xl md:text-2xl font-extrabold text-slate-900 hover:text-sky-600 transition-colors border-b-2 border-slate-900 hover:border-sky-600 pb-1 inline-block font-heading"
+                                >
+                                    hello@acclevate.com
+                                </a>
                             </div>
 
-                            {/* Trust Pillar */}
-                            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-8 mt-auto">
-                                <h5 className="font-bold text-navy-900 mb-3 tracking-wide">Direct Access Guarantee</h5>
-                                <p className="text-sm text-slate-600 font-light leading-relaxed">
-                                    You won&apos;t be passed off to junior account managers. When you engage with Acclevate, you speak directly with the senior strategic experts actively executing your corporate roadmap.
+                            <div className="mb-12">
+                                <span className="text-[10px] font-bold text-sky-600 uppercase tracking-widest mb-3 block">Phone Us</span>
+                                <a 
+                                    href="tel:+15551234567" 
+                                    className="text-xl md:text-2xl font-extrabold text-slate-900 hover:text-sky-600 transition-colors border-b-2 border-slate-900 hover:border-sky-600 pb-1 inline-block font-heading"
+                                >
+                                    +1 (555) 123-4567
+                                </a>
+                            </div>
+
+                            <div className="mb-12">
+                                <span className="text-[10px] font-bold text-sky-600 uppercase tracking-widest mb-3 block">Visit Us</span>
+                                <p className="text-base md:text-lg font-bold text-slate-700 leading-relaxed font-heading max-w-xs">
+                                    BTM 2nd Stage, Bengaluru, Karnataka
                                 </p>
+                            </div>
+
+                            {/* Circular premium social icons */}
+                            <div className="flex gap-4 mt-6">
+                                <a href="#" aria-label="LinkedIn" className="w-10 h-10 rounded-full border border-slate-200 hover:border-sky-500 hover:bg-sky-500 hover:text-white flex items-center justify-center text-slate-500 transition-all duration-300">
+                                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                                </a>
+                                <a href="#" aria-label="Twitter" className="w-10 h-10 rounded-full border border-slate-200 hover:border-sky-500 hover:bg-sky-500 hover:text-white flex items-center justify-center text-slate-500 transition-all duration-300">
+                                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+                                </a>
+                                <a href="#" aria-label="Instagram" className="w-10 h-10 rounded-full border border-slate-200 hover:border-sky-500 hover:bg-sky-500 hover:text-white flex items-center justify-center text-slate-500 transition-all duration-300">
+                                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204 0.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                                </a>
+                                <a href="#" aria-label="Facebook" className="w-10 h-10 rounded-full border border-slate-200 hover:border-sky-500 hover:bg-sky-500 hover:text-white flex items-center justify-center text-slate-500 transition-all duration-300">
+                                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg>
+                                </a>
                             </div>
                         </div>
 
-                        {/* Client Component: Interactive Form */}
-                        <div className="bg-white rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/50 p-8 md:p-12">
+                        {/* Client Component: Interactive Form (Right Side) */}
+                        <div className="bg-white rounded-3xl border border-slate-200 shadow-xl shadow-slate-100/50 p-8 md:p-12">
                             <ContactForm />
                         </div>
                     </div>

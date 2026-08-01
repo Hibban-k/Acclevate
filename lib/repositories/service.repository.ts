@@ -5,7 +5,7 @@ import Service, { IService } from '@/models/Service';
 export class ServiceRepository {
     async findAll(filter: Record<string, any> = {}): Promise<IService[]> {
         await connectDB();
-        return Service.find(filter).sort({ order: 1, createdAt: -1 }).lean();
+        return Service.find(filter).populate('category', 'name slug').sort({ order: 1, createdAt: -1 }).lean();
     }
 
     async findAllForSitemap(): Promise<any[]> {
@@ -18,7 +18,7 @@ export class ServiceRepository {
 
     async findOne(filter: Record<string, any> = {}): Promise<IService | null> {
         await connectDB();
-        return Service.findOne(filter).lean();
+        return Service.findOne(filter).populate('category', 'name slug').lean();
     }
 
     async findOnePopulatedBySlug(slug: string): Promise<IService | null> {

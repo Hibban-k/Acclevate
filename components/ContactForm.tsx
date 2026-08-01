@@ -52,7 +52,9 @@ export default function ContactForm() {
 
     return (
         <div>
-            <h3 className="text-2xl font-bold mb-8 tracking-tight text-slate-900">Request a Consultation</h3>
+            <h3 className="text-2xl md:text-3xl font-extrabold mb-8 tracking-tight text-slate-900 uppercase font-heading">
+                Let&apos;s Work Together
+            </h3>
 
             {formStatus === 'sent' && (
                 <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-8 text-sm font-medium">
@@ -82,26 +84,30 @@ export default function ContactForm() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label className="block text-sm font-medium text-slate-900 mb-2" htmlFor="fullName">Full Name</label>
+                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block" htmlFor="fullName">
+                            Full Name *
+                        </label>
                         <input
                             type="text"
                             id="fullName"
                             value={formData.fullName}
                             onChange={handleChange}
-                            className={inputClasses}
-                            placeholder="John Doe"
+                            className="w-full px-4 py-3.5 bg-slate-50/50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all font-light text-slate-800 text-sm"
+                            placeholder="e.g. John Doe"
                             required
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-slate-900 mb-2" htmlFor="phone">Phone Number</label>
+                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block" htmlFor="phone">
+                            Phone Number *
+                        </label>
                         <input
                             type="tel"
                             id="phone"
                             value={formData.phone}
                             onChange={handleChange}
-                            className={inputClasses}
-                            placeholder="+1 (555) 000-0000"
+                            className="w-full px-4 py-3.5 bg-slate-50/50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all font-light text-slate-800 text-sm"
+                            placeholder="e.g. +1 (555) 000-0000"
                             required
                         />
                     </div>
@@ -109,37 +115,43 @@ export default function ContactForm() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label className="block text-sm font-medium text-slate-900 mb-2" htmlFor="email">Email Address</label>
+                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block" htmlFor="email">
+                            Email Address *
+                        </label>
                         <input
                             type="email"
                             id="email"
                             value={formData.email}
                             onChange={handleChange}
-                            className={inputClasses}
-                            placeholder="john@company.com"
+                            className="w-full px-4 py-3.5 bg-slate-50/50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all font-light text-slate-800 text-sm"
+                            placeholder="e.g. john@company.com"
                             required
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-slate-900 mb-2" htmlFor="company">Company</label>
+                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block" htmlFor="company">
+                            Company (Optional)
+                        </label>
                         <input
                             type="text"
                             id="company"
                             value={formData.company}
                             onChange={handleChange}
-                            className={inputClasses}
-                            placeholder="Your Company (Optional)"
+                            className="w-full px-4 py-3.5 bg-slate-50/50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all font-light text-slate-800 text-sm"
+                            placeholder="e.g. Acme Corp"
                         />
                     </div>
                 </div>
 
                 <div className="mb-6">
-                    <label className="block text-sm font-medium text-slate-900 mb-2" htmlFor="service">Primary Area of Interest</label>
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block" htmlFor="service">
+                        Primary Area of Interest *
+                    </label>
                     <select
                         id="service"
                         value={formData.service}
                         onChange={handleChange}
-                        className={inputClasses}
+                        className="w-full px-4 py-3.5 bg-slate-50/50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all font-light text-slate-800 text-sm"
                         required
                     >
                         <option value="" disabled>Select a service focus...</option>
@@ -155,12 +167,14 @@ export default function ContactForm() {
                 </div>
 
                 <div className="mb-8">
-                    <label className="block text-sm font-medium text-slate-900 mb-2" htmlFor="message">Project Details</label>
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block" htmlFor="message">
+                        Details *
+                    </label>
                     <textarea
                         id="message"
                         value={formData.message}
                         onChange={handleChange}
-                        className={`${inputClasses} min-h-[140px] resize-y`}
+                        className="w-full px-4 py-3.5 bg-slate-50/50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all font-light text-slate-800 text-sm min-h-[140px] resize-y"
                         placeholder="Briefly describe your operational or financial challenges..."
                         required
                     />
@@ -169,13 +183,13 @@ export default function ContactForm() {
                 <button
                     type="submit"
                     disabled={formStatus === 'sending'}
-                    className={`w-full px-8 py-4 text-base font-semibold text-white rounded-xl transition-all shadow-xl hover:-translate-y-1 hover:shadow-2xl ${
+                    className={`w-full py-4 border-2 font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 ${
                         formStatus === 'sending'
-                            ? 'bg-slate-400 cursor-not-allowed shadow-none hover:translate-y-0'
-                            : 'bg-linear-to-r from-navy-900 via-navy-800 to-sky-900 hover:from-navy-800 hover:via-navy-700 hover:to-sky-800 hover:shadow-sky-900/20'
+                            ? 'border-slate-300 text-slate-400 bg-slate-100 cursor-not-allowed'
+                            : 'border-slate-900 text-slate-900 bg-transparent hover:bg-slate-900 hover:text-white'
                     }`}
                 >
-                    {formStatus === 'sending' ? 'Securely Routing...' : 'Submit Inquiry'}
+                    {formStatus === 'sending' ? 'Routing...' : 'Submit'}
                 </button>
             </form>
         </div>

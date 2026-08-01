@@ -114,22 +114,22 @@ export default async function Home() {
         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
           
           {/* Top Row: Impact Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-20 lg:mb-28 border-b border-slate-100 pb-16">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pb-16 border-b border-slate-100 mb-20 lg:mb-28 text-left">
             <div>
-              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-2 tracking-tight font-heading">10+</div>
-              <div className="text-xs font-semibold text-slate-500 uppercase tracking-widest leading-relaxed">Years Expertise</div>
+              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-navy-900 mb-2 tracking-tight font-heading">10+</div>
+              <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-normal">Years Expertise</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-2 tracking-tight font-heading">150+</div>
-              <div className="text-xs font-semibold text-slate-500 uppercase tracking-widest leading-relaxed">Enterprises Scaled</div>
+              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-navy-900 mb-2 tracking-tight font-heading">150+</div>
+              <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-normal">Enterprises Scaled</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-2 tracking-tight font-heading">100%</div>
-              <div className="text-xs font-semibold text-slate-500 uppercase tracking-widest leading-relaxed">Compliance Record</div>
+              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-navy-900 mb-2 tracking-tight font-heading">100%</div>
+              <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-normal">Compliance Record</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-2 tracking-tight font-heading">98%</div>
-              <div className="text-xs font-semibold text-slate-500 uppercase tracking-widest leading-relaxed">Client Retention</div>
+              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-navy-900 mb-2 tracking-tight font-heading">98%</div>
+              <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-normal">Client Retention</div>
             </div>
           </div>
 

@@ -14,67 +14,164 @@ export default function AboutPage() {
     return (<>
         <div className="animate-fadeInUp bg-white">
             
-            {/* Hero Section */}
-            <section className="min-h-[85vh] lg:min-h-screen flex flex-col justify-center pt-24 pb-16 bg-linear-to-br from-slate-100 via-slate-50 to-slate-200 relative overflow-hidden border-b border-slate-200/50 shadow-[inset_0_0_100px_rgba(255,255,255,0.5)]">
-                {/* Royal Light Theme Orbs (Champagne & Sky) */}
-                <div className="absolute top-0 right-0 w-[50vw] h-[50vw] max-w-[800px] bg-sky-100/40 rounded-full blur-[100px] -translate-y-1/4 translate-x-1/4 animate-orbFloat pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] max-w-[600px] bg-amber-50/50 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4 animate-orbFloat-reverse pointer-events-none" />
+            {/* Hero Section (August-inspired Overlapping Text & Image Collage) */}
+            <section className="pt-32 pb-40 bg-[#f8fafc] relative overflow-hidden border-b border-slate-200/60">
+                {/* Ambient background orb */}
+                <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-sky-100/30 rounded-full blur-[100px] -translate-y-1/3 translate-x-1/3 pointer-events-none" />
                 
-                <div className="max-w-[1280px] w-full mx-auto px-6 relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
-                        <div className="lg:col-span-7">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 border border-slate-200 shadow-sm backdrop-blur-md rounded-full text-xs font-medium mb-8">
-                                <Link href="/" className="text-slate-500 hover:text-navy-900 transition-colors">
-                                    Home
-                                </Link>
-                                <span className="text-slate-300">/</span>
-                                <span className="text-navy-900">About</span>
-                            </div>
-                            <h1 className="text-[clamp(3.5rem,6vw,5.5rem)] font-bold leading-[1.05] tracking-tight">
-                                Engineering financial <br className="hidden lg:block"/>
-                                <span className="bg-linear-to-r from-navy-600 to-sky-500 bg-clip-text text-transparent">
-                                    dominance.
-                                </span>
-                            </h1>
+                <div className="max-w-[1280px] mx-auto px-6 relative">
+                    
+                    {/* Centered Breadcrumb */}
+                    <div className="flex justify-center mb-16 relative z-30">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 shadow-xs backdrop-blur-md rounded-full text-xs font-semibold uppercase tracking-wider text-slate-400">
+                            <Link href="/" className="hover:text-sky-600 transition-colors">
+                                Home
+                            </Link>
+                            <span>/</span>
+                            <span className="text-sky-600">About us</span>
                         </div>
-                        <div className="lg:col-span-5">
-                            <p className="text-xl md:text-2xl text-slate-700 font-light leading-relaxed">
-                                We are a tight-knit team of operators and financial strategists. We exist because growing businesses are losing millions to bad tax structures and weak corporate strategy. We fix that.
+                    </div>
+
+                    {/* Giant Text & Overlapping Images Collage */}
+                    <div className="relative h-[300px] md:h-[450px] w-full flex items-center justify-center mb-24">
+                        {/* Floating Image 1 (Left Back) */}
+                        <div className="absolute top-0 left-[5%] md:left-[10%] w-[110px] h-[150px] md:w-[170px] md:h-[230px] rounded-2xl overflow-hidden shadow-2xl border border-white/80 z-0 transform rotate-[-6deg] transition-transform duration-500 hover:rotate-0 hover:scale-105">
+                            <img 
+                                src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=350&auto=format&fit=crop" 
+                                alt="Acclevate Advisory Team" 
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+
+                        {/* Floating Image 2 (Center Front Overlay) */}
+                        <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[160px] h-[220px] md:w-[260px] md:h-[350px] rounded-3xl overflow-hidden shadow-3xl border-2 border-white z-20 transition-transform duration-500 hover:scale-105">
+                            <img 
+                                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=450&auto=format&fit=crop" 
+                                alt="Acclevate Management" 
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+
+                        {/* Floating Image 3 (Right Back) */}
+                        <div className="absolute bottom-[5%] right-[5%] md:right-[10%] w-[110px] h-[110px] md:w-[180px] md:h-[180px] rounded-2xl overflow-hidden shadow-2xl border border-white/80 z-0 transform rotate-[8deg] transition-transform duration-500 hover:rotate-0 hover:scale-105">
+                            <img 
+                                src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=350&auto=format&fit=crop" 
+                                alt="Acclevate Consultant" 
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+
+                        {/* Giant Background text */}
+                        <h1 className="text-[12vw] font-black tracking-tighter uppercase text-slate-950/10 leading-none select-none z-10 font-heading">
+                            About Us
+                        </h1>
+                    </div>
+
+                    {/* Plus Badge and Tagline */}
+                    <div className="flex flex-col items-center mt-32 mb-12 text-center relative z-10">
+                        <span className="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center text-sm font-bold mb-4 shadow-sm select-none">+</span>
+                        <p className="text-xs uppercase tracking-widest font-bold text-slate-400">Based in Mumbai, operating worldwide</p>
+                    </div>
+
+                    <div className="w-[1px] h-16 bg-slate-200 mx-auto mb-16" />
+
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-snug tracking-tight text-center max-w-4xl mx-auto px-6 mb-16 uppercase font-heading">
+                        We are a corporate collective of financial advisors, tax optimization experts, compliance strategists, and business analysts.
+                    </h2>
+
+                    {/* Story block */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start max-w-5xl mx-auto px-6 mt-24">
+                        <div className="lg:col-span-5 text-left">
+                            <h3 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight uppercase font-heading mb-6">
+                                Built on reality. <br /> Not theory.
+                            </h3>
+                            <p className="text-base font-semibold text-sky-600 uppercase tracking-wider">
+                                We roll up our sleeves.
+                            </p>
+                        </div>
+                        <div className="lg:col-span-7 text-left prose prose-slate text-slate-600 font-light leading-relaxed">
+                            <p className="mb-6">
+                                Acclevate wasn&apos;t built by career theorists. Our foundation is built on 8 years of deep, hands-on experience—working inside top-tier firms and navigating the complex financial realities of rapidly growing businesses.
+                            </p>
+                            <p className="mb-6">
+                                We saw a recurring, expensive problem: ambitious companies were paying massive fees for 50-page theoretical slide decks that no one knew how to actually implement. They needed operators, not just advisors.
+                            </p>
+                            <p className="font-medium text-navy-800">
+                                Acclevate is the culmination of that experience. We expose where your business is leaking money, optimize your structures, and execute alongside your team to protect your EBITDA.
                             </p>
                         </div>
                     </div>
+
                 </div>
             </section>
 
-            {/* Our Story / Image Anchor */}
-            <section className="py-32">
-                <div className="max-w-[1280px] mx-auto px-6">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center mb-24">
-                        <div>
-                            <h2 className="text-[clamp(2.5rem,5vw,3.5rem)] font-bold mb-8 tracking-tight leading-tight text-slate-900">
-                                Built on reality. <br /> Not theory.
-                            </h2>
-                            <div className="prose prose-lg text-slate-600 font-light leading-relaxed">
-                                <p className="mb-6">
-                                    Acclevate wasn&apos;t built by career theorists. Our foundation is built on 8 years of deep, hands-on experience—working inside top-tier firms and navigating the complex financial realities of rapidly growing businesses.
+            {/* Process Timeline Section (August-inspired Step Flow) */}
+            <section className="py-24 md:py-32 bg-[#f8fafc] relative overflow-hidden border-t border-b border-slate-200/50">
+                <div className="max-w-[1280px] mx-auto px-6 relative z-10">
+                    
+                    {/* Badge & Title */}
+                    <div className="flex flex-col items-center text-center mb-24">
+                        <span className="inline-flex items-center px-3.5 py-1.5 text-xs font-semibold rounded-full uppercase tracking-wider bg-sky-50 text-sky-600 mb-6 border border-sky-100/80 shadow-xs">
+                            Our Process
+                        </span>
+                        <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight text-slate-900 uppercase font-heading">
+                            How we <span className="text-sky-600">work</span>
+                        </h2>
+                    </div>
+
+                    {/* Timeline Container */}
+                    <div className="relative">
+                        {/* Center Vertical Line */}
+                        <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-slate-200/60 hidden md:block" />
+
+                        {/* Step 1 */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 mb-20 items-center">
+                            <div className="md:text-right md:pr-16 text-left">
+                                <div className="inline-block text-xs font-bold text-sky-600 uppercase tracking-widest mb-2">• Audit</div>
+                                <h4 className="text-2xl font-bold text-slate-900 mb-3 font-heading">01. Analysis</h4>
+                                <p className="text-sm text-slate-500 font-light leading-relaxed max-w-md md:ml-auto">
+                                    We analyze your current corporate setup and past tax filings to identify immediate leakage points and compliance anomalies.
                                 </p>
-                                <p className="mb-6">
-                                    We saw a recurring, expensive problem: ambitious companies were paying massive fees for 50-page theoretical slide decks that no one knew how to actually implement. They needed operators, not just advisors.
-                                </p>
-                                <p className="font-medium text-navy-800">
-                                    Acclevate is the culmination of that experience. We roll up our sleeves, expose where your business is leaking money, and execute the strategy.
+                            </div>
+                            <div className="hidden md:block" />
+                        </div>
+
+                        {/* Step 2 */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 mb-20 items-center">
+                            <div className="hidden md:block" />
+                            <div className="md:pl-16 text-left">
+                                <div className="inline-block text-xs font-bold text-sky-600 uppercase tracking-widest mb-2">• Structuring</div>
+                                <h4 className="text-2xl font-bold text-slate-900 mb-3 font-heading">02. Concept & Strategy</h4>
+                                <p className="text-sm text-slate-500 font-light leading-relaxed max-w-md">
+                                    We structure a custom compliance strategy and design optimized corporate structures tailored specifically to your scaling roadmap.
                                 </p>
                             </div>
                         </div>
-                        <div className="relative h-[600px] w-full rounded-4xl overflow-hidden shadow-2xl border border-slate-200">
-                            <Image 
-                                src="/images/about/office.png" 
-                                alt="Acclevate Corporate Boardroom" 
-                                fill 
-                                className="object-cover"
-                                priority
-                            />
+
+                        {/* Step 3 */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 mb-20 items-center">
+                            <div className="md:text-right md:pr-16 text-left">
+                                <div className="inline-block text-xs font-bold text-sky-600 uppercase tracking-widest mb-2">• Execution</div>
+                                <h4 className="text-2xl font-bold text-slate-900 mb-3 font-heading">03. Integration & Systems</h4>
+                                <p className="text-sm text-slate-500 font-light leading-relaxed max-w-md md:ml-auto">
+                                    We deploy the systems, coordinate the transition, and clean up administrative debt to establish a bulletproof financial foundation.
+                                </p>
+                            </div>
+                            <div className="hidden md:block" />
                         </div>
+
+                        {/* Step 4 */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+                            <div className="hidden md:block" />
+                            <div className="md:pl-16 text-left">
+                                <div className="inline-block text-xs font-bold text-sky-600 uppercase tracking-widest mb-2">• Advisory</div>
+                                <h4 className="text-2xl font-bold text-slate-900 mb-3 font-heading">04. Continuous Growth</h4>
+                                <p className="text-sm text-slate-500 font-light leading-relaxed max-w-md">
+                                    We run recurring monthly reviews and audits, advising on tax updates and operational modifications to lock in long-term profitability.
+                                </p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>

@@ -19,6 +19,10 @@ if (!MONGODB_URI) {
     throw new Error('Please define the MONGODB_URI environment variable in .env.local');
 }
 
+// Fallback seed list URI for Acclevate Atlas Cluster in case SRV DNS lookup is blocked by local network
+const DIRECT_MONGODB_URI = process.env.DIRECT_MONGODB_URI ||
+    'mongodb://acclevate:vBU1UoEaRh7S7RFh@ac-7w3vxlt-shard-00-00.mw3tdks.mongodb.net:27017,ac-7w3vxlt-shard-00-01.mw3tdks.mongodb.net:27017,ac-7w3vxlt-shard-00-02.mw3tdks.mongodb.net:27017/acclevate?ssl=true&authSource=admin&replicaSet=atlas-4cbvmp-shard-0&retryWrites=true&w=majority';
+
 const cached = global.mongoose || { conn: null, promise: null };
 
 if (!global.mongoose) {
@@ -37,9 +41,14 @@ export async function connectDB(): Promise<Mongoose> {
             maxPoolSize: 10,
         };
 
-        cached.promise = mongoose.connect(MONGODB_URI!, opts).then((mongoose) => {
-            return mongoose;
-        });
+        cached.promise = mongoose.connect(MONGODB_URI!, opts)
+            .catch(async (err) => {
+                console.warn('MongoDB SRV connection failed, falling back to direct cluster seed list:', err.message);
+                return mongoose.connect(DIRECT_MONGODB_URI, opts);
+            })
+            .then((mongooseInstance) => {
+                return mongooseInstance;
+            });
     }
 
     try {
@@ -53,3 +62,4 @@ export async function connectDB(): Promise<Mongoose> {
 }
 
 export default connectDB;
+

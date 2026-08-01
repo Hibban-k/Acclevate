@@ -22,34 +22,22 @@ export default async function ServicesPage() {
 
     return (
         <div className="min-h-screen bg-white">
-            {/* Hero Section */}
-            <section className="min-h-[85vh] lg:min-h-screen flex flex-col justify-center pt-24 pb-16 bg-linear-to-br from-slate-100 via-slate-50 to-slate-200 relative overflow-hidden border-b border-slate-200/50 shadow-[inset_0_0_100px_rgba(255,255,255,0.5)]">
-                {/* Royal Light Theme Orbs (Champagne & Sky) */}
-                <div className="absolute top-0 right-0 w-[50vw] h-[50vw] max-w-[800px] bg-sky-100/40 rounded-full blur-[100px] -translate-y-1/4 translate-x-1/4 animate-orbFloat pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] max-w-[600px] bg-amber-50/50 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4 animate-orbFloat-reverse pointer-events-none" />
-
-                <div className="max-w-[1280px] w-full mx-auto px-6 relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
-                        <div className="lg:col-span-7">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 border border-slate-200 shadow-sm backdrop-blur-md rounded-full text-xs font-medium mb-8">
-                                <Link href="/" className="text-slate-500 hover:text-navy-900 transition-colors">
-                                    Home
-                                </Link>
-                                <span className="text-slate-300">/</span>
-                                <span className="text-navy-900">Services</span>
-                            </div>
-                            <h1 className="text-[clamp(3.5rem,6vw,5.5rem)] font-bold leading-[1.05] tracking-tight">
-                                Complete <br className="hidden lg:block"/>
-                                <span className="bg-linear-to-r from-navy-600 to-sky-500 bg-clip-text text-transparent">
-                                    corporate solutions.
-                                </span>
-                            </h1>
-                        </div>
-                        <div className="lg:col-span-5">
-                            <p className="text-xl md:text-2xl text-slate-700 font-light leading-relaxed">
-                                Stop patching leaks with short-term fixes. Browse our comprehensive suite of services designed to build a financial and operational foundation that actually scales.
-                            </p>
-                        </div>
+            {/* Centered Page Banner */}
+            <section className="py-20 bg-[#f8fafc] border-b border-slate-200/60 relative overflow-hidden text-center">
+                {/* Ambient floating blur orb */}
+                <div className="absolute top-0 right-0 w-[30vw] h-[30vw] bg-sky-100/30 rounded-full blur-[80px] -translate-y-1/3 translate-x-1/3 pointer-events-none" />
+                
+                <div className="max-w-[1280px] mx-auto px-6 relative z-10">
+                    <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4 uppercase font-heading">
+                        Services
+                    </h1>
+                    
+                    <div className="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
+                        <Link href="/" className="hover:text-sky-600 transition-colors">
+                            Home
+                        </Link>
+                        <span>/</span>
+                        <span className="text-sky-600">Services</span>
                     </div>
                 </div>
             </section>
