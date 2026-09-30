@@ -45,7 +45,7 @@ export default function TestimonialSlider() {
   };
 
   return (
-    <div className="group relative uiverse-outer flex flex-col h-full min-h-[480px] overflow-hidden">
+    <div className="group relative uiverse-outer flex flex-col h-full min-h-120 overflow-hidden">
       {/* Moving dot */}
       <div className="uiverse-dot" />
 
@@ -65,7 +65,7 @@ export default function TestimonialSlider() {
             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
           </svg>
 
-          <div className="relative h-[250px] sm:h-[200px] w-full z-10">
+          <div className="relative h-62.5 sm:h-50 w-full z-10">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}

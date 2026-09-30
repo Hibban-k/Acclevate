@@ -25,7 +25,7 @@ export default function ProcessTimeline() {
                  whileInView={{ scaleX: 1 }}
                  viewport={{ once: true, amount: 0.8 }}
                  transition={{ duration: 0.4, ease: "linear", delay: stepDelay + 0.4 }}
-                 className="hidden md:block absolute top-[1rem] left-[50%] w-[calc(100%+3rem)] h-[1px] bg-[#EAEBF1] origin-left z-0"
+                  className="hidden md:block absolute top-4 left-[50%] w-[calc(100%+3rem)] h-px bg-[#EAEBF1] origin-left z-0"
               />
             )}
 
@@ -39,7 +39,7 @@ export default function ProcessTimeline() {
                  whileInView={{ scaleY: 1 }}
                  viewport={{ once: true, amount: 0.8 }}
                  transition={{ duration: 0.2, ease: "easeOut", delay: stepDelay + 0.2 }}
-                 className="absolute top-4 w-[1px] h-8 bg-[#EAEBF1] origin-top z-10"
+                 className="absolute top-4 w-px h-8 bg-[#EAEBF1] origin-top z-10"
                />
 
                <motion.div 
@@ -56,7 +56,7 @@ export default function ProcessTimeline() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98], delay: stepDelay }}
-              className="text-center bg-navy-800/80 p-8 md:p-10 rounded-[2rem] shadow-sm border border-navy-700 flex flex-col items-center w-full relative z-20"
+              className="text-center bg-navy-800/80 p-8 md:p-10 rounded-4xl shadow-sm border border-navy-700 flex flex-col items-center w-full relative z-20"
             >
               <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
               <p className="text-lg text-slate-300 leading-relaxed font-light">{item.desc}</p>

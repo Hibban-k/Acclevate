@@ -30,7 +30,21 @@
 
   /* Font */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-subheading: 'Times New Roman', Times, serif;
+
+  /* Global Design Tokens */
+  --radius-base: 1rem;
+  
+  --color-surface-light: #f8fafc;
+  --color-surface-dark: #0d1538;
+  --color-surface-darker: #060915;
+  --color-border-subtle: rgba(226, 232, 240, 0.6);
+  --color-border-dark: rgba(51, 65, 85, 0.5);
+  
+  --shadow-premium-light: 0 15px 35px -5px rgba(0, 0, 0, 0.05);
+  --shadow-premium-dark: 0 25px 60px -15px rgba(15, 23, 42, 0.35);
+  --shadow-premium-hover: 0 20px 40px -10px rgba(10, 17, 40, 0.4);
 }
 
 @layer base {
@@ -47,8 +61,34 @@
     overflow-x: hidden;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1 {
     font-family: var(--font-heading);
+    letter-spacing: -0.05em;
+    line-height: 1.05;
+    font-weight: 700;
+  }
+
+  h2, h3, h4, h5, h6 {
+    font-family: var(--font-subheading);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    font-weight: 600;
+  }
+
+  h2 {
+    letter-spacing: -0.02em;
+  }
+  
+  h3 {
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+
+  p {
+    font-family: var(--font-sans);
+    letter-spacing: -0.01em;
+    line-height: 1.6;
+    font-weight: 400;
   }
 }
 
@@ -122,6 +162,21 @@
   animation: dotPulse 2s ease-in-out infinite;
 }
 
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-15deg); }
+  50% { transform: rotate(15deg); }
+  75% { transform: rotate(-15deg); }
+}
+
+.hover\:animate-shake:hover {
+  animation: shake 0.4s ease-in-out;
+}
+
+.group:hover .group-hover\:animate-shake {
+  animation: shake 0.4s ease-in-out;
+}
+
 .btn-glow::before {
   content: '';
   position: absolute;
@@ -175,10 +230,11 @@
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 0.5rem; /* Matches Tailwind's rounded-lg */
+  border-radius: var(--radius-base);
   padding: 1px; /* Thinner border thickness */
   background: linear-gradient(to right, var(--color-navy-900), var(--color-sky-900));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
@@ -215,7 +271,7 @@
 
 /* Uiverse glowing card styles (Light Frosty Teal Theme) */
 .uiverse-outer {
-  border-radius: 1.5rem; /* Matches rounded-3xl */
+  border-radius: var(--radius-base);
   padding: 1px;
   background: radial-gradient(circle 230px at 0% 0%, #38bdf8, rgba(14, 165, 233, 0.15));
   position: relative;
@@ -264,7 +320,7 @@
   z-index: 1;
   width: 100%;
   height: 100%;
-  border-radius: calc(1.5rem - 1px);
+  border-radius: calc(var(--radius-base) - 1px);
   border: solid 1px rgba(14, 165, 233, 0.15);
   background-color: rgba(255, 255, 255, 0.85);
   background-image: url('/service_card_bg_ripple_cropped.png');
@@ -344,4 +400,53 @@
   top: 0;
   width: 1px;
   height: 100%;
+}
+
+/* Vertical Line Pattern Animations */
+@keyframes verticalLineScan {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes verticalLinePulse {
+  0%, 100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.animate-vertical-scan-1 {
+  animation: verticalLineScan 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.animate-vertical-scan-2 {
+  animation: verticalLineScan 10s cubic-bezier(0.4, 0, 0.2, 1) infinite 2.5s;
+}
+
+.animate-vertical-scan-3 {
+  animation: verticalLineScan 13s cubic-bezier(0.4, 0, 0.2, 1) infinite 5s;
+}
+
+.animate-line-pulse {
+  animation: verticalLinePulse 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
 }

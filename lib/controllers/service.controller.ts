@@ -22,7 +22,7 @@ export const handlePostService = catchAsync(async (request: NextRequest) => {
     }
 
     const body = await request.json();
-    const { title, tagline, description, category, subcategory, relatedServices, features, faqs } = body;
+    const { title, tagline, description, category, relatedServices, features, faqs } = body;
 
     if (!title || !tagline || !description || !category) {
         return NextResponse.json(
@@ -36,7 +36,6 @@ export const handlePostService = catchAsync(async (request: NextRequest) => {
         tagline,
         description,
         category,
-        subcategory,
         relatedServices,
         features,
         faqs,

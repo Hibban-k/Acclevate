@@ -13,8 +13,8 @@ export function HeroSkeleton() {
                         <div className="w-32 h-8 bg-slate-200/60 rounded-full mb-8 animate-pulse backdrop-blur-md" />
                         
                         <div className="space-y-4 mb-8">
-                            <div className="h-16 md:h-20 bg-slate-200/80 rounded-2xl w-full animate-pulse" />
-                            <div className="h-16 md:h-20 bg-slate-200/80 rounded-2xl w-3/4 animate-pulse" />
+                            <div className="h-16 md:h-20 bg-slate-200/80 rounded-base w-full animate-pulse" />
+                            <div className="h-16 md:h-20 bg-slate-200/80 rounded-base w-3/4 animate-pulse" />
                         </div>
                     </div>
                     <div className="lg:col-span-5">
@@ -36,8 +36,8 @@ export function ContentSkeleton() {
             <div className="max-w-[1280px] mx-auto px-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {[1, 2, 3].map((i) => (
-                        <div key={i} className="h-72 bg-slate-50 rounded-3xl p-8 border border-slate-100 flex flex-col animate-pulse">
-                            <div className="w-16 h-16 rounded-2xl bg-slate-200 mb-6" />
+                        <div key={i} className="h-72 bg-slate-50 rounded-base p-8 border border-slate-100 flex flex-col animate-pulse">
+                            <div className="w-16 h-16 rounded-base bg-slate-200 mb-6" />
                             <div className="w-3/4 h-6 bg-slate-200 rounded mb-4" />
                             <div className="w-full h-4 bg-slate-200 rounded mb-2" />
                             <div className="w-5/6 h-4 bg-slate-200 rounded" />

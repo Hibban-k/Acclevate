@@ -24,7 +24,6 @@ interface Service {
     tagline: string;
     description: string;
     category: string;
-    subcategory?: string;
     serviceGroup?: string;
     relatedServices?: string[];
     features: Feature[];
@@ -40,7 +39,6 @@ interface FormData {
     tagline: string;
     description: string;
     category: string;
-    subcategory: string;
     serviceGroup: string;
     relatedServices: string[];
     features: Feature[];
@@ -54,7 +52,6 @@ const emptyFormData: FormData = {
     tagline: '',
     description: '',
     category: 'strategy',
-    subcategory: '',
     serviceGroup: '',
     relatedServices: [],
     features: [],
@@ -142,7 +139,6 @@ export default function AdminServicesPage() {
             tagline: service.tagline,
             description: service.description,
             category: service.category,
-            subcategory: service.subcategory || '',
             serviceGroup: service.serviceGroup || '',
             relatedServices: service.relatedServices || [],
             features: service.features || [],
@@ -283,18 +279,7 @@ export default function AdminServicesPage() {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                            <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">
-                                    Subcategory
-                                </label>
-                                <input
-                                    type="text"
-                                    value={formData.subcategory}
-                                    onChange={(e) => setFormData({ ...formData, subcategory: e.target.value })}
-                                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-navy-600 outline-none"
-                                    placeholder="e.g., Return Filings, Registrations"
-                                />
-                            </div>
+                            
                             <div>
                                 <label className="block text-sm font-medium text-slate-700 mb-1">
                                     Service Group

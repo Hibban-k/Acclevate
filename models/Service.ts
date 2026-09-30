@@ -56,7 +56,6 @@ export interface IService extends Document {
 
     // Taxonomy (now ObjectId refs instead of plain strings)
     category?: Types.ObjectId;
-    subcategory?: Types.ObjectId;
 
     // Content
     features: IFeature[];
@@ -161,10 +160,6 @@ const ServiceSchema = new Schema<IService>(
         category: {
             type: Schema.Types.ObjectId,
             ref: 'Category',
-        },
-        subcategory: {
-            type: Schema.Types.ObjectId,
-            ref: 'Subcategory',
         },
 
         // Content

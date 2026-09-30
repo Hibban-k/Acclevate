@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useStaggerReveal } from '@/hooks/useGSAP';
 
 const faqs = [
   {
@@ -32,20 +33,28 @@ const faqs = [
 
 export default function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useStaggerReveal(containerRef, '.faq-item', {
+      y: 30,
+      opacity: 0,
+      duration: 0.6,
+      stagger: 0.1,
+  });
 
   const toggleOpen = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div ref={containerRef} className="w-full flex flex-col gap-4">
       {faqs.map((faq, index) => {
         const isOpen = openIndex === index;
 
         return (
           <div 
             key={index}
-            className={`rounded-2xl border transition-all duration-300 bg-white ${
+            className={`faq-item rounded-base border transition-all duration-300 bg-white ${
               isOpen 
                 ? 'border-slate-300 shadow-xs' 
                 : 'border-slate-200/80 hover:border-slate-300 shadow-none'

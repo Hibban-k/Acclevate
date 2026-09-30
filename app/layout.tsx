@@ -2,8 +2,18 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ThreeScene from "@/components/ThreeScene";
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleTagManager } from '@next/third-parties/google';
+import { Inter, Geist } from 'next/font/google';
+
+const inter = Inter({ 
+  subsets: ['latin'], 
+  variable: '--font-sans' 
+});
+
+const geist = Geist({ 
+  subsets: ['latin'], 
+  variable: '--font-heading' 
+});
 
 export const metadata: Metadata = {
   /**
@@ -75,12 +85,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
         <link
           rel="icon"
           type="image/svg+xml"
@@ -104,8 +108,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-sans antialiased overflow-x-hidden">
-        <ThreeScene />
+      <body className={`${inter.variable} ${geist.variable} font-sans antialiased overflow-x-hidden`}>
         <div className="relative z-1">
           <Navbar />
           <main className="min-h-screen">{children}</main>

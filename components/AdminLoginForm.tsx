@@ -43,7 +43,7 @@ export default function AdminLoginForm() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
             <div className="w-full max-w-md">
-                <div className="bg-white rounded-2xl shadow-xl p-8">
+                <div className="bg-white rounded-base shadow-xl p-8">
                     {/* Logo */}
                     <div className="flex justify-center mb-8">
                         <Image

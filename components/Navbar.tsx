@@ -3,20 +3,40 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    if (!headerRef.current || typeof window === 'undefined') return;
+
+    const ctx = gsap.context(() => {
+      gsap.to(headerRef.current, {
+        backgroundColor: 'rgba(255, 255, 255, 0.85)',
+        backdropFilter: 'blur(12px)',
+        borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
+        paddingTop: '0px',
+        paddingBottom: '0px',
+        duration: 0.3,
+        ease: 'power2.inOut',
+        scrollTrigger: {
+          trigger: document.body,
+          start: 'top -20px',
+          toggleActions: 'play none none reverse',
+        }
+      });
+    });
+
+    return () => ctx.revert();
   }, []);
 
   const navItems = [
@@ -31,13 +51,11 @@ export default function Navbar() {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 h-[72px] z-1000 flex items-center transition-all duration-300 border-b border-slate-300
-    ${isScrolled ? 'bg-white/90 backdrop-blur-lg shadow-sm' : 'bg-transparent'}`}>
-      <div className="flex justify-between items-center w-full max-w-[1280px] mx-auto px-6">
+    <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50 w-full pt-4 px-4 border-b border-transparent transition-all">
+      <div className="mx-auto flex justify-between items-center h-[72px] w-full max-w-[1280px] px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity py-2">
           <Image
-          
             src="/logo.jpg"
             alt="Acclevate Business Solutions"
             width={150}

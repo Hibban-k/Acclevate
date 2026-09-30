@@ -15,7 +15,6 @@ export default function ContactForm() {
         email: '',
         phone: '',
         service: '',
-        company: '',
         message: '',
         honeypot: '',
     });
@@ -36,7 +35,14 @@ export default function ContactForm() {
 
             if (result && result.success) {
                 setFormStatus('sent');
-                setFormData({ fullName: '', email: '', phone: '', service: '', company: '', message: '', honeypot: '' });
+                setFormData({
+                    fullName: '',
+                    email: '',
+                    phone: '',
+                    service: '',
+                    message: '',
+                    honeypot: '',
+                });
                 setTimeout(() => setFormStatus('idle'), 5000);
             } else {
                 setFormStatus('error');
@@ -48,17 +54,14 @@ export default function ContactForm() {
         }
     };
 
-    const inputClasses = "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-navy-600 focus:ring-2 focus:ring-navy-600/10 transition-all font-light text-slate-800";
+    const inputClasses = "w-full bg-transparent border-0 border-b border-slate-300 focus:border-navy-900 focus:ring-0 px-0 py-2 text-slate-900 rounded-none transition-colors duration-300 shadow-none";
+    const labelClasses = "text-sm text-slate-700 block mb-1";
 
     return (
         <div>
-            <h3 className="text-2xl md:text-3xl font-extrabold mb-8 tracking-tight text-slate-900 uppercase font-heading">
-                Let&apos;s Work Together
-            </h3>
-
             {formStatus === 'sent' && (
                 <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-8 text-sm font-medium">
-                    Thank you! Your request has been securely routed to our leadership team. We will be in touch shortly.
+                    Thank you! Your inquiry has been sent successfully.
                 </div>
             )}
 
@@ -68,129 +71,111 @@ export default function ContactForm() {
                 </div>
             )}
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="space-y-10">
                 {/* Honeypot field - visually hidden to catch bots */}
                 <div style={{ display: 'none' }} aria-hidden="true">
-                    <input 
-                        type="text" 
-                        name="honeypot" 
-                        id="honeypot" 
-                        tabIndex={-1} 
+                    <input
+                        type="text"
+                        name="honeypot"
+                        id="honeypot"
+                        tabIndex={-1}
                         autoComplete="off"
                         value={formData.honeypot || ''}
                         onChange={handleChange}
                     />
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-                    <div>
-                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block" htmlFor="fullName">
-                            Full Name *
-                        </label>
-                        <input
-                            type="text"
-                            id="fullName"
-                            value={formData.fullName}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3.5 bg-slate-50/50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all font-light text-slate-800 text-sm"
-                            placeholder="e.g. John Doe"
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block" htmlFor="phone">
-                            Phone Number *
-                        </label>
-                        <input
-                            type="tel"
-                            id="phone"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3.5 bg-slate-50/50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all font-light text-slate-800 text-sm"
-                            placeholder="e.g. +1 (555) 000-0000"
-                            required
-                        />
+                <div>
+                    <label className="text-base font-bold text-slate-900 block mb-6">Name (required)</label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                        <div>
+                            <label className={labelClasses} htmlFor="fullName">Full Name</label>
+                            <input
+                                type="text"
+                                id="fullName"
+                                value={formData.fullName}
+                                onChange={handleChange}
+                                className={inputClasses}
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label className={labelClasses} htmlFor="phone">Phone Number</label>
+                            <input
+                               type="tel"
+                                id="phone"
+                                value={formData.phone}
+                                onChange={handleChange}
+                                className={inputClasses}
+                                required
+                            />
+                        </div>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
                     <div>
-                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block" htmlFor="email">
-                            Email Address *
-                        </label>
+                        <label className={labelClasses} htmlFor="email">Email (required)</label>
                         <input
                             type="email"
                             id="email"
                             value={formData.email}
                             onChange={handleChange}
-                            className="w-full px-4 py-3.5 bg-slate-50/50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all font-light text-slate-800 text-sm"
-                            placeholder="e.g. john@company.com"
+                            className={inputClasses}
                             required
                         />
                     </div>
-                    <div>
-                        <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block" htmlFor="company">
-                            Company (Optional)
-                        </label>
-                        <input
-                            type="text"
-                            id="company"
-                            value={formData.company}
+                    
+                    <div className="relative ">
+                        <label className={labelClasses} htmlFor="service">Service</label>
+                        <div>
+                        <select
+                            id="service"
+                            value={formData.service}
                             onChange={handleChange}
-                            className="w-full px-4 py-3.5 bg-slate-50/50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all font-light text-slate-800 text-sm"
-                            placeholder="e.g. Acme Corp"
-                        />
+                            className={`${inputClasses} appearance-none cursor-pointer pb-2`}
+                            required
+                        >
+                            <option value="" disabled></option>
+                            <option value="Business Registration">Business Registration</option>
+                            <option value="GST & Tax">GST & Tax</option>
+                            <option value="Trademark & IPR">Trademark & IPR</option>
+                            <option value="Corporate Compliance">Corporate Compliance</option>
+                            <option value="Legal Documentation">Legal Documentation</option>
+                            <option value="Business Conversion & Closure">Business Conversion & Closure</option>
+                            <option value="Certifications & Growth">Certifications & Growth</option>
+                            <option value="Other / General Consultation">Other / General Consultation</option>
+                        </select>
+                        </div>
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-700">
+                            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+                        </div>
+                        
                     </div>
                 </div>
 
-                <div className="mb-6">
-                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block" htmlFor="service">
-                        Primary Area of Interest *
-                    </label>
-                    <select
-                        id="service"
-                        value={formData.service}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3.5 bg-slate-50/50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all font-light text-slate-800 text-sm"
-                        required
-                    >
-                        <option value="" disabled>Select a service focus...</option>
-                        <option value="Business Registration">Business Registration</option>
-                        <option value="GST & Tax">GST & Tax</option>
-                        <option value="Trademark & IPR">Trademark & IPR</option>
-                        <option value="Corporate Compliance">Corporate Compliance</option>
-                        <option value="Legal Documentation">Legal Documentation</option>
-                        <option value="Business Conversion & Closure">Business Conversion & Closure</option>
-                        <option value="Certifications & Growth">Certifications & Growth</option>
-                        <option value="Other / General Consultation">Other / General Consultation</option>
-                    </select>
-                </div>
-
-                <div className="mb-8">
-                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block" htmlFor="message">
-                        Details *
-                    </label>
+                <div>
+                    <label className={labelClasses} htmlFor="message">Project description</label>
                     <textarea
                         id="message"
                         value={formData.message}
                         onChange={handleChange}
-                        className="w-full px-4 py-3.5 bg-slate-50/50 border border-slate-200 rounded-lg focus:bg-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all font-light text-slate-800 text-sm min-h-[140px] resize-y"
-                        placeholder="Briefly describe your operational or financial challenges..."
-                        required
+                        className={`${inputClasses} min-h-25 resize-y`}
                     />
                 </div>
 
-                <button
-                    type="submit"
-                    disabled={formStatus === 'sending'}
-                    className={`w-full py-4 border-2 font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 ${
-                        formStatus === 'sending'
+                <div className="pt-4">
+                    <button
+                        type="submit"
+                        disabled={formStatus === 'sending'}
+                        className={`w-full py-4 border-2 rounded-lg font-bold text-xs uppercase tracking-widest transition-all duration-300 ${formStatus === 'sending'
                             ? 'border-slate-300 text-slate-400 bg-slate-100 cursor-not-allowed'
                             : 'border-slate-900 text-slate-900 bg-transparent hover:bg-slate-900 hover:text-white'
-                    }`}
-                >
-                    {formStatus === 'sending' ? 'Routing...' : 'Submit'}
-                </button>
+                            }`}
+                    >
+                        {formStatus === 'sending' ? 'Sending...' : 'Submit'}
+                    </button>
+                </div>
             </form>
         </div>
     );

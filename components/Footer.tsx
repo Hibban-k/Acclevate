@@ -1,16 +1,29 @@
+"use client";
+
+import { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useStaggerReveal } from '@/hooks/useGSAP';
 
 export default function Footer() {
+    const gridRef = useRef<HTMLDivElement>(null);
+    
+    useStaggerReveal(gridRef, '.footer-col', {
+        y: 30,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.1,
+    });
+
     return (
         <footer className="bg-navy-900 border-t border-white/10 py-20 pb-8 relative overflow-hidden text-white">
             {/* Ambient Glow matching "How We Work" */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] bg-sky-500/10 blur-[120px] rounded-full pointer-events-none" />
             
             <div className="max-w-[1280px] mx-auto px-6 relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-16">
+                <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-16">
                     {/* Brand */}
-                    <div className="lg:col-span-1 md:col-span-2">
+                    <div className="footer-col lg:col-span-1 md:col-span-2">
                         <Link href="/" className="flex items-center gap-3 mb-4 bg-white/5 w-fit rounded-lg p-2 backdrop-blur-sm border border-white/10">
                             <Image
                                 src="/logo.jpg"
@@ -26,7 +39,7 @@ export default function Footer() {
                     </div>
 
                     {/* Services */}
-                    <div>
+                    <div className="footer-col">
                         <h5 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Services</h5>
                         <div className="flex flex-col gap-2">
                             <Link href="/services/strategy/strategy-consulting" className="text-sm text-navy-200 hover:text-sky-400 transition-colors">
@@ -45,7 +58,7 @@ export default function Footer() {
                     </div>
 
                     {/* Company */}
-                    <div>
+                    <div className="footer-col">
                         <h5 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Company</h5>
                         <div className="flex flex-col gap-2">
                             <Link href="/about" className="text-sm text-navy-200 hover:text-sky-400 transition-colors">
@@ -60,7 +73,7 @@ export default function Footer() {
                     </div>
 
                     {/* Resources */}
-                    <div>
+                    <div className="footer-col">
                         <h5 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Resources</h5>
                         <div className="flex flex-col gap-2">
                             <span className="text-sm text-navy-200 hover:text-sky-400 cursor-pointer transition-colors">Insights</span>

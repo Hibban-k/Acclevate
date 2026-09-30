@@ -1,5 +1,6 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
+import { Button } from '@/components/ui/Button';
 import ServicesCarousel from '@/components/ServicesCarousel';
 import CTASection from '@/components/CTASection';
 import TestimonialSlider from '@/components/TestimonialSlider';
@@ -7,7 +8,9 @@ import FaqAccordion from '@/components/FaqAccordion';
 import IndustryHub from '@/components/IndustryHub';
 import ProcessSlider from '@/components/ProcessSlider';
 import { getHomePageServicesAction } from '@/lib/actions/services';
-
+import HeroBackground from '@/components/HeroBackground';
+import HeroImageShowcase from '@/components/HeroImageShowcase';
+import HomeAnimations from '@/components/HomeAnimations';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -36,99 +39,89 @@ export default async function Home() {
   }
 
   return (
-    <div className="animate-fadeInUp bg-white">
-      {/* Hero Section */}
-      <section className="relative w-full overflow-hidden bg-white">
-        
-        {/* Background Image Container */}
-        <div className="relative w-full h-[55vh] md:h-[60vh] lg:h-[65vh] min-h-[420px] md:min-h-[500px]">
-          <Image
-            src="/premium_office_interior.png"
-            alt="Premium Office Interior"
-            fill
-            className="object-cover"
-            priority
-          />
-          
-          {/* Rich dark overlay to guarantee readable white glassmorphism elements */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0d1538]/40 via-slate-950/30 to-navy-950/75 z-10 pointer-events-none" />
+    <HomeAnimations>
+      <div>
+      {/* Hero Section - Light Corporate Layout */}
+      <section className="relative min-h-[85vh] flex items-center justify-start pt-24 pb-20 lg:pt-32 lg:pb-16 overflow-hidden">
+        {/* Original Animated Background */}
+        <HeroBackground />
 
-          {/* Centered logo badge and brand name overlay */}
-          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center pt-16 px-6 text-center">
-            {/* White Circle Logo Badge with glassmorphic backdrop and white stylized 'A' */}
-            <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center shadow-2xl mb-4 border border-white/20">
-              <svg viewBox="0 0 100 100" className="w-12 h-12 md:w-16 md:h-16 text-white" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Left thin slanted leg */}
-                <path d="M42 22 L20 78 H30 L48 22 Z" fill="currentColor" />
-                {/* Right thick slanted leg */}
-                <path d="M51 22 L73 78 H83 L61 22 Z" fill="currentColor" />
-                {/* Swooshing crossbar resembling user's logo */}
-                <path d="M25 58 C38 54 50 51 66 51 L64 55 C50 55 38 58 27 62 Z" fill="currentColor" />
-                {/* Small inner script-like detailing */}
-                <path d="M41 55 C43 49 48 46 51 49 C54 51 53 55 49 57 C45 59 42 57 41 55 Z" fill="currentColor" opacity="0.9" />
-              </svg>
-            </div>
-            
-            {/* Tagline inside a glassmorphic pill badge with white text */}
-            <div className="px-5 py-1.5 rounded-full bg-white/10 backdrop-blur-md shadow-lg border border-white/20 mt-2">
-              <p className="text-[10px] md:text-xs font-bold tracking-[0.25em] text-white uppercase">
-                Business Solutions
-              </p>
-            </div>
-          </div>          {/* Curved boundary transitioning into the white content below */}
-          <div className="absolute bottom-0 left-0 right-0 z-20 w-full select-none pointer-events-none">
-            <svg
-              viewBox="0 0 1440 100"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-full h-auto block translate-y-[1px]"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M0,100 Q720,0 1440,100 Z"
-                fill="#ffffff"
-              />
-            </svg>
-          </div>
-        </div>
+        <div className="relative z-10 w-full max-w-350 mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center lg:items-start justify-between gap-2 lg:gap-8 mt-4">
 
-        {/* Content Container Below the Curved Image */}
-        <div className="bg-white pt-10 pb-16 px-6 text-center relative z-20">
-          <div className="max-w-[800px] mx-auto">
-            <h2 className="text-3xl md:text-5xl font-extrabold text-[#0d1538] tracking-[0.05em] mb-6 uppercase">
-              Accelerate with ACCLEVATE
-            </h2>
-            <p className="text-lg md:text-xl text-slate-600 font-light leading-relaxed">
-              Acclevate Business Solutions — Transforming businesses through strategic insight and operational excellence. We help you plug the leaks, optimize your taxes, and scale with absolute confidence.
+          {/* Left Text Column */}
+          <div className="w-full lg:w-[50%] flex flex-col items-start text-left lg:pt-12 gap-10">
+
+            <div className="flex flex-col items-start leading-none tracking-tight mb-6" data-animate="fade-up" data-once="true" data-delay="0.1">
+              <h2 className="text-slate-500 text-[clamp(2.2rem,3.9vw,3.6rem)]  font-semibold mb-1 ml-4">Accelerate with</h2>
+              <h1 className="text-navy-900 text-[clamp(3.2rem,6.5vw,6rem)] font-bold">ACCLEVATE</h1>
+            </div>
+
+            <p className="text-base italic md:text-base lg:text-lg text-slate-700 leading-relaxed mb-10 max-w-xl" data-animate="fade-up" data-once="true" data-delay="0.2">
+              Practical guidance backed by clear processes, accurate work, and a thorough understanding of your business. We help you stay on top of your obligations and make informed decisions with confidence.
             </p>
-          </div>
-        </div>
 
+            {/* Checkmark Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8 mb-12" data-animate="fade-up" data-once="true" data-delay="0.3">
+              {[
+                "Accounting & Finance",
+                "Tax & Compliance",
+                "Business Registration & Legal",
+                "eCommerce & Business Growth"
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-center gap-3">
+                  <div className="shrink-0 text-navy-900 flex items-center justify-center">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                  <span className="text-slate-700 font-medium text-base md:text-lg">{item}</span>
+                </div>
+              ))}
+            </div>
+
+          </div>
+
+          {/* Right Image Column & CTAs */}
+          <div className="w-full lg:w-[45%] flex flex-col items-center justify-center z-20 -mt-8 lg:mt-0">
+            <HeroImageShowcase />
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center mt-2">
+              <Button href="/contact" variant="primary" size="md">
+                Schedule Free Consultation
+              </Button>
+              <Button href="/services" variant="secondary" size="md" withArrow>
+                Explore Services
+              </Button>
+            </div>
+          </div>
+
+        </div>
       </section>
 
       {/* High-Contrast Impact Section (Light Theme) */}
-      <section className="py-16 md:py-32 bg-white text-slate-900 relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-white text-slate-900 relative overflow-hidden">
         {/* Soft background highlight blob */}
         <div className="absolute top-1/2 left-0 w-[50vw] h-[50vw] bg-sky-50/40 rounded-full blur-[120px] -translate-y-1/2 -translate-x-1/3 pointer-events-none" />
 
-        <div className="max-w-[1280px] mx-auto px-6 relative z-10">
-          
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+
           {/* Top Row: Impact Stats */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pb-16 border-b border-slate-100 mb-20 lg:mb-28 text-left">
             <div>
-              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-navy-900 mb-2 tracking-tight font-heading">10+</div>
+              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-navy-900 mb-2 tracking-tight" data-count="10" data-suffix="+">0+</div>
               <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-normal">Years Expertise</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-navy-900 mb-2 tracking-tight font-heading">150+</div>
+              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-navy-900 mb-2 tracking-tight" data-count="150" data-suffix="+">0+</div>
               <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-normal">Enterprises Scaled</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-navy-900 mb-2 tracking-tight font-heading">100%</div>
+              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-navy-900 mb-2 tracking-tight" data-count="100" data-suffix="%">0%</div>
               <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-normal">Compliance Record</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-navy-900 mb-2 tracking-tight font-heading">98%</div>
+              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-navy-900 mb-2 tracking-tight" data-count="98" data-suffix="%">0%</div>
               <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-normal">Client Retention</div>
             </div>
           </div>
@@ -136,15 +129,16 @@ export default async function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             {/* Left: Heading & Paragraph */}
             <div className="flex flex-col items-start text-left">
-              <span className="inline-flex items-center px-3.5 py-1 text-xs font-semibold rounded-full uppercase tracking-wider bg-sky-50 text-sky-600 mb-6 border border-sky-100/80 shadow-xs">
-                Acclevate Impact
-              </span>
-              
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-none text-slate-900 uppercase font-heading mb-6">
-                Measurable <br /> <span className="text-sky-600">Results</span>
+              <div className="flex items-center gap-3 mb-6" data-animate="fade-up" data-once="true">
+                <div className="w-8 h-0.5 bg-slate-400"></div>
+                <span className="text-sm font-bold text-slate-500 uppercase tracking-widest">Acclevate Impact</span>
+              </div>
+
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-slate-900 uppercase mb-6" data-animate="fade-up" data-once="true" data-delay="0.1">
+                Measurable <br /> <span className="text-slate-400">Results</span>
               </h2>
-              
-              <p className="text-lg text-slate-600 mb-8 max-w-lg leading-relaxed font-light">
+
+              <p className="text-lg text-slate-600 mb-8 max-w-lg leading-relaxed font-light" data-animate="fade-up" data-once="true" data-delay="0.2">
                 We don&apos;t just hand you a 50-page PDF and walk away. We get our hands dirty to deliver real financial wins and operational stability.
               </p>
 
@@ -164,23 +158,24 @@ export default async function Home() {
       </section>
 
       {/* Industry Hub Section */}
-      <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-[#f8fafc] relative">
-        <div className="w-full max-w-[1600px] mx-auto px-4 md:px-8 relative z-10">
+      <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-surface-light relative">
+        <div className="w-full max-w-400 mx-auto px-4 md:px-8 relative z-10">
           <IndustryHub />
         </div>
       </section>
 
       {/* Services Carousel Section (Now Ice Water Style) */}
       <section className="py-32 bg-white relative overflow-hidden text-slate-900 border-t border-b border-slate-100">
-        <div className="max-w-[1280px] mx-auto px-6 relative z-10">
-          <div className="text-center max-w-[700px] mx-auto mb-12">
-            <span className="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full uppercase tracking-wider bg-sky-50 text-sky-600 mb-6 border border-sky-100/60 shadow-xs">
-              What We Do
-            </span>
-            <h2 className="text-[clamp(2rem,3vw,3rem)] font-bold mb-4 tracking-tight text-slate-900 font-heading">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center max-w-175 mx-auto mb-12">
+            <div className="flex items-center justify-center gap-3 mb-6" data-animate="fade-up" data-once="true">
+              <div className="w-8 h-0.5 bg-slate-400"></div>
+              <span className="text-sm font-bold text-slate-500 uppercase tracking-widest">What We Do</span>
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 tracking-tight text-slate-900" data-animate="fade-up" data-once="true" data-delay="0.1">
               Everything you need to scale.
             </h2>
-            <p className="text-lg text-slate-600 font-light leading-relaxed">
+            <p className="text-lg text-slate-600 font-light leading-relaxed" data-animate="fade-up" data-once="true" data-delay="0.2">
               We handle the heavy lifting so you can focus on building your business.
             </p>
           </div>
@@ -190,22 +185,23 @@ export default async function Home() {
       </section>
 
       {/* Methodology / Process Section */}
-      <section className="py-24 md:py-32 bg-slate-50 relative overflow-hidden">
+      <section className="pt-24 pb-12 md:pt-32 md:pb-20 bg-slate-50 relative">
         {/* Decorative subtle background orbs */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-sky-100/30 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4" />
           <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-amber-50/20 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4" />
         </div>
 
-        <div className="max-w-[1280px] mx-auto px-6 relative z-10">
-          <div className="text-center max-w-[800px] mx-auto mb-16">
-            <span className="inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full uppercase tracking-wider bg-navy-50 text-navy-600 mb-6 border border-navy-100">
-              Our Methodology
-            </span>
-            <h2 className="text-[clamp(2.5rem,5vw,3.5rem)] font-bold tracking-tight leading-tight text-navy-900 uppercase">
+        <div className="w-full max-w-390 mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-200 mx-auto mb-12 md:mb-16">
+            <div className="flex items-center justify-center gap-3 mb-6" data-animate="fade-up" data-once="true">
+              <div className="w-8 h-0.5 bg-slate-400"></div>
+              <span className="text-sm font-bold text-slate-500 uppercase tracking-widest">Our Methodology</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight leading-tight text-navy-900 uppercase" data-animate="fade-up" data-once="true" data-delay="0.1">
               How We Work
             </h2>
-            <p className="text-lg text-slate-600 mt-4 font-light max-w-xl mx-auto leading-relaxed">
+            <p className="text-lg text-slate-600 mt-4 font-light max-w-xl mx-auto leading-relaxed" data-animate="fade-up" data-once="true" data-delay="0.2">
               A structured, transparent approach designed to deliver measurable growth and operational efficiency.
             </p>
           </div>
@@ -214,16 +210,16 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* FAQ & CTA Section */}
+      {/* FAQ & Help Section */}
       <section className="py-24 md:py-32 bg-white relative overflow-hidden text-slate-900 border-t border-slate-100">
-        <div className="max-w-[1280px] mx-auto px-6 relative z-10">
-          
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-16 text-slate-900 font-heading">
-            Frequently asked questions:
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-12 text-slate-900" data-animate="fade-up" data-once="true">
+            Frequently asked questions
           </h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start">
-            
+
             {/* Left: FAQ Accordion */}
             <div className="lg:col-span-8 w-full">
               <FaqAccordion />
@@ -231,24 +227,24 @@ export default async function Home() {
 
             {/* Right: Contact Card */}
             <div className="lg:col-span-4 w-full">
-              <div className="border border-slate-200/80 rounded-3xl p-8 bg-[#f8fafc] shadow-xs flex flex-col items-start text-left">
+              <div className="border border-slate-200/80 rounded-base p-8 bg-surface-light shadow-premium-light flex flex-col items-start text-left">
                 {/* Speech Bubble Icon */}
-                <div className="w-12 h-12 rounded-2xl bg-sky-50 flex items-center justify-center mb-6 text-sky-600 border border-sky-100">
-                  <svg 
-                    width="24" 
-                    height="24" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
+                <div className="w-12 h-12 rounded-base bg-sky-50 flex items-center justify-center mb-6 text-sky-600 border border-sky-100">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
                     strokeLinejoin="round"
                   >
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                   </svg>
                 </div>
 
-                <h3 className="text-2xl font-bold text-slate-900 mb-4 font-heading">
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">
                   Still have questions?
                 </h3>
 
@@ -262,18 +258,18 @@ export default async function Home() {
                 >
                   <span>Contact With Us</span>
                   <div className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center transition-colors group-hover:bg-slate-200">
-                    <svg 
-                      width="10" 
-                      height="10" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      strokeWidth="3" 
-                      strokeLinecap="round" 
+                    <svg
+                      width="10"
+                      height="10"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
                       strokeLinejoin="round"
                       className="text-slate-600"
                     >
-                      <path d="m9 18 6-6-6-6"/>
+                      <path d="m9 18 6-6-6-6" />
                     </svg>
                   </div>
                 </Link>
@@ -283,6 +279,10 @@ export default async function Home() {
           </div>
         </div>
       </section>
-    </div>
+
+      {/* Grand Finale Conversion CTA Section */}
+      <CTASection />
+      </div>
+    </HomeAnimations>
   );
 }

@@ -1,6 +1,5 @@
 import { connectDB } from '@/lib/db';
 import Category, { ICategory } from '@/models/Category';
-import Subcategory from '@/models/Subcategory';
 
 export class CategoryRepository {
     async findAll(filter: Record<string, any> = {}): Promise<ICategory[]> {
@@ -17,23 +16,12 @@ export class CategoryRepository {
 
     async getCategoryHierarchy() {
         await connectDB();
-        // Parallel execution for counting and fetching
-        const [categoriesDocs, subcategoriesDocs] = await Promise.all([
-            Category.find({ isActive: true }).sort({ order: 1, name: 1 }).lean(),
-            Subcategory.find({ isActive: true }).lean()
-        ]);
+        const categoriesDocs = await Category.find({ isActive: true }).sort({ order: 1, name: 1 }).lean();
 
         const categories = categoriesDocs.map((cat: any) => ({
             id: cat._id.toString(),
             name: cat.name,
-            slug: cat.slug,
-            subcategories: subcategoriesDocs
-                .filter((sub: any) => sub.category.toString() === cat._id.toString())
-                .map((sub: any) => ({
-                    id: sub._id.toString(),
-                    name: sub.name,
-                    slug: sub.slug
-                }))
+            slug: cat.slug
         }));
 
         return JSON.parse(JSON.stringify(categories));
@@ -46,7 +34,8 @@ export class CategoryRepository {
 
     async findBySlug(slug: string): Promise<ICategory | null> {
         await connectDB();
-        return Category.findOne({ slug, isActive: true }).lean();
+        // Use $ne:false so categories without an explicit isActive field are still returned
+        return Category.findOne({ slug, isActive: { $ne: false } }).lean();
     }
 
     async create(data: Partial<ICategory>): Promise<ICategory> {

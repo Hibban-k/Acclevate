@@ -16,13 +16,10 @@ async function checkAdminAuth() {
     return session;
 }
 
-async function getActiveServicesData(currentOrder: number | null, category: string, subcategory: string, search: string) {
+async function getActiveServicesData(currentOrder: number | null, category: string, search: string) {
     const query: any = {};
     if (category !== 'all') {
         query.category = category;
-    }
-    if (subcategory !== 'all') {
-        query.subcategory = subcategory;
     }
     if (search) {
         query.$text = { $search: search };
@@ -46,7 +43,7 @@ export async function getHomePageServicesAction() {
     const fetchHomeServices = unstable_cache(
         async () => {
             // Home page always fetches the very first order group
-            const { services, categories } = await getActiveServicesData(null, 'all', 'all', '');
+            const { services, categories } = await getActiveServicesData(null, 'all', '');
             return {
                 success: true,
                 services,
@@ -63,7 +60,7 @@ export async function getInitialServicesAction() {
     const fetchInitialServices = unstable_cache(
         async () => {
             // Initial services page load fetches the very first order group
-            const { services, categories, nextOrder } = await getActiveServicesData(null, 'all', 'all', '');
+            const { services, categories, nextOrder } = await getActiveServicesData(null, 'all', '');
             return {
                 success: true,
                 services,
@@ -99,16 +96,14 @@ export async function getAllActiveServicesAction() {
 export async function getActiveServicesAction(params?: {
     currentOrder?: number | null;
     category?: string;
-    subcategory?: string;
     search?: string;
 }) {
     try {
         const currentOrder = params?.currentOrder ?? null;
         const category = params?.category ?? 'all';
-        const subcategory = params?.subcategory ?? 'all';
         const search = params?.search ?? '';
 
-        const { services, nextOrder, total, categories } = await getActiveServicesData(currentOrder, category, subcategory, search);
+        const { services, nextOrder, total, categories } = await getActiveServicesData(currentOrder, category, search);
 
         return {
             success: true,
@@ -153,7 +148,7 @@ export async function getServicesAction() {
 export async function createServiceAction(data: any) {
     await checkAdminAuth();
 
-    const { title, tagline, description, category, subcategory, relatedServices, features, faqs, order, isActive } = data;
+    const { title, tagline, description, category, relatedServices, features, faqs, order, isActive } = data;
 
     if (!title || !tagline || !description || !category) {
         throw new Error('Title, tagline, description, and category are required');
@@ -174,7 +169,6 @@ export async function createServiceAction(data: any) {
         tagline,
         description,
         category,
-        subcategory: subcategory || '',
         relatedServices: relatedServices || [],
         features: features || [],
         faqs: faqs || [],

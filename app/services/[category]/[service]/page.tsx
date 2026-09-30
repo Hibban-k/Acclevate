@@ -146,7 +146,7 @@ export default async function CoreServicePage({ params }: PageProps) {
                             <h2 className="text-3xl font-bold text-slate-900 mb-8">Key Features</h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 {serviceData.features.map((feature: any, index: number) => (
-                                    <div key={index} className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:shadow-md transition-shadow">
+                                    <div key={index} className="bg-slate-50 rounded-base p-6 border border-slate-100 hover:shadow-md transition-shadow">
                                         <h3 className="text-xl font-semibold text-navy-800 mb-3">{feature.title}</h3>
                                         <p className="text-slate-600 leading-relaxed">{feature.description}</p>
                                     </div>
@@ -161,7 +161,7 @@ export default async function CoreServicePage({ params }: PageProps) {
                             <h2 className="text-3xl font-bold text-slate-900 mb-8">Frequently Asked Questions</h2>
                             <div className="space-y-4">
                                 {serviceData.faqs.map((faq: any, index: number) => (
-                                    <div key={index} className="border border-slate-200 rounded-2xl p-6">
+                                    <div key={index} className="border border-slate-200 rounded-base p-6">
                                         <h3 className="text-lg font-semibold text-slate-900 mb-2">{faq.question}</h3>
                                         <p className="text-slate-600">{faq.answer}</p>
                                     </div>
@@ -181,14 +181,7 @@ export default async function CoreServicePage({ params }: PageProps) {
                             <p className="text-slate-600 text-lg">Comprehensive solutions tailored to your business needs.</p>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {serviceData.relatedServices.slice(0, 4).map((related: any, index: number) => {
-                                const cardGradients = [
-                                    'from-blue-400 via-purple-400 to-pink-400',
-                                    'from-cyan-400 via-blue-400 to-indigo-400',
-                                    'from-orange-300 via-pink-400 to-purple-400',
-                                    'from-green-400 via-cyan-400 to-blue-400',
-                                ];
-                                
+                            {serviceData.relatedServices.slice(0, 4).map((related: any) => {
                                 const mockService = {
                                     id: related._id || related.id,
                                     title: related.title,
@@ -201,10 +194,8 @@ export default async function CoreServicePage({ params }: PageProps) {
                                     <div key={mockService.id} className="h-full flex flex-col">
                                         <ServiceCard
                                             service={mockService}
-                                            variant="gradient"
-                                            gradientClass={cardGradients[index % cardGradients.length]}
                                             hrefOverride={`/services/${resolvedParams.category}/${mockService.slug}`}
-                                            className="grow"
+                                            className="h-full"
                                         />
                                     </div>
                                 );

@@ -179,7 +179,6 @@ export default function ServicesCarousel({ services, theme = 'light' }: Services
                             <ServiceCard
                                 key={`${service.id}-${index}`}
                                 service={service}
-                                variant="gradient"
                                 className="shrink-0 w-[calc(25%-18px)] min-w-[calc(25%-18px)] max-lg:w-[calc(33.333%-16px)] max-lg:min-w-[calc(33.333%-16px)] max-md:w-[calc(50%-12px)] max-md:min-w-[calc(50%-12px)] max-sm:w-full max-sm:min-w-full"
                             />
                         ))}

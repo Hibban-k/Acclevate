@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
+import { useScrollReveal, useStaggerReveal } from '@/hooks/useGSAP';
 
 const industries = [
   {
@@ -44,10 +45,15 @@ const industries = [
 
 export default function IndustryHub() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const panelsRef = useRef<HTMLDivElement>(null);
+
+  useScrollReveal(headerRef);
+  useStaggerReveal(panelsRef, '.panel-item', { y: 50, duration: 0.8, stagger: 0.1 });
 
   return (
     <div className="w-full">
-      <div className="text-center max-w-[800px] mx-auto mb-16">
+      <div ref={headerRef} className="text-center max-w-[800px] mx-auto mb-16">
         <h2 className="text-[clamp(2.5rem,5vw,3.5rem)] font-bold tracking-tight leading-tight text-navy-900 uppercase">
           Industry Hub
         </h2>
@@ -56,7 +62,7 @@ export default function IndustryHub() {
         </p>
       </div>
 
-      <div className="flex flex-col md:flex-row w-full h-[600px] md:h-[600px] rounded-2xl overflow-hidden bg-navy-900 shadow-2xl border border-[#eef8ff]/10">
+      <div ref={panelsRef} className="flex flex-col md:flex-row w-full h-[600px] md:h-[600px] rounded-base overflow-hidden bg-navy-900 shadow-premium-dark border border-white/10">
         {industries.map((industry, index) => {
           const isActive = activeIndex === index;
           
@@ -69,7 +75,7 @@ export default function IndustryHub() {
                   setActiveIndex(index);
                 }
               }}
-              className={`relative transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer overflow-hidden border-b md:border-b-0 md:border-r border-[#eef8ff]/10 last:border-b-0 md:last:border-r-0 shadow-[0_-15px_30px_-10px_rgba(0,0,0,0.6)] md:shadow-[-15px_0_30px_-10px_rgba(0,0,0,0.6)] z-10 hover:z-20 ${
+              className={`panel-item relative transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer overflow-hidden border-b md:border-b-0 md:border-r border-white/10 last:border-b-0 md:last:border-r-0 hover:shadow-premium-dark z-10 hover:z-20 ${
                 isActive ? 'h-[50%] md:h-auto md:w-[50%]' : 'h-[10%] md:h-auto md:w-[10%]'
               }`}
             >
@@ -104,20 +110,20 @@ export default function IndustryHub() {
               >
                 {/* Desktop Top Double Line */}
                 <div className="hidden md:flex w-16 md:w-24 flex-col gap-[3px] mb-6">
-                  <div className="w-full h-[1px] bg-[#eef8ff]/20" />
-                  <div className="w-full h-[1px] bg-[#eef8ff]/10" />
+                  <div className="w-full h-[1px] bg-white/20" />
+                  <div className="w-full h-[1px] bg-white/10" />
                 </div>
                 
                 <div className="flex-1 flex flex-row md:flex-col items-center justify-start md:justify-center w-full gap-4 md:gap-0">
-                  <span className="text-[#eef8ff] font-bold tracking-[0.1em] md:tracking-[0.3em] uppercase whitespace-nowrap md:-rotate-90 text-sm md:text-sm">
+                  <span className="text-white font-bold tracking-[0.1em] md:tracking-[0.3em] uppercase whitespace-nowrap md:-rotate-90 text-sm md:text-sm">
                     {industry.title}
                   </span>
                 </div>
 
                 {/* Desktop Bottom Double Line */}
                 <div className="hidden md:flex w-16 md:w-24 flex-col gap-[3px] mt-6">
-                  <div className="w-full h-[1px] bg-[#eef8ff]/20" />
-                  <div className="w-full h-[1px] bg-[#eef8ff]/10" />
+                  <div className="w-full h-[1px] bg-white/20" />
+                  <div className="w-full h-[1px] bg-white/10" />
                 </div>
               </div>
             </div>
