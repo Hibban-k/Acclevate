@@ -26,14 +26,14 @@ export default function CategoryLoading() {
 
                     {/* Main Content Grid Skeleton */}
                     <div className="flex-1 min-w-0">
-                        <div className="flex flex-col sm:flex-row justify-between mb-12 gap-6 border-b border-border pb-6">
+                        <div className="flex flex-col sm:flex-row justify-between mb-12 gap-6 pb-6">
                             <div className="w-64 h-10 bg-slate-200 rounded-lg animate-pulse" />
                             <div className="w-full sm:w-80 h-12 bg-slate-200 rounded-xl animate-pulse" />
                         </div>
                         
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             {[...Array(6)].map((_, i) => (
-                                <div key={i} className="h-72 bg-white rounded-base border border-border p-8 flex flex-col animate-pulse">
+                                <div key={i} className="h-72 bg-white rounded-base p-8 flex flex-col animate-pulse">
                                     <div className="w-14 h-14 rounded-base bg-background mb-6" />
                                     <div className="w-3/4 h-6 bg-background rounded mb-3" />
                                     <div className="w-full h-16 bg-background rounded mb-6 grow" />

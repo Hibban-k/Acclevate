@@ -54,7 +54,7 @@ export default function ContactForm() {
         }
     };
 
-    const inputClasses = "w-full bg-transparent border-0 border-b border-border focus:border-ink focus:ring-0 px-0 py-2 text-text-primary rounded-none transition-colors duration-300 shadow-none";
+    const inputClasses = "w-full bg-transparent border-0 focus:border-ink focus:ring-0 px-0 py-2 text-text-primary rounded-none transition-colors duration-300 shadow-none";
     const labelClasses = "text-sm text-text-secondary block mb-1";
 
     return (

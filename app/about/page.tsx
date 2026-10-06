@@ -47,7 +47,7 @@ export default function AboutPage() {
                 <OurStory />
 
                 {/* ─── 03 OUR EXPERTS ──────────────────────────────── */}
-                <div className="border-t border-border">
+                <div className="border-t">
                     <AboutExpertsEditorial />
                 </div>
 

@@ -84,7 +84,7 @@ function MilestoneItem({ m, index }: { m: typeof milestones[0], index: number })
 
       {/* Image Side */}
       <div ref={imgRef} className="w-full lg:w-1/2 relative">
-        <div className="relative h-60 md:h-95 lg:h-105 w-full overflow-hidden rounded-2xl shadow-xl border border-border/50">
+        <div className="relative h-60 md:h-95 lg:h-105 w-full overflow-hidden rounded-2xl shadow-xl">
           <Image
             src={m.img}
             alt={m.heading}
@@ -103,7 +103,7 @@ function MilestoneItem({ m, index }: { m: typeof milestones[0], index: number })
           </div>
         </div>
         {/* Milestone index */}
-        <div className="absolute -top-3 -right-3 md:-top-4 md:-right-4 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full border border-border shadow-md flex items-center justify-center z-10">
+        <div className="absolute -top-3 -right-3 md:-top-4 md:-right-4 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-md flex items-center justify-center z-10">
           <span className="text-[10px] md:text-xs font-black text-text-primary">{String(index + 1).padStart(2, '0')}</span>
         </div>
       </div>
@@ -121,7 +121,7 @@ export default function OurStory() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
         {/* Section Header */}
-        <div ref={headerRef} className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14 md:mb-28 border-b border-border pb-10">
+        <div ref={headerRef} className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14 md:mb-28 pb-10">
           <div>
             <div className="flex items-center gap-3 mb-5">
               <div className="w-8 h-0.5 bg-slate-400"></div>

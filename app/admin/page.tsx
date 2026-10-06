@@ -58,7 +58,7 @@ export default function AdminDashboard() {
                 <div className="text-text-secondary">Loading...</div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="bg-white rounded-xl p-6 shadow-sm border border-border">
+                    <div className="bg-white rounded-xl p-6 shadow-sm">
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-text-secondary text-sm">Total Services</p>
@@ -70,7 +70,7 @@ export default function AdminDashboard() {
                         </div>
                     </div>
 
-                    <div className="bg-white rounded-xl p-6 shadow-sm border border-border">
+                    <div className="bg-white rounded-xl p-6 shadow-sm">
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-text-secondary text-sm">Total Inquiries</p>
@@ -82,7 +82,7 @@ export default function AdminDashboard() {
                         </div>
                     </div>
 
-                    <div className="bg-white rounded-xl p-6 shadow-sm border border-border">
+                    <div className="bg-white rounded-xl p-6 shadow-sm">
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-text-secondary text-sm">New Inquiries</p>

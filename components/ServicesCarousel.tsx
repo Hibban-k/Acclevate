@@ -155,8 +155,8 @@ export default function ServicesCarousel({ services, theme = 'light' }: Services
                     onClick={() => { prevSlide(); startAutoSlide(); }}
                     className={`hidden md:flex w-12 h-12 shrink-0 items-center justify-center border rounded-xl text-xl cursor-pointer transition-all hover:scale-105 active:scale-95 z-10 ${
                         theme === 'dark' 
-                        ? 'bg-white/5 border-white/10 text-white hover:bg-brand-primary hover:border-brand-primary' 
-                        : 'bg-white border-border text-text-secondary hover:bg-charcoal hover:border-charcoal hover:text-white'
+                        ? 'bg-white/5 text-white hover:bg-brand-primary hover:border-brand-primary' 
+                        : 'bg-white text-text-secondary hover:bg-charcoal hover:border-charcoal hover:text-white'
                     }`}
                     aria-label="Previous"
                 >
@@ -190,8 +190,8 @@ export default function ServicesCarousel({ services, theme = 'light' }: Services
                     onClick={() => { nextSlide(); startAutoSlide(); }}
                     className={`hidden md:flex w-12 h-12 shrink-0 items-center justify-center border rounded-xl text-xl cursor-pointer transition-all hover:scale-105 active:scale-95 z-10 ${
                         theme === 'dark' 
-                        ? 'bg-white/5 border-white/10 text-white hover:bg-brand-primary hover:border-brand-primary' 
-                        : 'bg-white border-border text-text-secondary hover:bg-charcoal hover:border-charcoal hover:text-white'
+                        ? 'bg-white/5 text-white hover:bg-brand-primary hover:border-brand-primary' 
+                        : 'bg-white text-text-secondary hover:bg-charcoal hover:border-charcoal hover:text-white'
                     }`}
                     aria-label="Next"
                 >

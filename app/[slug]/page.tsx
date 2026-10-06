@@ -149,7 +149,7 @@ export default async function CollectionPage({ params }: PageProps) {
                                 Get Started
                             </Link>
                             <Link href="#services"
-                                className="h-11 px-7 inline-flex items-center justify-center rounded-xl border border-border text-text-secondary text-sm font-semibold hover:bg-background transition-colors">
+                                className="h-11 px-7 inline-flex items-center justify-center rounded-xl text-text-secondary text-sm font-semibold hover:bg-background transition-colors">
                                 View Services
                             </Link>
                         </div>
@@ -180,8 +180,8 @@ export default async function CollectionPage({ params }: PageProps) {
                                             data-delay="0.05"
                                             className={`${
                                                 isInnerDark
-                                                    ? 'bg-ink border border-white/10 shadow-2xl shadow-navy-900/10 text-white'
-                                                    : 'bg-background border border-border/80 shadow-premium-light text-text-primary'
+                                                    ? 'bg-ink border shadow-2xl shadow-navy-900/10 text-white'
+                                                    : 'bg-background shadow-premium-light text-text-primary'
                                             } rounded-3xl p-8 md:p-12 lg:p-14 relative overflow-hidden`}
                                         >
                                             {/* Subtle texture inside dark inner div */}
@@ -245,7 +245,7 @@ export default async function CollectionPage({ params }: PageProps) {
 
                         {/* Overflow services — separate light section */}
                         {overflowServices.length > 0 && (
-                            <section className="py-20 md:py-24 bg-white border-t border-border relative overflow-hidden">
+                            <section className="py-20 md:py-24 bg-white relative overflow-hidden">
                                 <div className="max-w-[1280px] mx-auto px-6 relative z-10">
                                     <p data-animate="fade-up" className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-8">More Services</p>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -268,7 +268,7 @@ export default async function CollectionPage({ params }: PageProps) {
                     02b  INDUSTRY INTRO — bg-background (alternating)
                     ══════════════════════════════════════════════════════ */}
                 {!isCategory && entity.industryIntro && (
-                    <section className="py-20 md:py-28 bg-background border-t border-border relative overflow-hidden">
+                    <section className="py-20 md:py-28 bg-background relative overflow-hidden">
                         <div className="absolute top-0 left-0 w-[40vw] h-[40vw] bg-surface-muted/40 rounded-full blur-[120px] -translate-y-1/2 -translate-x-1/3 pointer-events-none" />
                         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 items-center">
@@ -345,10 +345,10 @@ export default async function CollectionPage({ params }: PageProps) {
                     03  INDUSTRY SERVICES GRID — bg-white (back to light)
                     ══════════════════════════════════════════════════════ */}
                 {!isCategory && (
-                    <section id="services" className="py-24 md:py-32 bg-white relative overflow-hidden border-t border-border">
+                    <section id="services" className="py-24 md:py-32 bg-white relative overflow-hidden">
                         <div className="absolute bottom-0 right-0 w-[40vw] h-[40vw] bg-background rounded-full blur-[100px] pointer-events-none" />
                         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 mb-14 pb-10 border-b border-border">
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 mb-14 pb-10">
                                 <div className="lg:col-span-7">
                                     <div data-animate="fade-up" data-once="true" className="flex items-center gap-3 mb-5">
                                         <div className="w-8 h-0.5 bg-slate-400" />
@@ -390,8 +390,8 @@ export default async function CollectionPage({ params }: PageProps) {
                                     })}
                                 </div>
                             ) : (
-                                <div className="bg-background rounded-2xl border border-border p-16 md:p-24 text-center max-w-3xl mx-auto">
-                                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white border border-border shadow-sm mb-7">
+                                <div className="bg-background rounded-2xl p-16 md:p-24 text-center max-w-3xl mx-auto">
+                                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white shadow-sm mb-7">
                                         <svg className="w-9 h-9 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                                         </svg>
@@ -414,10 +414,10 @@ export default async function CollectionPage({ params }: PageProps) {
                     04  EXPLORE OTHER SIBLINGS — bg-background (alternating)
                     ══════════════════════════════════════════════════════ */}
                 {siblings.length > 0 && (
-                    <section className="py-24 md:py-32 bg-background border-t border-border relative overflow-hidden">
+                    <section className="py-24 md:py-32 bg-background relative overflow-hidden">
                         <div className="absolute top-0 left-0 w-[40vw] h-[40vw] bg-surface-muted/40 rounded-full blur-[130px] -translate-y-1/3 -translate-x-1/3 pointer-events-none" />
                         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 mb-14 pb-10 border-b border-border">
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 mb-14 pb-10">
                                 <div className="lg:col-span-7">
                                     <div data-animate="fade-up" className="flex items-center gap-3 mb-5">
                                         <div className="w-8 h-0.5 bg-slate-400" />
@@ -444,7 +444,7 @@ export default async function CollectionPage({ params }: PageProps) {
                                     <Link
                                         key={item.slug || item._id}
                                         href={`/${item.slug}`}
-                                        className="group bg-white rounded-2xl border border-border/80 p-7 md:p-8 flex flex-col items-start text-left hover:-translate-y-1 hover:shadow-lg hover:border-border transition-all duration-300"
+                                        className="group bg-white rounded-2xl p-7 md:p-8 flex flex-col items-start text-left hover:-translate-y-1 hover:shadow-lg hover:border-border transition-all duration-300"
                                         data-animate="fade-up"
                                         data-delay={String(0.04 + (i % 4) * 0.07)}
                                     >

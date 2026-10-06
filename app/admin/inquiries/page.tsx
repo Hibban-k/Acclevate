@@ -58,7 +58,7 @@ export default function AdminInquiriesPage() {
             ) : (
                 <div className="space-y-4">
                     {inquiries.map((inquiry) => (
-                        <div key={inquiry._id} className="bg-white rounded-xl p-6 shadow-sm border border-border">
+                        <div key={inquiry._id} className="bg-white rounded-xl p-6 shadow-sm">
                             <div className="flex justify-between items-start mb-4">
                                 <div>
                                     <div className="font-medium text-text-primary">

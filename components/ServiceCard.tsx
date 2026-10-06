@@ -108,7 +108,7 @@ export default function ServiceCard({ service, className = '', hrefOverride }: S
     return (
         <Link
             href={href}
-            className={`group flex flex-col h-full bg-surface border border-border rounded-xl hover:border-brand-primary hover:bg-[#F7FAF9] transition-all duration-300 overflow-hidden ${className}`}
+            className={`group flex flex-col h-full bg-surface rounded-xl hover:bg-[#F7FAF9] transition-all duration-300 overflow-hidden ${className}`}
         >
             {/* Top Image block with clipped corner */}
             <div 
@@ -155,4 +155,5 @@ export default function ServiceCard({ service, className = '', hrefOverride }: S
         </Link>
     );
 }
+
 

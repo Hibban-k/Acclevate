@@ -36,7 +36,7 @@ export function ContentSkeleton() {
             <div className="max-w-[1280px] mx-auto px-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {[1, 2, 3].map((i) => (
-                        <div key={i} className="h-72 bg-background rounded-base p-8 border border-border flex flex-col animate-pulse">
+                        <div key={i} className="h-72 bg-background rounded-base p-8 flex flex-col animate-pulse">
                             <div className="w-16 h-16 rounded-base bg-slate-200 mb-6" />
                             <div className="w-3/4 h-6 bg-slate-200 rounded mb-4" />
                             <div className="w-full h-4 bg-slate-200 rounded mb-2" />

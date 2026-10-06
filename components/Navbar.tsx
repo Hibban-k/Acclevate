@@ -103,7 +103,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <nav className="md:hidden fixed top-[72px] left-0 right-0 bg-white border-b border-border p-6 flex flex-col gap-4 z-999">
+        <nav className="md:hidden fixed top-[72px] left-0 right-0 bg-white p-6 flex flex-col gap-4 z-999">
           {navItems.map((item) => (
             <Link
               key={item.href}

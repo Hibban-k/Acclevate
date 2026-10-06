@@ -54,7 +54,7 @@ export default function AboutProcessTimeline() {
 
             {/* Image Side */}
             <div className={`w-full md:w-1/2 pl-16 mt-8 md:mt-0 md:pl-0 ${isEven ? 'md:pl-16 md:order-last' : 'md:pr-16'}`}>
-              <div className="relative h-[250px] md:h-[350px] w-full rounded-2xl overflow-hidden shadow-lg border border-border/50">
+              <div className="relative h-[250px] md:h-[350px] w-full rounded-2xl overflow-hidden shadow-lg">
                 <Image 
                   src={step.img} 
                   alt={step.title}

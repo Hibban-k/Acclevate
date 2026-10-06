@@ -16,7 +16,7 @@ export default function Footer() {
     });
 
     return (
-        <footer className="bg-ink border-t border-white/10 py-20 pb-8 relative overflow-hidden text-white">
+        <footer className="bg-ink border-t py-20 pb-8 relative overflow-hidden text-white">
             {/* Ambient Glow matching "How We Work" */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] bg-brand-primary/10 blur-[120px] rounded-full pointer-events-none" />
             
@@ -24,7 +24,7 @@ export default function Footer() {
                 <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-16">
                     {/* Brand */}
                     <div className="footer-col lg:col-span-1 md:col-span-2">
-                        <Link href="/" className="flex items-center gap-3 mb-4 bg-white/5 w-fit rounded-lg p-2 backdrop-blur-sm border border-white/10">
+                        <Link href="/" className="flex items-center gap-3 mb-4 bg-white/5 w-fit rounded-lg p-2 backdrop-blur-sm border">
                             <Image
                                 src="/logo.jpg"
                                 alt="Acclevate Business Solutions"
@@ -85,16 +85,16 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom */}
-                <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-sm text-[#C8D2D0] gap-4">
+                <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t text-sm text-[#C8D2D0] gap-4">
                     <p>© 2025 Acclevate Business Solutions. All rights reserved.</p>
                     <div className="flex gap-4">
-                        <a href="#" aria-label="LinkedIn" className="w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 rounded-full text-[#C8D2D0] hover:bg-brand-primary hover:text-white transition-all">
+                        <a href="#" aria-label="LinkedIn" className="w-9 h-9 flex items-center justify-center bg-white/5 border rounded-full text-[#C8D2D0] hover:bg-brand-primary hover:text-white transition-all">
                             in
                         </a>
-                        <a href="#" aria-label="Twitter" className="w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 rounded-full text-[#C8D2D0] hover:bg-brand-primary hover:text-white transition-all">
+                        <a href="#" aria-label="Twitter" className="w-9 h-9 flex items-center justify-center bg-white/5 border rounded-full text-[#C8D2D0] hover:bg-brand-primary hover:text-white transition-all">
                             𝕏
                         </a>
-                        <a href="#" aria-label="Facebook" className="w-9 h-9 flex items-center justify-center bg-white/5 border border-white/10 rounded-full text-[#C8D2D0] hover:bg-brand-primary hover:text-white transition-all">
+                        <a href="#" aria-label="Facebook" className="w-9 h-9 flex items-center justify-center bg-white/5 border rounded-full text-[#C8D2D0] hover:bg-brand-primary hover:text-white transition-all">
                             f
                         </a>
                     </div>

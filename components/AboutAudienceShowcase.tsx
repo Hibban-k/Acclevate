@@ -37,7 +37,7 @@ export default function AboutAudienceShowcase() {
         {audiences.map((audience, index) => (
           <div 
             key={index} 
-            className={`group relative h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-premium-light border border-border/50 cursor-pointer ${index === 3 ? 'lg:col-span-2' : ''} ${index === 4 ? 'md:col-span-2 lg:col-span-1' : ''}`}
+            className={`group relative h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-premium-light cursor-pointer ${index === 3 ? 'lg:col-span-2' : ''} ${index === 4 ? 'md:col-span-2 lg:col-span-1' : ''}`}
           >
             {/* Background Image */}
             <div className="absolute inset-0 z-0">

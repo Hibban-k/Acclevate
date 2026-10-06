@@ -97,7 +97,7 @@ export default function TestimonialSlider() {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-border/80 flex items-center justify-between z-10 relative">
+        <div className="mt-8 pt-8 border-t flex items-center justify-between z-10 relative">
           <div className="flex gap-2">
             {testimonials.map((_, idx) => (
               <button 
@@ -111,14 +111,14 @@ export default function TestimonialSlider() {
           <div className="flex gap-3">
             <button 
               onClick={handlePrev}
-              className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-text-secondary bg-white hover:bg-background hover:shadow-xs hover:text-text-primary transition-all cursor-pointer"
+              className="w-10 h-10 rounded-full flex items-center justify-center text-text-secondary bg-white hover:bg-background hover:shadow-xs hover:text-text-primary transition-all cursor-pointer"
               aria-label="Previous testimonial"
             >
               ←
             </button>
             <button 
               onClick={handleNext}
-              className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-text-secondary bg-white hover:bg-background hover:shadow-xs hover:text-text-primary transition-all cursor-pointer"
+              className="w-10 h-10 rounded-full flex items-center justify-center text-text-secondary bg-white hover:bg-background hover:shadow-xs hover:text-text-primary transition-all cursor-pointer"
               aria-label="Next testimonial"
             >
               →

@@ -22,8 +22,8 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
     return (
         <div className="min-h-screen bg-background flex">
             {/* Sidebar */}
-            <aside className="w-64 bg-white border-r border-border flex flex-col">
-                <div className="p-6 border-b border-border">
+            <aside className="w-64 bg-white flex flex-col">
+                <div className="p-6">
                     <Link href="/admin">
                         <Image
                             src="/logo.jpg"
@@ -51,7 +51,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
                     ))}
                 </nav>
 
-                <div className="p-4 border-t border-border">
+                <div className="p-4">
                     <Link
                         href="/"
                         className="flex items-center gap-3 px-4 py-3 text-text-secondary hover:bg-background rounded-lg"

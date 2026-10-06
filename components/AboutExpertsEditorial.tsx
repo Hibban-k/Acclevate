@@ -71,7 +71,7 @@ export default function AboutExpertsEditorial() {
         <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
           {experts.map((expert, idx) => (
             <div key={idx} className="expert-card flex flex-col items-center group cursor-pointer">
-              <div className="w-full aspect-square relative rounded-2xl overflow-hidden mb-6 bg-slate-200 shadow-sm border border-border/60">
+              <div className="w-full aspect-square relative rounded-2xl overflow-hidden mb-6 bg-slate-200 shadow-sm">
                 <Image 
                   src={expert.img}
                   alt={expert.title}

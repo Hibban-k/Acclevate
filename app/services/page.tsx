@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import CTASection from '@/components/CTASection';
 import HeroBackground from '@/components/HeroBackground';
 import ServicesCategoryCards from '@/components/ServicesCategoryCards';
@@ -15,7 +15,7 @@ export default function ServicesPage() {
     return (
         <ServicesAnimations>
             <div className="min-h-screen bg-white selection:bg-surface-muted selection:text-brand-deep">
-                {/* ── HERO ── */}
+                {/* â”€â”€ HERO â”€â”€ */}
                 <section className="min-h-[50vh] lg:min-h-[65vh] py-28 relative overflow-hidden flex flex-col items-center justify-center text-center">
                     <HeroBackground />
                     
@@ -36,11 +36,11 @@ export default function ServicesPage() {
                     </div>
                 </section>
 
-                {/* ── CATEGORY CARDS ── */}
+                {/* â”€â”€ CATEGORY CARDS â”€â”€ */}
                 <ServicesCategoryCards />
 
-                {/* ── FAQ SECTION (BG-WHITE) ── */}
-                <section className="py-24 md:py-32 bg-white relative overflow-hidden text-text-primary border-t border-border">
+                {/* â”€â”€ FAQ SECTION (BG-WHITE) â”€â”€ */}
+                <section className="py-24 md:py-32 bg-white relative overflow-hidden text-text-primary">
                     <div className="max-w-7xl mx-auto px-6 relative z-10">
                         <div className="flex items-center gap-3 mb-5" data-animate="fade-up" data-once="true">
                             <div className="w-8 h-0.5 bg-slate-400" />
@@ -59,7 +59,7 @@ export default function ServicesPage() {
 
                             {/* Right: Quick Contact Support Card */}
                             <div className="lg:col-span-4 w-full">
-                                <div className="border border-border/80 rounded-2xl p-8 bg-background flex flex-col items-start text-left shadow-xs">
+                                <div className="rounded-2xl p-8 bg-background flex flex-col items-start text-left shadow-xs">
                                     <div className="w-12 h-12 rounded-xl bg-surface-muted flex items-center justify-center mb-6 text-brand-primary border border-sky-100">
                                         <svg
                                             width="24"
@@ -85,10 +85,10 @@ export default function ServicesPage() {
 
                                     <Link
                                         href="/contact"
-                                        className="inline-flex items-center justify-between w-full py-3.5 px-6 bg-white hover:bg-background border border-border rounded-xl text-text-primary font-medium text-sm transition-all shadow-xs"
+                                        className="inline-flex items-center justify-between w-full py-3.5 px-6 bg-white hover:bg-background rounded-xl text-text-primary font-medium text-sm transition-all shadow-xs"
                                     >
                                         <span>Schedule Advisory Call</span>
-                                        <span className="text-brand-primary">→</span>
+                                        <span className="text-brand-primary">â†’</span>
                                     </Link>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@ export default function ServicesPage() {
                     </div>
                 </section>
 
-                {/* ── CTA ── */}
+                {/* â”€â”€ CTA â”€â”€ */}
                 <CTASection 
                     title="Ready to get started?"
                     description="Tell us what you need. We'll take it from here."
@@ -107,3 +107,4 @@ export default function ServicesPage() {
         </ServicesAnimations>
     );
 }
+

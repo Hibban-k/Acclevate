@@ -146,7 +146,7 @@ export default async function CoreServicePage({ params }: PageProps) {
                             <h2 className="text-3xl font-bold text-text-primary mb-8">Key Features</h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 {serviceData.features.map((feature: any, index: number) => (
-                                    <div key={index} className="bg-background rounded-base p-6 border border-border hover:shadow-md transition-shadow">
+                                    <div key={index} className="bg-background rounded-base p-6 hover:shadow-md transition-shadow">
                                         <h3 className="text-xl font-semibold text-text-primary mb-3">{feature.title}</h3>
                                         <p className="text-text-secondary leading-relaxed">{feature.description}</p>
                                     </div>
@@ -161,7 +161,7 @@ export default async function CoreServicePage({ params }: PageProps) {
                             <h2 className="text-3xl font-bold text-text-primary mb-8">Frequently Asked Questions</h2>
                             <div className="space-y-4">
                                 {serviceData.faqs.map((faq: any, index: number) => (
-                                    <div key={index} className="border border-border rounded-base p-6">
+                                    <div key={index} className="rounded-base p-6">
                                         <h3 className="text-lg font-semibold text-text-primary mb-2">{faq.question}</h3>
                                         <p className="text-text-secondary">{faq.answer}</p>
                                     </div>
@@ -174,7 +174,7 @@ export default async function CoreServicePage({ params }: PageProps) {
 
             {/* Related Services (4-Column Grid) */}
             {serviceData.relatedServices && serviceData.relatedServices.length > 0 && (
-                <section className="bg-background py-24 border-t border-border">
+                <section className="bg-background py-24">
                     <div className="max-w-[1400px] mx-auto px-6">
                         <div className="text-center mb-16">
                             <h2 className="text-3xl md:text-4xl font-bold text-text-primary mb-4">Explore Related Services</h2>

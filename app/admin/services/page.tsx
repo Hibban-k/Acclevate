@@ -242,7 +242,7 @@ export default function AdminServicesPage() {
 
             {/* Add/Edit Form */}
             {showForm && (
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-border mb-6">
+                <div className="bg-white rounded-xl p-6 shadow-sm mb-6">
                     <h2 className="text-xl font-semibold mb-6">
                         {editingId ? 'Edit Service' : 'Add New Service'}
                     </h2>
@@ -257,7 +257,7 @@ export default function AdminServicesPage() {
                                     type="text"
                                     value={formData.title}
                                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                                    className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
+                                    className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
                                     placeholder="e.g., Business Consulting"
                                     required
                                 />
@@ -269,7 +269,7 @@ export default function AdminServicesPage() {
                                 <select
                                     value={formData.category}
                                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                                    className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
+                                    className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
                                 >
                                     {Object.entries(categories).map(([value, label]) => (
                                         <option key={value} value={value}>{label}</option>
@@ -288,7 +288,7 @@ export default function AdminServicesPage() {
                                     type="text"
                                     value={formData.serviceGroup}
                                     onChange={(e) => setFormData({ ...formData, serviceGroup: e.target.value })}
-                                    className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
+                                    className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
                                     placeholder="e.g., Compliance, Advisory"
                                 />
                             </div>
@@ -302,7 +302,7 @@ export default function AdminServicesPage() {
                                 type="text"
                                 value={relatedServicesStr}
                                 onChange={(e) => setRelatedServicesStr(e.target.value)}
-                                className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
+                                className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
                                 placeholder="e.g., audit-services, tax-consulting"
                             />
                         </div>
@@ -315,7 +315,7 @@ export default function AdminServicesPage() {
                                 type="text"
                                 value={formData.tagline}
                                 onChange={(e) => setFormData({ ...formData, tagline: e.target.value })}
-                                className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
+                                className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
                                 placeholder="A short catchy tagline"
                                 required
                             />
@@ -328,7 +328,7 @@ export default function AdminServicesPage() {
                             <textarea
                                 value={formData.description}
                                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                                className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
+                                className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
                                 rows={4}
                                 placeholder="Detailed description of the service..."
                                 required
@@ -344,7 +344,7 @@ export default function AdminServicesPage() {
                                     type="number"
                                     value={formData.order}
                                     onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })}
-                                    className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
+                                    className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
                                     min={0}
                                 />
                                 <p className="text-xs text-text-secondary mt-1">Lower numbers appear first</p>
@@ -382,7 +382,7 @@ export default function AdminServicesPage() {
                             ) : (
                                 <div className="space-y-4">
                                     {formData.features.map((feature, index) => (
-                                        <div key={index} className="p-4 bg-background rounded-lg border border-border">
+                                        <div key={index} className="p-4 bg-background rounded-lg">
                                             <div className="flex justify-between items-start mb-3">
                                                 <span className="text-sm font-medium text-text-secondary">Feature {index + 1}</span>
                                                 <button
@@ -400,7 +400,7 @@ export default function AdminServicesPage() {
                                                         type="text"
                                                         value={feature.title}
                                                         onChange={(e) => updateFeature(index, 'title', e.target.value)}
-                                                        className="w-full px-2 py-1.5 text-sm border border-border rounded-lg"
+                                                        className="w-full px-2 py-1.5 text-sm rounded-lg"
                                                         placeholder="Feature title"
                                                     />
                                                 </div>
@@ -410,7 +410,7 @@ export default function AdminServicesPage() {
                                                         type="text"
                                                         value={feature.description}
                                                         onChange={(e) => updateFeature(index, 'description', e.target.value)}
-                                                        className="w-full px-2 py-1.5 text-sm border border-border rounded-lg"
+                                                        className="w-full px-2 py-1.5 text-sm rounded-lg"
                                                         placeholder="Short description"
                                                     />
                                                 </div>
@@ -440,7 +440,7 @@ export default function AdminServicesPage() {
                             ) : (
                                 <div className="space-y-4">
                                     {formData.faqs.map((faq, index) => (
-                                        <div key={index} className="p-4 bg-background rounded-lg border border-border">
+                                        <div key={index} className="p-4 bg-background rounded-lg">
                                             <div className="flex justify-between items-start mb-3">
                                                 <span className="text-sm font-medium text-text-secondary">FAQ {index + 1}</span>
                                                 <button
@@ -458,7 +458,7 @@ export default function AdminServicesPage() {
                                                         type="text"
                                                         value={faq.question}
                                                         onChange={(e) => updateFaq(index, 'question', e.target.value)}
-                                                        className="w-full px-3 py-2 text-sm border border-border rounded-lg focus:ring-1 focus:ring-navy-600 focus:border-charcoal outline-none bg-white"
+                                                        className="w-full px-3 py-2 text-sm rounded-lg focus:ring-1 focus:ring-navy-600 focus:border-charcoal outline-none bg-white"
                                                         placeholder="e.g., What documents are required?"
                                                     />
                                                 </div>
@@ -467,7 +467,7 @@ export default function AdminServicesPage() {
                                                     <textarea
                                                         value={faq.answer}
                                                         onChange={(e) => updateFaq(index, 'answer', e.target.value)}
-                                                        className="w-full px-3 py-2 text-sm border border-border rounded-lg focus:ring-1 focus:ring-navy-600 focus:border-charcoal outline-none bg-white"
+                                                        className="w-full px-3 py-2 text-sm rounded-lg focus:ring-1 focus:ring-navy-600 focus:border-charcoal outline-none bg-white"
                                                         rows={2}
                                                         placeholder="e.g., You will need a PAN Card, Aadhaar Card, and address proof..."
                                                     />
@@ -480,7 +480,7 @@ export default function AdminServicesPage() {
                         </div>
 
                         {/* Form Actions */}
-                        <div className="flex gap-3 pt-4 border-t border-border">
+                        <div className="flex gap-3 pt-4">
                             <button
                                 type="submit"
                                 disabled={saving}
@@ -591,11 +591,11 @@ export default function AdminServicesPage() {
 
             {/* Services List */}
             {loading ? (
-                <div className="flex items-center justify-center py-12 bg-white rounded-b-xl border border-border border-t-0">
+                <div className="flex items-center justify-center py-12 bg-white rounded-b-xl border-t-0">
                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-charcoal"></div>
                 </div>
             ) : services.filter(s => selectedCategory === 'all' || s.category === selectedCategory).length === 0 ? (
-                <div className="bg-white rounded-b-xl p-12 text-center border border-border border-t-0">
+                <div className="bg-white rounded-b-xl p-12 text-center border-t-0">
                     <div className="w-16 h-16 bg-background rounded-full flex items-center justify-center mx-auto mb-4">
                         <svg className="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
@@ -617,9 +617,9 @@ export default function AdminServicesPage() {
                     </button>
                 </div>
             ) : (
-                <div className="bg-white rounded-b-xl shadow-sm border border-border border-t-0 overflow-hidden">
+                <div className="bg-white rounded-b-xl shadow-sm border-t-0 overflow-hidden">
                     <table className="w-full">
-                        <thead className="bg-background border-b border-border">
+                        <thead className="bg-background">
                             <tr>
                                 <th className="text-left px-6 py-3 text-sm font-medium text-text-secondary">Order</th>
                                 <th className="text-left px-6 py-3 text-sm font-medium text-text-secondary">Service</th>
@@ -631,7 +631,7 @@ export default function AdminServicesPage() {
                         </thead>
                         <tbody>
                             {services.filter(s => selectedCategory === 'all' || s.category === selectedCategory).map((service) => (
-                                <tr key={service._id} className="border-b border-border hover:bg-background">
+                                <tr key={service._id} className="hover:bg-background">
                                     <td className="px-6 py-4">
                                         <span className="text-sm text-text-secondary">{service.order}</span>
                                     </td>

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import ServicesCarousel from '@/components/ServicesCarousel';
@@ -107,7 +107,7 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
 
           {/* Top Row: Impact Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pb-16 border-b border-border mb-20 lg:mb-28 text-left">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pb-16 mb-20 lg:mb-28 text-left">
             <div>
               <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-text-primary mb-2 tracking-tight" data-count="10" data-suffix="+">0+</div>
               <div className="text-[10px] font-bold text-text-secondary uppercase tracking-widest leading-normal">Years Expertise</div>
@@ -147,7 +147,7 @@ export default async function Home() {
                 className="inline-flex items-center gap-2 text-sm font-bold text-brand-primary hover:text-brand-deep transition-colors group cursor-pointer"
               >
                 <span>Discover our approach</span>
-                <span className="group-hover:translate-x-1.5 transition-transform duration-300">→</span>
+                <span className="group-hover:translate-x-1.5 transition-transform duration-300">â†’</span>
               </Link>
             </div>
 
@@ -165,7 +165,7 @@ export default async function Home() {
       </section>
 
       {/* Services Carousel Section (Now Ice Water Style) */}
-      <section className="py-32 bg-white relative overflow-hidden text-text-primary border-t border-b border-border">
+      <section className="py-32 bg-white relative overflow-hidden text-text-primary ">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center max-w-175 mx-auto mb-12">
             <div className="flex items-center justify-center gap-3 mb-6" data-animate="fade-up" data-once="true">
@@ -211,7 +211,7 @@ export default async function Home() {
       </section>
 
       {/* FAQ & Help Section */}
-      <section className="py-24 md:py-32 bg-white relative overflow-hidden text-text-primary border-t border-border">
+      <section className="py-24 md:py-32 bg-white relative overflow-hidden text-text-primary">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
 
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-12 text-text-primary" data-animate="fade-up" data-once="true">
@@ -227,7 +227,7 @@ export default async function Home() {
 
             {/* Right: Contact Card */}
             <div className="lg:col-span-4 w-full">
-              <div className="border border-border/80 rounded-base p-8 bg-surface-light shadow-premium-light flex flex-col items-start text-left">
+              <div className="rounded-base p-8 bg-surface-light shadow-premium-light flex flex-col items-start text-left">
                 {/* Speech Bubble Icon */}
                 <div className="w-12 h-12 rounded-base bg-surface-muted flex items-center justify-center mb-6 text-brand-primary border border-sky-100">
                   <svg
@@ -254,7 +254,7 @@ export default async function Home() {
 
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-between w-full py-3.5 px-6 bg-white hover:bg-background border border-border hover:border-border rounded-xl text-text-primary font-medium transition-all shadow-xs hover:-translate-y-0.5"
+                  className="inline-flex items-center justify-between w-full py-3.5 px-6 bg-white hover:bg-background hover:border-border rounded-xl text-text-primary font-medium transition-all shadow-xs hover:-translate-y-0.5"
                 >
                   <span>Contact With Us</span>
                   <div className="w-5 h-5 rounded-full bg-background flex items-center justify-center transition-colors group-hover:bg-slate-200">
@@ -286,3 +286,4 @@ export default async function Home() {
     </HomeAnimations>
   );
 }
+

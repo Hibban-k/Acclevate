@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Image from 'next/image';
 import { useRef } from 'react';
@@ -25,7 +25,7 @@ const steps = [
     num: "03",
     title: "Execute",
     subtitle: "Handle the work carefully.",
-    body: "We perform the necessary tasks with precision — preparing and filing GST returns, income tax returns, payroll accounts, and annual financial statements; completing company registration or compliance forms; or setting up marketplace accounts and product listings for online sellers. Nothing slips through the cracks.",
+    body: "We perform the necessary tasks with precision â€” preparing and filing GST returns, income tax returns, payroll accounts, and annual financial statements; completing company registration or compliance forms; or setting up marketplace accounts and product listings for online sellers. Nothing slips through the cracks.",
     keywords: ["GST Filing", "Income Tax Returns", "Company Registration", "Marketplace Setup"],
     img: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800",
   },
@@ -41,7 +41,7 @@ const steps = [
     num: "05",
     title: "Support What Comes Next",
     subtitle: "Stay ahead of the curve.",
-    body: "As your business grows, your needs change. We help you plan for the next steps — whether it's tax planning before expansion, adding new business licenses, entering a new market, or optimizing operations. Our goal is long-term stability and growth, not just solving today's problems.",
+    body: "As your business grows, your needs change. We help you plan for the next steps â€” whether it's tax planning before expansion, adding new business licenses, entering a new market, or optimizing operations. Our goal is long-term stability and growth, not just solving today's problems.",
     keywords: ["Tax Planning", "Business Licenses", "Market Expansion", "eCommerce Growth"],
     img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800",
   },
@@ -68,7 +68,7 @@ function StepItem({ step, index }: { step: typeof steps[0], index: number }) {
     >
       {/* Image */}
       <div className="w-full lg:w-5/12 relative flex-shrink-0">
-        <div ref={imgRef} className="relative h-[220px] md:h-[300px] w-full rounded-2xl overflow-hidden shadow-lg border border-border/50">
+        <div ref={imgRef} className="relative h-[220px] md:h-[300px] w-full rounded-2xl overflow-hidden shadow-lg">
           <Image
             src={step.img}
             alt={step.title}
@@ -121,11 +121,11 @@ export default function HowWeWork() {
   useScrollReveal(headerRef, { once: true });
 
   return (
-    <section className="py-20 md:py-32 bg-white relative overflow-hidden border-t border-border">
+    <section className="py-20 md:py-32 bg-white relative overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-6 relative z-10">
 
         {/* Header */}
-        <div ref={headerRef} className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 items-end mb-16 md:mb-24 pb-10 border-b border-border">
+        <div ref={headerRef} className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 items-end mb-16 md:mb-24 pb-10">
           <div className="lg:col-span-7">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-8 h-[2px] bg-slate-400"></div>
@@ -145,7 +145,7 @@ export default function HowWeWork() {
           </div>
         </div>
 
-        {/* Steps — alternating image/text blocks */}
+        {/* Steps â€” alternating image/text blocks */}
         <div className="flex flex-col gap-16 md:gap-24">
           {steps.map((step, i) => (
             <StepItem key={i} step={step} index={i} />
@@ -155,3 +155,4 @@ export default function HowWeWork() {
     </section>
   );
 }
+

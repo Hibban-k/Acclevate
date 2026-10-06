@@ -62,7 +62,7 @@ export default function IndustryHub() {
         </p>
       </div>
 
-      <div ref={panelsRef} className="flex flex-col md:flex-row w-full h-[600px] md:h-[600px] rounded-base overflow-hidden bg-ink shadow-premium-dark border border-white/10">
+      <div ref={panelsRef} className="flex flex-col md:flex-row w-full h-[600px] md:h-[600px] rounded-base overflow-hidden bg-ink shadow-premium-dark border">
         {industries.map((industry, index) => {
           const isActive = activeIndex === index;
           
@@ -75,7 +75,7 @@ export default function IndustryHub() {
                   setActiveIndex(index);
                 }
               }}
-              className={`panel-item relative transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer overflow-hidden border-b md:border-b-0 md:border-r border-white/10 last:border-b-0 md:last:border-r-0 hover:shadow-premium-dark z-10 hover:z-20 ${
+              className={`panel-item relative transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer overflow-hidden border-b md:border-b-0 md:border-r last:border-b-0 md:last:border-r-0 hover:shadow-premium-dark z-10 hover:z-20 ${
                 isActive ? 'h-[50%] md:h-auto md:w-[50%]' : 'h-[10%] md:h-auto md:w-[10%]'
               }`}
             >
