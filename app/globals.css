@@ -1,20 +1,33 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Brand Colors - Acclevate Navy Blue Theme */
-  --color-navy-50: #f0f4f8;
-  --color-navy-100: #d9e2ec;
-  --color-navy-200: #bcccdc;
-  --color-navy-300: #9fb3c8;
-  --color-navy-400: #6b7c93;
-  --color-navy-500: #4a5568;
-  --color-navy-600: #2B3674;
-  --color-navy-700: #252f5a;
-  --color-navy-800: #1e254a;
-  --color-navy-900: #151b36;
+  /* Brand Colors - Acclevate Dark Charcoal Theme (overriding 'navy' for compatibility) */
+  --color-navy-50: #f4f6f8;
+  --color-navy-100: #e9ecef;
+  --color-navy-200: #d6dae1;
+  --color-navy-300: #b0b7c3;
+  --color-navy-400: #88909e;
+  --color-navy-500: #646b7a;
+  --color-navy-600: #4a515e;
+  --color-navy-700: #3c424d;
+  --color-navy-800: #2a2e37;
+  --color-navy-900: #1b1e24;
 
   /* Accent Green (from logo) */
-  --color-accent: #22c55e;
+  --color-accent: #6b8e85;
+
+  /* Overriding Sky with Logo Sage Green (so existing sky-* classes use the new brand color) */
+  --color-sky-50: #f1f7f5;
+  --color-sky-100: #ddece7;
+  --color-sky-200: #bdd7ce;
+  --color-sky-300: #93bcaa;
+  --color-sky-400: #6b8e85;
+  --color-sky-500: #537a71;
+  --color-sky-600: #41625a;
+  --color-sky-700: #354e48;
+  --color-sky-800: #2a3e39;
+  --color-sky-900: #23332f;
+  --color-sky-950: #131d1a;
 
   /* Slate for text */
   --color-slate-50: #f8fafc;
@@ -36,15 +49,15 @@
   /* Global Design Tokens */
   --radius-base: 1rem;
   
-  --color-surface-light: #f8fafc;
-  --color-surface-dark: #0d1538;
-  --color-surface-darker: #060915;
-  --color-border-subtle: rgba(226, 232, 240, 0.6);
-  --color-border-dark: rgba(51, 65, 85, 0.5);
+  --color-surface-light: #f4f6f8;
+  --color-surface-dark: #1b1e24;
+  --color-surface-darker: #13151a;
+  --color-border-subtle: rgba(214, 218, 225, 0.6);
+  --color-border-dark: rgba(74, 81, 94, 0.5);
   
   --shadow-premium-light: 0 15px 35px -5px rgba(0, 0, 0, 0.05);
-  --shadow-premium-dark: 0 25px 60px -15px rgba(15, 23, 42, 0.35);
-  --shadow-premium-hover: 0 20px 40px -10px rgba(10, 17, 40, 0.4);
+  --shadow-premium-dark: 0 25px 60px -15px rgba(27, 30, 36, 0.35);
+  --shadow-premium-hover: 0 20px 40px -10px rgba(20, 22, 26, 0.4);
 }
 
 @layer base {
@@ -200,11 +213,11 @@
 
 /* Navy blue gradient utilities */
 .bg-navy-gradient {
-  background: linear-gradient(135deg, #2B3674 0%, #1e254a 100%);
+  background: linear-gradient(135deg, var(--color-navy-600) 0%, var(--color-navy-800) 100%);
 }
 
 .text-navy-gradient {
-  background: linear-gradient(135deg, #2B3674, #1e254a);
+  background: linear-gradient(135deg, var(--color-navy-600), var(--color-navy-800));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -255,7 +268,7 @@
   left: -100%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.15), transparent);
+  background: linear-gradient(90deg, transparent, rgba(83, 122, 113, 0.15), transparent);
   z-index: -1;
   pointer-events: none;
 }
@@ -273,21 +286,21 @@
 .uiverse-outer {
   border-radius: var(--radius-base);
   padding: 1px;
-  background: radial-gradient(circle 230px at 0% 0%, #38bdf8, rgba(14, 165, 233, 0.15));
+  background: radial-gradient(circle 230px at 0% 0%, #6b8e85, rgba(83, 122, 113, 0.15));
   position: relative;
   transition: all 0.3s ease;
 }
 
 .uiverse-outer:hover {
-  background: radial-gradient(circle 230px at 0% 0%, #0ea5e9, rgba(14, 165, 233, 0.4));
+  background: radial-gradient(circle 230px at 0% 0%, #537a71, rgba(83, 122, 113, 0.4));
 }
 
 .uiverse-dot {
   width: 6px;
   aspect-ratio: 1;
   position: absolute;
-  background-color: #0ea5e9;
-  box-shadow: 0 0 8px #0ea5e9, 0 0 15px rgba(14, 165, 233, 0.6);
+  background-color: #537a71;
+  box-shadow: 0 0 8px #537a71, 0 0 15px rgba(83, 122, 113, 0.6);
   border-radius: 100px;
   z-index: 2;
   right: 10%;
@@ -321,7 +334,7 @@
   width: 100%;
   height: 100%;
   border-radius: calc(var(--radius-base) - 1px);
-  border: solid 1px rgba(14, 165, 233, 0.15);
+  border: solid 1px rgba(83, 122, 113, 0.15);
   background-color: rgba(255, 255, 255, 0.85);
   background-image: url('/service_card_bg_ripple_cropped.png');
   background-size: cover;
@@ -336,7 +349,7 @@
 }
 
 .uiverse-outer:hover .uiverse-card {
-  background-color: rgba(235, 248, 255, 0.9);
+  background-color: rgba(237, 246, 243, 0.9);
   filter: brightness(1.02);
 }
 
@@ -345,9 +358,9 @@
   height: 45px;
   border-radius: 100px;
   position: absolute;
-  background-color: #0ea5e9;
+  background-color: #537a71;
   opacity: 0.05;
-  box-shadow: 0 0 40px #0ea5e9;
+  box-shadow: 0 0 40px #537a71;
   filter: blur(15px);
   transform-origin: 10%;
   top: 0%;
@@ -363,13 +376,13 @@
 
 .uiverse-line {
   position: absolute;
-  background-color: rgba(14, 165, 233, 0.08);
+  background-color: rgba(83, 122, 113, 0.08);
   pointer-events: none;
   transition: all 0.3s ease;
 }
 
 .uiverse-outer:hover .uiverse-line {
-  background-color: rgba(14, 165, 233, 0.15);
+  background-color: rgba(83, 122, 113, 0.15);
 }
 
 .uiverse-topl {
@@ -377,7 +390,7 @@
   left: 0;
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, rgba(14, 165, 233, 0.25) 30%, rgba(14, 165, 233, 0.05) 70%);
+  background: linear-gradient(90deg, rgba(83, 122, 113, 0.25) 30%, rgba(83, 122, 113, 0.05) 70%);
 }
 
 .uiverse-bottoml {
@@ -392,7 +405,7 @@
   top: 0;
   width: 1px;
   height: 100%;
-  background: linear-gradient(180deg, rgba(14, 165, 233, 0.25) 30%, rgba(14, 165, 233, 0.05) 70%);
+  background: linear-gradient(180deg, rgba(83, 122, 113, 0.25) 30%, rgba(83, 122, 113, 0.05) 70%);
 }
 
 .uiverse-rightl {
@@ -450,3 +463,5 @@
   50% { transform: translateY(-15px); }
   100% { transform: translateY(0px); }
 }
+
+
