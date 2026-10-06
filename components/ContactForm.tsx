@@ -54,8 +54,8 @@ export default function ContactForm() {
         }
     };
 
-    const inputClasses = "w-full bg-transparent border-0 border-b border-slate-300 focus:border-navy-900 focus:ring-0 px-0 py-2 text-slate-900 rounded-none transition-colors duration-300 shadow-none";
-    const labelClasses = "text-sm text-slate-700 block mb-1";
+    const inputClasses = "w-full bg-transparent border-0 border-b border-border focus:border-ink focus:ring-0 px-0 py-2 text-text-primary rounded-none transition-colors duration-300 shadow-none";
+    const labelClasses = "text-sm text-text-secondary block mb-1";
 
     return (
         <div>
@@ -86,7 +86,7 @@ export default function ContactForm() {
                 </div>
 
                 <div>
-                    <label className="text-base font-bold text-slate-900 block mb-6">Name (required)</label>
+                    <label className="text-base font-bold text-text-primary block mb-6">Name (required)</label>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                         <div>
                             <label className={labelClasses} htmlFor="fullName">Full Name</label>
@@ -147,7 +147,7 @@ export default function ContactForm() {
                             <option value="Other / General Consultation">Other / General Consultation</option>
                         </select>
                         </div>
-                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-700">
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-text-secondary">
                             <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
                         </div>
                         
@@ -169,8 +169,8 @@ export default function ContactForm() {
                         type="submit"
                         disabled={formStatus === 'sending'}
                         className={`w-full py-4 border-2 rounded-lg font-bold text-xs uppercase tracking-widest transition-all duration-300 ${formStatus === 'sending'
-                            ? 'border-slate-300 text-slate-400 bg-slate-100 cursor-not-allowed'
-                            : 'border-slate-900 text-slate-900 bg-transparent hover:bg-slate-900 hover:text-white'
+                            ? 'border-border text-slate-400 bg-background cursor-not-allowed'
+                            : 'border-slate-900 text-text-primary bg-transparent hover:bg-slate-900 hover:text-white'
                             }`}
                     >
                         {formStatus === 'sending' ? 'Sending...' : 'Submit'}

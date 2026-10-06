@@ -61,7 +61,7 @@ export default function TestimonialSlider() {
         <div className="uiverse-line uiverse-rightl" />
 
         <div>
-          <svg className="w-10 h-10 text-sky-400/80 mb-8 relative z-10" fill="currentColor" viewBox="0 0 24 24">
+          <svg className="w-10 h-10 text-brand-primary/80 mb-8 relative z-10" fill="currentColor" viewBox="0 0 24 24">
             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
           </svg>
 
@@ -75,7 +75,7 @@ export default function TestimonialSlider() {
                 transition={{ duration: 0.3 }}
                 className="absolute inset-0 flex flex-col"
               >
-                <p className="text-lg md:text-xl text-slate-700 font-medium leading-relaxed mb-8 flex-1">
+                <p className="text-lg md:text-xl text-text-secondary font-medium leading-relaxed mb-8 flex-1">
                   &quot;{testimonials[currentIndex].review}&quot;
                 </p>
                 <div className="flex items-center gap-4 shrink-0">
@@ -88,8 +88,8 @@ export default function TestimonialSlider() {
                     />
                   </div>
                   <div>
-                    <h4 className="text-base font-bold text-slate-900">{testimonials[currentIndex].name}</h4>
-                    <p className="text-sm text-slate-500 font-medium">{testimonials[currentIndex].role}</p>
+                    <h4 className="text-base font-bold text-text-primary">{testimonials[currentIndex].name}</h4>
+                    <p className="text-sm text-text-secondary font-medium">{testimonials[currentIndex].role}</p>
                   </div>
                 </div>
               </motion.div>
@@ -97,13 +97,13 @@ export default function TestimonialSlider() {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-slate-200/80 flex items-center justify-between z-10 relative">
+        <div className="mt-8 pt-8 border-t border-border/80 flex items-center justify-between z-10 relative">
           <div className="flex gap-2">
             {testimonials.map((_, idx) => (
               <button 
                 key={idx} 
                 onClick={() => setCurrentIndex(idx)}
-                className={`w-2 h-2 rounded-full transition-colors cursor-pointer ${idx === currentIndex ? 'bg-sky-600' : 'bg-slate-300'}`}
+                className={`w-2 h-2 rounded-full transition-colors cursor-pointer ${idx === currentIndex ? 'bg-brand-primary' : 'bg-slate-300'}`}
                 aria-label={`Go to slide ${idx + 1}`}
               />
             ))}
@@ -111,14 +111,14 @@ export default function TestimonialSlider() {
           <div className="flex gap-3">
             <button 
               onClick={handlePrev}
-              className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 bg-white hover:bg-slate-50 hover:shadow-xs hover:text-navy-900 transition-all cursor-pointer"
+              className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-text-secondary bg-white hover:bg-background hover:shadow-xs hover:text-text-primary transition-all cursor-pointer"
               aria-label="Previous testimonial"
             >
               ←
             </button>
             <button 
               onClick={handleNext}
-              className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 bg-white hover:bg-slate-50 hover:shadow-xs hover:text-navy-900 transition-all cursor-pointer"
+              className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-text-secondary bg-white hover:bg-background hover:shadow-xs hover:text-text-primary transition-all cursor-pointer"
               aria-label="Next testimonial"
             >
               →

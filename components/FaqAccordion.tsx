@@ -56,19 +56,19 @@ export default function FaqAccordion() {
             key={index}
             className={`faq-item rounded-base border transition-all duration-300 bg-white ${
               isOpen 
-                ? 'border-slate-300 shadow-xs' 
-                : 'border-slate-200/80 hover:border-slate-300 shadow-none'
+                ? 'border-border shadow-xs' 
+                : 'border-border/80 hover:border-border shadow-none'
             }`}
           >
             <button
               onClick={() => toggleOpen(index)}
               className="w-full flex items-center justify-between p-6 md:p-7 text-left focus:outline-none cursor-pointer"
             >
-              <span className={`text-base md:text-lg font-semibold pr-8 transition-colors duration-300 ${isOpen ? 'text-slate-900 font-bold' : 'text-slate-700'}`}>
+              <span className={`text-base md:text-lg font-semibold pr-8 transition-colors duration-300 ${isOpen ? 'text-text-primary font-bold' : 'text-text-secondary'}`}>
                 {faq.question}
               </span>
               <div 
-                className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 bg-slate-50 text-slate-600"
+                className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 bg-background text-text-secondary"
               >
                 <svg 
                   width="16" 
@@ -95,7 +95,7 @@ export default function FaqAccordion() {
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
                 >
-                  <div className="px-6 pb-6 md:px-7 md:pb-7 text-slate-600 font-light leading-relaxed text-sm md:text-base">
+                  <div className="px-6 pb-6 md:px-7 md:pb-7 text-text-secondary font-light leading-relaxed text-sm md:text-base">
                     {faq.answer}
                   </div>
                 </motion.div>

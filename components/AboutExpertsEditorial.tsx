@@ -40,7 +40,7 @@ export default function AboutExpertsEditorial() {
   useStaggerReveal(gridRef, '.expert-card');
 
   return (
-    <section className="py-24 md:py-32 bg-slate-50/50 relative overflow-hidden">
+    <section className="py-24 md:py-32 bg-background/50 relative overflow-hidden">
       <div className="max-w-350 mx-auto px-6 relative z-10">
         
         {/* Header Section matching the reference image */}
@@ -49,18 +49,18 @@ export default function AboutExpertsEditorial() {
           <div className="flex flex-col items-start max-w-175">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-8 h-0.5 bg-slate-400"></div>
-              <span className="text-sm font-bold text-slate-500 uppercase tracking-widest">
+              <span className="text-sm font-bold text-text-secondary uppercase tracking-widest">
                 Our Experts
               </span>
             </div>
-            <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-bold text-slate-800 leading-[1.1] tracking-tight flex flex-col items-start">
-              <span className="text-navy-900 px-3 py-1 mb-1 inline-block">Meet the Minds</span>
-              <span className="text-slate-500 px-3 py-1 inline-block">Behind the Magic</span>
+            <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-bold text-text-primary leading-[1.1] tracking-tight flex flex-col items-start">
+              <span className="text-text-primary px-3 py-1 mb-1 inline-block">Meet the Minds</span>
+              <span className="text-text-secondary px-3 py-1 inline-block">Behind the Magic</span>
             </h2>
           </div>
           
           <div className="max-w-112.5">
-            <p className="text-slate-600 font-medium leading-relaxed md:text-lg">
+            <p className="text-text-secondary font-medium leading-relaxed md:text-lg">
               A tight crew of strategists, advisors, and operators — all focused on one thing: moving the needle for your business.
             </p>
           </div>
@@ -71,7 +71,7 @@ export default function AboutExpertsEditorial() {
         <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
           {experts.map((expert, idx) => (
             <div key={idx} className="expert-card flex flex-col items-center group cursor-pointer">
-              <div className="w-full aspect-square relative rounded-2xl overflow-hidden mb-6 bg-slate-200 shadow-sm border border-slate-200/60">
+              <div className="w-full aspect-square relative rounded-2xl overflow-hidden mb-6 bg-slate-200 shadow-sm border border-border/60">
                 <Image 
                   src={expert.img}
                   alt={expert.title}
@@ -80,7 +80,7 @@ export default function AboutExpertsEditorial() {
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 20vw"
                 />
               </div>
-              <h3 className="text-base font-bold text-slate-700 text-center transition-colors group-hover:text-sky-700">
+              <h3 className="text-base font-bold text-text-secondary text-center transition-colors group-hover:text-brand-deep">
                 {expert.title}
               </h3>
               <p className="text-sm font-medium text-slate-400 text-center mt-1 mb-4">

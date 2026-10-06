@@ -39,46 +39,46 @@ export default function AdminInquiriesPage() {
     const statusColors = {
         new: 'bg-green-100 text-green-700',
         read: 'bg-blue-100 text-blue-700',
-        replied: 'bg-slate-100 text-slate-600',
+        replied: 'bg-background text-text-secondary',
     };
 
     return (
         <div>
             <div className="mb-8">
-                <h1 className="text-3xl font-bold text-slate-900">Inquiries</h1>
-                <p className="text-slate-600 mt-1">Contact form submissions</p>
+                <h1 className="text-3xl font-bold text-text-primary">Inquiries</h1>
+                <p className="text-text-secondary mt-1">Contact form submissions</p>
             </div>
 
             {loading ? (
-                <div className="text-slate-500">Loading...</div>
+                <div className="text-text-secondary">Loading...</div>
             ) : inquiries.length === 0 ? (
-                <div className="bg-white rounded-xl p-8 text-center text-slate-500">
+                <div className="bg-white rounded-xl p-8 text-center text-text-secondary">
                     No inquiries yet.
                 </div>
             ) : (
                 <div className="space-y-4">
                     {inquiries.map((inquiry) => (
-                        <div key={inquiry._id} className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
+                        <div key={inquiry._id} className="bg-white rounded-xl p-6 shadow-sm border border-border">
                             <div className="flex justify-between items-start mb-4">
                                 <div>
-                                    <div className="font-medium text-navy-900">
+                                    <div className="font-medium text-text-primary">
                                         {inquiry.fullName || `${inquiry.firstName || ''} ${inquiry.lastName || ''}`.trim()}
                                     </div>
-                                    <p className="text-sm text-slate-600">{inquiry.email}</p>
+                                    <p className="text-sm text-text-secondary">{inquiry.email}</p>
                                     {inquiry.company && (
-                                        <p className="text-sm text-slate-500">{inquiry.company}</p>
+                                        <p className="text-sm text-text-secondary">{inquiry.company}</p>
                                     )}
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <span className={`px-2 py-1 text-xs font-medium rounded ${statusColors[inquiry.status]}`}>
                                         {inquiry.status}
                                     </span>
-                                    <span className="text-sm text-slate-500">
+                                    <span className="text-sm text-text-secondary">
                                         {new Date(inquiry.createdAt).toLocaleDateString()}
                                     </span>
                                 </div>
                             </div>
-                            <p className="text-slate-700 bg-slate-50 p-4 rounded-lg">{inquiry.message}</p>
+                            <p className="text-text-secondary bg-background p-4 rounded-lg">{inquiry.message}</p>
                         </div>
                     ))}
                 </div>

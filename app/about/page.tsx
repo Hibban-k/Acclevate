@@ -27,14 +27,14 @@ export default function AboutPage() {
                     <HeroBackground />
                     <div className="w-full max-w-250 mx-auto px-6 relative z-10 flex flex-col items-center justify-center gap-6">
                         <div data-animate="fade-up" data-once="true" className="flex items-center justify-center gap-2 text-sm font-bold tracking-widest text-slate-400 uppercase mb-2">
-                            <Link href="/" className="hover:text-navy-900 transition-colors">Home</Link>
+                            <Link href="/" className="hover:text-text-primary transition-colors">Home</Link>
                             <span>/</span>
-                            <span className="text-navy-900">About Us</span>
+                            <span className="text-text-primary">About Us</span>
                         </div>
-                        <h1 data-animate="fade-up" data-once="true" data-delay="0.1" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-navy-900 leading-tight tracking-tight uppercase whitespace-nowrap">
+                        <h1 data-animate="fade-up" data-once="true" data-delay="0.1" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-text-primary leading-tight tracking-tight uppercase whitespace-nowrap">
                             About Acclevate
                         </h1>
-                        <p data-animate="fade-up" data-once="true" data-delay="0.2" className="text-md md:text-lg text-slate-600 italic max-w-2xl leading-relaxed mt-4">
+                        <p data-animate="fade-up" data-once="true" data-delay="0.2" className="text-md md:text-lg text-text-secondary italic max-w-2xl leading-relaxed mt-4">
                             Business expertise that moves with your business
                         </p>
                     </div>
@@ -47,7 +47,7 @@ export default function AboutPage() {
                 <OurStory />
 
                 {/* ─── 03 OUR EXPERTS ──────────────────────────────── */}
-                <div className="border-t border-slate-100">
+                <div className="border-t border-border">
                     <AboutExpertsEditorial />
                 </div>
 

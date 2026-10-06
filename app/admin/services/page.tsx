@@ -224,13 +224,13 @@ export default function AdminServicesPage() {
         <div>
             <div className="flex justify-between items-center mb-8">
                 <div>
-                    <h1 className="text-3xl font-bold text-slate-900">Services</h1>
-                    <p className="text-slate-600 mt-1">Manage your services</p>
+                    <h1 className="text-3xl font-bold text-text-primary">Services</h1>
+                    <p className="text-text-secondary mt-1">Manage your services</p>
                 </div>
                 {!showForm && (
                     <button
                         onClick={() => setShowForm(true)}
-                        className="px-4 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors flex items-center gap-2"
+                        className="px-4 py-2 bg-charcoal text-white rounded-lg hover:bg-charcoal transition-colors flex items-center gap-2"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -242,7 +242,7 @@ export default function AdminServicesPage() {
 
             {/* Add/Edit Form */}
             {showForm && (
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200 mb-6">
+                <div className="bg-white rounded-xl p-6 shadow-sm border border-border mb-6">
                     <h2 className="text-xl font-semibold mb-6">
                         {editingId ? 'Edit Service' : 'Add New Service'}
                     </h2>
@@ -250,26 +250,26 @@ export default function AdminServicesPage() {
                         {/* Basic Info */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                             <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">
+                                <label className="block text-sm font-medium text-text-secondary mb-1">
                                     Title <span className="text-red-500">*</span>
                                 </label>
                                 <input
                                     type="text"
                                     value={formData.title}
                                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-navy-600 outline-none"
+                                    className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
                                     placeholder="e.g., Business Consulting"
                                     required
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">
+                                <label className="block text-sm font-medium text-text-secondary mb-1">
                                     Category <span className="text-red-500">*</span>
                                 </label>
                                 <select
                                     value={formData.category}
                                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-navy-600 outline-none"
+                                    className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
                                 >
                                     {Object.entries(categories).map(([value, label]) => (
                                         <option key={value} value={value}>{label}</option>
@@ -281,54 +281,54 @@ export default function AdminServicesPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                             
                             <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">
+                                <label className="block text-sm font-medium text-text-secondary mb-1">
                                     Service Group
                                 </label>
                                 <input
                                     type="text"
                                     value={formData.serviceGroup}
                                     onChange={(e) => setFormData({ ...formData, serviceGroup: e.target.value })}
-                                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-navy-600 outline-none"
+                                    className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
                                     placeholder="e.g., Compliance, Advisory"
                                 />
                             </div>
                         </div>
 
                         <div className="mb-6">
-                            <label className="block text-sm font-medium text-slate-700 mb-1">
+                            <label className="block text-sm font-medium text-text-secondary mb-1">
                                 Related Services (Comma-separated slugs or names)
                             </label>
                             <input
                                 type="text"
                                 value={relatedServicesStr}
                                 onChange={(e) => setRelatedServicesStr(e.target.value)}
-                                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-navy-600 outline-none"
+                                className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
                                 placeholder="e.g., audit-services, tax-consulting"
                             />
                         </div>
 
                         <div className="mb-6">
-                            <label className="block text-sm font-medium text-slate-700 mb-1">
+                            <label className="block text-sm font-medium text-text-secondary mb-1">
                                 Tagline <span className="text-red-500">*</span>
                             </label>
                             <input
                                 type="text"
                                 value={formData.tagline}
                                 onChange={(e) => setFormData({ ...formData, tagline: e.target.value })}
-                                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-navy-600 outline-none"
+                                className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
                                 placeholder="A short catchy tagline"
                                 required
                             />
                         </div>
 
                         <div className="mb-6">
-                            <label className="block text-sm font-medium text-slate-700 mb-1">
+                            <label className="block text-sm font-medium text-text-secondary mb-1">
                                 Description <span className="text-red-500">*</span>
                             </label>
                             <textarea
                                 value={formData.description}
                                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-navy-600 outline-none"
+                                className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
                                 rows={4}
                                 placeholder="Detailed description of the service..."
                                 required
@@ -337,17 +337,17 @@ export default function AdminServicesPage() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                             <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">
+                                <label className="block text-sm font-medium text-text-secondary mb-1">
                                     Display Order
                                 </label>
                                 <input
                                     type="number"
                                     value={formData.order}
                                     onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })}
-                                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-navy-600 outline-none"
+                                    className="w-full px-3 py-2 border border-border rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
                                     min={0}
                                 />
-                                <p className="text-xs text-slate-500 mt-1">Lower numbers appear first</p>
+                                <p className="text-xs text-text-secondary mt-1">Lower numbers appear first</p>
                             </div>
                             <div className="flex items-center gap-3 pt-6">
                                 <label className="relative inline-flex items-center cursor-pointer">
@@ -357,8 +357,8 @@ export default function AdminServicesPage() {
                                         onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
                                         className="sr-only peer"
                                     />
-                                    <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-navy-600/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-navy-600"></div>
-                                    <span className="ml-3 text-sm font-medium text-slate-700">Active</span>
+                                    <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-navy-600/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-charcoal"></div>
+                                    <span className="ml-3 text-sm font-medium text-text-secondary">Active</span>
                                 </label>
                             </div>
                         </div>
@@ -366,25 +366,25 @@ export default function AdminServicesPage() {
                         {/* Features Section */}
                         <div className="mb-6">
                             <div className="flex justify-between items-center mb-3">
-                                <label className="block text-sm font-medium text-slate-700">
+                                <label className="block text-sm font-medium text-text-secondary">
                                     Features
                                 </label>
                                 <button
                                     type="button"
                                     onClick={addFeature}
-                                    className="text-sm text-navy-600 hover:text-navy-700 font-medium"
+                                    className="text-sm text-charcoal hover:text-charcoal font-medium"
                                 >
                                     + Add Feature
                                 </button>
                             </div>
                             {formData.features.length === 0 ? (
-                                <p className="text-sm text-slate-500 italic">No features added yet</p>
+                                <p className="text-sm text-text-secondary italic">No features added yet</p>
                             ) : (
                                 <div className="space-y-4">
                                     {formData.features.map((feature, index) => (
-                                        <div key={index} className="p-4 bg-slate-50 rounded-lg border border-slate-200">
+                                        <div key={index} className="p-4 bg-background rounded-lg border border-border">
                                             <div className="flex justify-between items-start mb-3">
-                                                <span className="text-sm font-medium text-slate-600">Feature {index + 1}</span>
+                                                <span className="text-sm font-medium text-text-secondary">Feature {index + 1}</span>
                                                 <button
                                                     type="button"
                                                     onClick={() => removeFeature(index)}
@@ -395,22 +395,22 @@ export default function AdminServicesPage() {
                                             </div>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                                 <div>
-                                                    <label className="block text-xs text-slate-500 mb-1">Title</label>
+                                                    <label className="block text-xs text-text-secondary mb-1">Title</label>
                                                     <input
                                                         type="text"
                                                         value={feature.title}
                                                         onChange={(e) => updateFeature(index, 'title', e.target.value)}
-                                                        className="w-full px-2 py-1.5 text-sm border border-slate-300 rounded-lg"
+                                                        className="w-full px-2 py-1.5 text-sm border border-border rounded-lg"
                                                         placeholder="Feature title"
                                                     />
                                                 </div>
                                                 <div>
-                                                    <label className="block text-xs text-slate-500 mb-1">Description</label>
+                                                    <label className="block text-xs text-text-secondary mb-1">Description</label>
                                                     <input
                                                         type="text"
                                                         value={feature.description}
                                                         onChange={(e) => updateFeature(index, 'description', e.target.value)}
-                                                        className="w-full px-2 py-1.5 text-sm border border-slate-300 rounded-lg"
+                                                        className="w-full px-2 py-1.5 text-sm border border-border rounded-lg"
                                                         placeholder="Short description"
                                                     />
                                                 </div>
@@ -424,25 +424,25 @@ export default function AdminServicesPage() {
                         {/* FAQs Section */}
                         <div className="mb-6">
                             <div className="flex justify-between items-center mb-3">
-                                <label className="block text-sm font-medium text-slate-700">
+                                <label className="block text-sm font-medium text-text-secondary">
                                     FAQs (Frequently Asked Questions)
                                 </label>
                                 <button
                                     type="button"
                                     onClick={addFaq}
-                                    className="text-sm text-navy-600 hover:text-navy-700 font-medium"
+                                    className="text-sm text-charcoal hover:text-charcoal font-medium"
                                 >
                                     + Add FAQ
                                 </button>
                             </div>
                             {formData.faqs.length === 0 ? (
-                                <p className="text-sm text-slate-500 italic">No FAQs added yet</p>
+                                <p className="text-sm text-text-secondary italic">No FAQs added yet</p>
                             ) : (
                                 <div className="space-y-4">
                                     {formData.faqs.map((faq, index) => (
-                                        <div key={index} className="p-4 bg-slate-50 rounded-lg border border-slate-200">
+                                        <div key={index} className="p-4 bg-background rounded-lg border border-border">
                                             <div className="flex justify-between items-start mb-3">
-                                                <span className="text-sm font-medium text-slate-600">FAQ {index + 1}</span>
+                                                <span className="text-sm font-medium text-text-secondary">FAQ {index + 1}</span>
                                                 <button
                                                     type="button"
                                                     onClick={() => removeFaq(index)}
@@ -453,21 +453,21 @@ export default function AdminServicesPage() {
                                             </div>
                                             <div className="space-y-3">
                                                 <div>
-                                                    <label className="block text-xs text-slate-500 mb-1">Question</label>
+                                                    <label className="block text-xs text-text-secondary mb-1">Question</label>
                                                     <input
                                                         type="text"
                                                         value={faq.question}
                                                         onChange={(e) => updateFaq(index, 'question', e.target.value)}
-                                                        className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-navy-600 focus:border-navy-600 outline-none bg-white"
+                                                        className="w-full px-3 py-2 text-sm border border-border rounded-lg focus:ring-1 focus:ring-navy-600 focus:border-charcoal outline-none bg-white"
                                                         placeholder="e.g., What documents are required?"
                                                     />
                                                 </div>
                                                 <div>
-                                                    <label className="block text-xs text-slate-500 mb-1">Answer</label>
+                                                    <label className="block text-xs text-text-secondary mb-1">Answer</label>
                                                     <textarea
                                                         value={faq.answer}
                                                         onChange={(e) => updateFaq(index, 'answer', e.target.value)}
-                                                        className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-1 focus:ring-navy-600 focus:border-navy-600 outline-none bg-white"
+                                                        className="w-full px-3 py-2 text-sm border border-border rounded-lg focus:ring-1 focus:ring-navy-600 focus:border-charcoal outline-none bg-white"
                                                         rows={2}
                                                         placeholder="e.g., You will need a PAN Card, Aadhaar Card, and address proof..."
                                                     />
@@ -480,18 +480,18 @@ export default function AdminServicesPage() {
                         </div>
 
                         {/* Form Actions */}
-                        <div className="flex gap-3 pt-4 border-t border-slate-200">
+                        <div className="flex gap-3 pt-4 border-t border-border">
                             <button
                                 type="submit"
                                 disabled={saving}
-                                className="px-6 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 disabled:opacity-50 transition-colors"
+                                className="px-6 py-2 bg-charcoal text-white rounded-lg hover:bg-charcoal disabled:opacity-50 transition-colors"
                             >
                                 {saving ? 'Saving...' : editingId ? 'Update Service' : 'Create Service'}
                             </button>
                             <button
                                 type="button"
                                 onClick={cancelForm}
-                                className="px-6 py-2 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors"
+                                className="px-6 py-2 bg-background text-text-secondary rounded-lg hover:bg-slate-200 transition-colors"
                             >
                                 Cancel
                             </button>
@@ -513,7 +513,7 @@ export default function AdminServicesPage() {
                             relative px-8 py-3 text-sm font-medium transition-all duration-200
                             ${selectedCategory === 'all'
                                 ? 'text-white z-20'
-                                : 'text-slate-600 hover:text-slate-900 z-10'
+                                : 'text-text-secondary hover:text-text-primary z-10'
                             }
                         `}
                         style={{
@@ -554,7 +554,7 @@ export default function AdminServicesPage() {
                                 relative px-8 py-3 text-sm font-medium transition-all duration-200
                                 ${selectedCategory === value
                                     ? 'text-white z-20'
-                                    : 'text-slate-600 hover:text-slate-900 z-10'
+                                    : 'text-text-secondary hover:text-text-primary z-10'
                                 }
                             `}
                             style={{
@@ -591,61 +591,61 @@ export default function AdminServicesPage() {
 
             {/* Services List */}
             {loading ? (
-                <div className="flex items-center justify-center py-12 bg-white rounded-b-xl border border-slate-200 border-t-0">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-navy-600"></div>
+                <div className="flex items-center justify-center py-12 bg-white rounded-b-xl border border-border border-t-0">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-charcoal"></div>
                 </div>
             ) : services.filter(s => selectedCategory === 'all' || s.category === selectedCategory).length === 0 ? (
-                <div className="bg-white rounded-b-xl p-12 text-center border border-slate-200 border-t-0">
-                    <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="bg-white rounded-b-xl p-12 text-center border border-border border-t-0">
+                    <div className="w-16 h-16 bg-background rounded-full flex items-center justify-center mx-auto mb-4">
                         <svg className="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                         </svg>
                     </div>
-                    <h3 className="text-lg font-medium text-slate-900 mb-1">
+                    <h3 className="text-lg font-medium text-text-primary mb-1">
                         {selectedCategory === 'all' ? 'No services yet' : `No ${categories[selectedCategory]} services`}
                     </h3>
-                    <p className="text-slate-500 mb-4">
+                    <p className="text-text-secondary mb-4">
                         {selectedCategory === 'all'
                             ? 'Get started by adding your first service'
                             : 'Add a service in this category or select a different tab'}
                     </p>
                     <button
                         onClick={() => setShowForm(true)}
-                        className="px-4 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors"
+                        className="px-4 py-2 bg-charcoal text-white rounded-lg hover:bg-charcoal transition-colors"
                     >
                         Add Service
                     </button>
                 </div>
             ) : (
-                <div className="bg-white rounded-b-xl shadow-sm border border-slate-200 border-t-0 overflow-hidden">
+                <div className="bg-white rounded-b-xl shadow-sm border border-border border-t-0 overflow-hidden">
                     <table className="w-full">
-                        <thead className="bg-slate-50 border-b border-slate-200">
+                        <thead className="bg-background border-b border-border">
                             <tr>
-                                <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">Order</th>
-                                <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">Service</th>
-                                <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">Category</th>
-                                <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">Features</th>
-                                <th className="text-left px-6 py-3 text-sm font-medium text-slate-600">Status</th>
-                                <th className="text-right px-6 py-3 text-sm font-medium text-slate-600">Actions</th>
+                                <th className="text-left px-6 py-3 text-sm font-medium text-text-secondary">Order</th>
+                                <th className="text-left px-6 py-3 text-sm font-medium text-text-secondary">Service</th>
+                                <th className="text-left px-6 py-3 text-sm font-medium text-text-secondary">Category</th>
+                                <th className="text-left px-6 py-3 text-sm font-medium text-text-secondary">Features</th>
+                                <th className="text-left px-6 py-3 text-sm font-medium text-text-secondary">Status</th>
+                                <th className="text-right px-6 py-3 text-sm font-medium text-text-secondary">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {services.filter(s => selectedCategory === 'all' || s.category === selectedCategory).map((service) => (
-                                <tr key={service._id} className="border-b border-slate-100 hover:bg-slate-50">
+                                <tr key={service._id} className="border-b border-border hover:bg-background">
                                     <td className="px-6 py-4">
-                                        <span className="text-sm text-slate-500">{service.order}</span>
+                                        <span className="text-sm text-text-secondary">{service.order}</span>
                                     </td>
                                     <td className="px-6 py-4">
-                                        <p className="font-medium text-slate-900">{service.title}</p>
-                                        <p className="text-sm text-slate-500 line-clamp-1">{service.tagline}</p>
+                                        <p className="font-medium text-text-primary">{service.title}</p>
+                                        <p className="text-sm text-text-secondary line-clamp-1">{service.tagline}</p>
                                     </td>
                                     <td className="px-6 py-4">
-                                        <span className="px-2 py-1 bg-navy-600/10 text-navy-600 text-xs font-medium rounded">
+                                        <span className="px-2 py-1 bg-charcoal/10 text-charcoal text-xs font-medium rounded">
                                             {categories[service.category] || service.category}
                                         </span>
                                     </td>
                                     <td className="px-6 py-4">
-                                        <span className="text-sm text-slate-600">
+                                        <span className="text-sm text-text-secondary">
                                             {service.features?.length || 0} features, {service.faqs?.length || 0} FAQs
                                         </span>
                                     </td>
@@ -654,7 +654,7 @@ export default function AdminServicesPage() {
                                             onClick={() => handleToggleStatus(service)}
                                             className={`px-2 py-1 text-xs font-medium rounded cursor-pointer ${service.isActive
                                                 ? 'bg-green-100 text-green-700 hover:bg-green-200'
-                                                : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                                                : 'bg-background text-text-secondary hover:bg-slate-200'
                                                 }`}
                                         >
                                             {service.isActive ? 'Active' : 'Inactive'}
@@ -664,7 +664,7 @@ export default function AdminServicesPage() {
                                         <div className="flex justify-end gap-2">
                                             <button
                                                 onClick={() => handleEdit(service)}
-                                                className="text-navy-600 hover:text-navy-800 text-sm font-medium"
+                                                className="text-charcoal hover:text-text-primary text-sm font-medium"
                                             >
                                                 Edit
                                             </button>

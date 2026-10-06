@@ -155,8 +155,8 @@ export default function ServicesCarousel({ services, theme = 'light' }: Services
                     onClick={() => { prevSlide(); startAutoSlide(); }}
                     className={`hidden md:flex w-12 h-12 shrink-0 items-center justify-center border rounded-xl text-xl cursor-pointer transition-all hover:scale-105 active:scale-95 z-10 ${
                         theme === 'dark' 
-                        ? 'bg-white/5 border-white/10 text-white hover:bg-sky-500 hover:border-sky-500' 
-                        : 'bg-white border-slate-200 text-slate-600 hover:bg-navy-600 hover:border-navy-600 hover:text-white'
+                        ? 'bg-white/5 border-white/10 text-white hover:bg-brand-primary hover:border-brand-primary' 
+                        : 'bg-white border-border text-text-secondary hover:bg-charcoal hover:border-charcoal hover:text-white'
                     }`}
                     aria-label="Previous"
                 >
@@ -190,8 +190,8 @@ export default function ServicesCarousel({ services, theme = 'light' }: Services
                     onClick={() => { nextSlide(); startAutoSlide(); }}
                     className={`hidden md:flex w-12 h-12 shrink-0 items-center justify-center border rounded-xl text-xl cursor-pointer transition-all hover:scale-105 active:scale-95 z-10 ${
                         theme === 'dark' 
-                        ? 'bg-white/5 border-white/10 text-white hover:bg-sky-500 hover:border-sky-500' 
-                        : 'bg-white border-slate-200 text-slate-600 hover:bg-navy-600 hover:border-navy-600 hover:text-white'
+                        ? 'bg-white/5 border-white/10 text-white hover:bg-brand-primary hover:border-brand-primary' 
+                        : 'bg-white border-border text-text-secondary hover:bg-charcoal hover:border-charcoal hover:text-white'
                     }`}
                     aria-label="Next"
                 >
@@ -207,8 +207,8 @@ export default function ServicesCarousel({ services, theme = 'light' }: Services
                         onClick={() => { goToSlide(index); startAutoSlide(); }}
                         className={`h-2.5 rounded-full border-none cursor-pointer transition-all ${
                             displaySlide === index
-                                ? (theme === 'dark' ? 'w-6 bg-sky-400' : 'w-6 bg-navy-600')
-                                : (theme === 'dark' ? 'w-2.5 bg-white/20 hover:bg-white/40' : 'w-2.5 bg-slate-200 hover:bg-navy-600/30')
+                                ? (theme === 'dark' ? 'w-6 bg-brand-primary' : 'w-6 bg-charcoal')
+                                : (theme === 'dark' ? 'w-2.5 bg-white/20 hover:bg-white/40' : 'w-2.5 bg-slate-200 hover:bg-charcoal/30')
                         }`}
                         aria-label={`Go to slide ${index + 1}`}
                     />

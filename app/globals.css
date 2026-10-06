@@ -1,64 +1,56 @@
 @import "tailwindcss";
 
+:root {
+  --brand-primary: #678782;
+  --brand-deep: #456F6A;
+
+  --ink: #26363A;
+  --charcoal: #4E5255;
+
+  --background: #FAFAF7;
+  --surface: #FFFFFF;
+
+  --surface-muted: #E8F0EE;
+
+  --text-primary: #26363A;
+  --text-secondary: #687579;
+
+  --border: #DDE4E2;
+
+  --success: #3F7564;
+  --error: #B65F5F;
+}
+
 @theme inline {
-  /* Brand Colors - Acclevate Dark Slate Theme (overriding 'navy' for compatibility) */
-  --color-navy-50: #f5f6f6;
-  --color-navy-100: #e6e8e8;
-  --color-navy-200: #cccecf;
-  --color-navy-300: #a7abad;
-  --color-navy-400: #7b8185;
-  --color-navy-500: #5e6468;
-  --color-navy-600: #54585c;
-  --color-navy-700: #4D5154; /* Exact logo text/slate color */
-  --color-navy-800: #3c4043;
-  --color-navy-900: #2d3133;
-  --color-navy-950: #1a1c1e;
-
-  /* Accent Green (from logo) */
-  --color-accent: #678782;
-
-  /* Overriding Sky with Logo Sage Green (so existing sky-* classes use the new brand color) */
-  --color-sky-50: #f2f6f5;
-  --color-sky-100: #e0ecea;
-  --color-sky-200: #c1dad6;
-  --color-sky-300: #99c0b9;
-  --color-sky-400: #74a49c;
-  --color-sky-500: #678782; /* Exact logo green */
-  --color-sky-600: #4c6d67;
-  --color-sky-700: #3f5853;
-  --color-sky-800: #334743;
-  --color-sky-900: #2b3b38;
-  --color-sky-950: #16201e;
-
-  /* Slate for text */
-  --color-slate-50: #f8fafc;
-  --color-slate-100: #f1f5f9;
-  --color-slate-200: #e2e8f0;
-  --color-slate-300: #cbd5e1;
-  --color-slate-400: #94a3b8;
-  --color-slate-500: #64748b;
-  --color-slate-600: #475569;
-  --color-slate-700: #334155;
-  --color-slate-800: #1e293b;
-  --color-slate-900: #0f172a;
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-deep: var(--brand-deep);
+  
+  --color-ink: var(--ink);
+  --color-charcoal: var(--charcoal);
+  
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  
+  --color-border-main: var(--border);
+  
+  --color-success: var(--success);
+  --color-error: var(--error);
 
   /* Font */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-heading: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-subheading: 'Times New Roman', Times, serif;
+  --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'DM Serif Display', 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-subheading: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* Global Design Tokens */
-  --radius-base: 1rem;
+  --radius-base: 8px;
   
-  --color-surface-light: #f5f6f6;
-  --color-surface-dark: #2d3133;
-  --color-surface-darker: #1a1c1e;
-  --color-border-subtle: rgba(204, 206, 207, 0.6);
-  --color-border-dark: rgba(77, 81, 84, 0.5);
-  
-  --shadow-premium-light: 0 15px 35px -5px rgba(0, 0, 0, 0.05);
-  --shadow-premium-dark: 0 25px 60px -15px rgba(45, 49, 51, 0.35);
-  --shadow-premium-hover: 0 20px 40px -10px rgba(35, 38, 40, 0.4);
+  --shadow-premium-light: 0 10px 30px -5px rgba(38, 54, 58, 0.05);
+  --shadow-premium-dark: 0 15px 40px -10px rgba(38, 54, 58, 0.1);
+  --shadow-premium-hover: 0 12px 35px -8px rgba(38, 54, 58, 0.08);
 }
 
 @layer base {
@@ -70,32 +62,29 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #ffffff;
-    color: #0f172a;
+    background-color: var(--background);
+    color: var(--text-primary);
     overflow-x: hidden;
   }
 
   h1 {
     font-family: var(--font-heading);
-    letter-spacing: -0.05em;
-    line-height: 1.05;
-    font-weight: 700;
-  }
-
-  h2, h3, h4, h5, h6 {
-    font-family: var(--font-subheading);
-    letter-spacing: -0.01em;
-    line-height: 1.2;
-    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    font-weight: 500;
   }
 
   h2 {
-    letter-spacing: -0.02em;
-  }
-  
-  h3 {
+    font-family: var(--font-heading);
     letter-spacing: -0.01em;
     line-height: 1.15;
+    font-weight: 500;
+  }
+  
+  h3, h4, h5, h6 {
+    font-family: var(--font-subheading);
+    letter-spacing: -0.01em;
+    font-weight: 600;
   }
 
   p {
@@ -211,260 +200,5 @@
 .carousel-item {
   scroll-snap-align: start;
 }
-
-/* Navy blue gradient utilities */
-.bg-navy-gradient {
-  background: linear-gradient(135deg, var(--color-navy-600) 0%, var(--color-navy-800) 100%);
-}
-
-.text-navy-gradient {
-  background: linear-gradient(135deg, var(--color-navy-600), var(--color-navy-800));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Secondary Button with Transparent Background & Gradient Border */
-.btn-secondary {
-  position: relative;
-  background: transparent;
-  z-index: 1;
-  overflow: hidden; /* Contains the shine effect */
-}
-
-.btn-secondary-text {
-  background: linear-gradient(to right, var(--color-navy-900), var(--color-sky-900));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Gradient Border Mask */
-.btn-secondary::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius-base);
-  padding: 1px; /* Thinner border thickness */
-  background: linear-gradient(to right, var(--color-navy-900), var(--color-sky-900));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  z-index: -1;
-  transition: all 0.3s ease;
-  opacity: 0.8;
-}
-
-.btn-secondary:hover::before {
-  opacity: 1;
-}
-
-/* Left to right light shine on hover */
-.btn-secondary::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(103, 135, 130, 0.15), transparent);
-  z-index: -1;
-  pointer-events: none;
-}
-
-.btn-secondary:hover::after {
-  animation: secondaryShine 1.2s ease-in-out forwards;
-}
-
-@keyframes secondaryShine {
-  0% { left: -100%; }
-  100% { left: 200%; }
-}
-
-/* Uiverse glowing card styles (Light Frosty Teal Theme) */
-.uiverse-outer {
-  border-radius: var(--radius-base);
-  padding: 1px;
-  background: radial-gradient(circle 230px at 0% 0%, #74a49c, rgba(103, 135, 130, 0.15));
-  position: relative;
-  transition: all 0.3s ease;
-}
-
-.uiverse-outer:hover {
-  background: radial-gradient(circle 230px at 0% 0%, #678782, rgba(103, 135, 130, 0.4));
-}
-
-.uiverse-dot {
-  width: 6px;
-  aspect-ratio: 1;
-  position: absolute;
-  background-color: #678782;
-  box-shadow: 0 0 8px #678782, 0 0 15px rgba(103, 135, 130, 0.6);
-  border-radius: 100px;
-  z-index: 2;
-  right: 10%;
-  top: 10%;
-  animation: uiverseMoveDot 8s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes uiverseMoveDot {
-  0%,
-  100% {
-    top: 10%;
-    right: 10%;
-  }
-  25% {
-    top: 10%;
-    right: 90%;
-  }
-  50% {
-    top: 90%;
-    right: 90%;
-  }
-  75% {
-    top: 90%;
-    right: 10%;
-  }
-}
-
-.uiverse-card {
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  border-radius: calc(var(--radius-base) - 1px);
-  border: solid 1px rgba(103, 135, 130, 0.15);
-  background-color: rgba(255, 255, 255, 0.85);
-  background-image: url('/service_card_bg_ripple_cropped.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-blend-mode: overlay;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  color: #0f172a;
-  transition: all 0.3s ease;
-}
-
-.uiverse-outer:hover .uiverse-card {
-  background-color: rgba(237, 246, 243, 0.9);
-  filter: brightness(1.02);
-}
-
-.uiverse-ray {
-  width: 220px;
-  height: 45px;
-  border-radius: 100px;
-  position: absolute;
-  background-color: #678782;
-  opacity: 0.05;
-  box-shadow: 0 0 40px #678782;
-  filter: blur(15px);
-  transform-origin: 10%;
-  top: 0%;
-  left: 0;
-  transform: rotate(40deg);
-  pointer-events: none;
-  transition: all 0.3s ease;
-}
-
-.uiverse-outer:hover .uiverse-ray {
-  opacity: 0.08;
-}
-
-.uiverse-line {
-  position: absolute;
-  background-color: rgba(103, 135, 130, 0.08);
-  pointer-events: none;
-  transition: all 0.3s ease;
-}
-
-.uiverse-outer:hover .uiverse-line {
-  background-color: rgba(103, 135, 130, 0.15);
-}
-
-.uiverse-topl {
-  top: 10%;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(103, 135, 130, 0.25) 30%, rgba(103, 135, 130, 0.05) 70%);
-}
-
-.uiverse-bottoml {
-  bottom: 10%;
-  left: 0;
-  width: 100%;
-  height: 1px;
-}
-
-.uiverse-leftl {
-  left: 10%;
-  top: 0;
-  width: 1px;
-  height: 100%;
-  background: linear-gradient(180deg, rgba(103, 135, 130, 0.25) 30%, rgba(103, 135, 130, 0.05) 70%);
-}
-
-.uiverse-rightl {
-  right: 10%;
-  top: 0;
-  width: 1px;
-  height: 100%;
-}
-
-/* Vertical Line Pattern Animations */
-@keyframes verticalLineScan {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  20% {
-    opacity: 0.8;
-  }
-  80% {
-    opacity: 0.8;
-  }
-  100% {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-}
-
-@keyframes verticalLinePulse {
-  0%, 100% {
-    opacity: 0.25;
-  }
-  50% {
-    opacity: 0.55;
-  }
-}
-
-.animate-vertical-scan-1 {
-  animation: verticalLineScan 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-
-.animate-vertical-scan-2 {
-  animation: verticalLineScan 10s cubic-bezier(0.4, 0, 0.2, 1) infinite 2.5s;
-}
-
-.animate-vertical-scan-3 {
-  animation: verticalLineScan 13s cubic-bezier(0.4, 0, 0.2, 1) infinite 5s;
-}
-
-.animate-line-pulse {
-  animation: verticalLinePulse 4s ease-in-out infinite;
-}
-
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0px); }
-}
-
-
 
 

@@ -20,10 +20,10 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
     ];
 
     return (
-        <div className="min-h-screen bg-slate-100 flex">
+        <div className="min-h-screen bg-background flex">
             {/* Sidebar */}
-            <aside className="w-64 bg-white border-r border-slate-200 flex flex-col">
-                <div className="p-6 border-b border-slate-200">
+            <aside className="w-64 bg-white border-r border-border flex flex-col">
+                <div className="p-6 border-b border-border">
                     <Link href="/admin">
                         <Image
                             src="/logo.jpg"
@@ -41,8 +41,8 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
                             key={item.href}
                             href={item.href}
                             className={`flex items-center gap-3 px-4 py-3 rounded-lg mb-1 transition-colors ${pathname === item.href
-                                    ? 'bg-navy-600 text-white'
-                                    : 'text-slate-600 hover:bg-slate-100'
+                                    ? 'bg-charcoal text-white'
+                                    : 'text-text-secondary hover:bg-background'
                                 }`}
                         >
                             <span>{item.icon}</span>
@@ -51,10 +51,10 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
                     ))}
                 </nav>
 
-                <div className="p-4 border-t border-slate-200">
+                <div className="p-4 border-t border-border">
                     <Link
                         href="/"
-                        className="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-100 rounded-lg"
+                        className="flex items-center gap-3 px-4 py-3 text-text-secondary hover:bg-background rounded-lg"
                     >
                         <span>🌐</span>
                         <span className="font-medium">View Website</span>

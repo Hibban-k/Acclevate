@@ -14,23 +14,23 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
     return (
         <ServicesAnimations>
-            <div className="min-h-screen bg-white selection:bg-sky-100 selection:text-sky-900">
+            <div className="min-h-screen bg-white selection:bg-surface-muted selection:text-brand-deep">
                 {/* ── HERO ── */}
                 <section className="min-h-[50vh] lg:min-h-[65vh] py-28 relative overflow-hidden flex flex-col items-center justify-center text-center">
                     <HeroBackground />
                     
                     <div className="w-full max-w-[1000px] mx-auto px-6 relative z-10 flex flex-col items-center justify-center gap-6">
                         <div data-animate="fade-up" data-once="true" className="flex items-center justify-center gap-2 text-sm font-bold tracking-widest text-slate-400 uppercase mb-2">
-                            <Link href="/" className="hover:text-navy-900 transition-colors">Home</Link>
+                            <Link href="/" className="hover:text-text-primary transition-colors">Home</Link>
                             <span>/</span>
-                            <span className="text-navy-900">Services</span>
+                            <span className="text-text-primary">Services</span>
                         </div>
                         
-                        <h1 data-animate="fade-up" data-once="true" data-delay="0.1" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-navy-900 leading-tight tracking-tight uppercase">
+                        <h1 data-animate="fade-up" data-once="true" data-delay="0.1" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-text-primary leading-tight tracking-tight uppercase">
                             Core Solutions
                         </h1>
                         
-                        <p data-animate="fade-up" data-once="true" data-delay="0.2" className="text-base md:text-lg text-slate-500 font-light max-w-xl leading-relaxed mt-4">
+                        <p data-animate="fade-up" data-once="true" data-delay="0.2" className="text-base md:text-lg text-text-secondary font-light max-w-xl leading-relaxed mt-4">
                             Expert financial, tax, and compliance solutions designed to scale your business with precision.
                         </p>
                     </div>
@@ -40,14 +40,14 @@ export default function ServicesPage() {
                 <ServicesCategoryCards />
 
                 {/* ── FAQ SECTION (BG-WHITE) ── */}
-                <section className="py-24 md:py-32 bg-white relative overflow-hidden text-slate-900 border-t border-slate-100">
+                <section className="py-24 md:py-32 bg-white relative overflow-hidden text-text-primary border-t border-border">
                     <div className="max-w-7xl mx-auto px-6 relative z-10">
                         <div className="flex items-center gap-3 mb-5" data-animate="fade-up" data-once="true">
                             <div className="w-8 h-0.5 bg-slate-400" />
-                            <span className="text-sm font-bold text-slate-500 uppercase tracking-widest">Common Questions</span>
+                            <span className="text-sm font-bold text-text-secondary uppercase tracking-widest">Common Questions</span>
                         </div>
 
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight mb-12 text-slate-900 uppercase" data-animate="fade-up" data-once="true" data-delay="0.1">
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight mb-12 text-text-primary uppercase" data-animate="fade-up" data-once="true" data-delay="0.1">
                             Frequently Asked <br className="hidden sm:block" /><span className="text-slate-400">Questions.</span>
                         </h2>
 
@@ -59,8 +59,8 @@ export default function ServicesPage() {
 
                             {/* Right: Quick Contact Support Card */}
                             <div className="lg:col-span-4 w-full">
-                                <div className="border border-slate-200/80 rounded-2xl p-8 bg-slate-50 flex flex-col items-start text-left shadow-xs">
-                                    <div className="w-12 h-12 rounded-xl bg-sky-50 flex items-center justify-center mb-6 text-sky-600 border border-sky-100">
+                                <div className="border border-border/80 rounded-2xl p-8 bg-background flex flex-col items-start text-left shadow-xs">
+                                    <div className="w-12 h-12 rounded-xl bg-surface-muted flex items-center justify-center mb-6 text-brand-primary border border-sky-100">
                                         <svg
                                             width="24"
                                             height="24"
@@ -75,20 +75,20 @@ export default function ServicesPage() {
                                         </svg>
                                     </div>
 
-                                    <h3 className="text-xl font-bold text-slate-900 mb-3 tracking-tight">
+                                    <h3 className="text-xl font-bold text-text-primary mb-3 tracking-tight">
                                         Have specific requirements?
                                     </h3>
 
-                                    <p className="text-slate-500 font-light leading-relaxed text-sm mb-8">
+                                    <p className="text-text-secondary font-light leading-relaxed text-sm mb-8">
                                         Our advisors are available to walk through your exact business setup and recommend the right service package.
                                     </p>
 
                                     <Link
                                         href="/contact"
-                                        className="inline-flex items-center justify-between w-full py-3.5 px-6 bg-white hover:bg-slate-100 border border-slate-200 rounded-xl text-slate-800 font-medium text-sm transition-all shadow-xs"
+                                        className="inline-flex items-center justify-between w-full py-3.5 px-6 bg-white hover:bg-background border border-border rounded-xl text-text-primary font-medium text-sm transition-all shadow-xs"
                                     >
                                         <span>Schedule Advisory Call</span>
-                                        <span className="text-sky-600">→</span>
+                                        <span className="text-brand-primary">→</span>
                                     </Link>
                                 </div>
                             </div>

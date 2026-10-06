@@ -118,26 +118,26 @@ export default async function CollectionPage({ params }: PageProps) {
                     <div className="w-full max-w-[900px] mx-auto px-6 relative z-10 flex flex-col items-center gap-6">
 
                         <div data-animate="fade-up" data-once="true" className="flex items-center justify-center gap-2 text-sm font-bold tracking-widest text-slate-400 uppercase">
-                            <Link href="/" className="hover:text-navy-900 transition-colors">Home</Link>
+                            <Link href="/" className="hover:text-text-primary transition-colors">Home</Link>
                             <span>/</span>
                             {isCategory
-                                ? <Link href="/services" className="hover:text-navy-900 transition-colors">Services</Link>
-                                : <Link href="/industries" className="hover:text-navy-900 transition-colors">Industries</Link>
+                                ? <Link href="/services" className="hover:text-text-primary transition-colors">Services</Link>
+                                : <Link href="/industries" className="hover:text-text-primary transition-colors">Industries</Link>
                             }
                             <span>/</span>
-                            <span className="text-navy-900">{entity.name}</span>
+                            <span className="text-text-primary">{entity.name}</span>
                         </div>
 
-                        <div data-animate="fade-up" data-once="true" data-delay="0.05" className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-full text-sm font-semibold text-slate-600">
+                        <div data-animate="fade-up" data-once="true" data-delay="0.05" className="inline-flex items-center gap-2 px-4 py-2 bg-background rounded-full text-sm font-semibold text-text-secondary">
                             <span className="text-lg">{entity.icon || (isCategory ? '📁' : '🏢')}</span>
                             {isCategory ? 'Service Category' : 'Industry Hub'}
                         </div>
 
-                        <h1 data-animate="fade-up" data-once="true" data-delay="0.1" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-navy-900 leading-tight tracking-tight uppercase">
+                        <h1 data-animate="fade-up" data-once="true" data-delay="0.1" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-text-primary leading-tight tracking-tight uppercase">
                             {entity.name}
                         </h1>
 
-                        <p data-animate="fade-up" data-once="true" data-delay="0.2" className="text-base md:text-lg text-slate-500 font-light max-w-2xl leading-relaxed">
+                        <p data-animate="fade-up" data-once="true" data-delay="0.2" className="text-base md:text-lg text-text-secondary font-light max-w-2xl leading-relaxed">
                             {entity.shortDescription
                                 || (isCategory ? entity.details?.[0]?.shortPoint?.substring(0, 180) : entity.description?.substring(0, 180))
                                 || `Comprehensive ${entity.name.toLowerCase()} solutions designed to scale your business with precision.`}
@@ -145,11 +145,11 @@ export default async function CollectionPage({ params }: PageProps) {
 
                         <div data-animate="fade-up" data-once="true" data-delay="0.3" className="flex items-center gap-3 mt-2">
                             <Link href="/contact"
-                                className="h-11 px-7 inline-flex items-center justify-center rounded-xl bg-navy-900 text-white text-sm font-semibold tracking-wide hover:bg-navy-800 transition-colors shadow-lg shadow-navy-900/15">
+                                className="h-11 px-7 inline-flex items-center justify-center rounded-xl bg-ink text-white text-sm font-semibold tracking-wide hover:bg-ink transition-colors shadow-lg shadow-navy-900/15">
                                 Get Started
                             </Link>
                             <Link href="#services"
-                                className="h-11 px-7 inline-flex items-center justify-center rounded-xl border border-slate-200 text-slate-700 text-sm font-semibold hover:bg-slate-50 transition-colors">
+                                className="h-11 px-7 inline-flex items-center justify-center rounded-xl border border-border text-text-secondary text-sm font-semibold hover:bg-background transition-colors">
                                 View Services
                             </Link>
                         </div>
@@ -165,7 +165,7 @@ export default async function CollectionPage({ params }: PageProps) {
                             const rowServices = pairedServices.slice(i * 2, i * 2 + 2);
                             const isFlipped = i % 2 !== 0;
                             const isInnerDark = i % 2 !== 0; // 1st & 3rd (index 0 & 2) are light, 2nd & 4th (index 1 & 3) are dark
-                            const sectionBg = isInnerDark ? 'bg-slate-50' : 'bg-white';
+                            const sectionBg = isInnerDark ? 'bg-background' : 'bg-white';
 
                             return (
                                 <section
@@ -180,8 +180,8 @@ export default async function CollectionPage({ params }: PageProps) {
                                             data-delay="0.05"
                                             className={`${
                                                 isInnerDark
-                                                    ? 'bg-navy-900 border border-white/10 shadow-2xl shadow-navy-900/10 text-white'
-                                                    : 'bg-slate-50 border border-slate-200/80 shadow-premium-light text-slate-900'
+                                                    ? 'bg-ink border border-white/10 shadow-2xl shadow-navy-900/10 text-white'
+                                                    : 'bg-background border border-border/80 shadow-premium-light text-text-primary'
                                             } rounded-3xl p-8 md:p-12 lg:p-14 relative overflow-hidden`}
                                         >
                                             {/* Subtle texture inside dark inner div */}
@@ -202,15 +202,15 @@ export default async function CollectionPage({ params }: PageProps) {
                                                         <div className={`h-px flex-1 ${isInnerDark ? 'bg-white/10' : 'bg-slate-200/60'}`} />
                                                     </div>
                                                     <div className="flex items-center gap-2 mb-4">
-                                                        <div className={`w-5 h-0.5 ${isInnerDark ? 'bg-sky-400' : 'bg-sky-600'}`} />
-                                                        <span className={`text-xs font-bold uppercase tracking-widest ${isInnerDark ? 'text-sky-400' : 'text-sky-600'}`}>
+                                                        <div className={`w-5 h-0.5 ${isInnerDark ? 'bg-brand-primary' : 'bg-brand-primary'}`} />
+                                                        <span className={`text-xs font-bold uppercase tracking-widest ${isInnerDark ? 'text-brand-primary' : 'text-brand-primary'}`}>
                                                             Service Focus
                                                         </span>
                                                     </div>
-                                                    <h3 className={`text-2xl md:text-3xl font-bold tracking-tight leading-snug mb-5 ${isInnerDark ? 'text-white' : 'text-navy-900'}`}>
+                                                    <h3 className={`text-2xl md:text-3xl font-bold tracking-tight leading-snug mb-5 ${isInnerDark ? 'text-white' : 'text-text-primary'}`}>
                                                         {detail.heading}
                                                     </h3>
-                                                    <p className={`text-sm md:text-base font-light leading-[1.9] tracking-[0.01em] ${isInnerDark ? 'text-slate-300' : 'text-slate-500'}`}>
+                                                    <p className={`text-sm md:text-base font-light leading-[1.9] tracking-[0.01em] ${isInnerDark ? 'text-slate-300' : 'text-text-secondary'}`}>
                                                         {detail.shortPoint}
                                                     </p>
                                                 </div>
@@ -227,11 +227,11 @@ export default async function CollectionPage({ params }: PageProps) {
                                                                 id: service._id?.toString() || '',
                                                                 category: entity,
                                                             }}
-                                                            cardBg={isInnerDark ? 'bg-slate-200' : 'bg-white'}
+                                                            
                                                             className="h-full"
                                                         />
                                                     )) : (
-                                                        <div className={`sm:col-span-2 flex items-center justify-center h-44 rounded-2xl border border-dashed ${isInnerDark ? 'border-white/15 text-slate-400' : 'border-slate-300 text-slate-400'} text-sm font-light`}>
+                                                        <div className={`sm:col-span-2 flex items-center justify-center h-44 rounded-2xl border border-dashed ${isInnerDark ? 'border-white/15 text-slate-400' : 'border-border text-slate-400'} text-sm font-light`}>
                                                             Services coming soon
                                                         </div>
                                                     )}
@@ -245,7 +245,7 @@ export default async function CollectionPage({ params }: PageProps) {
 
                         {/* Overflow services — separate light section */}
                         {overflowServices.length > 0 && (
-                            <section className="py-20 md:py-24 bg-white border-t border-slate-100 relative overflow-hidden">
+                            <section className="py-20 md:py-24 bg-white border-t border-border relative overflow-hidden">
                                 <div className="max-w-[1280px] mx-auto px-6 relative z-10">
                                     <p data-animate="fade-up" className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-8">More Services</p>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -265,27 +265,27 @@ export default async function CollectionPage({ params }: PageProps) {
                 )}
 
                 {/* ══════════════════════════════════════════════════════
-                    02b  INDUSTRY INTRO — bg-slate-50 (alternating)
+                    02b  INDUSTRY INTRO — bg-background (alternating)
                     ══════════════════════════════════════════════════════ */}
                 {!isCategory && entity.industryIntro && (
-                    <section className="py-20 md:py-28 bg-slate-50 border-t border-slate-100 relative overflow-hidden">
-                        <div className="absolute top-0 left-0 w-[40vw] h-[40vw] bg-sky-50/40 rounded-full blur-[120px] -translate-y-1/2 -translate-x-1/3 pointer-events-none" />
+                    <section className="py-20 md:py-28 bg-background border-t border-border relative overflow-hidden">
+                        <div className="absolute top-0 left-0 w-[40vw] h-[40vw] bg-surface-muted/40 rounded-full blur-[120px] -translate-y-1/2 -translate-x-1/3 pointer-events-none" />
                         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 items-center">
                                 <div className="lg:col-span-4">
                                     <div data-animate="fade-up" data-once="true" className="flex items-center gap-3 mb-6">
                                         <div className="w-8 h-0.5 bg-slate-400" />
-                                        <span className="text-sm font-bold text-slate-500 uppercase tracking-widest">Sector Overview</span>
+                                        <span className="text-sm font-bold text-text-secondary uppercase tracking-widest">Sector Overview</span>
                                     </div>
                                     <h2 data-animate="fade-up" data-once="true" data-delay="0.05"
-                                        className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight uppercase">
+                                        className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-text-primary leading-tight uppercase">
                                         {entity.name}
                                         <br /><span className="text-slate-300">Expertise.</span>
                                     </h2>
                                 </div>
                                 <div className="lg:col-span-8">
                                     <p data-animate="fade-up" data-once="true" data-delay="0.1"
-                                        className="text-base md:text-lg text-slate-600 font-light leading-relaxed">
+                                        className="text-base md:text-lg text-text-secondary font-light leading-relaxed">
                                         {entity.industryIntro}
                                     </p>
                                 </div>
@@ -295,25 +295,25 @@ export default async function CollectionPage({ params }: PageProps) {
                 )}
 
                 {/* ══════════════════════════════════════════════════════
-                    02c  INDUSTRY PAIN POINTS — bg-navy-900 dark section
+                    02c  INDUSTRY PAIN POINTS — bg-ink dark section
                     ══════════════════════════════════════════════════════ */}
                 {!isCategory && entity.painPoints && entity.painPoints.length > 0 && (
-                    <section className="py-20 md:py-28 bg-navy-900 text-white relative overflow-hidden">
+                    <section className="py-20 md:py-28 bg-ink text-white relative overflow-hidden">
                         <div className="absolute inset-0 opacity-[0.04] bg-[url('/grid-pattern.svg')]" />
                         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 items-start">
                                 <div className="lg:col-span-4">
                                     <div data-animate="fade-up" data-once="true" className="flex items-center gap-3 mb-6">
-                                        <div className="w-8 h-0.5 bg-slate-500" />
+                                        <div className="w-8 h-0.5 bg-background0" />
                                         <span className="text-sm font-bold text-slate-400 uppercase tracking-widest">Key Challenges</span>
                                     </div>
                                     <h2 data-animate="fade-up" data-once="true" data-delay="0.05"
                                         className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight uppercase">
                                         Common Challenges
-                                        <br /><span className="text-slate-500">We Solve.</span>
+                                        <br /><span className="text-text-secondary">We Solve.</span>
                                     </h2>
                                     <p data-animate="fade-up" data-once="true" data-delay="0.1"
-                                        className="mt-6 text-navy-200 text-sm md:text-base font-light leading-relaxed">
+                                        className="mt-6 text-text-secondary text-sm md:text-base font-light leading-relaxed">
                                         Every sector has its own compliance complexity. Here is what typically slows businesses in {entity.name} down.
                                     </p>
                                 </div>
@@ -323,15 +323,15 @@ export default async function CollectionPage({ params }: PageProps) {
                                             key={idx}
                                             data-animate="fade-up"
                                             data-delay={String(0.05 + (idx % 2) * 0.1)}
-                                            className="group bg-white/5 border border-white/8 hover:border-sky-500/30 hover:bg-white/8 rounded-xl p-5 md:p-6 transition-all duration-300"
+                                            className="group bg-white/5 border border-white/8 hover:border-brand-primary/30 hover:bg-white/8 rounded-xl p-5 md:p-6 transition-all duration-300"
                                         >
                                             <div className="flex items-start gap-3">
-                                                <div className="mt-0.5 w-5 h-5 rounded-full bg-sky-500/15 border border-sky-500/25 flex items-center justify-center shrink-0">
-                                                    <svg className="w-2.5 h-2.5 text-sky-400" fill="currentColor" viewBox="0 0 20 20">
+                                                <div className="mt-0.5 w-5 h-5 rounded-full bg-brand-primary/15 border border-brand-primary/25 flex items-center justify-center shrink-0">
+                                                    <svg className="w-2.5 h-2.5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20">
                                                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                                     </svg>
                                                 </div>
-                                                <span className="text-navy-100 text-sm font-light leading-relaxed">{point}</span>
+                                                <span className="text-text-secondary text-sm font-light leading-relaxed">{point}</span>
                                             </div>
                                         </div>
                                     ))}
@@ -345,24 +345,24 @@ export default async function CollectionPage({ params }: PageProps) {
                     03  INDUSTRY SERVICES GRID — bg-white (back to light)
                     ══════════════════════════════════════════════════════ */}
                 {!isCategory && (
-                    <section id="services" className="py-24 md:py-32 bg-white relative overflow-hidden border-t border-slate-100">
-                        <div className="absolute bottom-0 right-0 w-[40vw] h-[40vw] bg-slate-50 rounded-full blur-[100px] pointer-events-none" />
+                    <section id="services" className="py-24 md:py-32 bg-white relative overflow-hidden border-t border-border">
+                        <div className="absolute bottom-0 right-0 w-[40vw] h-[40vw] bg-background rounded-full blur-[100px] pointer-events-none" />
                         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 mb-14 pb-10 border-b border-slate-200">
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 mb-14 pb-10 border-b border-border">
                                 <div className="lg:col-span-7">
                                     <div data-animate="fade-up" data-once="true" className="flex items-center gap-3 mb-5">
                                         <div className="w-8 h-0.5 bg-slate-400" />
-                                        <span className="text-sm font-bold text-slate-500 uppercase tracking-widest">Tailored Solutions</span>
+                                        <span className="text-sm font-bold text-text-secondary uppercase tracking-widest">Tailored Solutions</span>
                                     </div>
                                     <h2 data-animate="fade-up" data-once="true" data-delay="0.05"
-                                        className="text-3xl md:text-[clamp(2.5rem,4.5vw,4rem)] font-extrabold tracking-tight text-slate-900 leading-tight uppercase">
+                                        className="text-3xl md:text-[clamp(2.5rem,4.5vw,4rem)] font-extrabold tracking-tight text-text-primary leading-tight uppercase">
                                         Services for {entity.name}
                                         <br /><span className="text-slate-300">Solutions.</span>
                                     </h2>
                                 </div>
                                 <div className="lg:col-span-5 flex items-end">
                                     <p data-animate="fade-up" data-once="true" data-delay="0.1"
-                                        className="text-base md:text-lg text-slate-500 font-light leading-relaxed">
+                                        className="text-base md:text-lg text-text-secondary font-light leading-relaxed">
                                         Specialized solutions for the unique regulatory and operational demands of the {entity.name} sector.
                                     </p>
                                 </div>
@@ -390,18 +390,18 @@ export default async function CollectionPage({ params }: PageProps) {
                                     })}
                                 </div>
                             ) : (
-                                <div className="bg-slate-50 rounded-2xl border border-slate-200 p-16 md:p-24 text-center max-w-3xl mx-auto">
-                                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white border border-slate-200 shadow-sm mb-7">
+                                <div className="bg-background rounded-2xl border border-border p-16 md:p-24 text-center max-w-3xl mx-auto">
+                                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white border border-border shadow-sm mb-7">
                                         <svg className="w-9 h-9 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                                         </svg>
                                     </div>
-                                    <h3 className="text-2xl font-bold text-slate-900 mb-3 tracking-tight">Solutions Coming Soon</h3>
+                                    <h3 className="text-2xl font-bold text-text-primary mb-3 tracking-tight">Solutions Coming Soon</h3>
                                     <p className="text-slate-400 text-base font-light max-w-sm mx-auto mb-8 leading-relaxed">
                                         We are crafting specialized packages for {entity.name}. Contact us to discuss your needs.
                                     </p>
                                     <Link href="/contact"
-                                        className="inline-flex items-center justify-center h-12 px-8 rounded-xl bg-navy-900 text-white text-sm font-semibold hover:bg-navy-800 transition-colors shadow-lg shadow-navy-900/20">
+                                        className="inline-flex items-center justify-center h-12 px-8 rounded-xl bg-ink text-white text-sm font-semibold hover:bg-ink transition-colors shadow-lg shadow-navy-900/20">
                                         Speak with an Expert
                                     </Link>
                                 </div>
@@ -411,27 +411,27 @@ export default async function CollectionPage({ params }: PageProps) {
                 )}
 
                 {/* ══════════════════════════════════════════════════════
-                    04  EXPLORE OTHER SIBLINGS — bg-slate-50 (alternating)
+                    04  EXPLORE OTHER SIBLINGS — bg-background (alternating)
                     ══════════════════════════════════════════════════════ */}
                 {siblings.length > 0 && (
-                    <section className="py-24 md:py-32 bg-slate-50 border-t border-slate-100 relative overflow-hidden">
-                        <div className="absolute top-0 left-0 w-[40vw] h-[40vw] bg-sky-50/40 rounded-full blur-[130px] -translate-y-1/3 -translate-x-1/3 pointer-events-none" />
+                    <section className="py-24 md:py-32 bg-background border-t border-border relative overflow-hidden">
+                        <div className="absolute top-0 left-0 w-[40vw] h-[40vw] bg-surface-muted/40 rounded-full blur-[130px] -translate-y-1/3 -translate-x-1/3 pointer-events-none" />
                         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 mb-14 pb-10 border-b border-slate-200">
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 mb-14 pb-10 border-b border-border">
                                 <div className="lg:col-span-7">
                                     <div data-animate="fade-up" className="flex items-center gap-3 mb-5">
                                         <div className="w-8 h-0.5 bg-slate-400" />
-                                        <span className="text-sm font-bold text-slate-500 uppercase tracking-widest">Keep Exploring</span>
+                                        <span className="text-sm font-bold text-text-secondary uppercase tracking-widest">Keep Exploring</span>
                                     </div>
                                     <h2 data-animate="fade-up" data-delay="0.05"
-                                        className="text-3xl md:text-[clamp(2.5rem,4.5vw,4rem)] font-extrabold tracking-tight text-slate-900 leading-tight uppercase">
+                                        className="text-3xl md:text-[clamp(2.5rem,4.5vw,4rem)] font-extrabold tracking-tight text-text-primary leading-tight uppercase">
                                         {isCategory ? 'Other Categories' : 'Other Industries'}
                                         <br /><span className="text-slate-300">We Cover.</span>
                                     </h2>
                                 </div>
                                 <div className="lg:col-span-5 flex items-end">
                                     <p data-animate="fade-up" data-delay="0.1"
-                                        className="text-base md:text-lg text-slate-500 font-light leading-relaxed">
+                                        className="text-base md:text-lg text-text-secondary font-light leading-relaxed">
                                         {isCategory
                                             ? 'Discover our full range of professional service categories.'
                                             : 'See how Acclevate serves businesses across different industry sectors.'}
@@ -444,20 +444,20 @@ export default async function CollectionPage({ params }: PageProps) {
                                     <Link
                                         key={item.slug || item._id}
                                         href={`/${item.slug}`}
-                                        className="group bg-white rounded-2xl border border-slate-200/80 p-7 md:p-8 flex flex-col items-start text-left hover:-translate-y-1 hover:shadow-lg hover:border-slate-300 transition-all duration-300"
+                                        className="group bg-white rounded-2xl border border-border/80 p-7 md:p-8 flex flex-col items-start text-left hover:-translate-y-1 hover:shadow-lg hover:border-border transition-all duration-300"
                                         data-animate="fade-up"
                                         data-delay={String(0.04 + (i % 4) * 0.07)}
                                     >
-                                        <div className="w-11 h-11 bg-slate-100 rounded-xl flex items-center justify-center mb-5 text-xl group-hover:bg-navy-900 transition-all duration-300">
+                                        <div className="w-11 h-11 bg-background rounded-xl flex items-center justify-center mb-5 text-xl group-hover:bg-ink transition-all duration-300">
                                             <span>{item.icon || (isCategory ? '📁' : '🏢')}</span>
                                         </div>
-                                        <h3 className="text-base font-bold text-slate-900 mb-2 group-hover:text-navy-900 transition-colors leading-snug">
+                                        <h3 className="text-base font-bold text-text-primary mb-2 group-hover:text-text-primary transition-colors leading-snug">
                                             {item.name}
                                         </h3>
                                         <p className="text-sm text-slate-400 font-light leading-relaxed mb-5 line-clamp-2 grow">
                                             {item.shortDescription || item.description?.substring(0, 90) || `Expert ${item.name.toLowerCase()} solutions.`}
                                         </p>
-                                        <div className="inline-flex items-center text-xs font-bold text-sky-600 uppercase tracking-wider group-hover:text-sky-500 transition-colors">
+                                        <div className="inline-flex items-center text-xs font-bold text-brand-primary uppercase tracking-wider group-hover:text-brand-primary transition-colors">
                                             <span>Explore</span>
                                             <span className="ml-1.5 group-hover:translate-x-1.5 transition-transform duration-300">→</span>
                                         </div>
@@ -484,3 +484,5 @@ export default async function CollectionPage({ params }: PageProps) {
         </ServicesAnimations>
     );
 }
+
+

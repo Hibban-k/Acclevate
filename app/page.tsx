@@ -52,11 +52,11 @@ export default async function Home() {
           <div className="w-full lg:w-[50%] flex flex-col items-start text-left lg:pt-12 gap-10">
 
             <div className="flex flex-col items-start leading-none tracking-tight mb-6" data-animate="fade-up" data-once="true" data-delay="0.1">
-              <h2 className="text-slate-500 text-[clamp(2.2rem,3.9vw,3.6rem)]  font-semibold mb-1 ml-4">Accelerate with</h2>
-              <h1 className="text-navy-900 text-[clamp(3.2rem,6.5vw,6rem)] font-bold">ACCLEVATE</h1>
+              <h2 className="text-text-secondary text-[clamp(2.2rem,3.9vw,3.6rem)]  font-semibold mb-1 ml-4">Accelerate with</h2>
+              <h1 className="text-text-primary text-[clamp(3.2rem,6.5vw,6rem)] font-bold">ACCLEVATE</h1>
             </div>
 
-            <p className="text-base italic md:text-base lg:text-lg text-slate-700 leading-relaxed mb-10 max-w-xl" data-animate="fade-up" data-once="true" data-delay="0.2">
+            <p className="text-base italic md:text-base lg:text-lg text-text-secondary leading-relaxed mb-10 max-w-xl" data-animate="fade-up" data-once="true" data-delay="0.2">
               Practical guidance backed by clear processes, accurate work, and a thorough understanding of your business. We help you stay on top of your obligations and make informed decisions with confidence.
             </p>
 
@@ -69,12 +69,12 @@ export default async function Home() {
                 "eCommerce & Business Growth"
               ].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-3">
-                  <div className="shrink-0 text-navy-900 flex items-center justify-center">
+                  <div className="shrink-0 text-text-primary flex items-center justify-center">
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
-                  <span className="text-slate-700 font-medium text-base md:text-lg">{item}</span>
+                  <span className="text-text-secondary font-medium text-base md:text-lg">{item}</span>
                 </div>
               ))}
             </div>
@@ -100,29 +100,29 @@ export default async function Home() {
       </section>
 
       {/* High-Contrast Impact Section (Light Theme) */}
-      <section className="py-16 md:py-24 bg-white text-slate-900 relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-white text-text-primary relative overflow-hidden">
         {/* Soft background highlight blob */}
-        <div className="absolute top-1/2 left-0 w-[50vw] h-[50vw] bg-sky-50/40 rounded-full blur-[120px] -translate-y-1/2 -translate-x-1/3 pointer-events-none" />
+        <div className="absolute top-1/2 left-0 w-[50vw] h-[50vw] bg-surface-muted/40 rounded-full blur-[120px] -translate-y-1/2 -translate-x-1/3 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
 
           {/* Top Row: Impact Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pb-16 border-b border-slate-100 mb-20 lg:mb-28 text-left">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pb-16 border-b border-border mb-20 lg:mb-28 text-left">
             <div>
-              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-navy-900 mb-2 tracking-tight" data-count="10" data-suffix="+">0+</div>
-              <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-normal">Years Expertise</div>
+              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-text-primary mb-2 tracking-tight" data-count="10" data-suffix="+">0+</div>
+              <div className="text-[10px] font-bold text-text-secondary uppercase tracking-widest leading-normal">Years Expertise</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-navy-900 mb-2 tracking-tight" data-count="150" data-suffix="+">0+</div>
-              <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-normal">Enterprises Scaled</div>
+              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-text-primary mb-2 tracking-tight" data-count="150" data-suffix="+">0+</div>
+              <div className="text-[10px] font-bold text-text-secondary uppercase tracking-widest leading-normal">Enterprises Scaled</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-navy-900 mb-2 tracking-tight" data-count="100" data-suffix="%">0%</div>
-              <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-normal">Compliance Record</div>
+              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-text-primary mb-2 tracking-tight" data-count="100" data-suffix="%">0%</div>
+              <div className="text-[10px] font-bold text-text-secondary uppercase tracking-widest leading-normal">Compliance Record</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-navy-900 mb-2 tracking-tight" data-count="98" data-suffix="%">0%</div>
-              <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-normal">Client Retention</div>
+              <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-text-primary mb-2 tracking-tight" data-count="98" data-suffix="%">0%</div>
+              <div className="text-[10px] font-bold text-text-secondary uppercase tracking-widest leading-normal">Client Retention</div>
             </div>
           </div>
 
@@ -131,20 +131,20 @@ export default async function Home() {
             <div className="flex flex-col items-start text-left">
               <div className="flex items-center gap-3 mb-6" data-animate="fade-up" data-once="true">
                 <div className="w-8 h-0.5 bg-slate-400"></div>
-                <span className="text-sm font-bold text-slate-500 uppercase tracking-widest">Acclevate Impact</span>
+                <span className="text-sm font-bold text-text-secondary uppercase tracking-widest">Acclevate Impact</span>
               </div>
 
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-slate-900 uppercase mb-6" data-animate="fade-up" data-once="true" data-delay="0.1">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-text-primary uppercase mb-6" data-animate="fade-up" data-once="true" data-delay="0.1">
                 Measurable <br /> <span className="text-slate-400">Results</span>
               </h2>
 
-              <p className="text-lg text-slate-600 mb-8 max-w-lg leading-relaxed font-light" data-animate="fade-up" data-once="true" data-delay="0.2">
+              <p className="text-lg text-text-secondary mb-8 max-w-lg leading-relaxed font-light" data-animate="fade-up" data-once="true" data-delay="0.2">
                 We don&apos;t just hand you a 50-page PDF and walk away. We get our hands dirty to deliver real financial wins and operational stability.
               </p>
 
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 text-sm font-bold text-sky-600 hover:text-sky-700 transition-colors group cursor-pointer"
+                className="inline-flex items-center gap-2 text-sm font-bold text-brand-primary hover:text-brand-deep transition-colors group cursor-pointer"
               >
                 <span>Discover our approach</span>
                 <span className="group-hover:translate-x-1.5 transition-transform duration-300">→</span>
@@ -165,17 +165,17 @@ export default async function Home() {
       </section>
 
       {/* Services Carousel Section (Now Ice Water Style) */}
-      <section className="py-32 bg-white relative overflow-hidden text-slate-900 border-t border-b border-slate-100">
+      <section className="py-32 bg-white relative overflow-hidden text-text-primary border-t border-b border-border">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center max-w-175 mx-auto mb-12">
             <div className="flex items-center justify-center gap-3 mb-6" data-animate="fade-up" data-once="true">
               <div className="w-8 h-0.5 bg-slate-400"></div>
-              <span className="text-sm font-bold text-slate-500 uppercase tracking-widest">What We Do</span>
+              <span className="text-sm font-bold text-text-secondary uppercase tracking-widest">What We Do</span>
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 tracking-tight text-slate-900" data-animate="fade-up" data-once="true" data-delay="0.1">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 tracking-tight text-text-primary" data-animate="fade-up" data-once="true" data-delay="0.1">
               Everything you need to scale.
             </h2>
-            <p className="text-lg text-slate-600 font-light leading-relaxed" data-animate="fade-up" data-once="true" data-delay="0.2">
+            <p className="text-lg text-text-secondary font-light leading-relaxed" data-animate="fade-up" data-once="true" data-delay="0.2">
               We handle the heavy lifting so you can focus on building your business.
             </p>
           </div>
@@ -185,10 +185,10 @@ export default async function Home() {
       </section>
 
       {/* Methodology / Process Section */}
-      <section className="pt-24 pb-12 md:pt-32 md:pb-20 bg-slate-50 relative">
+      <section className="pt-24 pb-12 md:pt-32 md:pb-20 bg-background relative">
         {/* Decorative subtle background orbs */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-sky-100/30 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4" />
+          <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-surface-muted/30 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4" />
           <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-amber-50/20 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4" />
         </div>
 
@@ -196,12 +196,12 @@ export default async function Home() {
           <div className="text-center max-w-200 mx-auto mb-12 md:mb-16">
             <div className="flex items-center justify-center gap-3 mb-6" data-animate="fade-up" data-once="true">
               <div className="w-8 h-0.5 bg-slate-400"></div>
-              <span className="text-sm font-bold text-slate-500 uppercase tracking-widest">Our Methodology</span>
+              <span className="text-sm font-bold text-text-secondary uppercase tracking-widest">Our Methodology</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight leading-tight text-navy-900 uppercase" data-animate="fade-up" data-once="true" data-delay="0.1">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight leading-tight text-text-primary uppercase" data-animate="fade-up" data-once="true" data-delay="0.1">
               How We Work
             </h2>
-            <p className="text-lg text-slate-600 mt-4 font-light max-w-xl mx-auto leading-relaxed" data-animate="fade-up" data-once="true" data-delay="0.2">
+            <p className="text-lg text-text-secondary mt-4 font-light max-w-xl mx-auto leading-relaxed" data-animate="fade-up" data-once="true" data-delay="0.2">
               A structured, transparent approach designed to deliver measurable growth and operational efficiency.
             </p>
           </div>
@@ -211,10 +211,10 @@ export default async function Home() {
       </section>
 
       {/* FAQ & Help Section */}
-      <section className="py-24 md:py-32 bg-white relative overflow-hidden text-slate-900 border-t border-slate-100">
+      <section className="py-24 md:py-32 bg-white relative overflow-hidden text-text-primary border-t border-border">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
 
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-12 text-slate-900" data-animate="fade-up" data-once="true">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-12 text-text-primary" data-animate="fade-up" data-once="true">
             Frequently asked questions
           </h2>
 
@@ -227,9 +227,9 @@ export default async function Home() {
 
             {/* Right: Contact Card */}
             <div className="lg:col-span-4 w-full">
-              <div className="border border-slate-200/80 rounded-base p-8 bg-surface-light shadow-premium-light flex flex-col items-start text-left">
+              <div className="border border-border/80 rounded-base p-8 bg-surface-light shadow-premium-light flex flex-col items-start text-left">
                 {/* Speech Bubble Icon */}
-                <div className="w-12 h-12 rounded-base bg-sky-50 flex items-center justify-center mb-6 text-sky-600 border border-sky-100">
+                <div className="w-12 h-12 rounded-base bg-surface-muted flex items-center justify-center mb-6 text-brand-primary border border-sky-100">
                   <svg
                     width="24"
                     height="24"
@@ -244,20 +244,20 @@ export default async function Home() {
                   </svg>
                 </div>
 
-                <h3 className="text-2xl font-bold text-slate-900 mb-4">
+                <h3 className="text-2xl font-bold text-text-primary mb-4">
                   Still have questions?
                 </h3>
 
-                <p className="text-slate-600 mb-8 font-light leading-relaxed text-sm md:text-base">
+                <p className="text-text-secondary mb-8 font-light leading-relaxed text-sm md:text-base">
                   Let&apos;s talk. Our team is here to help you make the most of Acclevate. Whether it&apos;s onboarding, integration, or support.
                 </p>
 
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-between w-full py-3.5 px-6 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl text-slate-800 font-medium transition-all shadow-xs hover:-translate-y-0.5"
+                  className="inline-flex items-center justify-between w-full py-3.5 px-6 bg-white hover:bg-background border border-border hover:border-border rounded-xl text-text-primary font-medium transition-all shadow-xs hover:-translate-y-0.5"
                 >
                   <span>Contact With Us</span>
-                  <div className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center transition-colors group-hover:bg-slate-200">
+                  <div className="w-5 h-5 rounded-full bg-background flex items-center justify-center transition-colors group-hover:bg-slate-200">
                     <svg
                       width="10"
                       height="10"
@@ -267,7 +267,7 @@ export default async function Home() {
                       strokeWidth="3"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="text-slate-600"
+                      className="text-text-secondary"
                     >
                       <path d="m9 18 6-6-6-6" />
                     </svg>

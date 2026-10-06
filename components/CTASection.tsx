@@ -52,9 +52,9 @@ export default function CTASection({
     useScrollReveal(btnRef, { y: 40, opacity: 0, duration: 0.8, delay: 0.15, once: true });
 
     return (
-        <section className="relative py-24 md:py-36 bg-linear-to-b from-slate-50 to-white text-slate-900 overflow-hidden">
+        <section className="relative py-24 md:py-36 bg-linear-to-b from-slate-50 to-white text-text-primary overflow-hidden">
             {/* Single subtle ambient glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-sky-100/40 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-surface-muted/40 rounded-full blur-[120px] pointer-events-none" />
 
             <div className="max-w-[720px] mx-auto px-6 relative z-10 flex flex-col items-center text-center">
 
@@ -63,17 +63,17 @@ export default function CTASection({
 
                 {/* Headline */}
                 {title ? (
-                    <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-5 leading-tight">
+                    <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-text-primary mb-5 leading-tight">
                         {title}
                     </h2>
                 ) : (
-                    <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-5 leading-tight">
+                    <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-text-primary mb-5 leading-tight">
                         Ready to get started?
                     </h2>
                 )}
 
                 {/* One-liner */}
-                <p className="text-base md:text-lg text-slate-500 font-light max-w-md mx-auto mb-10 leading-relaxed">
+                <p className="text-base md:text-lg text-text-secondary font-light max-w-md mx-auto mb-10 leading-relaxed">
                     {description}
                 </p>
 

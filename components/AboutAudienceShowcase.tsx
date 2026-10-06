@@ -37,7 +37,7 @@ export default function AboutAudienceShowcase() {
         {audiences.map((audience, index) => (
           <div 
             key={index} 
-            className={`group relative h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-premium-light border border-slate-200/50 cursor-pointer ${index === 3 ? 'lg:col-span-2' : ''} ${index === 4 ? 'md:col-span-2 lg:col-span-1' : ''}`}
+            className={`group relative h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-premium-light border border-border/50 cursor-pointer ${index === 3 ? 'lg:col-span-2' : ''} ${index === 4 ? 'md:col-span-2 lg:col-span-1' : ''}`}
           >
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
@@ -51,12 +51,12 @@ export default function AboutAudienceShowcase() {
             </div>
 
             {/* Gradient Overlay */}
-            <div className="absolute inset-0 z-10 bg-gradient-to-t from-navy-900/90 via-navy-900/40 to-transparent transition-opacity duration-500 group-hover:from-navy-900 group-hover:via-navy-900/80" />
+            <div className="absolute inset-0 z-10 bg-gradient-to-t from-ink/90 via-navy-900/40 to-transparent transition-opacity duration-500 group-hover:from-ink group-hover:via-navy-900/80" />
 
             {/* Content Container */}
             <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-10 z-20 text-left">
               {/* Animated Line */}
-              <div className="w-8 h-[2px] bg-sky-400 mb-6 transition-all duration-500 group-hover:w-16" />
+              <div className="w-8 h-[2px] bg-brand-primary mb-6 transition-all duration-500 group-hover:w-16" />
               
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight drop-shadow-sm">
                 {audience.title}

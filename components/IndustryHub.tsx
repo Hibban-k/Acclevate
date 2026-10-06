@@ -54,15 +54,15 @@ export default function IndustryHub() {
   return (
     <div className="w-full">
       <div ref={headerRef} className="text-center max-w-[800px] mx-auto mb-16">
-        <h2 className="text-[clamp(2.5rem,5vw,3.5rem)] font-bold tracking-tight leading-tight text-navy-900 uppercase">
+        <h2 className="text-[clamp(2.5rem,5vw,3.5rem)] font-bold tracking-tight leading-tight text-text-primary uppercase">
           Industry Hub
         </h2>
-        <p className="text-xl text-slate-600 mt-6 max-w-2xl mx-auto leading-relaxed font-light">
+        <p className="text-xl text-text-secondary mt-6 max-w-2xl mx-auto leading-relaxed font-light">
           We bring deep domain expertise to a diverse range of sectors, tailoring our operational and financial strategies to the unique demands of your market.
         </p>
       </div>
 
-      <div ref={panelsRef} className="flex flex-col md:flex-row w-full h-[600px] md:h-[600px] rounded-base overflow-hidden bg-navy-900 shadow-premium-dark border border-white/10">
+      <div ref={panelsRef} className="flex flex-col md:flex-row w-full h-[600px] md:h-[600px] rounded-base overflow-hidden bg-ink shadow-premium-dark border border-white/10">
         {industries.map((industry, index) => {
           const isActive = activeIndex === index;
           
@@ -91,7 +91,7 @@ export default function IndustryHub() {
                   alt={industry.title} 
                   className="object-cover opacity-60" 
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/60 md:via-navy-900/40 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink via-navy-900/60 md:via-navy-900/40 to-transparent pointer-events-none" />
                 
                 {/* Content at Bottom Left */}
                 <div className="absolute bottom-4 left-6 right-6 md:bottom-10 md:left-10 md:right-10 text-left">

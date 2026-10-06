@@ -79,8 +79,8 @@ export default function ProcessSlider() {
               </div>
 
               <div className={`relative z-20 max-w-3xl text-left transition-all duration-500 ease-out ${activeIndex === 0 ? 'opacity-100 translate-y-0' : 'opacity-40 translate-y-4'}`}>
-                <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-sky-500/15 border border-sky-400/30 text-sky-400 text-xs md:text-sm font-semibold tracking-wider mb-5 uppercase backdrop-blur-xs">
-                  <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
+                <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-brand-primary/15 border border-brand-primary/30 text-brand-primary text-xs md:text-sm font-semibold tracking-wider mb-5 uppercase backdrop-blur-xs">
+                  <span className="w-2 h-2 rounded-full bg-brand-primary animate-pulse" />
                   Step 1 of 3
                 </div>
                 <h3 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight leading-none uppercase">
@@ -108,8 +108,8 @@ export default function ProcessSlider() {
               </div>
 
               <div className={`relative z-20 max-w-3xl text-left transition-all duration-500 ease-out ${activeIndex === 1 ? 'opacity-100 translate-y-0' : 'opacity-40 translate-y-4'}`}>
-                <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-sky-500/15 border border-sky-400/30 text-sky-400 text-xs md:text-sm font-semibold tracking-wider mb-5 uppercase backdrop-blur-xs">
-                  <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
+                <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-brand-primary/15 border border-brand-primary/30 text-brand-primary text-xs md:text-sm font-semibold tracking-wider mb-5 uppercase backdrop-blur-xs">
+                  <span className="w-2 h-2 rounded-full bg-brand-primary animate-pulse" />
                   Step 2 of 3
                 </div>
                 <h3 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight leading-none uppercase">
@@ -137,8 +137,8 @@ export default function ProcessSlider() {
               </div>
 
               <div className={`relative z-20 max-w-3xl text-left transition-all duration-500 ease-out ${activeIndex === 2 ? 'opacity-100 translate-y-0' : 'opacity-40 translate-y-4'}`}>
-                <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-sky-500/15 border border-sky-400/30 text-sky-400 text-xs md:text-sm font-semibold tracking-wider mb-5 uppercase backdrop-blur-xs">
-                  <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
+                <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-brand-primary/15 border border-brand-primary/30 text-brand-primary text-xs md:text-sm font-semibold tracking-wider mb-5 uppercase backdrop-blur-xs">
+                  <span className="w-2 h-2 rounded-full bg-brand-primary animate-pulse" />
                   Step 3 of 3
                 </div>
                 <h3 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight leading-none uppercase">
@@ -158,7 +158,7 @@ export default function ProcessSlider() {
                 onClick={() => handleTabClick(0)}
                 className="group relative py-4 sm:py-5 md:py-6 px-4 md:px-8 flex flex-col items-center md:items-start text-center md:text-left transition-all duration-200 cursor-pointer focus:outline-none"
               >
-                <span className={`text-[10px] md:text-xs font-semibold uppercase tracking-widest mb-1 transition-colors duration-200 ${activeIndex === 0 ? 'text-sky-400' : 'text-slate-500 group-hover:text-slate-400'}`}>
+                <span className={`text-[10px] md:text-xs font-semibold uppercase tracking-widest mb-1 transition-colors duration-200 ${activeIndex === 0 ? 'text-brand-primary' : 'text-text-secondary group-hover:text-slate-400'}`}>
                   Step 01
                 </span>
                 <span className={`text-xs sm:text-sm md:text-base font-medium transition-colors duration-200 ${activeIndex === 0 ? 'text-white font-semibold' : 'text-slate-400 group-hover:text-slate-300'}`}>
@@ -171,7 +171,7 @@ export default function ProcessSlider() {
                 onClick={() => handleTabClick(1)}
                 className="group relative py-4 sm:py-5 md:py-6 px-4 md:px-8 flex flex-col items-center md:items-start text-center md:text-left transition-all duration-200 cursor-pointer focus:outline-none"
               >
-                <span className={`text-[10px] md:text-xs font-semibold uppercase tracking-widest mb-1 transition-colors duration-200 ${activeIndex === 1 ? 'text-sky-400' : 'text-slate-500 group-hover:text-slate-400'}`}>
+                <span className={`text-[10px] md:text-xs font-semibold uppercase tracking-widest mb-1 transition-colors duration-200 ${activeIndex === 1 ? 'text-brand-primary' : 'text-text-secondary group-hover:text-slate-400'}`}>
                   Step 02
                 </span>
                 <span className={`text-xs sm:text-sm md:text-base font-medium transition-colors duration-200 ${activeIndex === 1 ? 'text-white font-semibold' : 'text-slate-400 group-hover:text-slate-300'}`}>
@@ -184,7 +184,7 @@ export default function ProcessSlider() {
                 onClick={() => handleTabClick(2)}
                 className="group relative py-4 sm:py-5 md:py-6 px-4 md:px-8 flex flex-col items-center md:items-start text-center md:text-left transition-all duration-200 cursor-pointer focus:outline-none"
               >
-                <span className={`text-[10px] md:text-xs font-semibold uppercase tracking-widest mb-1 transition-colors duration-200 ${activeIndex === 2 ? 'text-sky-400' : 'text-slate-500 group-hover:text-slate-400'}`}>
+                <span className={`text-[10px] md:text-xs font-semibold uppercase tracking-widest mb-1 transition-colors duration-200 ${activeIndex === 2 ? 'text-brand-primary' : 'text-text-secondary group-hover:text-slate-400'}`}>
                   Step 03
                 </span>
                 <span className={`text-xs sm:text-sm md:text-base font-medium transition-colors duration-200 ${activeIndex === 2 ? 'text-white font-semibold' : 'text-slate-400 group-hover:text-slate-300'}`}>

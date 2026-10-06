@@ -47,7 +47,7 @@ export default function ProcessTimeline() {
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true, amount: 0.8 }}
                   transition={{ type: "spring", stiffness: 100, damping: 20, delay: stepDelay }}
-                  className="w-4 h-4 bg-slate-50 rounded-full ring-4 ring-navy-800 relative z-20" 
+                  className="w-4 h-4 bg-background rounded-full ring-4 ring-navy-800 relative z-20" 
                />
             </div>
 
@@ -56,7 +56,7 @@ export default function ProcessTimeline() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98], delay: stepDelay }}
-              className="text-center bg-navy-800/80 p-8 md:p-10 rounded-4xl shadow-sm border border-navy-700 flex flex-col items-center w-full relative z-20"
+              className="text-center bg-ink/80 p-8 md:p-10 rounded-4xl shadow-sm border border-navy-700 flex flex-col items-center w-full relative z-20"
             >
               <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
               <p className="text-lg text-slate-300 leading-relaxed font-light">{item.desc}</p>

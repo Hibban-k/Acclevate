@@ -48,44 +48,44 @@ export default function AdminDashboard() {
     return (
         <div>
             <div className="mb-8">
-                <h1 className="text-3xl font-bold text-slate-900">Dashboard</h1>
-                <p className="text-slate-600 mt-1">
+                <h1 className="text-3xl font-bold text-text-primary">Dashboard</h1>
+                <p className="text-text-secondary mt-1">
                     Welcome back, {session?.user?.name || 'Admin'}!
                 </p>
             </div>
 
             {loading ? (
-                <div className="text-slate-500">Loading...</div>
+                <div className="text-text-secondary">Loading...</div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
+                    <div className="bg-white rounded-xl p-6 shadow-sm border border-border">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-slate-600 text-sm">Total Services</p>
-                                <p className="text-3xl font-bold text-slate-900 mt-1">{stats.totalServices}</p>
+                                <p className="text-text-secondary text-sm">Total Services</p>
+                                <p className="text-3xl font-bold text-text-primary mt-1">{stats.totalServices}</p>
                             </div>
-                            <div className="w-12 h-12 bg-navy-600/10 rounded-lg flex items-center justify-center text-2xl">
+                            <div className="w-12 h-12 bg-charcoal/10 rounded-lg flex items-center justify-center text-2xl">
                                 🔧
                             </div>
                         </div>
                     </div>
 
-                    <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
+                    <div className="bg-white rounded-xl p-6 shadow-sm border border-border">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-slate-600 text-sm">Total Inquiries</p>
-                                <p className="text-3xl font-bold text-slate-900 mt-1">{stats.totalInquiries}</p>
+                                <p className="text-text-secondary text-sm">Total Inquiries</p>
+                                <p className="text-3xl font-bold text-text-primary mt-1">{stats.totalInquiries}</p>
                             </div>
-                            <div className="w-12 h-12 bg-navy-600/10 rounded-lg flex items-center justify-center text-2xl">
+                            <div className="w-12 h-12 bg-charcoal/10 rounded-lg flex items-center justify-center text-2xl">
                                 📧
                             </div>
                         </div>
                     </div>
 
-                    <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
+                    <div className="bg-white rounded-xl p-6 shadow-sm border border-border">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-slate-600 text-sm">New Inquiries</p>
+                                <p className="text-text-secondary text-sm">New Inquiries</p>
                                 <p className="text-3xl font-bold text-green-600 mt-1">{stats.newInquiries}</p>
                             </div>
                             <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-2xl">

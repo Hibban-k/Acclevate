@@ -54,15 +54,15 @@ function MilestoneItem({ m, index }: { m: typeof milestones[0], index: number })
             {m.year}
           </span>
           <div className="flex flex-col">
-            <span className="text-[10px] md:text-xs font-bold text-sky-600 uppercase tracking-widest">{m.label}</span>
-            <div className="w-6 md:w-8 h-0.5 bg-sky-500 mt-1.5 md:mt-2" />
+            <span className="text-[10px] md:text-xs font-bold text-brand-primary uppercase tracking-widest">{m.label}</span>
+            <div className="w-6 md:w-8 h-0.5 bg-brand-primary mt-1.5 md:mt-2" />
           </div>
         </div>
 
-        <h3 className="text-xl md:text-3xl lg:text-4xl font-bold text-slate-900 leading-tight tracking-tight mb-4 md:mb-6">
+        <h3 className="text-xl md:text-3xl lg:text-4xl font-bold text-text-primary leading-tight tracking-tight mb-4 md:mb-6">
           {m.heading}
         </h3>
-        <p className="text-sm md:text-base lg:text-lg text-slate-600 font-light leading-relaxed mb-5 md:mb-8">
+        <p className="text-sm md:text-base lg:text-lg text-text-secondary font-light leading-relaxed mb-5 md:mb-8">
           {m.body}
         </p>
 
@@ -71,9 +71,9 @@ function MilestoneItem({ m, index }: { m: typeof milestones[0], index: number })
           {m.tag.split(' · ').map((tag, j) => (
             <span
               key={j}
-              className="inline-flex items-center text-sm md:text-base font-medium text-slate-700"
+              className="inline-flex items-center text-sm md:text-base font-medium text-text-secondary"
             >
-              <svg className="w-4 h-4 mr-3 text-slate-900 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <svg className="w-4 h-4 mr-3 text-text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
               {tag}
@@ -84,7 +84,7 @@ function MilestoneItem({ m, index }: { m: typeof milestones[0], index: number })
 
       {/* Image Side */}
       <div ref={imgRef} className="w-full lg:w-1/2 relative">
-        <div className="relative h-60 md:h-95 lg:h-105 w-full overflow-hidden rounded-2xl shadow-xl border border-slate-200/50">
+        <div className="relative h-60 md:h-95 lg:h-105 w-full overflow-hidden rounded-2xl shadow-xl border border-border/50">
           <Image
             src={m.img}
             alt={m.heading}
@@ -93,7 +93,7 @@ function MilestoneItem({ m, index }: { m: typeof milestones[0], index: number })
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
           {/* Navy overlay fading to clear */}
-          <div className="absolute inset-0 bg-linear-to-t from-navy-900/30 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-t from-ink/30 to-transparent pointer-events-none" />
           {/* Caption on image bottom */}
           <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 flex items-center gap-2">
             <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
@@ -103,8 +103,8 @@ function MilestoneItem({ m, index }: { m: typeof milestones[0], index: number })
           </div>
         </div>
         {/* Milestone index */}
-        <div className="absolute -top-3 -right-3 md:-top-4 md:-right-4 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full border border-slate-200 shadow-md flex items-center justify-center z-10">
-          <span className="text-[10px] md:text-xs font-black text-navy-900">{String(index + 1).padStart(2, '0')}</span>
+        <div className="absolute -top-3 -right-3 md:-top-4 md:-right-4 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full border border-border shadow-md flex items-center justify-center z-10">
+          <span className="text-[10px] md:text-xs font-black text-text-primary">{String(index + 1).padStart(2, '0')}</span>
         </div>
       </div>
     </div>
@@ -117,24 +117,24 @@ export default function OurStory() {
   useScrollReveal(headerRef, { once: true });
 
   return (
-    <section className="py-20 md:py-32 bg-slate-50 relative overflow-hidden">
+    <section className="py-20 md:py-32 bg-background relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
         {/* Section Header */}
-        <div ref={headerRef} className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14 md:mb-28 border-b border-slate-300 pb-10">
+        <div ref={headerRef} className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14 md:mb-28 border-b border-border pb-10">
           <div>
             <div className="flex items-center gap-3 mb-5">
               <div className="w-8 h-0.5 bg-slate-400"></div>
-              <span className="text-sm font-bold text-slate-500 uppercase tracking-widest">
+              <span className="text-sm font-bold text-text-secondary uppercase tracking-widest">
                 Our Story
               </span>
             </div>
-            <h2 className="text-3xl md:text-[clamp(2.5rem,5vw,4rem)] font-extrabold tracking-tight text-slate-900 leading-tight uppercase">
+            <h2 className="text-3xl md:text-[clamp(2.5rem,5vw,4rem)] font-extrabold tracking-tight text-text-primary leading-tight uppercase">
               Built for Real<br className="hidden md:block" />
               <span className="text-slate-400">Business Needs</span>
             </h2>
           </div>
-          <p className="text-base md:text-lg text-slate-500 font-light max-w-sm leading-relaxed md:text-right">
+          <p className="text-base md:text-lg text-text-secondary font-light max-w-sm leading-relaxed md:text-right">
             From a founding team in Bangalore in 2024 to a multi-disciplinary business partner across accounting, tax, legal, and digital growth.
           </p>
         </div>
