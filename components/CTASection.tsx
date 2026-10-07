@@ -54,9 +54,9 @@ export default function CTASection({
     return (
         <section className="relative py-24 md:py-36 bg-linear-to-b from-slate-50 to-white text-text-primary overflow-hidden">
             {/* Single subtle ambient glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-surface-muted/40 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-100 bg-surface-muted/40 rounded-full blur-[120px] pointer-events-none" />
 
-            <div className="max-w-[720px] mx-auto px-6 relative z-10 flex flex-col items-center text-center">
+            <div className="max-w-180 mx-auto px-6 relative z-10 flex flex-col items-center text-center">
 
                 {/* Thin divider line */}
                 <div ref={dividerRef} className="w-12 h-0.5 bg-slate-300 mb-10" />

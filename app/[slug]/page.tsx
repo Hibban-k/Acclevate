@@ -115,7 +115,7 @@ export default async function CollectionPage({ params }: PageProps) {
                     ══════════════════════════════════════════════════════ */}
                 <section className="min-h-[52vh] lg:min-h-[65vh] py-28 relative overflow-hidden flex flex-col items-center justify-center text-center">
                     <HeroBackground />
-                    <div className="w-full max-w-[900px] mx-auto px-6 relative z-10 flex flex-col items-center gap-6">
+                    <div className="w-full max-w-225 mx-auto px-6 relative z-10 flex flex-col items-center gap-6">
 
                         <div data-animate="fade-up" data-once="true" className="flex items-center justify-center gap-2 text-sm font-bold tracking-widest text-slate-400 uppercase">
                             <Link href="/" className="hover:text-text-primary transition-colors">Home</Link>
@@ -173,7 +173,7 @@ export default async function CollectionPage({ params }: PageProps) {
                                     id={i === 0 ? 'services' : undefined}
                                     className={`w-full py-10 md:py-14 ${sectionBg} relative overflow-hidden`}
                                 >
-                                    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                                    <div className="max-w-360 mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                                         {/* Inner Container Div (Light for 1st & 3rd, Dark for 2nd & 4th) */}
                                         <div
                                             data-animate="fade-up"
@@ -186,7 +186,7 @@ export default async function CollectionPage({ params }: PageProps) {
                                         >
                                             {/* Subtle texture inside dark inner div */}
                                             {isInnerDark && (
-                                                <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none" />
+                                                <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#ffffff_1px,transparent_1px)] bg-size-[32px_32px] pointer-events-none" />
                                             )}
 
                                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center relative z-10">
@@ -246,7 +246,7 @@ export default async function CollectionPage({ params }: PageProps) {
                         {/* Overflow services — separate light section */}
                         {overflowServices.length > 0 && (
                             <section className="py-20 md:py-24 bg-white relative overflow-hidden">
-                                <div className="max-w-[1280px] mx-auto px-6 relative z-10">
+                                <div className="max-w-7xl mx-auto px-6 relative z-10">
                                     <p data-animate="fade-up" className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-8">More Services</p>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                         {overflowServices.map((service: any, k: number) => (
@@ -270,7 +270,7 @@ export default async function CollectionPage({ params }: PageProps) {
                 {!isCategory && entity.industryIntro && (
                     <section className="py-20 md:py-28 bg-background relative overflow-hidden">
                         <div className="absolute top-0 left-0 w-[40vw] h-[40vw] bg-surface-muted/40 rounded-full blur-[120px] -translate-y-1/2 -translate-x-1/3 pointer-events-none" />
-                        <div className="max-w-[1280px] mx-auto px-6 relative z-10">
+                        <div className="max-w-7xl mx-auto px-6 relative z-10">
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 items-center">
                                 <div className="lg:col-span-4">
                                     <div data-animate="fade-up" data-once="true" className="flex items-center gap-3 mb-6">
@@ -300,7 +300,7 @@ export default async function CollectionPage({ params }: PageProps) {
                 {!isCategory && entity.painPoints && entity.painPoints.length > 0 && (
                     <section className="py-20 md:py-28 bg-ink text-white relative overflow-hidden">
                         <div className="absolute inset-0 opacity-[0.04] bg-[url('/grid-pattern.svg')]" />
-                        <div className="max-w-[1280px] mx-auto px-6 relative z-10">
+                        <div className="max-w-7xl mx-auto px-6 relative z-10">
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 items-start">
                                 <div className="lg:col-span-4">
                                     <div data-animate="fade-up" data-once="true" className="flex items-center gap-3 mb-6">
@@ -347,7 +347,7 @@ export default async function CollectionPage({ params }: PageProps) {
                 {!isCategory && (
                     <section id="services" className="py-24 md:py-32 bg-white relative overflow-hidden">
                         <div className="absolute bottom-0 right-0 w-[40vw] h-[40vw] bg-background rounded-full blur-[100px] pointer-events-none" />
-                        <div className="max-w-[1280px] mx-auto px-6 relative z-10">
+                        <div className="max-w-7xl mx-auto px-6 relative z-10">
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 mb-14 pb-10">
                                 <div className="lg:col-span-7">
                                     <div data-animate="fade-up" data-once="true" className="flex items-center gap-3 mb-5">
@@ -416,7 +416,7 @@ export default async function CollectionPage({ params }: PageProps) {
                 {siblings.length > 0 && (
                     <section className="py-24 md:py-32 bg-background relative overflow-hidden">
                         <div className="absolute top-0 left-0 w-[40vw] h-[40vw] bg-surface-muted/40 rounded-full blur-[130px] -translate-y-1/3 -translate-x-1/3 pointer-events-none" />
-                        <div className="max-w-[1280px] mx-auto px-6 relative z-10">
+                        <div className="max-w-7xl mx-auto px-6 relative z-10">
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 mb-14 pb-10">
                                 <div className="lg:col-span-7">
                                     <div data-animate="fade-up" className="flex items-center gap-3 mb-5">

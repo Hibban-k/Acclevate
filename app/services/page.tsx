@@ -1,4 +1,4 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import CTASection from '@/components/CTASection';
 import HeroBackground from '@/components/HeroBackground';
 import ServicesCategoryCards from '@/components/ServicesCategoryCards';
@@ -19,7 +19,7 @@ export default function ServicesPage() {
                 <section className="min-h-[50vh] lg:min-h-[65vh] py-28 relative overflow-hidden flex flex-col items-center justify-center text-center">
                     <HeroBackground />
                     
-                    <div className="w-full max-w-[1000px] mx-auto px-6 relative z-10 flex flex-col items-center justify-center gap-6">
+                    <div className="w-full max-w-250 mx-auto px-6 relative z-10 flex flex-col items-center justify-center gap-6">
                         <div data-animate="fade-up" data-once="true" className="flex items-center justify-center gap-2 text-sm font-bold tracking-widest text-slate-400 uppercase mb-2">
                             <Link href="/" className="hover:text-text-primary transition-colors">Home</Link>
                             <span>/</span>

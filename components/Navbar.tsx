@@ -18,6 +18,7 @@ export default function Navbar() {
 
   useEffect(() => {
     if (!headerRef.current || typeof window === 'undefined') return;
+    if (pathname.startsWith('/admin')) return;
 
     const ctx = gsap.context(() => {
       gsap.to(headerRef.current, {
@@ -37,7 +38,10 @@ export default function Navbar() {
     });
 
     return () => ctx.revert();
-  }, []);
+  }, [pathname]);
+
+  // Early return AFTER all hooks
+  if (pathname.startsWith('/admin')) return null;
 
   const navItems = [
     { href: '/services', label: 'Services' },
@@ -52,7 +56,7 @@ export default function Navbar() {
 
   return (
     <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50 w-full pt-4 px-4 border-b border-transparent transition-all">
-      <div className="mx-auto flex justify-between items-center h-[72px] w-full max-w-[1280px] px-6">
+      <div className="mx-auto flex justify-between items-center h-18 w-full max-w-7xl px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity py-2">
           <Image
@@ -103,7 +107,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <nav className="md:hidden fixed top-[72px] left-0 right-0 bg-white p-6 flex flex-col gap-4 z-999">
+        <nav className="md:hidden fixed top-18 left-0 right-0 bg-white p-6 flex flex-col gap-4 z-999">
           {navItems.map((item) => (
             <Link
               key={item.href}
