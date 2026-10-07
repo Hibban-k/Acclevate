@@ -499,7 +499,7 @@ const Footer = ({ baseUrl }: { baseUrl: string }) => (
     <View style={styles.footerContactBar}>
       <View style={styles.contactChunk}>
         <PhoneIcon />
-        <Text style={styles.contactText}>+91 98765 43210</Text>
+        <Text style={styles.contactText}>+91 94828 34887</Text>
       </View>
       <View style={styles.dividerV} />
       <View style={styles.contactChunk}>
@@ -514,7 +514,7 @@ const Footer = ({ baseUrl }: { baseUrl: string }) => (
       <View style={styles.dividerV} />
       <View style={styles.contactChunk}>
         <PinIcon />
-        <Text style={styles.contactText}>123 Business Street,{'\n'}Your City, Your State – 123456</Text>
+        <Text style={styles.contactText}>Bengaluru</Text>
       </View>
       <View style={styles.dividerV} />
       <Text style={styles.taglineTeal}>{'Your Growth\nOur Priority'}</Text>

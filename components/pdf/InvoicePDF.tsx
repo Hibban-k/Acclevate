@@ -422,7 +422,7 @@ export const InvoicePDF: React.FC<InvoiceProps> = ({ data }) => (
         <View style={styles.footerContactBar}>
           <View style={styles.contactChunk}>
             <PhoneIcon />
-            <Text style={styles.contactText}>{data.phone || '+91 98765 43210'}</Text>
+            <Text style={styles.contactText}>{data.phone || '+91 94828 34887'}</Text>
           </View>
           <View style={styles.dividerV} />
           <View style={styles.contactChunk}>
@@ -437,7 +437,7 @@ export const InvoicePDF: React.FC<InvoiceProps> = ({ data }) => (
           <View style={styles.dividerV} />
           <View style={styles.contactChunk}>
             <PinIcon />
-            <Text style={styles.contactText}>{data.address || '123 Business Street,\nYour City, Your State – 123456'}</Text>
+            <Text style={styles.contactText}>{data.address || 'Bengaluru'}</Text>
           </View>
         </View>
       </View>
@@ -479,8 +479,7 @@ export const InvoicePDF: React.FC<InvoiceProps> = ({ data }) => (
         <View style={styles.clientRight}>
           <Text style={styles.fromLabel}>From</Text>
           <Text style={styles.clientName}>Acclevate Business Solutions</Text>
-          <Text style={styles.clientLine}>123 Business Street,</Text>
-          <Text style={styles.clientLine}>Your City, Your State – 123456</Text>
+          <Text style={styles.clientLine}>Bengaluru</Text>
           <Text style={styles.clientLine}>GSTIN: 27ABCDE1234F1Z5</Text>
         </View>
       </View>
@@ -538,3 +537,5 @@ export const InvoicePDF: React.FC<InvoiceProps> = ({ data }) => (
     </Page>
   </Document>
 );
+
+

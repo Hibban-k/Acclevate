@@ -273,7 +273,7 @@ export const LetterheadPDF: React.FC<LetterheadProps> = ({ data }) => (
         <View style={styles.footerContactRow1}>
           <View style={styles.contactChunk}>
             <PhoneIcon />
-            <Text style={styles.contactText}>{data.phone || '+91 98765 43210'}</Text>
+            <Text style={styles.contactText}>{data.phone || '+91 94828 34887'}</Text>
           </View>
           <View style={styles.contactChunk}>
             <MailIcon />
@@ -289,7 +289,7 @@ export const LetterheadPDF: React.FC<LetterheadProps> = ({ data }) => (
         <View style={styles.footerContactRow2}>
           <View style={styles.contactChunk}>
             <PinIcon />
-            <Text style={styles.contactText}>{data.address || '123 Business Street, Your City, Your State – 123456'}</Text>
+            <Text style={styles.contactText}>{data.address || 'Bengaluru'}</Text>
           </View>
         </View>
 
