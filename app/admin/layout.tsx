@@ -17,6 +17,9 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
         { href: '/admin', label: 'Dashboard', icon: '📊' },
         { href: '/admin/services', label: 'Services', icon: '🔧' },
         { href: '/admin/inquiries', label: 'Inquiries', icon: '📧' },
+        { href: '/admin/quotation', label: 'Quotation', icon: '📄' },
+        { href: '/admin/letterhead', label: 'Letterhead', icon: '📝' },
+        { href: '/admin/invoice', label: 'Invoice', icon: '🧾' },
     ];
 
     return (

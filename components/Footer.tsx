@@ -4,8 +4,10 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useStaggerReveal } from '@/hooks/useGSAP';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
+    const pathname = usePathname();
     const gridRef = useRef<HTMLDivElement>(null);
     
     useStaggerReveal(gridRef, '.footer-col', {
@@ -14,6 +16,8 @@ export default function Footer() {
         duration: 0.6,
         stagger: 0.1,
     });
+
+    if (pathname.startsWith('/admin')) return null;
 
     return (
         <footer className="bg-ink border-t py-20 pb-8 relative overflow-hidden text-white">
