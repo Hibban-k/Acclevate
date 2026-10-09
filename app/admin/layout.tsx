@@ -4,9 +4,11 @@ import { SessionProvider } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
+import { useState } from 'react';
 
 function AdminLayoutContent({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     // Don't show sidebar on login page
     if (pathname === '/admin/login') {
@@ -22,12 +24,48 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
         { href: '/admin/invoice', label: 'Invoice', icon: '🧾' },
     ];
 
+    const closeSidebar = () => setIsSidebarOpen(false);
+
     return (
-        <div className="min-h-screen bg-background flex">
+        <div className="min-h-screen bg-background flex flex-col md:flex-row">
+            {/* Mobile Header */}
+            <div className="md:hidden flex items-center justify-between p-4 bg-white border-b border-gray-200">
+                <Link href="/admin">
+                    <Image
+                        src="/logo.jpg"
+                        alt="Acclevate"
+                        width={120}
+                        height={34}
+                        className="h-7 w-auto"
+                    />
+                </Link>
+                <button
+                    onClick={() => setIsSidebarOpen(true)}
+                    className="p-2 text-gray-600 hover:bg-gray-100 rounded-md"
+                >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+
+            {/* Sidebar Overlay */}
+            {isSidebarOpen && (
+                <div 
+                    className="fixed inset-0 bg-black/50 z-40 md:hidden"
+                    onClick={closeSidebar}
+                />
+            )}
+
             {/* Sidebar */}
-            <aside className="w-64 bg-white flex flex-col">
-                <div className="p-6">
-                    <Link href="/admin">
+            <aside className={`
+                fixed inset-y-0 left-0 z-50 w-64 bg-white flex flex-col shadow-xl md:shadow-none
+                transform transition-transform duration-300 ease-in-out
+                md:relative md:translate-x-0
+                ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+            `}>
+                <div className="p-6 flex items-center justify-between">
+                    <Link href="/admin" onClick={closeSidebar}>
                         <Image
                             src="/logo.jpg"
                             alt="Acclevate"
@@ -36,13 +74,22 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
                             className="h-8 w-auto"
                         />
                     </Link>
+                    <button 
+                        className="md:hidden p-2 text-gray-500 hover:bg-gray-100 rounded-md"
+                        onClick={closeSidebar}
+                    >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
 
-                <nav className="flex-1 p-4">
+                <nav className="flex-1 p-4 overflow-y-auto">
                     {navItems.map((item) => (
                         <Link
                             key={item.href}
                             href={item.href}
+                            onClick={closeSidebar}
                             className={`flex items-center gap-3 px-4 py-3 rounded-lg mb-1 transition-colors ${pathname === item.href
                                     ? 'bg-charcoal text-white'
                                     : 'text-text-secondary hover:bg-background'
@@ -54,7 +101,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
                     ))}
                 </nav>
 
-                <div className="p-4">
+                <div className="p-4 border-t border-gray-100">
                     <Link
                         href="/"
                         className="flex items-center gap-3 px-4 py-3 text-text-secondary hover:bg-background rounded-lg"
@@ -73,7 +120,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
             </aside>
 
             {/* Main Content */}
-            <main className="flex-1 p-8">
+            <main className="flex-1 p-4 md:p-8 overflow-x-hidden">
                 {children}
             </main>
         </div>
@@ -87,5 +134,3 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </SessionProvider>
     );
 }
-
-

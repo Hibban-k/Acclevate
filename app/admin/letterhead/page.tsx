@@ -20,6 +20,7 @@ export default function LetterheadGenerator() {
     const [content, setContent] = useState('Thank you for giving us the opportunity to support your business needs. At Acclevate Business Solutions, we aim to provide expert guidance and end-to-end assistance in the areas of compliance, accounting, registration and business growth.\n\nWe understand the importance of a strong foundation for your business, and we are committed to delivering practical, result-oriented solutions that help you stay compliant and move forward with confidence.\n\nPlease find attached our detailed quotation for the proposed services. Should you have any questions or need any further information, we would be happy to assist you.\n\nWe look forward to the opportunity to work with you.');
 
     const [mounted, setMounted] = useState(false);
+    const [showPreview, setShowPreview] = useState(false);
     useEffect(() => { setMounted(true); }, []);
 
     const data = {
@@ -29,21 +30,29 @@ export default function LetterheadGenerator() {
     };
 
     return (
-        <div className="flex gap-8 h-[calc(100vh-8rem)]">
+        <div className="relative h-[calc(100vh-8rem)]">
             {/* Admin Controls */}
-            <div className="w-1/2 lg:w-[45%] bg-white p-6 rounded-xl shadow-sm overflow-y-auto">
-                <div className="flex justify-between items-center mb-6 sticky top-0 bg-white z-10 pb-4 border-b border-gray-100">
+            <div className="w-full max-w-4xl mx-auto bg-white p-4 md:p-6 rounded-xl shadow-sm overflow-y-auto h-full">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sticky top-0 bg-white z-10 pb-4 border-b border-gray-100 gap-4">
                     <h2 className="text-xl font-bold">Letterhead Details</h2>
-                    {mounted && (
-                        <PDFDownloadLink 
-                            document={<LetterheadPDF data={data} />} 
-                            fileName={`Letterhead_${referenceNo.replace(/\//g, '-')}.pdf`}
-                            className="bg-brand-primary text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-brand-deep transition-colors"
+                    <div className="flex gap-3">
+                        <button 
+                            onClick={() => setShowPreview(true)}
+                            className="bg-gray-100 text-gray-700 px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors"
                         >
-                            {/* @ts-ignore */}
-                            {({ loading }) => (loading ? 'Loading...' : 'Download PDF')}
-                        </PDFDownloadLink>
-                    )}
+                            Show Preview
+                        </button>
+                        {mounted && (
+                            <PDFDownloadLink 
+                                document={<LetterheadPDF data={data} />} 
+                                fileName={`Letterhead_${referenceNo.replace(/\//g, '-')}.pdf`}
+                                className="bg-brand-primary text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-brand-deep transition-colors"
+                            >
+                                {/* @ts-ignore */}
+                                {({ loading }) => (loading ? 'Loading...' : 'Download PDF')}
+                            </PDFDownloadLink>
+                        )}
+                    </div>
                 </div>
 
                 <div className="space-y-4">
@@ -79,16 +88,29 @@ export default function LetterheadGenerator() {
                 </div>
             </div>
 
-            {/* LIVE REACT-PDF PREVIEW */}
-            <div className="flex-1 bg-gray-200 rounded-xl overflow-hidden shadow-inner">
-                {mounted ? (
-                    <PDFViewer width="100%" height="100%" className="border-none">
-                        <LetterheadPDF data={data} />
-                    </PDFViewer>
-                ) : (
-                    <div className="w-full h-full flex items-center justify-center">Loading PDF Viewer...</div>
-                )}
-            </div>
+            {/* PDF PREVIEW MODAL */}
+            {showPreview && (
+                <div className="fixed inset-0 z-50 bg-black/80 flex flex-col p-4 md:p-8">
+                    <div className="flex justify-between items-center mb-4 text-white max-w-5xl mx-auto w-full">
+                        <h2 className="text-xl font-bold">PDF Preview</h2>
+                        <button 
+                            onClick={() => setShowPreview(false)} 
+                            className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-lg font-medium transition-colors"
+                        >
+                            Close Preview
+                        </button>
+                    </div>
+                    <div className="flex-1 bg-white rounded-xl overflow-hidden shadow-2xl max-w-5xl mx-auto w-full">
+                        {mounted ? (
+                            <PDFViewer width="100%" height="100%" className="border-none">
+                                <LetterheadPDF data={data} />
+                            </PDFViewer>
+                        ) : (
+                            <div className="w-full h-full flex items-center justify-center">Loading PDF Viewer...</div>
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

@@ -48,6 +48,7 @@ export default function InvoiceGenerator() {
     };
 
     const [mounted, setMounted] = useState(false);
+    const [showPreview, setShowPreview] = useState(false);
     useEffect(() => { setMounted(true); }, []);
 
     const data = {
@@ -57,20 +58,28 @@ export default function InvoiceGenerator() {
     };
 
     return (
-        <div className="flex gap-8 h-[calc(100vh-8rem)]">
-            <div className="w-1/2 lg:w-[45%] bg-white p-6 rounded-xl shadow-sm overflow-y-auto">
-                <div className="flex justify-between items-center mb-6 sticky top-0 bg-white z-10 pb-4 border-b border-gray-100">
+        <div className="relative h-[calc(100vh-8rem)]">
+            <div className="w-full max-w-4xl mx-auto bg-white p-4 md:p-6 rounded-xl shadow-sm overflow-y-auto h-full">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sticky top-0 bg-white z-10 pb-4 border-b border-gray-100 gap-4">
                     <h2 className="text-xl font-bold">Invoice Details</h2>
-                    {mounted && (
-                        <PDFDownloadLink 
-                            document={<InvoicePDF data={data} />} 
-                            fileName={`Invoice_${invoiceNo}.pdf`}
-                            className="bg-brand-primary text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-brand-deep transition-colors"
+                    <div className="flex gap-3">
+                        <button 
+                            onClick={() => setShowPreview(true)}
+                            className="bg-gray-100 text-gray-700 px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors"
                         >
-                            {/* @ts-ignore */}
-                            {({ loading }) => (loading ? 'Loading...' : 'Download PDF')}
-                        </PDFDownloadLink>
-                    )}
+                            Show Preview
+                        </button>
+                        {mounted && (
+                            <PDFDownloadLink 
+                                document={<InvoicePDF data={data} />} 
+                                fileName={`Invoice_${invoiceNo}.pdf`}
+                                className="bg-brand-primary text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-brand-deep transition-colors"
+                            >
+                                {/* @ts-ignore */}
+                                {({ loading }) => (loading ? 'Loading...' : 'Download PDF')}
+                            </PDFDownloadLink>
+                        )}
+                    </div>
                 </div>
 
                 <div className="space-y-4">
@@ -130,16 +139,29 @@ export default function InvoiceGenerator() {
                 </div>
             </div>
 
-            {/* LIVE REACT-PDF PREVIEW */}
-            <div className="flex-1 bg-gray-200 rounded-xl overflow-hidden shadow-inner">
-                {mounted ? (
-                    <PDFViewer width="100%" height="100%" className="border-none">
-                        <InvoicePDF data={data} />
-                    </PDFViewer>
-                ) : (
-                    <div className="w-full h-full flex items-center justify-center">Loading PDF Viewer...</div>
-                )}
-            </div>
+            {/* PDF PREVIEW MODAL */}
+            {showPreview && (
+                <div className="fixed inset-0 z-50 bg-black/80 flex flex-col p-4 md:p-8">
+                    <div className="flex justify-between items-center mb-4 text-white max-w-5xl mx-auto w-full">
+                        <h2 className="text-xl font-bold">PDF Preview</h2>
+                        <button 
+                            onClick={() => setShowPreview(false)} 
+                            className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-lg font-medium transition-colors"
+                        >
+                            Close Preview
+                        </button>
+                    </div>
+                    <div className="flex-1 bg-white rounded-xl overflow-hidden shadow-2xl max-w-5xl mx-auto w-full">
+                        {mounted ? (
+                            <PDFViewer width="100%" height="100%" className="border-none">
+                                <InvoicePDF data={data} />
+                            </PDFViewer>
+                        ) : (
+                            <div className="w-full h-full flex items-center justify-center">Loading PDF Viewer...</div>
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
