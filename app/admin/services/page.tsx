@@ -318,11 +318,7 @@ export default function AdminServicesPage() {
                   }
                   className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
                 >
-                  {Object.entries(categories).map(([value, label]) => (
-                    <option key={value} value={value}>
-                      {label}
-                    </option>
-                  ))}
+                  {categories.map((cat) => (<option key={cat._id} value={cat._id}>{cat.name}</option>))}
                 </select>
               </div>
             </div>
@@ -644,7 +640,7 @@ export default function AdminServicesPage() {
 
       {/* Folder-Style Category Tabs */}
       <div className="mb-0">
-        <div className="flex items-end gap-0 relative">
+        <div className="flex items-end gap-0 relative overflow-x-auto hide-scrollbar">
           {/* Tab baseline */}
           <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-slate-200 z-0" />
 
@@ -846,6 +842,7 @@ export default function AdminServicesPage() {
     </div>
   );
 }
+
 
 
 
