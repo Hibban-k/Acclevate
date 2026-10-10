@@ -23,6 +23,7 @@ import mongoose, { Schema, Document, Model, Types } from 'mongoose';
 interface IFeature {
     title: string;
     description: string;
+    image?: string;
 }
 
 export interface IFaq {
@@ -155,6 +156,7 @@ const ServiceSchema = new Schema<IService>(
             type: String,
             required: [true, 'Description is required'],
         },
+        image: { type: String },
 
         // Taxonomy — ObjectId refs (was plain String)
         category: {

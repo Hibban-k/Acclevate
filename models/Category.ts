@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document, Model } from 'mongoose';
+﻿import mongoose, { Schema, Document, Model } from 'mongoose';
 
 export interface ICategoryDetail {
     heading: string;
@@ -10,11 +10,11 @@ export interface ICategory extends Document {
     slug: string;
     details: ICategoryDetail[];
     shortDescription?: string;
-    icon?: string;
+    image?: string;
     isActive: boolean;
     order: number;
 
-    // ── SEO Fields (category-level) ────────────────────────────────────────
+    // â”€â”€ SEO Fields (category-level) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     metaTitle?: string;
     metaDescription?: string;
     keywords?: string[];
@@ -23,7 +23,7 @@ export interface ICategory extends Document {
     ogImage?: string;
     canonicalUrl?: string;
 
-    // ── Structured Data ────────────────────────────────────────────────────
+    // â”€â”€ Structured Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     structuredData?: Record<string, unknown>;
 
     createdAt: Date;
@@ -41,7 +41,7 @@ const CategorySchema = new Schema<ICategory>(
         slug: { type: String, required: true, unique: true, lowercase: true, trim: true },
         details: { type: [CategoryDetailSchema], default: [] },
         shortDescription: { type: String },
-        icon: { type: String, default: '📁' },
+        image: { type: String },
         isActive: { type: Boolean, default: true },
         order: { type: Number, default: 0 },
         // SEO
@@ -65,3 +65,4 @@ const Category: Model<ICategory> =
     mongoose.models.Category || mongoose.model<ICategory>('Category', CategorySchema);
 
 export default Category;
+
