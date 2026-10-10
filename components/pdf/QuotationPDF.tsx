@@ -9,7 +9,7 @@ const LIGHT_BG  = '#F5F5F0';
 const BORDER    = '#DDE3E3';
 const WHITE     = '#FFFFFF';
 const HEADER_H  = 90;
-const FOOTER_H  = 220;
+const FOOTER_H  = 120;
 const PAD       = 32;
 
 const styles = StyleSheet.create({
@@ -90,6 +90,33 @@ const styles = StyleSheet.create({
     width: 220,
     height: 'auto',
     opacity: 0.7,
+  },
+  contentFooter: {
+    marginTop: 20,
+  },
+  footerContactRow1: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+    gap: 20,
+  },
+  footerContactRow2: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  footerTaglineRow: {
+    borderTopWidth: 1,
+    borderTopColor: '#DDE3E3',
+    paddingTop: 10,
+    flexDirection: 'row',
+    gap: 8,
+  },
+  taglineItem: {
+    fontSize: 7.5,
+    fontFamily: 'Helvetica-Bold',
+    color: '#125B61',
+    letterSpacing: 1.5,
   },
   footerTopRow: {
     flexDirection: 'row',
@@ -456,68 +483,41 @@ const Header = ({ baseUrl }: { baseUrl: string }) => (
 );
 
 // ─── SHARED FOOTER ─────────────────────────────────────────────────────────────
-const Footer = ({ baseUrl }: { baseUrl: string }) => (
+const Footer = ({ data }: { data: any }) => (
   <View style={styles.fixedFooter} fixed>
-    <Image src={baseUrl + '/images/quotation-bg.png'} style={styles.watermark} />
+    <Image src={data.baseUrl + '/images/quotation-bg.png'} style={styles.watermark} />
 
-    <View style={styles.footerTopRow}>
-      {/* Terms */}
-      <View style={styles.termsCol}>
-        <Text style={styles.footerSectionTitle}>TERMS & CONDITIONS</Text>
-        <Text style={styles.termsItem}>1. Quotation is valid for 15 days from the date of issue.</Text>
-        <Text style={styles.termsItem}>2. Payment terms: 50% advance, 50% before final delivery.</Text>
-        <Text style={styles.termsItem}>3. Any additional government fees (if applicable) will be charged separately.</Text>
-        <Text style={styles.termsItem}>4. Work will commence upon receipt of advance payment and signed authorization.</Text>
-        <Text style={styles.termsItem}>5. The above services are subject to terms and conditions of Acclevate Business Solutions.</Text>
-      </View>
-      {/* Next Steps */}
-      <View style={styles.nextStepsCol}>
-        <Text style={styles.footerSectionTitle}>NEXT STEPS</Text>
-        <View style={styles.stepRow}>
-          <View style={styles.stepIcon}><DocIcon /></View>
-          <Text style={styles.stepText}>Review the quotation</Text>
-        </View>
-        <View style={styles.stepRow}>
-          <View style={styles.stepIcon}><CheckIcon /></View>
-          <Text style={styles.stepText}>Confirm and approve</Text>
-        </View>
-        <View style={styles.stepRow}>
-          <View style={styles.stepIcon}><EnvIcon /></View>
-          <Text style={styles.stepText}>{"We'll get started right away"}</Text>
-        </View>
-      </View>
-    </View>
-
-    {/* Sign-off */}
-    <View style={styles.footerSignOff}>
-      <View style={styles.signOffLine} />
-      <Text style={styles.signOffText}>Looking forward to working with you.</Text>
-      <Text style={styles.signOffName}>Team Acclevate</Text>
-    </View>
-
-    {/* Contact bar */}
-    <View style={styles.footerContactBar}>
+    {/* Row 1: phone + email + website */}
+    <View style={styles.footerContactRow1}>
       <View style={styles.contactChunk}>
         <PhoneIcon />
-        <Text style={styles.contactText}>+91 94828 34887</Text>
+        <Text style={styles.contactText}>{data.phone || '+91 94828 34887'}</Text>
       </View>
-      <View style={styles.dividerV} />
       <View style={styles.contactChunk}>
         <MailIcon />
-        <Text style={styles.contactText}>hello@acclevate.com</Text>
+        <Text style={styles.contactText}>{data.email || 'hello@acclevate.com'}</Text>
       </View>
-      <View style={styles.dividerV} />
       <View style={styles.contactChunk}>
         <WebIcon />
-        <Text style={styles.contactText}>www.acclevate.com</Text>
+        <Text style={styles.contactText}>{data.website || 'www.acclevate.com'}</Text>
       </View>
-      <View style={styles.dividerV} />
+    </View>
+
+    {/* Row 2: address */}
+    <View style={styles.footerContactRow2}>
       <View style={styles.contactChunk}>
         <PinIcon />
-        <Text style={styles.contactText}>Bengaluru</Text>
+        <Text style={styles.contactText}>{data.address || 'Bengaluru'}</Text>
       </View>
-      <View style={styles.dividerV} />
-      <Text style={styles.taglineTeal}>{'Your Growth\nOur Priority'}</Text>
+    </View>
+
+    {/* Bottom tagline */}
+    <View style={styles.footerTaglineRow}>
+      <Text style={styles.taglineItem}>BUILD</Text>
+      <Text style={styles.taglineItem}>/</Text>
+      <Text style={styles.taglineItem}>COMPLY</Text>
+      <Text style={styles.taglineItem}>/</Text>
+      <Text style={styles.taglineItem}>GROW</Text>
     </View>
   </View>
 );
@@ -559,7 +559,7 @@ export const QuotationPDF: React.FC<QuotationProps> = ({ data }) => (
       <Header baseUrl={data.baseUrl} />
 
       {/* Fixed footer on every page */}
-      <Footer baseUrl={data.baseUrl} />
+      <Footer data={data} />
 
       {/* ── PAGE 1 ONLY: Title + Meta ── */}
       <View style={styles.titleSection}>
@@ -636,6 +636,45 @@ export const QuotationPDF: React.FC<QuotationProps> = ({ data }) => (
         </View>
       </View>
 
+      {/* Terms and Conditions (moved to content body) */}
+      <View style={styles.contentFooter} wrap={false}>
+      <View style={styles.footerTopRow}>
+        {/* Terms */}
+        <View style={styles.termsCol}>
+          <Text style={styles.footerSectionTitle}>TERMS & CONDITIONS</Text>
+          <Text style={styles.termsItem}>1. Quotation is valid for 15 days from the date of issue.</Text>
+          <Text style={styles.termsItem}>2. Payment terms: 50% advance, 50% before final delivery.</Text>
+          <Text style={styles.termsItem}>3. Any additional government fees (if applicable) will be charged separately.</Text>
+          <Text style={styles.termsItem}>4. Work will commence upon receipt of advance payment and signed authorization.</Text>
+          <Text style={styles.termsItem}>5. The above services are subject to terms and conditions of Acclevate Business Solutions.</Text>
+        </View>
+        {/* Next Steps */}
+        <View style={styles.nextStepsCol}>
+          <Text style={styles.footerSectionTitle}>NEXT STEPS</Text>
+          <View style={styles.stepRow}>
+            <View style={styles.stepIcon}><DocIcon /></View>
+            <Text style={styles.stepText}>Review the quotation</Text>
+          </View>
+          <View style={styles.stepRow}>
+            <View style={styles.stepIcon}><CheckIcon /></View>
+            <Text style={styles.stepText}>Confirm and approve</Text>
+          </View>
+          <View style={styles.stepRow}>
+            <View style={styles.stepIcon}><EnvIcon /></View>
+            <Text style={styles.stepText}>{"We'll get started right away"}</Text>
+          </View>
+        </View>
+      </View>
+
+      {/* Sign-off */}
+      <View style={styles.footerSignOff}>
+        <View style={styles.signOffLine} />
+        <Text style={styles.signOffText}>Looking forward to working with you.</Text>
+        <Text style={styles.signOffName}>Team Acclevate</Text>
+      </View>
+      </View>
+
     </Page>
   </Document>
 );
+
