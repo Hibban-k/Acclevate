@@ -35,6 +35,13 @@ interface Service {
   shortDescription: string;
   metaTitle: string;
   metaDescription: string;
+  image?: string;
+  keywords?: string[];
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  structuredData?: any;
   createdAt: string;
   updatedAt: string;
 }
@@ -54,6 +61,13 @@ interface FormData {
   shortDescription: string;
   metaTitle: string;
   metaDescription: string;
+  image: string;
+  keywords: string;
+  ogTitle: string;
+  ogDescription: string;
+  ogImage: string;
+  canonicalUrl: string;
+  structuredData: string;
 }
 
 const emptyFormData: FormData = {
@@ -71,6 +85,13 @@ const emptyFormData: FormData = {
   shortDescription: "",
   metaTitle: "",
   metaDescription: "",
+  image: "",
+  keywords: "",
+  ogTitle: "",
+  ogDescription: "",
+  ogImage: "",
+  canonicalUrl: "",
+  structuredData: "",
 };
 
 const emptyFeature: Feature = {
@@ -121,8 +142,21 @@ export default function AdminServicesPage() {
     e.preventDefault();
     setSaving(true);
 
+    let parsedStructuredData = null;
+    if (formData.structuredData.trim()) {
+      try {
+        parsedStructuredData = JSON.parse(formData.structuredData);
+      } catch (e) {
+        alert("Invalid JSON in Structured Data. Please provide valid JSON or leave it blank.");
+        setSaving(false);
+        return;
+      }
+    }
+
     const dataToSave = {
       ...formData,
+      keywords: formData.keywords.split(",").map((k) => k.trim()).filter(Boolean),
+      structuredData: parsedStructuredData,
       relatedServices: relatedServicesStr
         .split(",")
         .map((s) => s.trim())
@@ -164,7 +198,14 @@ export default function AdminServicesPage() {
       shortDescription: service.shortDescription || "",
       metaTitle: service.metaTitle || "",
       metaDescription: service.metaDescription || "",
-    });
+        image: service.image || "",
+        keywords: service.keywords?.join(", ") || "",
+        ogTitle: service.ogTitle || "",
+        ogDescription: service.ogDescription || "",
+        ogImage: service.ogImage || "",
+        canonicalUrl: service.canonicalUrl || "",
+        structuredData: service.structuredData ? JSON.stringify(service.structuredData, null, 2) : "",
+      });
     setRelatedServicesStr(
       service.relatedServices ? service.relatedServices.map(rs => typeof rs === "object" ? (rs as any)._id : rs).join(", ") : "",
     );
@@ -306,40 +347,46 @@ export default function AdminServicesPage() {
             {editingId ? "Edit Service" : "Add New Service"}
           </h2>
           <form onSubmit={handleSubmit}>
-            {/* Basic Info */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">
-                  Title <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={formData.title}
-                  onChange={(e) =>
-                    setFormData({ ...formData, title: e.target.value })
-                  }
-                  className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
-                  placeholder="e.g., Business Consulting"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">
-                  Category <span className="text-red-500">*</span>
-                </label>
-                <select
-                  value={formData.category}
-                  onChange={(e) =>
-                    setFormData({ ...formData, category: e.target.value })
-                  }
-                  className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
-                >
-                  {categories.map((cat) => (<option key={cat._id} value={cat._id}>{cat.name}</option>))}
-                </select>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              {/* Basic Info */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                  <label className="block text-sm font-medium text-text-secondary mb-1">
+                    Title <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.title}
+                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                    className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none border border-slate-200"
+                    placeholder="e.g., Business Consulting"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-text-secondary mb-1">
+                    Category <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    value={formData.category}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none border border-slate-200"
+                  >
+                    {categories.map((cat) => (<option key={cat._id} value={cat._id}>{cat.name}</option>))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-text-secondary mb-1">
+                    Tagline <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.tagline}
+                    onChange={(e) => setFormData({ ...formData, tagline: e.target.value })}
+                    className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none border border-slate-200"
+                    placeholder="A short catchy tagline"
+                    required
+                  />
+                </div>
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1">
                     Slug
@@ -347,17 +394,54 @@ export default function AdminServicesPage() {
                   <input
                     type="text"
                     value={formData.slug}
-                    onChange={(e) =>
-                      setFormData({ ...formData, slug: e.target.value })
-                    }
-                    className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
+                    onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
+                    className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none border border-slate-200"
                     placeholder="auto-generated if empty"
                   />
                 </div>
               </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                
+              {/* Main Content */}
+              <div className="mb-6 space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-text-secondary mb-1">
+                    Short Description (Summary)
+                  </label>
+                  <textarea
+                    value={formData.shortDescription}
+                    onChange={(e) => setFormData({ ...formData, shortDescription: e.target.value })}
+                    className="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:ring-2 focus:ring-navy-600 focus:border-charcoal bg-white"
+                    rows={2}
+                    placeholder="Brief summary for listings"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-text-secondary mb-1">
+                    Description <span className="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    value={formData.description}
+                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                    className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none border border-slate-200 min-h-[120px]"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-text-secondary mb-1">
+                    Main Image URL
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.image}
+                    onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                    className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none border border-slate-200"
+                    placeholder="/images/services/my-service.jpg"
+                  />
+                </div>
+              </div>
+
+              {/* Lists and Relationships */}
+              <div className="mb-6 space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1">
                     Related Services (Comma-separated ObjectIds)
@@ -366,280 +450,350 @@ export default function AdminServicesPage() {
                     type="text"
                     value={relatedServicesStr}
                     onChange={(e) => setRelatedServicesStr(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
+                    className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none border border-slate-200"
                     placeholder="e.g., 60f1b..."
                   />
                 </div>
-              </div>
-              
-              <div className="mb-6 border border-slate-200 p-4 rounded-xl space-y-4">
-                <h3 className="font-medium text-slate-800">SEO Settings</h3>
-                <div>
-                  <label className="block text-sm font-medium text-text-secondary mb-1">Short Description</label>
-                  <textarea
-                    value={formData.shortDescription}
-                    onChange={(e) => setFormData({ ...formData, shortDescription: e.target.value })}
-                    className="w-full px-4 py-2 border border-border rounded-lg"
-                    rows={2}
-                  />
+
+                {/* Covered Services Section */}
+                <div className="pt-6 border-t border-slate-100">
+                  <div className="flex justify-between items-center mb-4">
+                    <label className="block text-sm font-medium text-text-primary">
+                      Covered Services
+                    </label>
+                    <button
+                      type="button"
+                      onClick={addCoveredService}
+                      className="text-xs px-3 py-1.5 bg-background text-text-secondary rounded-lg hover:bg-slate-200"
+                    >
+                      + Add Covered Service
+                    </button>
+                  </div>
+                  {formData.coveredServices.length === 0 ? (
+                    <p className="text-sm text-text-secondary italic">
+                      No covered services added yet
+                    </p>
+                  ) : (
+                    <div className="space-y-4">
+                      {formData.coveredServices.map((cs, index) => (
+                        <div key={index} className="p-4 bg-background rounded-lg border border-slate-100">
+                          <div className="flex justify-between items-start mb-3">
+                            <h4 className="text-xs font-semibold text-text-secondary uppercase tracking-wider">
+                              Service {index + 1}
+                            </h4>
+                            <button
+                              type="button"
+                              onClick={() => removeCoveredService(index)}
+                              className="text-red-500 hover:text-red-700 p-1"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                              </svg>
+                            </button>
+                          </div>
+                          <div className="space-y-3">
+                            <div>
+                              <label className="block text-xs text-text-secondary mb-1">Name</label>
+                              <input
+                                type="text"
+                                value={cs.name}
+                                onChange={(e) => updateCoveredService(index, "name", e.target.value)}
+                                className="w-full px-3 py-2 text-sm rounded-lg focus:ring-1 focus:ring-navy-600 focus:border-charcoal outline-none bg-white border border-slate-200"
+                                placeholder="Service name"
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-xs text-text-secondary mb-1">Short Description</label>
+                              <input
+                                type="text"
+                                value={cs.description}
+                                onChange={(e) => updateCoveredService(index, "description", e.target.value)}
+                                className="w-full px-3 py-2 text-sm rounded-lg focus:ring-1 focus:ring-navy-600 focus:border-charcoal outline-none bg-white border border-slate-200"
+                                placeholder="Brief description"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
+
+                {/* Features Section */}
+                <div className="pt-6 border-t border-slate-100">
+                  <div className="flex justify-between items-center mb-4">
+                    <label className="block text-sm font-medium text-text-primary">
+                      Features
+                    </label>
+                    <button
+                      type="button"
+                      onClick={addFeature}
+                      className="text-xs px-3 py-1.5 bg-background text-text-secondary rounded-lg hover:bg-slate-200"
+                    >
+                      + Add Feature
+                    </button>
+                  </div>
+                  {formData.features.length === 0 ? (
+                    <p className="text-sm text-text-secondary italic">
+                      No features added yet
+                    </p>
+                  ) : (
+                    <div className="space-y-4">
+                      {formData.features.map((feature, index) => (
+                        <div key={index} className="p-4 bg-background rounded-lg border border-slate-100">
+                          <div className="flex justify-between items-start mb-3">
+                            <h4 className="text-xs font-semibold text-text-secondary uppercase tracking-wider">
+                              Feature {index + 1}
+                            </h4>
+                            <button
+                              type="button"
+                              onClick={() => removeFeature(index)}
+                              className="text-red-500 hover:text-red-700 p-1"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                              </svg>
+                            </button>
+                          </div>
+                          <div className="space-y-3">
+                            <div>
+                              <label className="block text-xs text-text-secondary mb-1">Title</label>
+                              <input
+                                type="text"
+                                value={feature.title}
+                                onChange={(e) => updateFeature(index, "title", e.target.value)}
+                                className="w-full px-2 py-1.5 text-sm rounded-lg border border-slate-200"
+                                placeholder="Feature title"
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-xs text-text-secondary mb-1">Description</label>
+                              <input
+                                type="text"
+                                value={feature.description}
+                                onChange={(e) => updateFeature(index, "description", e.target.value)}
+                                className="w-full px-2 py-1.5 text-sm rounded-lg border border-slate-200"
+                                placeholder="Feature description"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* FAQs Section */}
+                <div className="pt-6 border-t border-slate-100">
+                  <div className="flex justify-between items-center mb-4">
+                    <label className="block text-sm font-medium text-text-primary">
+                      FAQs
+                    </label>
+                    <button
+                      type="button"
+                      onClick={addFaq}
+                      className="text-xs px-3 py-1.5 bg-background text-text-secondary rounded-lg hover:bg-slate-200"
+                    >
+                      + Add FAQ
+                    </button>
+                  </div>
+                  {formData.faqs.length === 0 ? (
+                    <p className="text-sm text-text-secondary italic">
+                      No FAQs added yet
+                    </p>
+                  ) : (
+                    <div className="space-y-4">
+                      {formData.faqs.map((faq, index) => (
+                        <div key={index} className="p-4 bg-background rounded-lg border border-slate-100">
+                          <div className="flex justify-between items-start mb-3">
+                            <h4 className="text-xs font-semibold text-text-secondary uppercase tracking-wider">
+                              FAQ {index + 1}
+                            </h4>
+                            <button
+                              type="button"
+                              onClick={() => removeFaq(index)}
+                              className="text-red-500 hover:text-red-700 p-1"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                              </svg>
+                            </button>
+                          </div>
+                          <div className="space-y-3">
+                            <div>
+                              <label className="block text-xs text-text-secondary mb-1">Question</label>
+                              <input
+                                type="text"
+                                value={faq.question}
+                                onChange={(e) => updateFaq(index, "question", e.target.value)}
+                                className="w-full px-3 py-2 text-sm rounded-lg focus:ring-1 focus:ring-navy-600 focus:border-charcoal outline-none bg-white border border-slate-200"
+                                placeholder="e.g., What documents are required?"
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-xs text-text-secondary mb-1">Answer</label>
+                              <textarea
+                                value={faq.answer}
+                                onChange={(e) => updateFaq(index, "answer", e.target.value)}
+                                className="w-full px-3 py-2 text-sm rounded-lg focus:ring-1 focus:ring-navy-600 focus:border-charcoal outline-none bg-white border border-slate-200"
+                                rows={2}
+                                placeholder="Clear and concise answer"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Configuration */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 pt-6 border-t border-slate-100">
                 <div>
-                  <label className="block text-sm font-medium text-text-secondary mb-1">Meta Title</label>
+                  <label className="block text-sm font-medium text-text-secondary mb-1">
+                    Display Order
+                  </label>
                   <input
-                    type="text"
-                    value={formData.metaTitle}
-                    onChange={(e) => setFormData({ ...formData, metaTitle: e.target.value })}
-                    className="w-full px-4 py-2 border border-border rounded-lg"
+                    type="number"
+                    value={formData.order}
+                    onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })}
+                    className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none border border-slate-200"
                   />
                 </div>
+                <div className="flex items-center">
+                  <label className="relative inline-flex items-center cursor-pointer mt-6">
+                    <input
+                      type="checkbox"
+                      checked={formData.isActive}
+                      onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
+                      className="sr-only peer"
+                    />
+                    <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-navy-600/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-charcoal"></div>
+                    <span className="ml-3 text-sm font-medium text-text-secondary">
+                      Active
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              {/* SEO & Advanced Section */}
+              <div className="mb-8 border border-slate-200 p-6 rounded-xl space-y-8 bg-slate-50/50">
                 <div>
-                  <label className="block text-sm font-medium text-text-secondary mb-1">Meta Description</label>
-                  <textarea
-                    value={formData.metaDescription}
-                    onChange={(e) => setFormData({ ...formData, metaDescription: e.target.value })}
-                    className="w-full px-4 py-2 border border-border rounded-lg"
-                    rows={2}
-                  />
-                </div>
-              </div>
-
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-text-secondary mb-1">
-                Tagline <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                value={formData.tagline}
-                onChange={(e) =>
-                  setFormData({ ...formData, tagline: e.target.value })
-                }
-                className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
-                placeholder="A short catchy tagline"
-                required
-              />
-            </div>
-
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-text-secondary mb-1">
-                Description <span className="text-red-500">*</span>
-              </label>
-              <textarea
-                value={formData.description}
-                onChange={(e) =>
-                  setFormData({ ...formData, description: e.target.value })
-                }
-                className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
-                rows={4}
-                placeholder="Detailed description of the service..."
-                required
-              />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <div>
-                <label className="block text-sm font-medium text-text-secondary mb-1">
-                  Display Order
-                </label>
-                <input
-                  type="number"
-                  value={formData.order}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      order: parseInt(e.target.value) || 0,
-                    })
-                  }
-                  className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
-                  min={0}
-                />
-                <p className="text-xs text-text-secondary mt-1">
-                  Lower numbers appear first
-                </p>
-              </div>
-              <div className="flex items-center gap-3 pt-6">
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={formData.isActive}
-                    onChange={(e) =>
-                      setFormData({ ...formData, isActive: e.target.checked })
-                    }
-                    className="sr-only peer"
-                  />
-                  <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-navy-600/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-charcoal"></div>
-                  <span className="ml-3 text-sm font-medium text-text-secondary">
-                    Active
-                  </span>
-                </label>
-              </div>
-            </div>
-
-            {/* Features Section */}
-            <div className="mb-6">
-              <div className="flex justify-between items-center mb-3">
-                <label className="block text-sm font-medium text-text-secondary">
-                  Features
-                </label>
-                <button
-                  type="button"
-                  onClick={addFeature}
-                  className="text-sm text-charcoal hover:text-charcoal font-medium"
-                >
-                  + Add Feature
-                </button>
-              </div>
-              {formData.features.length === 0 ? (
-                <p className="text-sm text-text-secondary italic">
-                  No features added yet
-                </p>
-              ) : (
-                <div className="space-y-4">
-                  {formData.features.map((feature, index) => (
-                    <div key={index} className="p-4 bg-background rounded-lg">
-                      <div className="flex justify-between items-start mb-3">
-                        <span className="text-sm font-medium text-text-secondary">
-                          Feature {index + 1}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => removeFeature(index)}
-                          className="text-red-500 hover:text-red-700 text-sm"
-                        >
-                          Remove
-                        </button>
+                  <h3 className="font-medium text-slate-800 mb-4 border-b pb-2">SEO & Metadata Settings</h3>
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-text-secondary mb-1">Meta Title</label>
+                        <input
+                          type="text"
+                          value={formData.metaTitle}
+                          onChange={(e) => setFormData({ ...formData, metaTitle: e.target.value })}
+                          className="w-full px-4 py-2 border border-border rounded-lg outline-none focus:ring-2 focus:ring-navy-600 focus:border-charcoal bg-white"
+                        />
                       </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <div>
-                          <label className="block text-xs text-text-secondary mb-1">
-                            Title
-                          </label>
-                          <input
-                            type="text"
-                            value={feature.title}
-                            onChange={(e) =>
-                              updateFeature(index, "title", e.target.value)
-                            }
-                            className="w-full px-2 py-1.5 text-sm rounded-lg"
-                            placeholder="Feature title"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs text-text-secondary mb-1">
-                            Description
-                          </label>
-                          <input
-                            type="text"
-                            value={feature.description}
-                            onChange={(e) =>
-                              updateFeature(
-                                index,
-                                "description",
-                                e.target.value,
-                              )
-                            }
-                            className="w-full px-2 py-1.5 text-sm rounded-lg"
-                            placeholder="Short description"
-                          />
-                        </div>
+                      <div>
+                        <label className="block text-sm font-medium text-text-secondary mb-1">Canonical URL</label>
+                        <input
+                          type="text"
+                          value={formData.canonicalUrl}
+                          onChange={(e) => setFormData({ ...formData, canonicalUrl: e.target.value })}
+                          className="w-full px-4 py-2 border border-border rounded-lg outline-none focus:ring-2 focus:ring-navy-600 focus:border-charcoal bg-white"
+                          placeholder="https://acclevate.com/services/..."
+                        />
                       </div>
                     </div>
-                  ))}
+                    <div>
+                      <label className="block text-sm font-medium text-text-secondary mb-1">Meta Description</label>
+                      <textarea
+                        value={formData.metaDescription}
+                        onChange={(e) => setFormData({ ...formData, metaDescription: e.target.value })}
+                        className="w-full px-4 py-2 border border-border rounded-lg outline-none focus:ring-2 focus:ring-navy-600 focus:border-charcoal bg-white"
+                        rows={2}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-text-secondary mb-1">Keywords (Comma-separated)</label>
+                      <input
+                        type="text"
+                        value={formData.keywords}
+                        onChange={(e) => setFormData({ ...formData, keywords: e.target.value })}
+                        className="w-full px-4 py-2 border border-border rounded-lg outline-none focus:ring-2 focus:ring-navy-600 focus:border-charcoal bg-white"
+                        placeholder="accounting, gst filing, business growth"
+                      />
+                    </div>
+                  </div>
                 </div>
-              )}
-            </div>
 
-            {/* FAQs Section */}
-            <div className="mb-6">
-              <div className="flex justify-between items-center mb-3">
-                <label className="block text-sm font-medium text-text-secondary">
-                  FAQs (Frequently Asked Questions)
-                </label>
-                <button
-                  type="button"
-                  onClick={addFaq}
-                  className="text-sm text-charcoal hover:text-charcoal font-medium"
-                >
-                  + Add FAQ
-                </button>
-              </div>
-              {formData.faqs.length === 0 ? (
-                <p className="text-sm text-text-secondary italic">
-                  No FAQs added yet
-                </p>
-              ) : (
-                <div className="space-y-4">
-                  {formData.faqs.map((faq, index) => (
-                    <div key={index} className="p-4 bg-background rounded-lg">
-                      <div className="flex justify-between items-start mb-3">
-                        <span className="text-sm font-medium text-text-secondary">
-                          FAQ {index + 1}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => removeFaq(index)}
-                          className="text-red-500 hover:text-red-700 text-sm"
-                        >
-                          Remove
-                        </button>
+                <div>
+                  <h3 className="font-medium text-slate-800 mb-4 border-b pb-2">Social / Open Graph (OG)</h3>
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-text-secondary mb-1">OG Title</label>
+                        <input
+                          type="text"
+                          value={formData.ogTitle}
+                          onChange={(e) => setFormData({ ...formData, ogTitle: e.target.value })}
+                          className="w-full px-4 py-2 border border-border rounded-lg outline-none focus:ring-2 focus:ring-navy-600 focus:border-charcoal bg-white"
+                        />
                       </div>
-                      <div className="space-y-3">
-                        <div>
-                          <label className="block text-xs text-text-secondary mb-1">
-                            Question
-                          </label>
-                          <input
-                            type="text"
-                            value={faq.question}
-                            onChange={(e) =>
-                              updateFaq(index, "question", e.target.value)
-                            }
-                            className="w-full px-3 py-2 text-sm rounded-lg focus:ring-1 focus:ring-navy-600 focus:border-charcoal outline-none bg-white"
-                            placeholder="e.g., What documents are required?"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-xs text-text-secondary mb-1">
-                            Answer
-                          </label>
-                          <textarea
-                            value={faq.answer}
-                            onChange={(e) =>
-                              updateFaq(index, "answer", e.target.value)
-                            }
-                            className="w-full px-3 py-2 text-sm rounded-lg focus:ring-1 focus:ring-navy-600 focus:border-charcoal outline-none bg-white"
-                            rows={2}
-                            placeholder="e.g., You will need a PAN Card, Aadhaar Card, and address proof..."
-                          />
-                        </div>
+                      <div>
+                        <label className="block text-sm font-medium text-text-secondary mb-1">OG Image URL</label>
+                        <input
+                          type="text"
+                          value={formData.ogImage}
+                          onChange={(e) => setFormData({ ...formData, ogImage: e.target.value })}
+                          className="w-full px-4 py-2 border border-border rounded-lg outline-none focus:ring-2 focus:ring-navy-600 focus:border-charcoal bg-white"
+                          placeholder="/images/og/my-service.jpg"
+                        />
                       </div>
                     </div>
-                  ))}
+                    <div>
+                      <label className="block text-sm font-medium text-text-secondary mb-1">OG Description</label>
+                      <textarea
+                        value={formData.ogDescription}
+                        onChange={(e) => setFormData({ ...formData, ogDescription: e.target.value })}
+                        className="w-full px-4 py-2 border border-border rounded-lg outline-none focus:ring-2 focus:ring-navy-600 focus:border-charcoal bg-white"
+                        rows={2}
+                      />
+                    </div>
+                  </div>
                 </div>
-              )}
-            </div>
 
-            {/* Form Actions */}
-            <div className="flex gap-3 pt-4">
-              <button
-                type="submit"
-                disabled={saving}
-                className="px-6 py-2 bg-charcoal text-white rounded-lg hover:bg-charcoal disabled:opacity-50 transition-colors"
-              >
-                {saving
-                  ? "Saving..."
-                  : editingId
-                    ? "Update Service"
-                    : "Create Service"}
-              </button>
-              <button
-                type="button"
-                onClick={cancelForm}
-                className="px-6 py-2 bg-background text-text-secondary rounded-lg hover:bg-slate-200 transition-colors"
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
+                <div>
+                  <h3 className="font-medium text-slate-800 mb-4 border-b pb-2">Advanced</h3>
+                  <div>
+                    <label className="block text-sm font-medium text-text-secondary mb-1">Structured Data (JSON-LD Schema)</label>
+                    <textarea
+                      value={formData.structuredData}
+                      onChange={(e) => setFormData({ ...formData, structuredData: e.target.value })}
+                      className="w-full px-4 py-2 border border-border rounded-lg outline-none focus:ring-2 focus:ring-navy-600 focus:border-charcoal bg-white font-mono text-xs"
+                      rows={6}
+                      placeholder='{ "@context": "https://schema.org", "@type": "Service", ... }'
+                    />
+                    <p className="text-xs text-text-secondary mt-1">Provide a valid JSON object. Will be injected as application/ld+json.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex justify-end gap-3 pt-6 border-t border-slate-100">
+                <button
+                  type="button"
+                  onClick={cancelForm}
+                  className="px-4 py-2 text-sm font-medium text-text-secondary bg-background hover:bg-slate-200 rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={saving}
+                  className="px-4 py-2 text-sm font-medium text-white bg-charcoal hover:bg-text-primary rounded-lg transition-colors disabled:opacity-50"
+                >
+                  {saving ? "Saving..." : "Save Service"}
+                </button>
+              </div>
+            </form>
         </div>
       )}
 
