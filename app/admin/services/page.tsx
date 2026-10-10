@@ -8,6 +8,7 @@ import {
   updateServiceAction,
   deleteServiceAction,
 } from "@/lib/actions/services";
+import { uploadImageAction } from "@/lib/actions/upload";
 
 interface Feature {
   title: string;
@@ -112,6 +113,26 @@ export default function AdminServicesPage() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState<FormData>(emptyFormData);
   const [saving, setSaving] = useState(false);
+  const [uploadingField, setUploadingField] = useState<string | null>(null);
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, field: "image" | "ogImage", folder: string) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadingField(field);
+    const uploadData = new FormData();
+    uploadData.append("file", file);
+
+    try {
+      const url = await uploadImageAction(uploadData, folder);
+      setFormData((prev) => ({ ...prev, [field]: url }));
+    } catch (error: any) {
+      console.error("Upload failed", error);
+      alert("Failed to upload image: " + error.message);
+    } finally {
+      setUploadingField(null);
+    }
+  };
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [relatedServicesStr, setRelatedServicesStr] = useState<string>("");
   
@@ -428,15 +449,27 @@ export default function AdminServicesPage() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1">
-                    Main Image URL
+                    Main Image
                   </label>
-                  <input
-                    type="text"
-                    value={formData.image}
-                    onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                    className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none border border-slate-200"
-                    placeholder="/images/services/my-service.jpg"
-                  />
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={formData.image}
+                      onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                      className="flex-1 px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none border border-slate-200"
+                      placeholder="Image URL or upload"
+                    />
+                    <label className="cursor-pointer px-4 py-2 bg-slate-100 hover:bg-slate-200 text-sm font-medium text-slate-700 rounded-lg flex items-center justify-center transition-colors">
+                      {uploadingField === 'image' ? 'Uploading...' : 'Upload'}
+                      <input 
+                        type="file" 
+                        accept="image/*" 
+                        className="hidden" 
+                        onChange={(e) => handleImageUpload(e, 'image', 'services')}
+                        disabled={uploadingField === 'image'}
+                      />
+                    </label>
+                  </div>
                 </div>
               </div>
 
@@ -739,14 +772,26 @@ export default function AdminServicesPage() {
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-text-secondary mb-1">OG Image URL</label>
-                        <input
-                          type="text"
-                          value={formData.ogImage}
-                          onChange={(e) => setFormData({ ...formData, ogImage: e.target.value })}
-                          className="w-full px-4 py-2 border border-border rounded-lg outline-none focus:ring-2 focus:ring-navy-600 focus:border-charcoal bg-white"
-                          placeholder="/images/og/my-service.jpg"
-                        />
+                        <label className="block text-sm font-medium text-text-secondary mb-1">OG Image</label>
+                          <div className="flex gap-2">
+                            <input
+                              type="text"
+                              value={formData.ogImage}
+                              onChange={(e) => setFormData({ ...formData, ogImage: e.target.value })}
+                              className="flex-1 px-4 py-2 border border-border rounded-lg outline-none focus:ring-2 focus:ring-navy-600 focus:border-charcoal bg-white"
+                              placeholder="URL or upload"
+                            />
+                            <label className="cursor-pointer px-3 py-2 bg-slate-100 hover:bg-slate-200 text-sm font-medium text-slate-700 rounded-lg flex items-center justify-center transition-colors border border-border">
+                              {uploadingField === 'ogImage' ? '...' : 'Upload'}
+                              <input 
+                                type="file" 
+                                accept="image/*" 
+                                className="hidden" 
+                                onChange={(e) => handleImageUpload(e, 'ogImage', 'og-images')}
+                                disabled={uploadingField === 'ogImage'}
+                              />
+                            </label>
+                          </div>
                       </div>
                     </div>
                     <div>
