@@ -702,7 +702,7 @@ export default function AdminServicesPage() {
                 className={`relative shrink-0 whitespace-nowrap px-8 py-3 text-sm font-medium transition-all duration-200 ${selectedCategory === cat._id ? "text-white z-20" : "text-text-secondary hover:text-text-primary z-10"}`}
                 style={{ marginRight: "-12px" }}
               >
-                <svg style={{ filter: selectedCategory === cat._id ? "drop-shadow(0 -2px 4px rgba(0,0,0,0.1))" : "none" }}>
+                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 40" preserveAspectRatio="none" style={{ filter: selectedCategory === cat._id ? "drop-shadow(0 -2px 4px rgba(0,0,0,0.1))" : "none" }}>
                   <path d="M 12 40 Q 12 40, 8 36 L 2 10 Q 0 4, 6 2 L 16 0 Q 100 40, 88 40 Z" fill={selectedCategory === cat._id ? "#1e293b" : "#f1f5f9"} className="transition-all duration-200" />
                 </svg>
                 <span className="relative z-10">{cat.name}</span>
@@ -847,6 +847,7 @@ export default function AdminServicesPage() {
     </div>
   );
 }
+
 
 
 
