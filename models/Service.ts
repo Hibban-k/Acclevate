@@ -1,24 +1,24 @@
-import mongoose, { Schema, Document, Model, Types } from 'mongoose';
+﻿import mongoose, { Schema, Document, Model, Types } from 'mongoose';
 
 /**
- * Service Model — Reusable SEO Schema Template
- * ─────────────────────────────────────────────────────────────────────────────
+ * Service Model â€” Reusable SEO Schema Template
+ * â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
  * This is the CORE template for all services. It acts as the "base layer"
  * that all SEO strategies build on top of.
  *
  * TAXONOMY STRUCTURE:
- *   Category → Subcategory → Service (this model)
+ *   Category â†’ Subcategory â†’ Service (this model)
  *
  * SEO FEATURES BUILT IN:
  *   1. Full meta tag fields (title, description, keywords, OG, Twitter)
- *   2. Structured Data (JSON-LD) — stored as an object, injected at runtime
- *   3. Internal Linking — explicit anchor text definitions for cross-linking
- *   4. Related Services — for "Explore more services" widgets
- *   5. FAQPage Schema — FAQ data automatically generates FAQPage JSON-LD
+ *   2. Structured Data (JSON-LD) â€” stored as an object, injected at runtime
+ *   3. Internal Linking â€” explicit anchor text definitions for cross-linking
+ *   4. Related Services â€” for "Explore more services" widgets
+ *   5. FAQPage Schema â€” FAQ data automatically generates FAQPage JSON-LD
  *   6. Canonical URL support
  */
 
-// ── Sub-schemas ──────────────────────────────────────────────────────────────
+// â”€â”€ Sub-schemas â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 interface IFeature {
     title: string;
@@ -32,7 +32,7 @@ export interface IFaq {
 }
 
 /**
- * InternalLink — defines how THIS service links to another service.
+ * InternalLink â€” defines how THIS service links to another service.
  * Instead of just storing a slug (which gives no context), we store:
  *   - The target service's ObjectId (for accurate lookups)
  *   - The anchor text to use in the link (critical for keyword-rich linking)
@@ -47,13 +47,14 @@ interface IInternalLink {
     isPrimary: boolean;         // Primary links appear in body; secondary in sidebar
 }
 
-// ── Main Interface ───────────────────────────────────────────────────────────
+// â”€â”€ Main Interface â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export interface IService extends Document {
     title: string;
     slug: string;
     tagline: string;
     description: string;
+    image?: string;
 
     // Taxonomy (now ObjectId refs instead of plain strings)
     category?: Types.ObjectId;
@@ -158,7 +159,7 @@ const ServiceSchema = new Schema<IService>(
         },
         image: { type: String },
 
-        // Taxonomy — ObjectId refs (was plain String)
+        // Taxonomy â€” ObjectId refs (was plain String)
         category: {
             type: Schema.Types.ObjectId,
             ref: 'Category',

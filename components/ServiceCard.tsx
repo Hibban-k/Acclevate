@@ -55,13 +55,13 @@ const defaultWhiteIcon = (
 function getCategoryWhiteIcon(categorySlug: string) {
     const slug = (categorySlug || '').toLowerCase();
     switch (slug) {
-        case 'strategy':
+        case 'accounting-bookkeeping':
             return strategyWhiteIcon;
-        case 'digital':
+        case 'tax-gst':
             return digitalWhiteIcon;
-        case 'operations':
+        case 'legal-documentation-compliance':
             return operationsWhiteIcon;
-        case 'people':
+        case 'ecommerce-business-growth':
             return peopleWhiteIcon;
         default:
             return defaultWhiteIcon;
@@ -80,13 +80,13 @@ function getServiceImage(service: Service, categorySlug: string): string {
     if (title.includes('registration') || title.includes('incorporation') || title.includes('trademark') || title.includes('ipr')) {
         return 'https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=600&auto=format&fit=crop';
     }
-    if (slug === 'strategy' || slug === 'corporate-compliance') {
+    if (slug === 'accounting-bookkeeping' || slug === 'corporate-compliance') {
         return 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop';
     }
-    if (slug === 'digital' || slug === 'legal-documentation') {
+    if (slug === 'tax-gst' || slug === 'legal-documentation') {
         return 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=600&auto=format&fit=crop';
     }
-    if (slug === 'operations' || slug === 'business-conversion-closure') {
+    if (slug === 'legal-documentation-compliance' || slug === 'business-conversion-closure') {
         return 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=600&auto=format&fit=crop';
     }
     return 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=600&auto=format&fit=crop';
@@ -155,5 +155,6 @@ export default function ServiceCard({ service, className = '', hrefOverride }: S
         </Link>
     );
 }
+
 
 

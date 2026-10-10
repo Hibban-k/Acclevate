@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from 'react';
 import Link from 'next/link';
@@ -46,17 +46,17 @@ export default function Footer() {
                     <div className="footer-col">
                         <h5 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Services</h5>
                         <div className="flex flex-col gap-2">
-                            <Link href="/services/strategy/strategy-consulting" className="text-sm text-[#C8D2D0] hover:text-[#8FAAA5] transition-colors">
-                                Strategy Consulting
+                            <Link href="/accounting-bookkeeping" className="text-sm text-[#C8D2D0] hover:text-[#8FAAA5] transition-colors">
+                                Accounting & Bookkeeping
                             </Link>
-                            <Link href="/services/digital/digital-transformation" className="text-sm text-[#C8D2D0] hover:text-[#8FAAA5] transition-colors">
-                                Digital Transformation
+                            <Link href="/tax-gst" className="text-sm text-[#C8D2D0] hover:text-[#8FAAA5] transition-colors">
+                                Tax & GST
                             </Link>
-                            <Link href="/services/operations/operations-excellence" className="text-sm text-[#C8D2D0] hover:text-[#8FAAA5] transition-colors">
-                                Operations Excellence
+                            <Link href="/legal-documentation-compliance" className="text-sm text-[#C8D2D0] hover:text-[#8FAAA5] transition-colors">
+                                Legal & Compliance
                             </Link>
-                            <Link href="/services/people/leadership-advisory" className="text-sm text-[#C8D2D0] hover:text-[#8FAAA5] transition-colors">
-                                Leadership Advisory
+                            <Link href="/ecommerce-business-growth" className="text-sm text-[#C8D2D0] hover:text-[#8FAAA5] transition-colors">
+                                eCommerce & Business Growth
                             </Link>
                         </div>
                     </div>
@@ -90,13 +90,13 @@ export default function Footer() {
 
                 {/* Bottom */}
                 <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t text-sm text-[#C8D2D0] gap-4">
-                    <p>© 2025 Acclevate Business Solutions. All rights reserved.</p>
+                    <p>Â© 2025 Acclevate Business Solutions. All rights reserved.</p>
                     <div className="flex gap-4">
                         <a href="#" aria-label="LinkedIn" className="w-9 h-9 flex items-center justify-center bg-white/5 border rounded-full text-[#C8D2D0] hover:bg-brand-primary hover:text-white transition-all">
                             in
                         </a>
                         <a href="#" aria-label="Twitter" className="w-9 h-9 flex items-center justify-center bg-white/5 border rounded-full text-[#C8D2D0] hover:bg-brand-primary hover:text-white transition-all">
-                            𝕏
+                            ð•
                         </a>
                         <a href="#" aria-label="Facebook" className="w-9 h-9 flex items-center justify-center bg-white/5 border rounded-full text-[#C8D2D0] hover:bg-brand-primary hover:text-white transition-all">
                             f
@@ -107,6 +107,7 @@ export default function Footer() {
         </footer>
     );
 }
+
 
 
 
