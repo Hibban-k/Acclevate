@@ -26,7 +26,7 @@ interface Service {
   tagline: string;
   description: string;
   category: string | { _id: string; name: string };
-  coveredServices: { service: string | { _id: string; name: string } }[];
+  coveredServices: { name: string; description: string }[];
   relatedServices: (string | { _id: string; title: string })[];
   features: Feature[];
   faqs: FAQ[];
@@ -45,7 +45,7 @@ interface FormData {
   tagline: string;
   description: string;
   category: string;
-  coveredServices: string[];
+  coveredServices: { name: string; description: string }[];
   relatedServices: string[];
   features: Feature[];
   faqs: FAQ[];
@@ -93,8 +93,7 @@ export default function AdminServicesPage() {
   const [saving, setSaving] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [relatedServicesStr, setRelatedServicesStr] = useState<string>("");
-  const [coveredServicesStr, setCoveredServicesStr] = useState<string>("");
-
+  
   async function fetchData() {
     try {
       const [servicesData, categoriesData] = await Promise.all([
@@ -156,7 +155,7 @@ export default function AdminServicesPage() {
       tagline: service.tagline,
       description: service.description,
       category: typeof service.category === "object" && service.category !== null ? (service.category as any)._id : service.category,
-      coveredServices: service.coveredServices?.map(cs => typeof cs.service === "object" ? cs.service._id : cs.service) || [],
+      coveredServices: service.coveredServices?.map(cs => ({ name: cs.name || "", description: cs.description || "" })) || [],
       relatedServices: service.relatedServices?.map(rs => typeof rs === "object" ? (rs as any)._id : rs) || [],
       features: service.features || [],
       faqs: service.faqs || [],
@@ -169,10 +168,7 @@ export default function AdminServicesPage() {
     setRelatedServicesStr(
       service.relatedServices ? service.relatedServices.map(rs => typeof rs === "object" ? (rs as any)._id : rs).join(", ") : "",
     );
-    setCoveredServicesStr(
-      service.coveredServices ? service.coveredServices.map(cs => typeof cs.service === "object" ? cs.service._id : cs.service).join(", ") : "",
-    );
-    setEditingId(service._id);
+        setEditingId(service._id);
     setShowForm(true);
   };
 
@@ -204,7 +200,27 @@ export default function AdminServicesPage() {
     setEditingId(null);
     setFormData(emptyFormData);
     setRelatedServicesStr("");
-    setCoveredServicesStr("");
+      };
+
+  // Covered Services management
+  const addCoveredService = () => {
+    setFormData({
+      ...formData,
+      coveredServices: [...formData.coveredServices, { name: "", description: "" }],
+    });
+  };
+
+  const updateCoveredService = (index: number, field: "name" | "description", value: string) => {
+    const updated = [...formData.coveredServices];
+    updated[index] = { ...updated[index], [field]: value };
+    setFormData({ ...formData, coveredServices: updated });
+  };
+
+  const removeCoveredService = (index: number) => {
+    setFormData({
+      ...formData,
+      coveredServices: formData.coveredServices.filter((_, i) => i !== index),
+    });
   };
 
   // Feature management
@@ -341,18 +357,7 @@ export default function AdminServicesPage() {
               </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                <div>
-                  <label className="block text-sm font-medium text-text-secondary mb-1">
-                    Covered Services (Comma-separated ObjectIds)
-                  </label>
-                  <input
-                    type="text"
-                    value={coveredServicesStr}
-                    onChange={(e) => setCoveredServicesStr(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none"
-                    placeholder="e.g., 60f1b..."
-                  />
-                </div>
+                
                 <div>
                   <label className="block text-sm font-medium text-text-secondary mb-1">
                     Related Services (Comma-separated ObjectIds)
@@ -648,7 +653,7 @@ export default function AdminServicesPage() {
           <button
             onClick={() => setSelectedCategory("all")}
             className={`
-                            relative px-8 py-3 text-sm font-medium transition-all duration-200
+                            relative shrink-0 whitespace-nowrap px-8 py-3 text-sm font-medium transition-all duration-200
                             ${
                               selectedCategory === "all"
                                 ? "text-white z-20"
@@ -694,7 +699,7 @@ export default function AdminServicesPage() {
               <button
                 key={cat._id}
                 onClick={() => setSelectedCategory(cat._id)}
-                className={`relative px-8 py-3 text-sm font-medium transition-all duration-200 ${selectedCategory === cat._id ? "text-white z-20" : "text-text-secondary hover:text-text-primary z-10"}`}
+                className={`relative shrink-0 whitespace-nowrap px-8 py-3 text-sm font-medium transition-all duration-200 ${selectedCategory === cat._id ? "text-white z-20" : "text-text-secondary hover:text-text-primary z-10"}`}
                 style={{ marginRight: "-12px" }}
               >
                 <svg style={{ filter: selectedCategory === cat._id ? "drop-shadow(0 -2px 4px rgba(0,0,0,0.1))" : "none" }}>
@@ -842,6 +847,7 @@ export default function AdminServicesPage() {
     </div>
   );
 }
+
 
 
 
