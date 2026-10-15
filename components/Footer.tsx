@@ -20,7 +20,7 @@ export default function Footer() {
     if (pathname.startsWith('/admin')) return null;
 
     return (
-        <footer className="bg-ink border-t py-20 pb-8 relative overflow-hidden text-white">
+        <footer data-public-design={pathname !== '/about' || undefined} className="bg-ink border-t py-20 pb-8 relative overflow-hidden text-white">
             {/* Ambient Glow matching "How We Work" */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] bg-brand-primary/10 blur-[120px] rounded-full pointer-events-none" />
             

@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
     return (
         <ServicesAnimations>
-            <div className="min-h-screen bg-white selection:bg-surface-muted selection:text-brand-deep">
+            <div className="public-design min-h-screen bg-white selection:bg-surface-muted selection:text-brand-deep">
                 {/* â”€â”€ HERO â”€â”€ */}
-                <section className="min-h-[50vh] lg:min-h-[65vh] py-28 relative overflow-hidden flex flex-col items-center justify-center text-center">
+                <section className="page-hero relative overflow-hidden flex flex-col items-center justify-center text-center">
                     <HeroBackground />
                     
                     <div className="w-full max-w-250 mx-auto px-6 relative z-10 flex flex-col items-center justify-center gap-6">
@@ -41,7 +41,7 @@ export default function ServicesPage() {
 
                 {/* â”€â”€ FAQ SECTION (BG-WHITE) â”€â”€ */}
                 <section className="py-24 md:py-32 bg-white relative overflow-hidden text-text-primary">
-                    <div className="max-w-7xl mx-auto px-6 relative z-10">
+                    <div className="public-container relative z-10">
                         <div className="flex items-center gap-3 mb-5" data-animate="fade-up" data-once="true">
                             <div className="w-8 h-0.5 bg-slate-400" />
                             <span className="text-sm font-bold text-text-secondary uppercase tracking-widest">Common Questions</span>

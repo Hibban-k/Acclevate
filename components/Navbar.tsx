@@ -3,42 +3,24 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { useState, useEffect } from 'react';
 
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const headerRef = useRef<HTMLElement>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    if (!headerRef.current || typeof window === 'undefined') return;
-    if (pathname.startsWith('/admin')) return;
+    if (typeof window === 'undefined') return;
 
-    const ctx = gsap.context(() => {
-      gsap.to(headerRef.current, {
-        backgroundColor: 'rgba(255, 255, 255, 0.85)',
-        backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid rgba(226, 232, 240, 0.8)',
-        paddingTop: '0px',
-        paddingBottom: '0px',
-        duration: 0.3,
-        ease: 'power2.inOut',
-        scrollTrigger: {
-          trigger: document.body,
-          start: 'top -20px',
-          toggleActions: 'play none none reverse',
-        }
-      });
-    });
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
 
-    return () => ctx.revert();
-  }, [pathname]);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Early return AFTER all hooks
   if (pathname.startsWith('/admin')) return null;
@@ -55,12 +37,22 @@ export default function Navbar() {
   };
 
   return (
-    <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50 w-full pt-4 px-4 border-b border-transparent transition-all">
+    <header
+      data-public-design
+      data-scrolled={isScrolled ? 'true' : 'false'}
+      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
+        isScrolled
+          ? 'scrolled bg-[#FAFAF7]/90 backdrop-blur-md border-b border-[var(--border)] shadow-xs'
+          : mobileMenuOpen
+          ? 'bg-[#FAFAF7] border-b border-transparent'
+          : 'bg-transparent border-b border-transparent'
+      }`}
+    >
       <div className="mx-auto flex justify-between items-center h-18 w-full max-w-7xl px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity py-2">
           <Image
-            src="/logo.jpg"
+            src="/logo.png"
             alt="Acclevate Business Solutions"
             width={150}
             height={48}
@@ -100,6 +92,8 @@ export default function Navbar() {
           className="md:hidden bg-transparent border-none text-xl cursor-pointer p-2 text-text-primary"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-navigation"
         >
           {mobileMenuOpen ? '✕' : '☰'}
         </button>
@@ -107,7 +101,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <nav className="md:hidden fixed top-18 left-0 right-0 bg-white p-6 flex flex-col gap-4 z-999">
+        <nav id="mobile-navigation" className="md:hidden fixed top-18 left-0 right-0 bg-white p-6 flex flex-col gap-4 z-999">
           {navItems.map((item) => (
             <Link
               key={item.href}

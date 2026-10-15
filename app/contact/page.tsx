@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
 import ContactForm from '@/components/ContactForm';
 import HeroBackground from '@/components/HeroBackground';
 import ContactAnimations from '@/components/ContactAnimations';
@@ -26,9 +25,9 @@ export const metadata: Metadata = {
 export default function ContactPage() {
     return (
         <ContactAnimations>
-            <div className="bg-white">
+            <div className="public-design bg-white">
                 {/* Contact Hero */}
-                <section className="min-h-[50vh] lg:min-h-[65vh] py-28 relative overflow-hidden flex flex-col items-center justify-center text-center">
+                <section className="page-hero relative overflow-hidden flex flex-col items-center justify-center text-center">
                     <HeroBackground />
                     
                     <div className="w-full max-w-250 mx-auto px-6 relative z-10 flex flex-col items-center justify-center gap-6">
@@ -43,7 +42,7 @@ export default function ContactPage() {
                         </h1>
                         
                         <p data-animate="fade-up" data-once="true" data-delay="0.2" className="text-base md:text-lg text-text-secondary font-light max-w-xl leading-relaxed mt-4">
-                            Tell us what you need. We'll help you understand the right next step.
+                            Tell us what you need. We&apos;ll help you understand the right next step.
                         </p>
                     </div>
                 </section>
@@ -53,11 +52,11 @@ export default function ContactPage() {
                     <div className="max-w-200 mx-auto px-6 relative z-10">
                         <div data-animate="fade-up" data-once="true" className="text-center mb-12">
                             <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-3 tracking-tight">Send a Message</h2>
-                            <p className="text-base text-text-secondary font-light max-w-md mx-auto">Fill out the form below and we'll get back to you shortly.</p>
+                            <p className="text-base text-text-secondary font-light max-w-md mx-auto">Fill out the form below and we&apos;ll get back to you shortly.</p>
                         </div>
 
                         {/* Client Component: Interactive Form */}
-                        <div data-animate="fade-up" data-once="true" data-delay="0.1" className="bg-white rounded-3xl p-8 md:p-12 mb-20 shadow-[0_0_40px_rgba(0,0,0,0.03)]">
+                        <div data-animate="fade-up" data-once="true" data-delay="0.1" className="bg-white border border-border-main rounded-2xl p-5 sm:p-8 md:p-12 mb-20 shadow-premium-light">
                             <ContactForm />
                         </div>
 
@@ -84,7 +83,7 @@ export default function ContactPage() {
 
                 {/* Contact Info Cards */}
                 <section className="py-16 md:py-24 bg-background">
-                    <div className="max-w-7xl mx-auto px-6">
+                    <div className="public-container">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {/* Call Us Card */}
                             <div data-animate="fade-up" data-delay="0.1" className="bg-white p-10 rounded-2xl shadow-sm flex flex-col items-center text-center group hover:-translate-y-1 hover:shadow-md transition-all duration-300">
@@ -107,7 +106,7 @@ export default function ContactPage() {
                                 </div>
                                 <h3 className="text-lg font-bold text-text-primary mb-2">Email Us</h3>
                                 <a href="mailto:hello@acclevate.com" className="text-base font-medium text-text-secondary hover:text-text-primary mb-2 transition-colors">hello@acclevate.com</a>
-                                <p className="text-sm text-slate-400">We'll respond within 24 hours</p>
+                                <p className="text-sm text-slate-400">We&apos;ll respond within 24 hours</p>
                             </div>
 
                             {/* Visit Us Card */}

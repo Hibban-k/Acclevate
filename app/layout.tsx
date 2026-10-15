@@ -3,7 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { GoogleTagManager } from '@next/third-parties/google';
-import { Inter, Geist } from 'next/font/google';
+import { Inter, Geist, Outfit } from 'next/font/google';
 
 const inter = Inter({ 
   subsets: ['latin'], 
@@ -13,6 +13,12 @@ const inter = Inter({
 const geist = Geist({ 
   subsets: ['latin'], 
   variable: '--font-heading' 
+});
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  variable: '--font-logo',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -108,7 +114,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} ${geist.variable} font-sans antialiased overflow-x-hidden`}>
+      <body className={`${inter.variable} ${geist.variable} ${outfit.variable} font-sans antialiased overflow-x-hidden`}>
         <div className="relative z-1">
           <Navbar />
           <main className="min-h-screen">{children}</main>

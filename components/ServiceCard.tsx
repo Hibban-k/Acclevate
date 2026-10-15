@@ -1,5 +1,7 @@
 ﻿import Link from 'next/link';
 
+import ServiceImage from '@/components/ServiceImage';
+
 interface Service {
     title: string;
     slug: string;
@@ -108,14 +110,13 @@ export default function ServiceCard({ service, className = '', hrefOverride }: S
     return (
         <Link
             href={href}
-            className={`group flex flex-col h-full bg-surface rounded-xl hover:bg-[#F7FAF9] transition-all duration-300 overflow-hidden ${className}`}
+            className={`group flex flex-col h-full bg-surface border border-border-main rounded-2xl hover:border-brand-primary/50 hover:shadow-premium-hover hover:-translate-y-1 transition-all duration-200 overflow-hidden ${className}`}
         >
-            {/* Top Image block with clipped corner */}
+            {/* Service image */}
             <div 
                 className="relative w-full h-48 overflow-hidden shrink-0 bg-ink"
-                style={{ clipPath: 'polygon(0% 48px, 48px 0%, 100% 0%, 100% 100%, 0% 100%)' }}
             >
-                <img
+                <ServiceImage
                     src={serviceImg}
                     alt={service.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -127,7 +128,7 @@ export default function ServiceCard({ service, className = '', hrefOverride }: S
             <div className="relative p-6 pt-12 flex flex-col grow z-0">
                 
                 {/* Floating circular icon badge overlay */}
-                <div className="absolute -top-7 left-6 w-14 h-14 rounded-full bg-ink border-4 border-surface shadow-sm flex items-center justify-center z-10 group-hover:bg-brand-deep transition-colors duration-300">
+                <div className="absolute -top-6 left-6 w-12 h-12 rounded-xl bg-ink border-4 border-surface shadow-sm flex items-center justify-center z-10 group-hover:bg-brand-deep transition-colors duration-200">
                     {whiteIcon}
                 </div>
 

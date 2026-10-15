@@ -52,7 +52,7 @@ export default function CTASection({
     useScrollReveal(btnRef, { y: 40, opacity: 0, duration: 0.8, delay: 0.15, once: true });
 
     return (
-        <section className="relative py-24 md:py-36 bg-linear-to-b from-slate-50 to-white text-text-primary overflow-hidden">
+        <section className="closing-cta relative py-24 md:py-36 bg-linear-to-b from-slate-50 to-white text-text-primary overflow-hidden">
             {/* Single subtle ambient glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-100 bg-surface-muted/40 rounded-full blur-[120px] pointer-events-none" />
 

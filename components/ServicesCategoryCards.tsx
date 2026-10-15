@@ -83,7 +83,7 @@ const categories = [
     }
 ];
 
-const CategoryCard = ({ cat, index, isDark }: { cat: typeof categories[0], index: number, isDark: boolean }) => {
+const CategoryCard = ({ cat, isDark }: { cat: typeof categories[0], isDark: boolean }) => {
     const textRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLDivElement>(null);
     const listRef = useRef<HTMLDivElement>(null);
@@ -117,14 +117,14 @@ const CategoryCard = ({ cat, index, isDark }: { cat: typeof categories[0], index
     });
 
     return (
-        <section className={`w-full py-12 md:py-0 lg:h-screen flex items-center ${isDark ? 'bg-background' : 'bg-white'}`}>
-            <div className="w-full max-w-350 mx-auto px-6 lg:px-12 overflow-hidden lg:h-[88vh]">
-                <div className={`w-full h-full ${isDark ? 'bg-ink shadow-premium-dark border-white/10' : 'bg-background shadow-premium-light border-border/60'} rounded-base border overflow-hidden flex flex-col ${isDark ? 'lg:flex-row-reverse' : 'lg:flex-row'} relative`}>
+        <section className={`w-full py-8 md:py-12 flex items-center ${isDark ? 'bg-background' : 'bg-white'}`}>
+            <div className="public-container panel-container">
+                <div className={`w-full ${isDark ? 'bg-ink border-white/10' : 'bg-background border-border-main'} rounded-2xl border overflow-hidden flex flex-col ${isDark ? 'lg:flex-row-reverse' : 'lg:flex-row'} relative`}>
                     
                     {/* Text Content Area (60% width) */}
                     <div 
                         ref={textRef}
-                        className="w-full lg:w-[60%] p-10 lg:p-14 flex flex-col xl:flex-row gap-12 xl:gap-16 relative z-10 lg:h-full items-center"
+                        className="w-full lg:w-[60%] p-6 sm:p-10 lg:p-12 flex flex-col gap-8 relative z-10 items-start"
                     >
                         {/* Giant Watermark Number */}
                         <div className="absolute top-2 left-6 md:top-4 md:left-10 select-none pointer-events-none z-0">
@@ -135,8 +135,7 @@ const CategoryCard = ({ cat, index, isDark }: { cat: typeof categories[0], index
 
                         {/* Title & Desc (Left side of content area) */}
                         <div className="flex-1 flex flex-col items-start gap-6 relative z-10">
-                            {/* Uses global subheading font automatically mapped in CSS (Times New Roman) */}
-                            <h2 className={`text-[2.5rem] md:text-5xl lg:text-[3.2rem] leading-[1.1] ${isDark ? 'text-white' : 'text-text-primary'}`}>
+                            <h2 className={`text-3xl sm:text-4xl lg:text-5xl leading-[1.15] ${isDark ? 'text-white' : 'text-text-primary'}`}>
                                 {cat.title}
                             </h2>
                             <p className={`text-lg leading-relaxed mt-2 mb-2 ${isDark ? 'text-slate-300' : 'text-text-secondary'}`}>
@@ -145,16 +144,14 @@ const CategoryCard = ({ cat, index, isDark }: { cat: typeof categories[0], index
                             <Button 
                                 href={cat.link} 
                                 variant={isDark ? "secondary" : "primary"} 
-                                
-                                
-                                className={`shadow-lg ${isDark ? 'hover:shadow-white/10' : 'shadow-navy-900/10 hover:shadow-navy-900/20'}`}
+                                className={isDark ? 'text-white border-white/40 hover:bg-white/10' : ''}
                             >
                                 Explore {cat.title.split(' &')[0]} &rarr;
                             </Button>
                         </div>
 
                         {/* Services List (Right side of content area) */}
-                        <div ref={listRef} className={`flex-1 flex flex-col justify-center gap-6 mt-4 xl:mt-0 xl:pl-6 xl:border-l ${isDark ? 'border-white/10' : 'border-border'} relative z-10`}>
+                        <div ref={listRef} className={`w-full grid grid-cols-1 sm:grid-cols-2 gap-5 pt-7 border-t ${isDark ? 'border-white/15' : 'border-border-main'} relative z-10`}>
                             {cat.services.map((service, i) => (
                                 <div 
                                     key={i} 
@@ -163,7 +160,7 @@ const CategoryCard = ({ cat, index, isDark }: { cat: typeof categories[0], index
                                     <div className={`w-11 h-11 rounded-base flex items-center justify-center shrink-0 shadow-sm border ${isDark ? 'bg-brand-primary/10 text-brand-primary border-brand-primary/20' : 'bg-white text-brand-primary border-sky-100/60'}`}>
                                         {service.icon}
                                     </div>
-                                    <span className={`font-semibold text-[1.05rem] ${isDark ? 'text-slate-200' : 'text-text-secondary'}`}>{service.name}</span>
+                                    <span className={`font-medium text-sm leading-relaxed ${isDark ? 'text-slate-200' : 'text-text-secondary'}`}>{service.name}</span>
                                 </div>
                             ))}
                         </div>
@@ -172,7 +169,7 @@ const CategoryCard = ({ cat, index, isDark }: { cat: typeof categories[0], index
                     {/* Image Area (40% width) */}
                     <div 
                         ref={imageRef}
-                        className="w-full lg:w-[40%] relative h-75 sm:h-100 lg:h-full"
+                        className="w-full lg:w-[40%] relative h-64 sm:h-80 lg:h-auto lg:min-h-100"
                     >
                         {/* Desktop Slanted image */}
                         <div className="absolute inset-0 hidden lg:block" style={{ clipPath: isDark ? 'polygon(0 0, 85% 0, 100% 100%, 0 100%)' : 'polygon(15% 0, 100% 0, 100% 100%, 0 100%)' }}>
@@ -207,7 +204,7 @@ export default function ServicesCategoryCards() {
         <div className="w-full flex flex-col mt-8">
             {categories.map((cat, index) => {
                 const isDark = index % 2 !== 0;
-                return <CategoryCard key={cat.num} cat={cat} index={index} isDark={isDark} />;
+                return <CategoryCard key={cat.num} cat={cat} isDark={isDark} />;
             })}
         </div>
     );

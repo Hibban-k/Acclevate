@@ -21,10 +21,15 @@ export default function HomeAnimations({ children }: { children: React.ReactNode
     
     // Check if user prefers reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
-
     const countElements = containerRef.current.querySelectorAll('[data-count]');
     if (countElements.length === 0) return;
+
+    if (prefersReducedMotion) {
+      countElements.forEach((el) => {
+        el.textContent = (el.getAttribute('data-count') || '0') + (el.getAttribute('data-suffix') || '');
+      });
+      return;
+    }
 
     const ctx = gsap.context(() => {
       countElements.forEach((el) => {

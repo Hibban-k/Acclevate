@@ -63,6 +63,10 @@ export class InquiryService {
         return inquiry;
     }
 
+    async deleteInquiry(id: string) {
+        return inquiryRepository.delete(id);
+    }
+
     async getAllInquiries() {
         return inquiryRepository.findAll();
     }

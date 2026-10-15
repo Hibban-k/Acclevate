@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { cache } from 'react';
 import { serviceService } from '@/lib/services/service.service';
 import ServiceCard from '@/components/ServiceCard';
+import ServiceImage from '@/components/ServiceImage';
 
 export const revalidate = 604800; // 1 week
 
@@ -41,7 +42,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 // Helper to parse description and inject internal links
 function renderDescriptionWithLinks(description: string, internalLinks: any[]) {
     if (!internalLinks || internalLinks.length === 0) {
-        return <p className="text-text-secondary leading-relaxed text-lg">{description}</p>;
+        return <p className="text-text-secondary leading-relaxed text-lg whitespace-pre-wrap">{description}</p>;
     }
 
     let parsedDescription = description;
@@ -85,7 +86,7 @@ function renderDescriptionWithLinks(description: string, internalLinks: any[]) {
                         <Link 
                             key={i} 
                             href={`/services/${link.targetService.category?.slug || 'service'}/${link.targetService.slug}`}
-                            className="text-charcoal font-medium underline decoration-navy-200 underline-offset-4 hover:decoration-navy-600 transition-colors"
+                            className="text-brand-deep font-medium underline decoration-brand-primary/40 underline-offset-4 hover:decoration-brand-deep transition-colors"
                         >
                             {link.anchorText}
                         </Link>
@@ -106,8 +107,14 @@ export default async function CoreServicePage({ params }: PageProps) {
         notFound();
     }
 
+    // Existing public records include this content even though the model type omits it.
+    const coveredServices = (serviceData as typeof serviceData & {
+        coveredServices?: { name: string; description: string }[];
+    }).coveredServices || [];
+    const categoryName = (serviceData.category as unknown as { name?: string })?.name || 'Professional services';
+
     return (
-        <div className="min-h-screen bg-white">
+        <div className="public-design service-detail min-h-screen bg-white">
             {/* Structured Data JSON-LD */}
             {serviceData.structuredData && (
                 <script
@@ -117,38 +124,91 @@ export default async function CoreServicePage({ params }: PageProps) {
             )}
 
             {/* Hero Section */}
-            <section className="bg-background pt-[136px] pb-24 relative overflow-hidden">
-                <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-                    <div className="absolute top-0 right-0 w-[40vw] h-[40vw] max-w-[600px] bg-surface-muted/20 rounded-full blur-[100px] -translate-y-1/4 translate-x-1/4 animate-orbFloat" />
+            <section className="page-hero service-detail-hero bg-background relative">
+                <div className="public-container panel-container">
+                <div className={`service-masthead bg-surface text-text-primary border border-border-main rounded-base overflow-hidden ${serviceData.image ? 'grid lg:grid-cols-[1.15fr_0.85fr]' : ''}`}>
+                    <div className="min-w-0 p-6 sm:p-10 lg:p-12 flex flex-col justify-center">
+                        <Link href={`/${resolvedParams.category}`} className="inline-flex items-center gap-3 w-fit text-xs font-medium tracking-[0.12em] uppercase text-brand-deep hover:text-text-primary mb-10 transition-colors">
+                            <span className="w-6 h-px bg-brand-primary/50" aria-hidden="true" />
+                            {categoryName}
+                        </Link>
+                        <h1 className="text-text-primary mb-7 leading-tight">
+                            {serviceData.title}
+                        </h1>
+                        <p className="text-xl md:text-2xl text-text-primary mb-7">
+                            {serviceData.tagline}
+                        </p>
+                        {serviceData.shortDescription && (
+                            <p className="text-sm md:text-base text-text-secondary max-w-lg border-t border-border-main pt-6">
+                                {serviceData.shortDescription}
+                            </p>
+                        )}
+                    </div>
+                    {serviceData.image && (
+                        <div className="service-visual relative bg-surface-muted">
+                        <ServiceImage
+                            src={serviceData.image}
+                            alt={serviceData.title}
+                            priority
+                            className="w-full h-72 sm:h-96 lg:h-full object-cover"
+                        />
+                        <div aria-hidden="true" className="absolute inset-5 border border-white/30 pointer-events-none" />
+                        </div>
+                    )}
                 </div>
-                
-                <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-6 tracking-tight leading-tight">
-                        {serviceData.title}
-                    </h1>
-                    <p className="text-xl text-text-secondary mb-8 font-light">
-                        {serviceData.tagline}
-                    </p>
                 </div>
             </section>
 
             {/* Main Content */}
             <section className="py-20">
-                <div className="max-w-4xl mx-auto px-6">
-                    <div className="prose prose-lg max-w-none prose-headings:text-text-primary prose-p:text-text-secondary">
+                <div className="public-container">
+                    <div className="service-editorial-row">
+                        <div>
+                            <span className="service-eyebrow">01 / Introduction</span>
+                            <h2 className="text-3xl md:text-4xl text-text-primary">Overview</h2>
+                        </div>
+                        <div className="service-copy">
                         {/* Dynamic Description with Internal Links */}
                         {renderDescriptionWithLinks(serviceData.description, serviceData.internalLinks || [])}
+                        </div>
                     </div>
 
                     {/* Features */}
                     {serviceData.features && serviceData.features.length > 0 && (
-                        <div className="mt-16">
-                            <h2 className="text-3xl font-bold text-text-primary mb-8">Key Features</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="service-editorial-row mt-20 pt-12 border-t border-border-main">
+                            <div>
+                                <span className="service-eyebrow">02 / The value</span>
+                                <h2 className="text-3xl md:text-4xl text-text-primary">Key Features</h2>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10">
                                 {serviceData.features.map((feature: any, index: number) => (
-                                    <div key={index} className="bg-background rounded-base p-6 hover:shadow-md transition-shadow">
+                                    <div key={index} className="service-feature border-t-2 border-border-main pt-6 transition-colors duration-200 hover:border-brand-primary">
+                                        <span aria-hidden="true" className="block text-sm text-brand-deep tabular-nums mb-6">{String(index + 1).padStart(2, '0')}</span>
+                                        {feature.image && (
+                                            <ServiceImage src={feature.image} alt={feature.title} className="w-full aspect-video object-cover rounded-lg mb-6" />
+                                        )}
                                         <h3 className="text-xl font-semibold text-text-primary mb-3">{feature.title}</h3>
-                                        <p className="text-text-secondary leading-relaxed">{feature.description}</p>
+                                        <p className="text-text-secondary leading-relaxed whitespace-pre-wrap">{feature.description}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {coveredServices.length > 0 && (
+                        <div className="service-editorial-row service-coverage mt-20 bg-background border border-border-main rounded-base p-6 sm:p-10">
+                            <div>
+                                <span className="service-eyebrow">03 / In scope</span>
+                                <h2 className="text-3xl md:text-4xl text-text-primary">Covered Services</h2>
+                            </div>
+                            <div>
+                                {coveredServices.map((service, index) => (
+                                    <div key={`${service.name}-${index}`} className="service-coverage-item grid grid-cols-[2rem_1fr] gap-4 border-t border-border-main py-7 first:border-t-0 first:pt-0 last:pb-0">
+                                        <span aria-hidden="true" className="text-xs text-brand-deep tabular-nums pt-1.5">{String(index + 1).padStart(2, '0')}</span>
+                                        <div>
+                                        <h3 className="text-xl text-text-primary mb-3">{service.name}</h3>
+                                        <p className="text-text-secondary whitespace-pre-wrap">{service.description}</p>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
@@ -157,13 +217,16 @@ export default async function CoreServicePage({ params }: PageProps) {
 
                     {/* FAQs */}
                     {serviceData.faqs && serviceData.faqs.length > 0 && (
-                        <div className="mt-20">
-                            <h2 className="text-3xl font-bold text-text-primary mb-8">Frequently Asked Questions</h2>
-                            <div className="space-y-4">
+                        <div className="service-editorial-row mt-20 pt-12 border-t border-border-main">
+                            <div>
+                                <span className="service-eyebrow">04 / Good to know</span>
+                                <h2 className="text-3xl md:text-4xl text-text-primary">Frequently Asked Questions</h2>
+                            </div>
+                            <div className="space-y-4 service-copy">
                                 {serviceData.faqs.map((faq: any, index: number) => (
-                                    <div key={index} className="rounded-base p-6">
+                                    <div key={index} className="border-b border-border-main py-6 first:pt-0">
                                         <h3 className="text-lg font-semibold text-text-primary mb-2">{faq.question}</h3>
-                                        <p className="text-text-secondary">{faq.answer}</p>
+                                        <p className="text-text-secondary whitespace-pre-wrap">{faq.answer}</p>
                                     </div>
                                 ))}
                             </div>
@@ -175,18 +238,19 @@ export default async function CoreServicePage({ params }: PageProps) {
             {/* Related Services (4-Column Grid) */}
             {serviceData.relatedServices && serviceData.relatedServices.length > 0 && (
                 <section className="bg-background py-24">
-                    <div className="max-w-[1400px] mx-auto px-6">
+                    <div className="public-container">
                         <div className="text-center mb-16">
                             <h2 className="text-3xl md:text-4xl font-bold text-text-primary mb-4">Explore Related Services</h2>
                             <p className="text-text-secondary text-lg">Comprehensive solutions tailored to your business needs.</p>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {serviceData.relatedServices.slice(0, 4).map((related: any) => {
+                            {serviceData.relatedServices.map((related: any) => {
                                 const mockService = {
                                     id: related._id || related.id,
                                     title: related.title,
                                     slug: related.slug,
                                     tagline: related.shortDescription || 'Discover how this service can accelerate your growth.',
+                                    image: related.image,
                                     category: resolvedParams.category
                                 };
 

@@ -7,7 +7,7 @@ export class ProgrammaticPageRepository {
         await connectDB();
         return ProgrammaticPage.find({ isActive: true, ...filter })
             .populate('service', 'title slug')
-            .populate('industry', 'name slug icon')
+            
             .lean();
     }
 
@@ -16,7 +16,7 @@ export class ProgrammaticPageRepository {
         return ProgrammaticPage.find({ isActive: true })
             .select('slug updatedAt service industry')
             .populate('service', 'slug')
-            .populate('industry', 'slug')
+            
             .lean();
     }
 
@@ -24,7 +24,7 @@ export class ProgrammaticPageRepository {
         await connectDB();
         return ProgrammaticPage.findById(id)
             .populate('service')
-            .populate('industry')
+            
             .lean();
     }
 
@@ -32,7 +32,7 @@ export class ProgrammaticPageRepository {
         await connectDB();
         return ProgrammaticPage.findOne({ slug, isActive: true })
             .populate('service')
-            .populate('industry')
+            
             .lean();
     }
 
@@ -40,9 +40,9 @@ export class ProgrammaticPageRepository {
         await connectDB();
         
         // Find industry by slug
-        const Industry = (await import('@/models/Industry')).default;
-        const industry = await Industry.findOne({ slug: industrySlug, isActive: true }).lean();
-        if (!industry) return null;
+        // const Industry = (await import('@/models/Industry')).default;
+        // // const industry = await Industry.findOne({ slug: industrySlug, isActive: true }).lean();
+        // if (!industry) return null;
 
         // Find service by slug
         const Service = (await import('@/models/Service')).default;
@@ -50,7 +50,7 @@ export class ProgrammaticPageRepository {
         if (!service) return null;
 
         return ProgrammaticPage.findOne({ 
-            industry: industry._id, 
+             
             service: service._id, 
             isActive: true 
         })
@@ -62,7 +62,7 @@ export class ProgrammaticPageRepository {
                 { path: 'internalLinks.targetService', select: 'title slug category' }
             ]
         })
-        .populate('industry')
+        
         .lean();
     }
 

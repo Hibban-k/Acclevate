@@ -148,33 +148,23 @@ export async function getServicesAction() {
 export async function createServiceAction(data: any) {
     await checkAdminAuth();
 
-    const { title, tagline, description, category, relatedServices, features, faqs, order, isActive } = data;
+    const { title, tagline, description, category } = data;
 
     if (!title || !tagline || !description || !category) {
-        throw new Error('Title, tagline, description, and category are required');
+        throw new Error("Title, tagline, description, and category are required");
     }
 
-    const slug = slugify(title, { lower: true, strict: true });
+    if (!data.slug) {
+        data.slug = slugify(title, { lower: true, strict: true });
+    }
 
     // Check if slug is unique
-    const existing = await serviceService.getServiceBySlug(slug);
-    let finalSlug = slug;
+    const existing = await serviceService.getServiceBySlug(data.slug);
     if (existing) {
-        finalSlug = `${slug}-${Date.now()}`;
+        data.slug = `${data.slug}-${Date.now()}`;
     }
 
-    const service = await serviceService.createService({
-        title,
-        slug: finalSlug,
-        tagline,
-        description,
-        category,
-        relatedServices: relatedServices || [],
-        features: features || [],
-        faqs: faqs || [],
-        order: order || 0,
-        isActive: isActive !== undefined ? isActive : true,
-    });
+    const service = await serviceService.createService(data);
 
     revalidatePath('/');
     revalidatePath('/services');
@@ -219,6 +209,17 @@ export async function updateServiceAction(id: string, data: any) {
     return JSON.parse(JSON.stringify(service));
 }
 
+export async function bulkDeleteServicesAction(ids: string[]) {
+    await checkAdminAuth();
+    for (const id of ids) {
+        await serviceService.deleteService(id);
+    }
+    revalidatePath('/');
+    revalidatePath('/services');
+    revalidatePath('/admin/services');
+    return { success: true };
+}
+
 export async function deleteServiceAction(id: string) {
     await checkAdminAuth();
 
@@ -233,3 +234,4 @@ export async function deleteServiceAction(id: string) {
 
     return { success: true };
 }
+

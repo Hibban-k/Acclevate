@@ -45,27 +45,15 @@ export default function TestimonialSlider() {
   };
 
   return (
-    <div className="group relative uiverse-outer flex flex-col h-full min-h-120 overflow-hidden">
-      {/* Moving dot */}
-      <div className="uiverse-dot" />
-
-      {/* Inner Card Container */}
-      <div className="uiverse-card p-10 md:p-12 flex flex-col h-full w-full justify-between relative overflow-hidden">
-        {/* Glowing light ray */}
-        <div className="uiverse-ray" />
-
-        {/* Reticle Lines */}
-        <div className="uiverse-line uiverse-topl" />
-        <div className="uiverse-line uiverse-bottoml" />
-        <div className="uiverse-line uiverse-leftl" />
-        <div className="uiverse-line uiverse-rightl" />
+    <div className="group relative flex flex-col h-full overflow-hidden rounded-2xl border border-border-main bg-background">
+      <div className="p-6 sm:p-10 md:p-12 flex flex-col h-full w-full justify-between relative overflow-hidden">
 
         <div>
           <svg className="w-10 h-10 text-brand-primary/80 mb-8 relative z-10" fill="currentColor" viewBox="0 0 24 24">
             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
           </svg>
 
-          <div className="relative h-62.5 sm:h-50 w-full z-10">
+          <div className="relative min-h-64 sm:min-h-56 w-full z-10">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
@@ -73,7 +61,7 @@ export default function TestimonialSlider() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
-                className="absolute inset-0 flex flex-col"
+                className="flex flex-col"
               >
                 <p className="text-lg md:text-xl text-text-secondary font-medium leading-relaxed mb-8 flex-1">
                   &quot;{testimonials[currentIndex].review}&quot;
@@ -97,7 +85,7 @@ export default function TestimonialSlider() {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t flex items-center justify-between z-10 relative">
+        <div className="mt-8 pt-6 border-t border-border-main flex items-center justify-between z-10 relative">
           <div className="flex gap-2">
             {testimonials.map((_, idx) => (
               <button 

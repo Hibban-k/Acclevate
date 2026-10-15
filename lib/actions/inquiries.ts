@@ -54,3 +54,18 @@ export async function getInquiriesAction() {
     const inquiries = await inquiryService.getAllInquiries();
     return JSON.parse(JSON.stringify(inquiries));
 }
+
+export async function deleteInquiryAction(id: string) {
+    await checkAdminAuth();
+    await inquiryService.deleteInquiry(id);
+    return { success: true };
+}
+
+export async function bulkDeleteInquiriesAction(ids: string[]) {
+    await checkAdminAuth();
+    for (const id of ids) {
+        await inquiryService.deleteInquiry(id);
+    }
+    return { success: true };
+}
+

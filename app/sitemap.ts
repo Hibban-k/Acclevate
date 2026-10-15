@@ -2,28 +2,10 @@ import { MetadataRoute } from 'next';
 import { serviceRepository } from '@/lib/repositories/service.repository';
 import { categoryRepository } from '@/lib/repositories/category.repository';
 import { programmaticPageRepository } from '@/lib/repositories/programmatic.repository';
-import { industryRepository } from '@/lib/repositories/industry.repository';
 
 const BASE_URL = 'https://www.acclevate.com';
 
-/**
- * Dynamic Sitemap Generator
- * ─────────────────────────────────────────────────────────────────────────────
- * Priority Guide (0.0 - 1.0):
- *   1.0 = Homepage
- *   0.9 = Static core pages & Main Directories (Industries hub, Services hub)
- *   0.8 = Core Service & Core Industry pages
- *   0.7 = Category pages
- *   0.6 = Programmatic GEO/AEO niche pages (service + industry crossover)
- *   0.5 = Everything else
- *
- * changeFrequency Guide:
- *   "daily"   = Content changes often
- *   "weekly"  = Service/Industry pages (updated occasionally for SEO)
- *   "monthly" = Static pages
- */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    // 1. Static Pages & Hubs
     const staticPages: MetadataRoute.Sitemap = [
         {
             url: BASE_URL,
@@ -44,12 +26,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.9,
         },
         {
-            url: `${BASE_URL}/industries`,
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 0.9,
-        },
-        {
             url: `${BASE_URL}/contact`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
@@ -57,28 +33,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
     ];
 
-    // 2. Parallel Database Fetching (via strict repository layer)
     let services: any[] = [];
     let categories: any[] = [];
-    let industries: any[] = [];
     let progPages: any[] = [];
 
     try {
-        const [servicesRes, categoriesRes, industriesRes, progPagesRes] = await Promise.all([
+        const [servicesRes, categoriesRes, progPagesRes] = await Promise.all([
             serviceRepository.findAllForSitemap(),
             categoryRepository.findAllForSitemap(),
-            industryRepository.findAllForSitemap(),
             programmaticPageRepository.findAllForSitemap()
         ]);
         services = servicesRes || [];
         categories = categoriesRes || [];
-        industries = industriesRes || [];
         progPages = progPagesRes || [];
     } catch (error) {
         console.error('Failed to fetch data for sitemap generation:', error);
     }
 
-    // 3. Dynamic Service Pages 
     const servicePages: MetadataRoute.Sitemap = services.map((service) => {
         const categorySlug = (service.category && typeof service.category === 'object' && 'slug' in service.category)
             ? (service.category as any).slug
@@ -91,7 +62,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         };
     });
 
-    // 4. Dynamic Category Pages 
     const categoryPages: MetadataRoute.Sitemap = categories.map((cat) => ({
         url: `${BASE_URL}/services/${cat.slug}`,
         lastModified: cat.updatedAt,
@@ -99,18 +69,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.7,
     }));
 
-    // 5. Dynamic Industry Pages
-    const industryPages: MetadataRoute.Sitemap = industries.map((ind) => ({
-        url: `${BASE_URL}/industries/${ind.slug}`,
-        lastModified: ind.updatedAt,
-        changeFrequency: 'weekly',
-        priority: 0.8,
-    }));
-
-    // 6. Programmatic (GEO / AEO) Intersection Pages
-    // Extremely powerful for SEO (e.g. "financial-advisory-for-healthcare")
     const programmaticPages: MetadataRoute.Sitemap = progPages.map((page) => ({
-        url: `${BASE_URL}/industries/${page.industry?.slug}/${page.service?.slug}`,
+        url: `${BASE_URL}/services/${page.service?.slug}`,
         lastModified: page.updatedAt,
         changeFrequency: 'monthly',
         priority: 0.6,
@@ -120,7 +80,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ...staticPages,
         ...servicePages,
         ...categoryPages,
-        ...industryPages,
         ...programmaticPages,
     ];
 }

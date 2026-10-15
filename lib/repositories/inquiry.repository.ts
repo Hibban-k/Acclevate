@@ -30,6 +30,11 @@ export class InquiryRepository {
             { new: true }
         );
     }
+
+    async delete(id: string): Promise<IInquiry | null> {
+        await connectDB();
+        return Inquiry.findByIdAndDelete(id);
+    }
 }
 
 export const inquiryRepository = new InquiryRepository();

@@ -1,7 +1,7 @@
 ﻿import Link from 'next/link';
 import { AnchorHTMLAttributes, ButtonHTMLAttributes, forwardRef } from 'react';
 
-const baseStyles = "inline-flex items-center justify-center font-medium rounded-lg transition-colors duration-200 border border-transparent";
+const baseStyles = "action-button inline-flex items-center justify-center font-medium rounded-lg transition-colors duration-200 border border-transparent";
 
 const variantStyles = {
     primary: "bg-brand-deep text-white hover:bg-ink",

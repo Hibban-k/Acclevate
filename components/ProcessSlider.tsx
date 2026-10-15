@@ -53,9 +53,9 @@ export default function ProcessSlider() {
   };
 
   return (
-    <div ref={outerContainerRef} className="relative w-full h-[260vh]">
+    <div ref={outerContainerRef} className="process-slider relative w-full h-[260vh]">
       <div className="sticky top-20 w-full max-w-390 mx-auto py-4">
-        <div className="relative w-full rounded-base overflow-hidden shadow-premium-dark border border-slate-700/50 bg-surface-dark">
+        <div className="relative w-full rounded-base overflow-hidden shadow-premium-dark border border-slate-700/50 bg-ink">
           <div
             className="flex flex-row w-full will-change-transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]"
             style={{
@@ -75,7 +75,7 @@ export default function ProcessSlider() {
                     priority
                   />
                 </div>
-                <div className="absolute inset-0 bg-linear-to-t from-[#080c1e] via-[#080c1e]/80 to-[#080c1e]/25 md:bg-linear-to-r md:from-[#080c1e] md:via-[#080c1e]/85 md:to-transparent z-10 pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-t from-[#243b36] via-[#243b36]/80 to-[#243b36]/25 md:bg-linear-to-r md:from-[#243b36] md:via-[#243b36]/85 md:to-transparent z-10 pointer-events-none" />
               </div>
 
               <div className={`relative z-20 max-w-3xl text-left transition-all duration-500 ease-out ${activeIndex === 0 ? 'opacity-100 translate-y-0' : 'opacity-40 translate-y-4'}`}>
@@ -104,7 +104,7 @@ export default function ProcessSlider() {
                     className="object-cover"
                   />
                 </div>
-                <div className="absolute inset-0 bg-linear-to-t from-[#080c1e] via-[#080c1e]/80 to-[#080c1e]/25 md:bg-linear-to-r md:from-[#080c1e] md:via-[#080c1e]/85 md:to-transparent z-10 pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-t from-[#243b36] via-[#243b36]/80 to-[#243b36]/25 md:bg-linear-to-r md:from-[#243b36] md:via-[#243b36]/85 md:to-transparent z-10 pointer-events-none" />
               </div>
 
               <div className={`relative z-20 max-w-3xl text-left transition-all duration-500 ease-out ${activeIndex === 1 ? 'opacity-100 translate-y-0' : 'opacity-40 translate-y-4'}`}>
@@ -133,7 +133,7 @@ export default function ProcessSlider() {
                     className="object-cover"
                   />
                 </div>
-                <div className="absolute inset-0 bg-linear-to-t from-[#080c1e] via-[#080c1e]/80 to-[#080c1e]/25 md:bg-linear-to-r md:from-[#080c1e] md:via-[#080c1e]/85 md:to-transparent z-10 pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-t from-[#243b36] via-[#243b36]/80 to-[#243b36]/25 md:bg-linear-to-r md:from-[#243b36] md:via-[#243b36]/85 md:to-transparent z-10 pointer-events-none" />
               </div>
 
               <div className={`relative z-20 max-w-3xl text-left transition-all duration-500 ease-out ${activeIndex === 2 ? 'opacity-100 translate-y-0' : 'opacity-40 translate-y-4'}`}>
@@ -151,17 +151,18 @@ export default function ProcessSlider() {
             </div>
           </div>
 
-          <div className="relative z-20 bg-surface-darker/95 backdrop-blur-md border-t border-slate-700/50 w-full">
+          <div className="relative z-20 bg-ink border-t border-white/15 w-full">
             <div className="grid grid-cols-3 w-full">
               <button
                 type="button"
                 onClick={() => handleTabClick(0)}
+                aria-pressed={activeIndex === 0}
                 className="group relative py-4 sm:py-5 md:py-6 px-4 md:px-8 flex flex-col items-center md:items-start text-center md:text-left transition-all duration-200 cursor-pointer focus:outline-none"
               >
-                <span className={`text-[10px] md:text-xs font-semibold uppercase tracking-widest mb-1 transition-colors duration-200 ${activeIndex === 0 ? 'text-brand-primary' : 'text-text-secondary group-hover:text-slate-400'}`}>
+                <span className={`text-[10px] md:text-xs font-semibold uppercase tracking-widest mb-1 transition-colors duration-200 ${activeIndex === 0 ? 'text-brand-primary' : 'text-slate-300 group-hover:text-white'}`}>
                   Step 01
                 </span>
-                <span className={`text-xs sm:text-sm md:text-base font-medium transition-colors duration-200 ${activeIndex === 0 ? 'text-white font-semibold' : 'text-slate-400 group-hover:text-slate-300'}`}>
+                <span className={`text-xs sm:text-sm md:text-base font-medium transition-colors duration-200 ${activeIndex === 0 ? 'text-white font-semibold' : 'text-slate-300 group-hover:text-white'}`}>
                   Discovery
                 </span>
               </button>
@@ -169,12 +170,13 @@ export default function ProcessSlider() {
               <button
                 type="button"
                 onClick={() => handleTabClick(1)}
+                aria-pressed={activeIndex === 1}
                 className="group relative py-4 sm:py-5 md:py-6 px-4 md:px-8 flex flex-col items-center md:items-start text-center md:text-left transition-all duration-200 cursor-pointer focus:outline-none"
               >
-                <span className={`text-[10px] md:text-xs font-semibold uppercase tracking-widest mb-1 transition-colors duration-200 ${activeIndex === 1 ? 'text-brand-primary' : 'text-text-secondary group-hover:text-slate-400'}`}>
+                <span className={`text-[10px] md:text-xs font-semibold uppercase tracking-widest mb-1 transition-colors duration-200 ${activeIndex === 1 ? 'text-brand-primary' : 'text-slate-300 group-hover:text-white'}`}>
                   Step 02
                 </span>
-                <span className={`text-xs sm:text-sm md:text-base font-medium transition-colors duration-200 ${activeIndex === 1 ? 'text-white font-semibold' : 'text-slate-400 group-hover:text-slate-300'}`}>
+                <span className={`text-xs sm:text-sm md:text-base font-medium transition-colors duration-200 ${activeIndex === 1 ? 'text-white font-semibold' : 'text-slate-300 group-hover:text-white'}`}>
                   Strategy
                 </span>
               </button>
@@ -182,12 +184,13 @@ export default function ProcessSlider() {
               <button
                 type="button"
                 onClick={() => handleTabClick(2)}
+                aria-pressed={activeIndex === 2}
                 className="group relative py-4 sm:py-5 md:py-6 px-4 md:px-8 flex flex-col items-center md:items-start text-center md:text-left transition-all duration-200 cursor-pointer focus:outline-none"
               >
-                <span className={`text-[10px] md:text-xs font-semibold uppercase tracking-widest mb-1 transition-colors duration-200 ${activeIndex === 2 ? 'text-brand-primary' : 'text-text-secondary group-hover:text-slate-400'}`}>
+                <span className={`text-[10px] md:text-xs font-semibold uppercase tracking-widest mb-1 transition-colors duration-200 ${activeIndex === 2 ? 'text-brand-primary' : 'text-slate-300 group-hover:text-white'}`}>
                   Step 03
                 </span>
-                <span className={`text-xs sm:text-sm md:text-base font-medium transition-colors duration-200 ${activeIndex === 2 ? 'text-white font-semibold' : 'text-slate-400 group-hover:text-slate-300'}`}>
+                <span className={`text-xs sm:text-sm md:text-base font-medium transition-colors duration-200 ${activeIndex === 2 ? 'text-white font-semibold' : 'text-slate-300 group-hover:text-white'}`}>
                   Execution
                 </span>
               </button>

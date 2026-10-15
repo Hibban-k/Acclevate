@@ -54,19 +54,19 @@ export default function ContactForm() {
         }
     };
 
-    const inputClasses = "w-full bg-transparent border-0 focus:border-ink focus:ring-0 px-0 py-2 text-text-primary rounded-none transition-colors duration-300 shadow-none";
-    const labelClasses = "text-sm text-text-secondary block mb-1";
+    const inputClasses = "w-full min-w-0 min-h-12 bg-background border border-border-main focus:border-brand-deep px-3 py-3 text-base text-text-primary rounded-lg transition-colors duration-200 shadow-none";
+    const labelClasses = "text-sm font-medium text-text-primary block mb-2";
 
     return (
         <div>
             {formStatus === 'sent' && (
-                <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-8 text-sm font-medium">
+                <div role="status" className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-8 text-sm font-medium">
                     Thank you! Your inquiry has been sent successfully.
                 </div>
             )}
 
             {formStatus === 'error' && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-8 text-sm font-medium">
+                <div role="alert" className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-8 text-sm font-medium">
                     {errorMessage}
                 </div>
             )}
@@ -86,13 +86,13 @@ export default function ContactForm() {
                 </div>
 
                 <div>
-                    <label className="text-base font-bold text-text-primary block mb-6">Name (required)</label>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                         <div>
-                            <label className={labelClasses} htmlFor="fullName">Full Name</label>
+                            <label className={labelClasses} htmlFor="fullName">Full name (required)</label>
                             <input
                                 type="text"
                                 id="fullName"
+                                autoComplete="name"
                                 value={formData.fullName}
                                 onChange={handleChange}
                                 className={inputClasses}
@@ -100,10 +100,11 @@ export default function ContactForm() {
                             />
                         </div>
                         <div>
-                            <label className={labelClasses} htmlFor="phone">Phone Number</label>
+                            <label className={labelClasses} htmlFor="phone">Phone number (required)</label>
                             <input
                                type="tel"
                                 id="phone"
+                                autoComplete="tel"
                                 value={formData.phone}
                                 onChange={handleChange}
                                 className={inputClasses}
@@ -119,6 +120,7 @@ export default function ContactForm() {
                         <input
                             type="email"
                             id="email"
+                            autoComplete="email"
                             value={formData.email}
                             onChange={handleChange}
                             className={inputClasses}
@@ -127,16 +129,16 @@ export default function ContactForm() {
                     </div>
                     
                     <div className="relative ">
-                        <label className={labelClasses} htmlFor="service">Service</label>
-                        <div>
+                        <label className={labelClasses} htmlFor="service">Service (required)</label>
+                        <div className="relative">
                         <select
                             id="service"
                             value={formData.service}
                             onChange={handleChange}
-                            className={`${inputClasses} appearance-none cursor-pointer pb-2`}
+                            className={`${inputClasses} appearance-none cursor-pointer pr-9`}
                             required
                         >
-                            <option value="" disabled></option>
+                            <option value="" disabled>Select a service</option>
                             <option value="Business Registration">Business Registration</option>
                             <option value="GST & Tax">GST & Tax</option>
                             <option value="Trademark & IPR">Trademark & IPR</option>
@@ -146,9 +148,9 @@ export default function ContactForm() {
                             <option value="Certifications & Growth">Certifications & Growth</option>
                             <option value="Other / General Consultation">Other / General Consultation</option>
                         </select>
-                        </div>
                         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-text-secondary">
                             <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+                        </div>
                         </div>
                         
                     </div>
@@ -160,7 +162,7 @@ export default function ContactForm() {
                         id="message"
                         value={formData.message}
                         onChange={handleChange}
-                        className={`${inputClasses} min-h-25 resize-y`}
+                        className={`${inputClasses} min-h-36 resize-y`}
                     />
                 </div>
 
@@ -170,7 +172,7 @@ export default function ContactForm() {
                         disabled={formStatus === 'sending'}
                         className={`w-full py-4 border-2 rounded-lg font-bold text-xs uppercase tracking-widest transition-all duration-300 ${formStatus === 'sending'
                             ? 'border-border text-slate-400 bg-background cursor-not-allowed'
-                            : 'border-slate-900 text-text-primary bg-transparent hover:bg-slate-900 hover:text-white'
+                            : 'border-brand-deep text-white bg-brand-deep hover:bg-ink hover:border-ink'
                             }`}
                     >
                         {formStatus === 'sending' ? 'Sending...' : 'Submit'}

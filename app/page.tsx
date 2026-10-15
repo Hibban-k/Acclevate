@@ -1,5 +1,4 @@
 ﻿import Link from 'next/link';
-import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import ServicesCarousel from '@/components/ServicesCarousel';
 import CTASection from '@/components/CTASection';
@@ -8,6 +7,7 @@ import FaqAccordion from '@/components/FaqAccordion';
 import IndustryHub from '@/components/IndustryHub';
 import ProcessSlider from '@/components/ProcessSlider';
 import { getHomePageServicesAction } from '@/lib/actions/services';
+import { categoryService } from '@/lib/services/category.service';
 import HeroBackground from '@/components/HeroBackground';
 import HeroImageShowcase from '@/components/HeroImageShowcase';
 import HomeAnimations from '@/components/HomeAnimations';
@@ -24,6 +24,7 @@ export const metadata: Metadata = {
 export const revalidate = 604800; // 1 week
 
 export default async function Home() {
+  const categories = await categoryService.getAllCategories().catch(() => []);
   let data: { services: any[]; categories: any[] } = { services: [], categories: [] };
 
   try {
@@ -40,28 +41,28 @@ export default async function Home() {
 
   return (
     <HomeAnimations>
-      <div>
+      <div className="public-design">
       {/* Hero Section - Light Corporate Layout */}
-      <section className="relative min-h-[85vh] flex items-center justify-start pt-24 pb-20 lg:pt-32 lg:pb-16 overflow-hidden">
+      <section className="home-hero relative flex items-center justify-start pt-32 pb-16 lg:pt-40 lg:pb-24 overflow-hidden">
         {/* Original Animated Background */}
         <HeroBackground />
 
-        <div className="relative z-10 w-full max-w-350 mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center lg:items-start justify-between gap-2 lg:gap-8 mt-4">
+        <div className="relative z-10 public-container flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
 
           {/* Left Text Column */}
-          <div className="w-full lg:w-[50%] flex flex-col items-start text-left lg:pt-12 gap-10">
+          <div className="w-full lg:w-[52%] min-w-0 flex flex-col items-start text-left gap-7">
 
-            <div className="flex flex-col items-start leading-none tracking-tight mb-6" data-animate="fade-up" data-once="true" data-delay="0.1">
-              <h2 className="text-text-secondary text-[clamp(2.2rem,3.9vw,3.6rem)]  font-semibold mb-1 ml-4">Accelerate with</h2>
+            <div className="flex flex-col items-start leading-none tracking-tight" data-animate="fade-up" data-once="true" data-delay="0.1">
+              <p className="text-brand-deep text-xl sm:text-2xl font-medium mb-3">Accelerate with</p>
               <h1 className="text-text-primary text-[clamp(3.2rem,6.5vw,6rem)] font-bold">ACCLEVATE</h1>
             </div>
 
-            <p className="text-base italic md:text-base lg:text-lg text-text-secondary leading-relaxed mb-10 max-w-xl" data-animate="fade-up" data-once="true" data-delay="0.2">
+            <p className="text-base lg:text-lg text-text-secondary leading-relaxed max-w-xl" data-animate="fade-up" data-once="true" data-delay="0.2">
               Practical guidance backed by clear processes, accurate work, and a thorough understanding of your business. We help you stay on top of your obligations and make informed decisions with confidence.
             </p>
 
             {/* Checkmark Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8 mb-12" data-animate="fade-up" data-once="true" data-delay="0.3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 pt-6 border-t border-border-main w-full" data-animate="fade-up" data-once="true" data-delay="0.3">
               {[
                 "Accounting & Finance",
                 "Tax & Compliance",
@@ -69,12 +70,12 @@ export default async function Home() {
                 "eCommerce & Business Growth"
               ].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-3">
-                  <div className="shrink-0 text-text-primary flex items-center justify-center">
+                  <div className="shrink-0 text-brand-deep flex items-center justify-center">
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
-                  <span className="text-text-secondary font-medium text-base md:text-lg">{item}</span>
+                  <span className="text-text-secondary font-medium text-sm leading-relaxed">{item}</span>
                 </div>
               ))}
             </div>
@@ -82,11 +83,11 @@ export default async function Home() {
           </div>
 
           {/* Right Image Column & CTAs */}
-          <div className="w-full lg:w-[45%] flex flex-col items-center justify-center z-20 -mt-8 lg:mt-0">
+          <div className="w-full lg:w-[44%] min-w-0 flex flex-col items-center justify-center z-20">
             <HeroImageShowcase />
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center mt-2">
+            <div className="hero-actions flex flex-col sm:flex-row lg:flex-col xl:flex-row items-stretch gap-3 w-full justify-center mt-4">
               <Button href="/contact" variant="primary" size="md">
                 Schedule Free Consultation
               </Button>
@@ -104,10 +105,10 @@ export default async function Home() {
         {/* Soft background highlight blob */}
         <div className="absolute top-1/2 left-0 w-[50vw] h-[50vw] bg-surface-muted/40 rounded-full blur-[120px] -translate-y-1/2 -translate-x-1/3 pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="public-container relative z-10">
 
           {/* Top Row: Impact Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pb-16 mb-20 lg:mb-28 text-left">
+          <div className="impact-stats grid grid-cols-2 sm:grid-cols-4 gap-8 pb-12 mb-16 lg:mb-20 border-b border-border-main text-left">
             <div>
               <div className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-text-primary mb-2 tracking-tight" data-count="10" data-suffix="+">0+</div>
               <div className="text-[10px] font-bold text-text-secondary uppercase tracking-widest leading-normal">Years Expertise</div>
@@ -157,16 +158,21 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Industry Hub Section */}
-      <section className="pt-24 pb-16 md:pt-32 md:pb-24 bg-surface-light relative">
-        <div className="w-full max-w-400 mx-auto px-4 md:px-8 relative z-10">
-          <IndustryHub />
+      {/* Service Categories */}
+      <section className="py-20 md:py-28 bg-background relative">
+        <div className="public-container panel-container relative z-10">
+          <IndustryHub categories={categories.map((category) => ({
+            name: category.name,
+            slug: category.slug,
+            shortDescription: category.shortDescription || '',
+            image: category.image,
+          }))} />
         </div>
       </section>
 
       {/* Services Carousel Section (Now Ice Water Style) */}
-      <section className="py-32 bg-white relative overflow-hidden text-text-primary ">
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <section className="py-20 md:py-28 bg-white relative overflow-hidden text-text-primary">
+        <div className="public-container relative z-10">
           <div className="text-center max-w-175 mx-auto mb-12">
             <div className="flex items-center justify-center gap-3 mb-6" data-animate="fade-up" data-once="true">
               <div className="w-8 h-0.5 bg-slate-400"></div>
@@ -192,7 +198,7 @@ export default async function Home() {
           <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-amber-50/20 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4" />
         </div>
 
-        <div className="w-full max-w-390 mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="public-container panel-container relative z-10">
           <div className="text-center max-w-200 mx-auto mb-12 md:mb-16">
             <div className="flex items-center justify-center gap-3 mb-6" data-animate="fade-up" data-once="true">
               <div className="w-8 h-0.5 bg-slate-400"></div>
@@ -212,7 +218,7 @@ export default async function Home() {
 
       {/* FAQ & Help Section */}
       <section className="py-24 md:py-32 bg-white relative overflow-hidden text-text-primary">
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="public-container relative z-10">
 
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-12 text-text-primary" data-animate="fade-up" data-once="true">
             Frequently asked questions
@@ -227,7 +233,7 @@ export default async function Home() {
 
             {/* Right: Contact Card */}
             <div className="lg:col-span-4 w-full">
-              <div className="rounded-base p-8 bg-surface-light shadow-premium-light flex flex-col items-start text-left">
+              <div className="rounded-2xl border border-border-main p-6 sm:p-8 bg-background shadow-premium-light flex flex-col items-start text-left">
                 {/* Speech Bubble Icon */}
                 <div className="w-12 h-12 rounded-base bg-surface-muted flex items-center justify-center mb-6 text-brand-primary border border-sky-100">
                   <svg

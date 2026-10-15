@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useId } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStaggerReveal } from '@/hooks/useGSAP';
 
@@ -34,6 +34,7 @@ const faqs = [
 export default function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const accordionId = useId();
 
   useStaggerReveal(containerRef, '.faq-item', {
       y: 30,
@@ -61,6 +62,9 @@ export default function FaqAccordion() {
             }`}
           >
             <button
+              id={`${accordionId}-question-${index}`}
+              aria-expanded={isOpen}
+              aria-controls={`${accordionId}-answer-${index}`}
               onClick={() => toggleOpen(index)}
               className="w-full flex items-center justify-between p-6 md:p-7 text-left focus:outline-none cursor-pointer"
             >
@@ -90,6 +94,10 @@ export default function FaqAccordion() {
             <AnimatePresence initial={false}>
               {isOpen && (
                 <motion.div
+                  id={`${accordionId}-answer-${index}`}
+                  role="region"
+                  aria-labelledby={`${accordionId}-question-${index}`}
+                  className="overflow-hidden"
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
