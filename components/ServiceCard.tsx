@@ -1,4 +1,4 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 
 import ServiceImage from '@/components/ServiceImage';
 
@@ -112,9 +112,10 @@ export default function ServiceCard({ service, className = '', hrefOverride }: S
             href={href}
             className={`group flex flex-col h-full bg-surface border border-border-main rounded-2xl hover:border-brand-primary/50 hover:shadow-premium-hover hover:-translate-y-1 transition-all duration-200 overflow-hidden ${className}`}
         >
-            {/* Service image */}
+            {/* Service image with light top-left corner cut */}
             <div 
                 className="relative w-full h-48 overflow-hidden shrink-0 bg-ink"
+                style={{ clipPath: 'polygon(0% 28px, 28px 0%, 100% 0%, 100% 100%, 0% 100%)' }}
             >
                 <ServiceImage
                     src={serviceImg}
