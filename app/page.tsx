@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import ServicesCarousel from '@/components/ServicesCarousel';
 import CTASection from '@/components/CTASection';
@@ -44,7 +44,7 @@ export default async function Home() {
     <HomeAnimations>
       <div className="public-design">
       {/* Hero Section - Light Corporate Layout */}
-      <section className="home-hero relative flex items-center justify-start pt-24 pb-12 sm:pt-28 sm:pb-16 lg:pt-40 lg:pb-24 overflow-hidden">
+      <section className="home-hero relative flex items-center justify-start pt-24 pb-12 sm:pt-28 sm:pb-16 lg:pt-40 lg:pb-24 overflow-hidden h-[99.90vh]">
         {/* Original Animated Background */}
         <HeroBackground />
 
