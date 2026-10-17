@@ -26,8 +26,8 @@ const reviews: Review[] = [
     photo: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
     rating: 5,
     date: "2 weeks ago",
-    service: "Tax & GST Compliance",
-    review: "Acclevate transformed our financial and tax compliance structure. Their proactive guidance on GST filing and corporate structuring saved us countless hours and plugged operational leaks. Truly world-class advisory.",
+    service: "Tax & GST",
+    review: "Acclevate transformed our financial and tax compliance structure. Their proactive guidance on GST filing saved us countless hours and plugged operational leaks.",
     verified: true,
   },
   {
@@ -38,8 +38,8 @@ const reviews: Review[] = [
     photo: "https://i.pravatar.cc/150?u=a04258114e29026702d",
     rating: 5,
     date: "3 weeks ago",
-    service: "eCommerce & Business Growth",
-    review: "The expertise the team brings is unparalleled. We scaled our retail operations across 3 new cities with absolute confidence knowing our compliance was flawless and books were fully audited.",
+    service: "eCommerce Growth",
+    review: "The expertise the team brings is unparalleled. We scaled our retail operations across 3 new cities with absolute confidence knowing our compliance was flawless.",
     verified: true,
   },
   {
@@ -50,8 +50,8 @@ const reviews: Review[] = [
     photo: "https://i.pravatar.cc/150?u=a04258114e29026302d",
     rating: 5,
     date: "1 month ago",
-    service: "Accounting & Bookkeeping",
-    review: "Not just another consulting firm. They became an extension of our core management team, aggressively optimizing our financial processes and providing sharp, decision-ready MIS reports every single month.",
+    service: "Bookkeeping",
+    review: "Not just another consulting firm. They became an extension of our core management team, aggressively optimizing our financial processes and providing sharp MIS reports.",
     verified: true,
   },
   {
@@ -62,8 +62,8 @@ const reviews: Review[] = [
     photo: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
     rating: 5,
     date: "1 month ago",
-    service: "Legal & Corporate Compliance",
-    review: "Acclevate handled our complete corporate compliance, trademark filings, and documentation with precision. Their attention to detail and rapid turnaround gave our board total peace of mind.",
+    service: "Corporate Legal",
+    review: "Acclevate handled our complete corporate compliance, trademark filings, and documentation with precision. Their rapid turnaround gave our board total peace of mind.",
     verified: true,
   },
   {
@@ -74,8 +74,8 @@ const reviews: Review[] = [
     photo: "https://i.pravatar.cc/150?u=a04258114e29026708d",
     rating: 5,
     date: "2 months ago",
-    service: "GST Registration & Advisory",
-    review: "Navigating complex multi-state GST regulations for a fast-growing health startup was daunting until we partnered with Acclevate. Prompt responses, zero compliance hiccups, and very professional consultants.",
+    service: "GST Advisory",
+    review: "Navigating complex multi-state GST regulations for a fast-growing startup was daunting until we partnered with Acclevate. Prompt responses and zero compliance hiccups.",
     verified: true,
   },
   {
@@ -86,8 +86,8 @@ const reviews: Review[] = [
     photo: "https://i.pravatar.cc/150?u=a04258114e29026709d",
     rating: 5,
     date: "2 months ago",
-    service: "Financial Reporting & MIS",
-    review: "Their monthly financial review meetings gave our leadership team complete visibility into cash flows, burn rate, and unit profitability. Highly recommended to any founder looking for a trustworthy partner.",
+    service: "Financial MIS",
+    review: "Their monthly financial review meetings gave our leadership team complete visibility into cash flows, burn rate, and unit profitability. Truly a trustworthy financial partner.",
     verified: true,
   },
 ];
@@ -113,7 +113,7 @@ const GoogleGLogo = ({ className = "w-4 h-4" }: { className?: string }) => (
   </svg>
 );
 
-const GoogleStar = ({ className = "w-4 h-4" }: { className?: string }) => (
+const GoogleStar = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="#F4B400">
     <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
   </svg>
@@ -167,7 +167,7 @@ export default function TestimonialSlider() {
   const slideVariants = {
     enter: (dir: number) => ({
       opacity: 0,
-      x: dir > 0 ? 30 : -30,
+      x: dir > 0 ? 25 : -25,
     }),
     center: {
       opacity: 1,
@@ -175,7 +175,7 @@ export default function TestimonialSlider() {
     },
     exit: (dir: number) => ({
       opacity: 0,
-      x: dir > 0 ? -30 : 30,
+      x: dir > 0 ? -25 : 25,
     }),
   };
 
@@ -185,66 +185,59 @@ export default function TestimonialSlider() {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Top Header: Google Rating Overview & Navigation Controls */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-border-main">
-        {/* Google Reviews Trust Badge */}
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-surface border border-border-main flex items-center justify-center shadow-xs shrink-0">
-            <GoogleGLogo className="w-5 h-5" />
+      {/* Top Controls Bar */}
+      <div className="flex items-center justify-between gap-4 mb-5 pb-4 border-b border-border-main">
+        {/* Google Reviews Trust Pill */}
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-surface border border-border-main flex items-center justify-center shadow-xs shrink-0">
+            <GoogleGLogo className="w-4 h-4" />
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-base font-bold text-ink">4.9</span>
-              <div className="flex gap-0.5">
-                {[...Array(5)].map((_, i) => (
-                  <GoogleStar key={i} className="w-4 h-4" />
-                ))}
-              </div>
-              <span className="text-xs font-semibold text-text-secondary bg-surface-muted px-2 py-0.5 rounded-full">
-                Google Reviews
-              </span>
+          <div className="flex items-center gap-1.5">
+            <span className="text-sm font-bold text-ink">4.9</span>
+            <div className="flex gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <GoogleStar key={i} className="w-3.5 h-3.5" />
+              ))}
             </div>
-            <p className="text-xs text-text-secondary mt-0.5">
-              Based on verified business client reviews
-            </p>
+            <span className="text-[11px] font-semibold text-text-secondary hidden sm:inline">
+              (Google Reviews)
+            </span>
           </div>
         </div>
 
-        {/* Navigation Buttons and Page Indicators */}
-        <div className="flex items-center gap-3 self-end sm:self-auto">
-          {/* Page Dots */}
-          <div className="flex items-center gap-1.5 mr-2">
+        {/* Navigation Buttons and Dots */}
+        <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-1.5 mr-1">
             {[...Array(totalPages)].map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => handleDot(idx)}
                 className={`transition-all duration-300 rounded-full cursor-pointer ${
                   idx === pageIndex
-                    ? 'w-6 h-2 bg-brand-primary'
-                    : 'w-2 h-2 bg-slate-300 hover:bg-slate-400'
+                    ? 'w-5 h-1.5 bg-brand-primary'
+                    : 'w-1.5 h-1.5 bg-slate-300 hover:bg-slate-400'
                 }`}
                 aria-label={`Go to review pair ${idx + 1}`}
               />
             ))}
           </div>
 
-          {/* Prev / Next buttons */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1">
             <button
               onClick={handlePrev}
-              className="w-9 h-9 rounded-full border border-border-main bg-surface flex items-center justify-center text-text-secondary hover:text-text-primary hover:border-brand-primary/40 hover:bg-surface-muted transition-all cursor-pointer shadow-xs"
+              className="w-8 h-8 rounded-full border border-border-main bg-surface flex items-center justify-center text-text-secondary hover:text-text-primary hover:border-brand-primary/40 hover:bg-surface-muted transition-all cursor-pointer shadow-xs"
               aria-label="Previous reviews"
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M15 18l-6-6 6-6" />
               </svg>
             </button>
             <button
               onClick={handleNext}
-              className="w-9 h-9 rounded-full bg-ink text-white flex items-center justify-center hover:bg-brand-primary transition-all cursor-pointer shadow-xs"
+              className="w-8 h-8 rounded-full bg-ink text-white flex items-center justify-center hover:bg-brand-primary transition-all cursor-pointer shadow-xs"
               aria-label="Next reviews"
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M9 18l6-6-6-6" />
               </svg>
             </button>
@@ -253,7 +246,7 @@ export default function TestimonialSlider() {
       </div>
 
       {/* Two Reviews Shown at a Time */}
-      <div className="relative overflow-hidden min-h-[340px]">
+      <div className="relative overflow-hidden min-h-[300px]">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={pageIndex}
@@ -263,42 +256,42 @@ export default function TestimonialSlider() {
             animate="center"
             exit="exit"
             transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-5"
           >
             {currentPair.map((item) => (
               <div
                 key={item.id}
-                className="group relative flex flex-col justify-between bg-surface border border-border-main rounded-2xl p-6 sm:p-7 shadow-[0_2px_12px_rgba(38,54,58,0.04)] hover:shadow-[0_12px_32px_rgba(38,54,58,0.08)] hover:border-brand-primary/40 transition-all duration-300"
+                className="group relative flex flex-col justify-between bg-surface border border-border-main rounded-2xl p-5 sm:p-5.5 shadow-[0_2px_12px_rgba(38,54,58,0.04)] hover:shadow-[0_8px_24px_rgba(38,54,58,0.08)] hover:border-brand-primary/40 transition-all duration-300"
               >
                 {/* Card Top: Google Branding + Service Tag + Date */}
                 <div>
-                  <div className="flex items-center justify-between gap-3 mb-4">
-                    <div className="flex items-center gap-2">
-                      <GoogleGLogo className="w-4 h-4 shrink-0" />
-                      <span className="text-xs font-semibold text-text-primary tracking-tight">
-                        Google Review
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <div className="flex items-center gap-1.5">
+                      <GoogleGLogo className="w-3.5 h-3.5 shrink-0" />
+                      <span className="text-[11px] font-semibold text-text-primary tracking-tight">
+                        Google
                       </span>
-                      <span className="text-slate-300">•</span>
-                      <span className="text-xs text-text-secondary">
+                      <span className="text-slate-300 text-xs">•</span>
+                      <span className="text-[11px] text-text-secondary">
                         {item.date}
                       </span>
                     </div>
 
-                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-brand-deep bg-surface-muted px-2.5 py-0.5 rounded-md">
+                    <span className="inline-flex items-center text-[10px] font-semibold text-brand-deep bg-surface-muted px-2 py-0.5 rounded shrink-0">
                       {item.service}
                     </span>
                   </div>
 
-                  {/* Stars + Rating count */}
-                  <div className="flex items-center gap-2 mb-4">
+                  {/* Stars + Verified Badge */}
+                  <div className="flex items-center justify-between gap-2 mb-3">
                     <div className="flex gap-0.5">
                       {[...Array(item.rating)].map((_, i) => (
-                        <GoogleStar key={i} className="w-4 h-4" />
+                        <GoogleStar key={i} className="w-3.5 h-3.5" />
                       ))}
                     </div>
                     {item.verified && (
-                      <span className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/60">
-                        <svg className="w-3 h-3 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-medium text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-full border border-emerald-200/60">
+                        <svg className="w-2.5 h-2.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
                           <path
                             fillRule="evenodd"
                             d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -311,14 +304,14 @@ export default function TestimonialSlider() {
                   </div>
 
                   {/* Review Text */}
-                  <p className="text-sm sm:text-base text-text-secondary leading-relaxed font-normal mb-6">
+                  <p className="text-xs sm:text-sm text-text-secondary leading-relaxed font-normal mb-5">
                     &ldquo;{item.review}&rdquo;
                   </p>
                 </div>
 
                 {/* Card Bottom: Reviewer Profile */}
-                <div className="pt-4 border-t border-slate-100 flex items-center gap-3 mt-auto">
-                  <div className="relative w-11 h-11 rounded-full overflow-hidden border border-border-main shrink-0 shadow-xs">
+                <div className="pt-3.5 border-t border-slate-100 flex items-center gap-2.5 mt-auto">
+                  <div className="relative w-9 h-9 rounded-full overflow-hidden border border-border-main shrink-0 shadow-xs">
                     <Image
                       src={item.photo}
                       alt={item.name}
@@ -326,16 +319,16 @@ export default function TestimonialSlider() {
                       className="object-cover"
                     />
                   </div>
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-1.5">
-                      <h4 className="text-sm font-bold text-ink truncate">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-1">
+                      <h4 className="text-xs sm:text-sm font-bold text-ink truncate">
                         {item.name}
                       </h4>
-                      <svg className="w-3.5 h-3.5 text-blue-500 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-3 h-3 text-blue-500 shrink-0" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
                       </svg>
                     </div>
-                    <p className="text-xs text-text-secondary truncate font-medium">
+                    <p className="text-[11px] text-text-secondary truncate font-medium">
                       {item.role}, {item.company}
                     </p>
                   </div>

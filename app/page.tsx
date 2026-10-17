@@ -127,25 +127,24 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* Section Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-            <div className="max-w-xl text-left" data-animate="fade-up" data-once="true">
+          {/* Side-by-Side: Measurable Results (Left) & 2-Review Cards (Right) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center">
+            {/* Left Column: Heading, Description, and CTA */}
+            <div className="lg:col-span-4 flex flex-col items-start text-left" data-animate="fade-up" data-once="true">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-8 h-0.5 bg-brand-primary"></div>
                 <span className="text-xs font-bold text-text-secondary uppercase tracking-widest">Acclevate Impact</span>
               </div>
 
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-ink uppercase mb-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-ink uppercase mb-5">
                 Measurable <br className="hidden sm:inline" />
                 <span className="text-brand-primary">Results</span>
               </h2>
 
-              <p className="text-base md:text-lg text-text-secondary leading-relaxed font-light">
-                We don&apos;t just hand you a 50-page PDF and walk away. We get our hands dirty to deliver real financial wins and operational stability.
+              <p className="text-base text-text-secondary leading-relaxed font-light mb-8 max-w-md">
+                We don&apos;t just hand you a 50-page PDF and walk away. We get our hands dirty to deliver real financial wins, compliance confidence, and operational stability.
               </p>
-            </div>
 
-            <div className="shrink-0" data-animate="fade-up" data-once="true" data-delay="0.1">
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-surface border border-border-main text-sm font-bold text-brand-deep hover:bg-surface-muted hover:border-brand-primary/40 transition-all shadow-xs group"
@@ -154,11 +153,11 @@ export default async function Home() {
                 <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
               </Link>
             </div>
-          </div>
 
-          {/* Reviews Slider (2 Reviews at a time) */}
-          <div data-animate="fade-up" data-once="true" data-delay="0.2">
-            <TestimonialSlider />
+            {/* Right Column: 2 Reviews Slider */}
+            <div className="lg:col-span-8 w-full min-w-0" data-animate="fade-up" data-once="true" data-delay="0.15">
+              <TestimonialSlider />
+            </div>
           </div>
         </div>
       </section>
