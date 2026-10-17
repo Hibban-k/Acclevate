@@ -15,7 +15,7 @@ export default function HeroImageShowcase() {
   useParallax(imageRef, { y: 30 });
 
   return (
-    <div ref={containerRef} className="w-full relative h-56 sm:h-80 lg:h-112.5 flex items-center justify-center z-10">
+    <div ref={containerRef} className="w-full relative h-52 sm:h-64 lg:h-76 xl:h-84 flex items-center justify-center z-10">
       <div
         ref={imageRef}
         className="relative w-full max-w-125 h-full"

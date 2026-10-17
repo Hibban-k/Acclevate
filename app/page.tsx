@@ -48,13 +48,13 @@ export default async function Home() {
         {/* Original Animated Background */}
         <HeroBackground />
 
-        <div className="relative z-10 public-container flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+        <div className="relative z-10 public-container flex flex-col lg:flex-row items-center lg:items-end justify-between gap-8 lg:gap-12">
 
           {/* Left Text Column */}
-          <div className="w-full lg:w-[54%] min-w-0 flex flex-col items-start text-left gap-5 sm:gap-6">
+          <div className="w-full lg:w-[54%] min-w-0 flex flex-col items-start text-left gap-6 sm:gap-7">
 
             <div className="flex flex-col items-start leading-none tracking-tight" data-animate="fade-up" data-once="true" data-delay="0.1">
-              <p className="text-brand-deep text-lg sm:text-2xl font-medium mb-2.5">Accelerate with</p>
+              <p className="text-brand-deep text-lg sm:text-2xl font-medium mb-3">Accelerate with</p>
               <h1 className="text-text-primary text-[clamp(2.8rem,6.5vw,5.5rem)] font-bold">ACCLEVATE</h1>
             </div>
 
@@ -89,11 +89,11 @@ export default async function Home() {
           </div>
 
           {/* Right Image Column & CTAs */}
-          <div className="w-full lg:w-[44%] min-w-0 flex flex-col items-center justify-center z-20">
+          <div className="w-full lg:w-[44%] min-w-0 flex flex-col items-center justify-end z-20">
             <HeroImageShowcase />
 
-            {/* CTA Buttons (placed after image) */}
-            <div className="hero-actions flex flex-col sm:flex-row lg:flex-col xl:flex-row items-stretch gap-3 w-full justify-center mt-4">
+            {/* CTA Buttons (placed after image, baseline-aligned with left column) */}
+            <div className="hero-actions flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full justify-center mt-3">
               <Button href="/contact" variant="primary" size="md">
                 Schedule Free Consultation
               </Button>
