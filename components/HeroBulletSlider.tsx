@@ -21,11 +21,11 @@ export default function HeroBulletSlider() {
   }, []);
 
   return (
-    <div className="flex items-center gap-3 py-2 px-3.5 sm:px-4 bg-surface-muted/60 border border-border-main/80 rounded-full w-full sm:w-fit shadow-2xs">
-      {/* Arrow Badge (Matches Screenshot) */}
-      <div className="w-5 h-5 rounded-full bg-brand-primary/15 text-brand-deep flex items-center justify-center shrink-0">
+    <div className="flex items-center gap-3">
+      {/* Chevron icon matching the original bullet list */}
+      <div className="shrink-0 text-brand-deep flex items-center justify-center">
         <svg
-          className="w-3 h-3 text-brand-deep"
+          className="w-4 h-4"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -35,32 +35,20 @@ export default function HeroBulletSlider() {
         </svg>
       </div>
 
-      {/* Rotating text */}
-      <div className="relative h-6 overflow-hidden flex-1 sm:flex-initial sm:min-w-[230px]">
+      {/* Rotating plain text (no capsule / pill) */}
+      <div className="relative h-6 overflow-hidden flex-1">
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
-            initial={{ y: 16, opacity: 0 }}
+            initial={{ y: 14, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -16, opacity: 0 }}
+            exit={{ y: -14, opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-            className="text-text-primary font-semibold text-xs sm:text-sm leading-6 truncate"
+            className="text-text-secondary font-medium text-sm leading-6"
           >
             {items[index]}
           </motion.div>
         </AnimatePresence>
-      </div>
-
-      {/* Progress Dots */}
-      <div className="flex items-center gap-1 shrink-0 ml-1">
-        {items.map((_, i) => (
-          <div
-            key={i}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
-              i === index ? 'w-3.5 bg-brand-primary' : 'w-1.5 bg-slate-300'
-            }`}
-          />
-        ))}
       </div>
     </div>
   );

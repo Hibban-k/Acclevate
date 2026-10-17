@@ -62,13 +62,38 @@ export default async function Home() {
               Practical guidance backed by clear processes, accurate work, and a thorough understanding of your business. We help you stay on top of your obligations and make informed decisions with confidence.
             </p>
 
-            {/* Sliding Bullet Point Rotator */}
-            <div data-animate="fade-up" data-once="true" data-delay="0.3" className="w-full sm:w-auto">
+            {/* Mobile view only: single plain-text sliding bullet rotator */}
+            <div className="lg:hidden w-full pt-4 border-t border-border-main" data-animate="fade-up" data-once="true" data-delay="0.3">
               <HeroBulletSlider />
             </div>
 
-            {/* Above-the-fold CTA Buttons */}
-            <div className="hero-actions flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto pt-2" data-animate="fade-up" data-once="true" data-delay="0.4">
+            {/* Desktop view only: original 2x2 grid checkmarks */}
+            <div className="hidden lg:grid grid-cols-2 gap-y-4 gap-x-6 pt-6 border-t border-border-main w-full" data-animate="fade-up" data-once="true" data-delay="0.3">
+              {[
+                "Accounting & Finance",
+                "Tax & Compliance",
+                "Business Registration & Legal",
+                "eCommerce & Business Growth"
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-center gap-3">
+                  <div className="shrink-0 text-brand-deep flex items-center justify-center">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                  <span className="text-text-secondary font-medium text-sm leading-relaxed">{item}</span>
+                </div>
+              ))}
+            </div>
+
+          </div>
+
+          {/* Right Image Column & CTAs */}
+          <div className="w-full lg:w-[44%] min-w-0 flex flex-col items-center justify-center z-20">
+            <HeroImageShowcase />
+
+            {/* CTA Buttons (placed after image) */}
+            <div className="hero-actions flex flex-col sm:flex-row lg:flex-col xl:flex-row items-stretch gap-3 w-full justify-center mt-4">
               <Button href="/contact" variant="primary" size="md">
                 Schedule Free Consultation
               </Button>
@@ -76,12 +101,6 @@ export default async function Home() {
                 Explore Services
               </Button>
             </div>
-
-          </div>
-
-          {/* Right Image Column */}
-          <div className="w-full lg:w-[44%] min-w-0 flex flex-col items-center justify-center z-20">
-            <HeroImageShowcase />
           </div>
 
         </div>
