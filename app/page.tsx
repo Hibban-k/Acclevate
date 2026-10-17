@@ -10,6 +10,7 @@ import { getHomePageServicesAction } from '@/lib/actions/services';
 import { categoryService } from '@/lib/services/category.service';
 import HeroBackground from '@/components/HeroBackground';
 import HeroImageShowcase from '@/components/HeroImageShowcase';
+import HeroBulletSlider from '@/components/HeroBulletSlider';
 import HomeAnimations from '@/components/HomeAnimations';
 import { Metadata } from 'next';
 
@@ -43,51 +44,31 @@ export default async function Home() {
     <HomeAnimations>
       <div className="public-design">
       {/* Hero Section - Light Corporate Layout */}
-      <section className="home-hero relative flex items-center justify-start pt-32 pb-16 lg:pt-40 lg:pb-24 overflow-hidden">
+      <section className="home-hero relative flex items-center justify-start pt-24 pb-12 sm:pt-28 sm:pb-16 lg:pt-40 lg:pb-24 overflow-hidden">
         {/* Original Animated Background */}
         <HeroBackground />
 
         <div className="relative z-10 public-container flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
 
           {/* Left Text Column */}
-          <div className="w-full lg:w-[52%] min-w-0 flex flex-col items-start text-left gap-7">
+          <div className="w-full lg:w-[54%] min-w-0 flex flex-col items-start text-left gap-5 sm:gap-6">
 
             <div className="flex flex-col items-start leading-none tracking-tight" data-animate="fade-up" data-once="true" data-delay="0.1">
-              <p className="text-brand-deep text-xl sm:text-2xl font-medium mb-3">Accelerate with</p>
-              <h1 className="text-text-primary text-[clamp(3.2rem,6.5vw,6rem)] font-bold">ACCLEVATE</h1>
+              <p className="text-brand-deep text-lg sm:text-2xl font-medium mb-2.5">Accelerate with</p>
+              <h1 className="text-text-primary text-[clamp(2.8rem,6.5vw,5.5rem)] font-bold">ACCLEVATE</h1>
             </div>
 
-            <p className="text-base lg:text-lg text-text-secondary leading-relaxed max-w-xl" data-animate="fade-up" data-once="true" data-delay="0.2">
+            <p className="text-sm sm:text-base lg:text-lg text-text-secondary leading-relaxed max-w-xl" data-animate="fade-up" data-once="true" data-delay="0.2">
               Practical guidance backed by clear processes, accurate work, and a thorough understanding of your business. We help you stay on top of your obligations and make informed decisions with confidence.
             </p>
 
-            {/* Checkmark Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 pt-6 border-t border-border-main w-full" data-animate="fade-up" data-once="true" data-delay="0.3">
-              {[
-                "Accounting & Finance",
-                "Tax & Compliance",
-                "Business Registration & Legal",
-                "eCommerce & Business Growth"
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-center gap-3">
-                  <div className="shrink-0 text-brand-deep flex items-center justify-center">
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                  <span className="text-text-secondary font-medium text-sm leading-relaxed">{item}</span>
-                </div>
-              ))}
+            {/* Sliding Bullet Point Rotator */}
+            <div data-animate="fade-up" data-once="true" data-delay="0.3" className="w-full sm:w-auto">
+              <HeroBulletSlider />
             </div>
 
-          </div>
-
-          {/* Right Image Column & CTAs */}
-          <div className="w-full lg:w-[44%] min-w-0 flex flex-col items-center justify-center z-20">
-            <HeroImageShowcase />
-
-            {/* CTA Buttons */}
-            <div className="hero-actions flex flex-col sm:flex-row lg:flex-col xl:flex-row items-stretch gap-3 w-full justify-center mt-4">
+            {/* Above-the-fold CTA Buttons */}
+            <div className="hero-actions flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto pt-2" data-animate="fade-up" data-once="true" data-delay="0.4">
               <Button href="/contact" variant="primary" size="md">
                 Schedule Free Consultation
               </Button>
@@ -95,6 +76,12 @@ export default async function Home() {
                 Explore Services
               </Button>
             </div>
+
+          </div>
+
+          {/* Right Image Column */}
+          <div className="w-full lg:w-[44%] min-w-0 flex flex-col items-center justify-center z-20">
+            <HeroImageShowcase />
           </div>
 
         </div>
