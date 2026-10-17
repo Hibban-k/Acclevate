@@ -123,9 +123,28 @@ export default function TestimonialSlider() {
   const [pageIndex, setPageIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const totalPages = Math.ceil(reviews.length / 2);
+  // Detect mobile screen width (< 640px)
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 640;
+      setIsMobile(mobile);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const totalPages = isMobile ? reviews.length : Math.ceil(reviews.length / 2);
+
+  // Keep index within bounds if screen width changes
+  useEffect(() => {
+    if (pageIndex >= totalPages) {
+      setPageIndex(0);
+    }
+  }, [totalPages, pageIndex]);
 
   const startTimer = () => {
     if (intervalRef.current) clearInterval(intervalRef.current);
@@ -162,7 +181,10 @@ export default function TestimonialSlider() {
     startTimer();
   };
 
-  const currentPair = reviews.slice(pageIndex * 2, pageIndex * 2 + 2);
+  // Slice 1 review on mobile, 2 reviews on desktop
+  const currentReviews = isMobile
+    ? reviews.slice(pageIndex, pageIndex + 1)
+    : reviews.slice(pageIndex * 2, pageIndex * 2 + 2);
 
   const slideVariants = {
     enter: (dir: number) => ({
@@ -217,7 +239,7 @@ export default function TestimonialSlider() {
                     ? 'w-5 h-1.5 bg-brand-primary'
                     : 'w-1.5 h-1.5 bg-slate-300 hover:bg-slate-400'
                 }`}
-                aria-label={`Go to review pair ${idx + 1}`}
+                aria-label={`Go to review ${idx + 1}`}
               />
             ))}
           </div>
@@ -226,7 +248,7 @@ export default function TestimonialSlider() {
             <button
               onClick={handlePrev}
               className="w-8 h-8 rounded-full border border-border-main bg-surface flex items-center justify-center text-text-secondary hover:text-text-primary hover:border-brand-primary/40 hover:bg-surface-muted transition-all cursor-pointer shadow-xs"
-              aria-label="Previous reviews"
+              aria-label="Previous review"
             >
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M15 18l-6-6 6-6" />
@@ -235,7 +257,7 @@ export default function TestimonialSlider() {
             <button
               onClick={handleNext}
               className="w-8 h-8 rounded-full bg-ink text-white flex items-center justify-center hover:bg-brand-primary transition-all cursor-pointer shadow-xs"
-              aria-label="Next reviews"
+              aria-label="Next review"
             >
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M9 18l6-6-6-6" />
@@ -245,7 +267,7 @@ export default function TestimonialSlider() {
         </div>
       </div>
 
-      {/* Two Reviews Shown at a Time */}
+      {/* Review Cards: 1 on mobile, 2 on desktop */}
       <div className="relative overflow-hidden min-h-[300px]">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
@@ -258,10 +280,12 @@ export default function TestimonialSlider() {
             transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
             className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-5"
           >
-            {currentPair.map((item) => (
+            {currentReviews.map((item, idx) => (
               <div
                 key={item.id}
-                className="group relative flex flex-col justify-between bg-surface border border-border-main rounded-2xl p-5 sm:p-5.5 shadow-[0_2px_12px_rgba(38,54,58,0.04)] hover:shadow-[0_8px_24px_rgba(38,54,58,0.08)] hover:border-brand-primary/40 transition-all duration-300"
+                className={`group relative flex-col justify-between bg-surface border border-border-main rounded-2xl p-5 sm:p-5.5 shadow-[0_2px_12px_rgba(38,54,58,0.04)] hover:shadow-[0_8px_24px_rgba(38,54,58,0.08)] hover:border-brand-primary/40 transition-all duration-300 ${
+                  idx === 1 ? 'hidden sm:flex' : 'flex'
+                }`}
               >
                 {/* Card Top: Google Branding + Service Tag + Date */}
                 <div>
