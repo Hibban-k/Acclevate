@@ -25,7 +25,7 @@ export default function HeroImageShowcase() {
           src="/transprent_office.png" 
           alt="Accounting Dashboard" 
           fill
-          className="object-contain mix-blend-multiply transition-transform duration-700 hover:scale-[1.03] hidden md:block"
+          className="object-contain mix-blend-multiply transition-transform duration-700 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] hover:scale-[1.025] hover:drop-shadow-[0_15px_30px_rgba(36,59,54,0.08)] hidden md:block"
           priority
         />
         {/* Mobile Image */}
@@ -33,7 +33,7 @@ export default function HeroImageShowcase() {
           src="/mobile_hero_office.png" 
           alt="Mobile Accounting Dashboard" 
           fill
-          className="object-contain mix-blend-multiply transition-transform duration-700 hover:scale-[1.03] md:hidden"
+          className="object-contain mix-blend-multiply transition-transform duration-700 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] hover:scale-[1.025] hover:drop-shadow-[0_15px_30px_rgba(36,59,54,0.08)] md:hidden"
           priority
         />
       </div>

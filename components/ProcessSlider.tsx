@@ -26,7 +26,7 @@ export default function ProcessSlider() {
           trigger: outerContainerRef.current,
           start: 'top top',
           end: 'bottom bottom',
-          scrub: true,
+          scrub: 0.8,
           onUpdate: () => {
             const stepIndex = Math.min(2, Math.max(0, Math.floor(obj.value)));
             setActiveIndex(stepIndex);
