@@ -25,6 +25,9 @@ export default function HeroBackground() {
         ))}
       </div>
 
+      {/* 4. Bottom Soft Gradient & Shadow Mask to seamlessly blend into next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-28 sm:h-40 bg-gradient-to-b from-transparent via-white/60 to-white pointer-events-none z-10" />
+
     </div>
   );
 }
