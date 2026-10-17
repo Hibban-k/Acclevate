@@ -1,4 +1,4 @@
-﻿import Link from 'next/link';
+import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import ServicesCarousel from '@/components/ServicesCarousel';
 import CTASection from '@/components/CTASection';
@@ -127,32 +127,37 @@ export default async function Home() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-            {/* Left: Heading & Paragraph */}
-            <div className="flex flex-col items-start text-left">
-              <div className="flex items-center gap-3 mb-6" data-animate="fade-up" data-once="true">
-                <div className="w-8 h-0.5 bg-slate-400"></div>
-                <span className="text-sm font-bold text-text-secondary uppercase tracking-widest">Acclevate Impact</span>
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div className="max-w-xl text-left" data-animate="fade-up" data-once="true">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-0.5 bg-brand-primary"></div>
+                <span className="text-xs font-bold text-text-secondary uppercase tracking-widest">Acclevate Impact</span>
               </div>
 
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-text-primary uppercase mb-6" data-animate="fade-up" data-once="true" data-delay="0.1">
-                Measurable <br /> <span className="text-slate-400">Results</span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-ink uppercase mb-4">
+                Measurable <br className="hidden sm:inline" />
+                <span className="text-brand-primary">Results</span>
               </h2>
 
-              <p className="text-lg text-text-secondary mb-8 max-w-lg leading-relaxed font-light" data-animate="fade-up" data-once="true" data-delay="0.2">
+              <p className="text-base md:text-lg text-text-secondary leading-relaxed font-light">
                 We don&apos;t just hand you a 50-page PDF and walk away. We get our hands dirty to deliver real financial wins and operational stability.
               </p>
-
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 text-sm font-bold text-brand-primary hover:text-brand-deep transition-colors group cursor-pointer"
-              >
-                <span>Discover our approach</span>
-                <span className="group-hover:translate-x-1.5 transition-transform duration-300">â†’</span>
-              </Link>
             </div>
 
-            {/* Right: Client Reviews Slider */}
+            <div className="shrink-0" data-animate="fade-up" data-once="true" data-delay="0.1">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-surface border border-border-main text-sm font-bold text-brand-deep hover:bg-surface-muted hover:border-brand-primary/40 transition-all shadow-xs group"
+              >
+                <span>Discover our approach</span>
+                <span className="group-hover:translate-x-1 transition-transform duration-200">→</span>
+              </Link>
+            </div>
+          </div>
+
+          {/* Reviews Slider (2 Reviews at a time) */}
+          <div data-animate="fade-up" data-once="true" data-delay="0.2">
             <TestimonialSlider />
           </div>
         </div>
