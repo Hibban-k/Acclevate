@@ -129,7 +129,7 @@ export default function AboutPage() {
                                         <p>
                                             <strong className="font-semibold text-text-primary">Founded in Bangalore in 2024,</strong> Acclevate was built around a singular premise: fast-growing businesses don&apos;t need more theoretical slide decks. They need <strong className="font-semibold text-text-primary">hands-on operators</strong> who sit in the trenches and execute.
                                         </p>
-                                        <p>
+                                        <p className="font-thin italic">
                                             We eliminate costly compliance mistakes and penalty risks by taking complete ownership of your day-to-day ledgers, statutory GST filings, and corporate legal frameworks — so your leadership stays 100% focused on growth.
                                         </p>
                                     </div>
