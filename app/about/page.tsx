@@ -87,9 +87,9 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                {/* ─── 01 OUR STORY SECTION (MAIN: BG-WHITE, INNER: BG-BACKGROUND) ─── */}
+                {/* ─── 01 OUR STORY SECTION (MAIN: BG-WHITE, INNER: BG-BACKGROUND, WIDE PANEL) ─── */}
                 <section className="py-16 md:py-24 bg-white relative overflow-hidden text-text-primary border-t border-border-main">
-                    <div className="public-container max-w-[88rem] relative z-10">
+                    <div className="public-container panel-container !max-w-[94rem] mx-auto relative z-10">
                         
                         {/* Section Header */}
                         <div className="flex items-center gap-3 mb-5" data-animate="fade-up" data-once="true">
@@ -117,9 +117,9 @@ export default function AboutPage() {
                             </p>
                         </div>
 
-                        {/* Inner Child Div: Increased Width (max-w-[88rem]), bg-background with border-border-main */}
+                        {/* Inner Child Div: Wide Panel Width */}
                         <div
-                            className="rounded-2xl p-6 sm:p-8 md:p-12 bg-background border border-border-main shadow-xs"
+                            className="w-full rounded-2xl p-6 sm:p-10 lg:p-14 bg-background border border-border-main shadow-xs"
                             data-animate="fade-up"
                             data-once="true"
                         >
@@ -167,7 +167,7 @@ export default function AboutPage() {
                                             sizes="(max-width: 1024px) 100vw, 45vw"
                                         />
 
-                                        {/* Floating Interactive Badge (elevates smoothly on hover) */}
+                                        {/* Floating Interactive Badge */}
                                         <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 p-3.5 sm:p-4 rounded-xl bg-white/95 backdrop-blur-md border border-border-main shadow-md flex items-center justify-between transition-all duration-300 group-hover:-translate-y-1">
                                             <div className="flex items-center gap-3">
                                                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-surface-muted flex items-center justify-center text-brand-primary font-bold text-xs sm:text-sm">
@@ -189,9 +189,9 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                {/* ─── 02 OUR FOUNDER (MAIN: BG-BACKGROUND, INNER: BG-INK DARK) ─── */}
+                {/* ─── 02 OUR FOUNDER (MAIN: BG-BACKGROUND, INNER: BG-INK DARK, WIDE PANEL) ─── */}
                 <section className="py-16 md:py-24 bg-background relative overflow-hidden border-t border-border-main">
-                    <div className="public-container max-w-[88rem] relative z-10">
+                    <div className="public-container panel-container !max-w-[94rem] mx-auto relative z-10">
                         
                         {/* Section Header */}
                         <div className="flex items-center gap-3 mb-5" data-animate="fade-up" data-once="true">
@@ -225,9 +225,9 @@ export default function AboutPage() {
                             </p>
                         </div>
 
-                        {/* Inner Child Div: Increased Width (max-w-[88rem]), bg-ink (Dark Container) */}
+                        {/* Inner Child Div: Wide Panel Width, bg-ink (Dark Container) */}
                         <div
-                            className="rounded-2xl p-6 sm:p-8 md:p-12 bg-ink border border-white/10 text-white shadow-xl"
+                            className="w-full rounded-2xl p-6 sm:p-10 lg:p-14 bg-ink border border-white/10 text-white shadow-xl"
                             data-animate="fade-up"
                             data-once="true"
                         >
@@ -244,7 +244,7 @@ export default function AboutPage() {
                                             sizes="(max-width: 1024px) 100vw, 40vw"
                                         />
 
-                                        {/* Floating Interactive Founder Badge (Smooth elevation on hover) */}
+                                        {/* Floating Interactive Founder Badge */}
                                         <div className="absolute bottom-4 left-4 right-4 p-3.5 sm:p-4 rounded-xl bg-ink/90 backdrop-blur-md border border-white/10 shadow-lg flex items-center justify-between transition-all duration-300 group-hover:-translate-y-1">
                                             <div>
                                                 <div className="text-xs sm:text-sm font-bold text-white">Ahamed Kaab</div>
@@ -317,9 +317,9 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                {/* ─── 03 WHAT WE PROVIDE (MAIN: BG-WHITE, INNER: BG-BACKGROUND) ─── */}
+                {/* ─── 03 WHAT WE PROVIDE (MAIN: BG-WHITE, INNER: BG-BACKGROUND, WIDE PANEL) ─── */}
                 <section className="py-16 md:py-24 bg-white relative overflow-hidden text-text-primary border-t border-border-main">
-                    <div className="public-container max-w-[88rem] relative z-10">
+                    <div className="public-container panel-container !max-w-[94rem] mx-auto relative z-10">
                         
                         {/* Section Header */}
                         <div className="flex items-center gap-3 mb-5" data-animate="fade-up" data-once="true">
@@ -354,9 +354,9 @@ export default function AboutPage() {
                             </Link>
                         </div>
 
-                        {/* Inner Child Div: Increased Width (max-w-[88rem]), bg-background with border-border-main */}
+                        {/* Inner Child Div: Wide Panel Width */}
                         <div
-                            className="rounded-2xl p-6 sm:p-8 md:p-12 bg-background border border-border-main shadow-xs"
+                            className="w-full rounded-2xl p-6 sm:p-10 lg:p-14 bg-background border border-border-main shadow-xs"
                             data-animate="fade-up"
                             data-once="true"
                         >
@@ -405,7 +405,7 @@ export default function AboutPage() {
                                             sizes="(max-width: 1024px) 100vw, 40vw"
                                         />
 
-                                        {/* Floating Badge (elevates on hover) */}
+                                        {/* Floating Badge */}
                                         <div className="absolute top-4 left-4 p-3 rounded-xl bg-white/95 backdrop-blur-md border border-border-main shadow-xs text-xs font-bold text-text-primary flex items-center gap-2 group-hover:-translate-y-0.5 transition-transform duration-300">
                                             <span className="w-2 h-2 rounded-full bg-brand-primary animate-pulse" />
                                             <span>Full-Stack Back-Office Infrastructure</span>
@@ -419,9 +419,9 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                {/* ─── 04 OUR EXPERTS (MAIN: BG-BACKGROUND, INNER: BG-INK DARK CARDS) ─── */}
+                {/* ─── 04 OUR EXPERTS (MAIN: BG-BACKGROUND, INNER: BG-INK DARK CARDS, WIDE PANEL) ─── */}
                 <section className="py-16 md:py-24 bg-background relative overflow-hidden text-text-primary border-t border-border-main">
-                    <div className="public-container max-w-[88rem] relative z-10">
+                    <div className="public-container panel-container !max-w-[94rem] mx-auto relative z-10">
                         
                         {/* Section Header */}
                         <div className="flex items-center gap-3 mb-5" data-animate="fade-up" data-once="true">
@@ -446,7 +446,7 @@ export default function AboutPage() {
                             </div>
                         </div>
 
-                        {/* Experts Grid: Inner cards in bg-ink (Dark Cards) with Interactive Hover Elevation */}
+                        {/* Experts Grid: Wide Panel Layout */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                             {ourExperts.map((expert, idx) => (
                                 <div
