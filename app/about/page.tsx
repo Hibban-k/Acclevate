@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import HeroBackground from '@/components/HeroBackground';
 import CTASection from '@/components/CTASection';
 import AboutAnimations from '@/components/AboutAnimations';
+import AboutBulletSlider from '@/components/AboutBulletSlider';
 
 export const metadata: Metadata = {
     title: 'About Acclevate | Top Corporate Consulting & Financial Advisory',
@@ -333,8 +334,13 @@ export default function AboutPage() {
                                         </p>
                                     </div>
 
-                                    {/* Clean Feature Grid (Hero section style marks) */}
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-border-main">
+                                    {/* Mobile view only: single sliding category rotator */}
+                                    <div className="sm:hidden w-full pt-6 border-t border-border-main">
+                                        <AboutBulletSlider />
+                                    </div>
+
+                                    {/* Desktop & Tablet view: 2-column grid */}
+                                    <div className="hidden sm:grid grid-cols-2 gap-4 pt-6 border-t border-border-main">
                                         <div className="flex items-center gap-3 text-sm font-semibold text-text-primary">
                                             <div className="shrink-0 text-brand-deep flex items-center justify-center">
                                                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
