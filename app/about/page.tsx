@@ -45,37 +45,6 @@ const ourExperts = [
     },
 ];
 
-const summaryCapabilities = [
-    {
-        num: '01',
-        title: 'Accounting & Bookkeeping',
-        tag: 'Financial Control',
-        description: 'Clean ledgers, daily bookkeeping, bank & vendor reconciliations, and executive monthly MIS reporting packages.',
-        services: ['Daily Ledgers', 'Monthly MIS Reports', 'Cash Flow Management', 'Audit-Ready Balance Sheets'],
-    },
-    {
-        num: '02',
-        title: 'Taxation & GST Compliance',
-        tag: 'Statutory Safety',
-        description: 'Monthly and annual GST filings, advance tax modeling, corporate income tax returns, and zero-defect notice defense.',
-        services: ['GSTR-1, 3B & 9C', 'Advance Tax Planning', 'TDS / TCS Withholding', 'Department Notice Defense'],
-    },
-    {
-        num: '03',
-        title: 'Business Registration & Legal',
-        tag: 'Corporate Foundation',
-        description: 'Fast-track company & LLP formation, trademark registration, founder equity agreements, and annual ROC compliances.',
-        services: ['Pvt Ltd & LLP Setup', 'Trademark & IP Filing', 'Founder Contracts', 'Annual MCA Compliance'],
-    },
-    {
-        num: '04',
-        title: 'eCommerce & Growth Scaling',
-        tag: 'Omnichannel Scale',
-        description: 'Multi-state GST warehouse expansion (APOB/VPOB), Amazon & Flipkart setup, and payment gateway reconciliations.',
-        services: ['APOB / VPOB GST', 'Marketplace Fee Audits', 'Gateway Reconciliation', 'Unit Economics Optimization'],
-    },
-];
-
 export default function AboutPage() {
     return (
         <AboutAnimations>
@@ -89,7 +58,7 @@ export default function AboutPage() {
                         <div
                             data-animate="fade-up"
                             data-once="true"
-                            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-muted/80 border border-border-main/70 text-xs font-bold tracking-widest text-text-secondary uppercase"
+                            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-muted/80 border border-border-main text-xs font-bold tracking-widest text-text-secondary uppercase"
                         >
                             <Link href="/" className="hover:text-text-primary transition-colors">Home</Link>
                             <span className="text-slate-300">/</span>
@@ -117,8 +86,8 @@ export default function AboutPage() {
                 </section>
 
                 {/* ─── 01 OUR STORY SECTION ───────────────────────────── */}
-                <section className="py-24 md:py-32 bg-white relative overflow-hidden text-text-primary border-t border-border-main/60">
-                    <div className="max-w-7xl mx-auto px-6 relative z-10">
+                <section className="py-20 md:py-32 bg-white relative overflow-hidden text-text-primary border-t border-border-main">
+                    <div className="public-container relative z-10">
                         
                         <div className="flex items-center gap-3 mb-5" data-animate="fade-up" data-once="true">
                             <div className="w-8 h-0.5 bg-brand-primary" />
@@ -162,7 +131,7 @@ export default function AboutPage() {
                                     </p>
                                 </div>
 
-                                {/* Story Milestones Pill Row */}
+                                {/* Story Milestones Row */}
                                 <div className="grid grid-cols-3 gap-4 pt-6 border-t border-border-main">
                                     <div>
                                         <div className="text-2xl md:text-3xl font-extrabold text-text-primary">2024</div>
@@ -181,12 +150,7 @@ export default function AboutPage() {
 
                             {/* Right Editorial Image Card */}
                             <div className="lg:col-span-5 relative" data-animate="fade-up" data-once="true" data-delay="0.2">
-                                <div
-                                    className="relative h-80 md:h-105 w-full rounded-2xl overflow-hidden shadow-lg border border-border-main group"
-                                    style={{
-                                        clipPath: 'polygon(0% 24px, 24px 0%, 100% 0%, 100% 100%, 0% 100%)',
-                                    }}
-                                >
+                                <div className="relative h-80 md:h-100 w-full rounded-2xl overflow-hidden shadow-xs border border-border-main bg-surface-muted group">
                                     <Image
                                         src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1200"
                                         alt="Acclevate Team Strategic Collaboration"
@@ -194,16 +158,6 @@ export default function AboutPage() {
                                         className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                                         sizes="(max-width: 1024px) 100vw, 45vw"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent pointer-events-none" />
-                                    
-                                    <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between text-white pointer-events-none">
-                                        <span className="text-xs font-bold uppercase tracking-wider bg-ink/80 backdrop-blur-sm px-3.5 py-1.5 rounded-lg border border-white/10">
-                                            The Acclevate Standard
-                                        </span>
-                                        <span className="text-xs font-mono font-bold text-white/90">
-                                            Execution First
-                                        </span>
-                                    </div>
                                 </div>
                             </div>
 
@@ -213,8 +167,8 @@ export default function AboutPage() {
                 </section>
 
                 {/* ─── 02 OUR FOUNDER SECTION ─────────────────────────── */}
-                <section className="py-24 md:py-32 bg-background relative overflow-hidden text-text-primary">
-                    <div className="max-w-7xl mx-auto px-6 relative z-10">
+                <section className="py-20 md:py-32 bg-background relative overflow-hidden text-text-primary">
+                    <div className="public-container relative z-10">
                         
                         <div className="flex items-center gap-3 mb-5" data-animate="fade-up" data-once="true">
                             <div className="w-8 h-0.5 bg-brand-primary" />
@@ -250,32 +204,30 @@ export default function AboutPage() {
                         {/* Founder Card: Side by Side */}
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
                             
-                            {/* Left: Founder Portrait & Credential Badge */}
+                            {/* Left: Founder Portrait Card */}
                             <div className="lg:col-span-5 relative" data-animate="fade-up" data-once="true">
-                                <div
-                                    className="relative aspect-4/5 w-full rounded-2xl overflow-hidden shadow-md border border-border-main group bg-white"
-                                    style={{
-                                        clipPath: 'polygon(0% 24px, 24px 0%, 100% 0%, 100% 100%, 0% 100%)',
-                                    }}
-                                >
-                                    <Image
-                                        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000"
-                                        alt="Ahamed Kaab - Founder of Acclevate"
-                                        fill
-                                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                        sizes="(max-width: 1024px) 100vw, 40vw"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent pointer-events-none" />
+                                <div className="rounded-2xl p-6 bg-white border border-border-main shadow-xs flex flex-col gap-5">
+                                    <div className="relative aspect-4/5 w-full rounded-xl overflow-hidden border border-border-main bg-surface-muted group">
+                                        <Image
+                                            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000"
+                                            alt="Ahamed Kaab - Founder of Acclevate"
+                                            fill
+                                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                            sizes="(max-width: 1024px) 100vw, 40vw"
+                                        />
+                                    </div>
 
-                                    {/* Name & Credentials pill on image */}
-                                    <div className="absolute bottom-5 left-5 right-5 text-white pointer-events-none">
-                                        <div className="inline-block bg-brand-primary text-white text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded mb-1">
-                                            Founder &amp; Principal Lead
+                                    {/* Name & Credentials Details */}
+                                    <div className="flex flex-col">
+                                        <div className="flex items-center justify-between mb-1">
+                                            <h3 className="text-xl font-bold text-text-primary tracking-tight">
+                                                Ahamed Kaab
+                                            </h3>
+                                            <span className="text-[11px] font-bold text-brand-primary uppercase tracking-wider bg-surface-muted px-2.5 py-0.5 rounded-full">
+                                                Founder
+                                            </span>
                                         </div>
-                                        <h3 className="text-xl md:text-2xl font-bold tracking-tight">
-                                            Ahamed Kaab
-                                        </h3>
-                                        <p className="text-xs text-white/80 font-light mt-0.5">
+                                        <p className="text-xs text-text-secondary font-medium">
                                             Chartered Accountancy Aspirant · Bangalore
                                         </p>
                                     </div>
@@ -287,7 +239,7 @@ export default function AboutPage() {
                                 
                                 <div className="rounded-2xl p-8 bg-white border border-border-main shadow-xs">
                                     <div className="flex items-center gap-2 mb-3">
-                                        <span className="w-2 h-2 rounded-full bg-brand-primary animate-pulse" />
+                                        <span className="w-2 h-2 rounded-full bg-brand-primary" />
                                         <span className="text-xs font-bold text-brand-primary uppercase tracking-widest">
                                             Articleship &amp; Practical Foundation
                                         </span>
@@ -302,7 +254,7 @@ export default function AboutPage() {
                                             As a dedicated Chartered Accountancy aspirant undergoing rigorous articleship and corporate audit internship training, Ahamed Kaab observed firsthand how fast-growing businesses stumble into severe financial and tax compliance traps.
                                         </p>
                                         <p>
-                                            Having worked hands-on through statutory audits, GST reconciliation pipelines, ledger scrutiny, and departmental compliance across emerging enterprises, he established Acclevate to provide accessible, institutional-grade financial discipline without the red tape.
+                                            Having worked hands-on through statutory audits, GST reconciliation pipelines, ledger scrutiny, and departmental compliance across emerging enterprises, he established Acclevate to provide accessible, institutional-grade financial discipline without unnecessary corporate overhead.
                                         </p>
                                     </div>
 
@@ -341,105 +293,95 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                {/* ─── 03 WHAT WE PROVIDE (WIDE SUMMARY) ──────────────── */}
-                <section className="py-24 md:py-32 bg-white relative overflow-hidden text-text-primary border-t border-border-main/60">
-                    <div className="max-w-7xl mx-auto px-6 relative z-10">
+                {/* ─── 03 WHAT WE PROVIDE (WIDE EDITORIAL SUMMARY) ────── */}
+                <section className="py-20 md:py-32 bg-white relative overflow-hidden text-text-primary border-t border-border-main">
+                    <div className="public-container relative z-10">
                         
                         <div className="flex items-center gap-3 mb-5" data-animate="fade-up" data-once="true">
                             <div className="w-8 h-0.5 bg-brand-primary" />
                             <span className="text-sm font-bold text-text-secondary uppercase tracking-widest">What We Provide</span>
                         </div>
 
-                        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16 md:mb-20">
-                            <div>
-                                <h2
-                                    data-animate="fade-up"
-                                    data-once="true"
-                                    data-delay="0.1"
-                                    className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-text-primary uppercase leading-tight max-w-2xl"
-                                >
-                                    Unified Financial &amp; <br className="hidden sm:inline" />
-                                    <span className="text-brand-primary">Operational Infrastructure</span>
-                                </h2>
-                                <p className="text-base text-text-secondary font-light max-w-xl leading-relaxed mt-3">
-                                    A wide, dependable operational umbrella handling your finances, statutory filings, corporate legal setup, and digital scaling.
-                                </p>
-                            </div>
+                        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 md:mb-16">
+                            <h2
+                                data-animate="fade-up"
+                                data-once="true"
+                                data-delay="0.1"
+                                className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-text-primary uppercase leading-tight max-w-2xl"
+                            >
+                                Unified Operational &amp; <br />
+                                <span className="text-brand-primary">Financial Infrastructure</span>
+                            </h2>
 
                             <Link
                                 href="/services"
                                 className="inline-flex items-center gap-2 text-sm font-bold text-brand-deep hover:text-brand-primary transition-colors group"
+                                data-animate="fade-up"
+                                data-once="true"
                             >
-                                <span>View Full Services Directory</span>
+                                <span>View Full Service Catalog</span>
                                 <span className="group-hover:translate-x-1 transition-transform">→</span>
                             </Link>
                         </div>
 
-                        {/* 4 Wide Summary Cards */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-12">
-                            {summaryCapabilities.map((item, idx) => (
-                                <div
-                                    key={idx}
-                                    data-animate="fade-up"
-                                    data-once="true"
-                                    data-delay={String(idx * 0.1)}
-                                    className="group rounded-2xl p-8 bg-background hover:bg-white border border-border-main hover:border-brand-primary/40 transition-all duration-300 shadow-xs hover:shadow-md flex flex-col justify-between"
-                                    style={{
-                                        clipPath: 'polygon(0% 20px, 20px 0%, 100% 0%, 100% 100%, 0% 100%)',
-                                    }}
-                                >
-                                    <div>
-                                        {/* Card Header */}
-                                        <div className="flex items-center justify-between mb-4">
-                                            <span className="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-surface-muted text-brand-deep">
-                                                {item.tag}
-                                            </span>
-                                            <span className="text-3xl font-extrabold text-slate-300 group-hover:text-brand-primary transition-colors">
-                                                {item.num}
-                                            </span>
-                                        </div>
-
-                                        <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-2 tracking-tight group-hover:text-brand-deep transition-colors">
-                                            {item.title}
-                                        </h3>
-
-                                        <p className="text-sm text-text-secondary font-light leading-relaxed mb-6">
-                                            {item.description}
+                        {/* Wide Summary Block with Visuals */}
+                        <div className="rounded-2xl p-8 md:p-12 bg-background border border-border-main" data-animate="fade-up" data-once="true">
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                                
+                                {/* 2-Paragraph Summary Narrative */}
+                                <div className="lg:col-span-7 flex flex-col gap-6">
+                                    <div className="space-y-4 text-base md:text-lg text-text-secondary font-light leading-relaxed">
+                                        <p>
+                                            Acclevate delivers an integrated, full-stack back-office ecosystem covering accounting, taxation, corporate legal setup, and digital marketplace scaling. Rather than forcing founders to coordinate between disconnected vendors, our dedicated team takes complete ownership of your day-to-day bookkeeping, monthly MIS reporting, advance tax forecasting, and zero-defect GST return filings (GSTR-1, 3B, and 9C).
                                         </p>
-
-                                        {/* Service Points */}
-                                        <div className="grid grid-cols-2 gap-2 pt-4 border-t border-border-main/60">
-                                            {item.services.map((s, sIdx) => (
-                                                <div key={sIdx} className="flex items-center gap-2 text-xs text-text-primary font-medium">
-                                                    <span className="w-1.5 h-1.5 rounded-full bg-brand-primary shrink-0" />
-                                                    <span className="truncate">{s}</span>
-                                                </div>
-                                            ))}
-                                        </div>
+                                        <p>
+                                            From fast-tracking Private Limited and LLP incorporations with trademark protection to establishing multi-state GST warehouses (APOB/VPOB) for Amazon, Flipkart, Blinkit, and Shopify brands, we ensure your business remains legally sound, financially transparent, and positioned for sustained commercial growth.
+                                        </p>
                                     </div>
 
-                                    <div className="pt-6 mt-6 border-t border-border-main/50 flex items-center justify-between">
-                                        <span className="text-xs font-semibold text-text-secondary">
-                                            Institutional Accuracy
+                                    {/* Integrated Key Pillars Pills */}
+                                    <div className="flex flex-wrap gap-2.5 pt-4 border-t border-border-main">
+                                        <span className="inline-flex items-center text-xs font-semibold px-3.5 py-1.5 rounded-full bg-white border border-border-main text-text-primary">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-brand-primary mr-2" />
+                                            Accounting &amp; Virtual CFO
                                         </span>
-                                        <Link
-                                            href="/services"
-                                            className="text-xs font-bold text-brand-primary group-hover:underline flex items-center gap-1"
-                                        >
-                                            <span>Explore Details</span>
-                                            <span>→</span>
-                                        </Link>
+                                        <span className="inline-flex items-center text-xs font-semibold px-3.5 py-1.5 rounded-full bg-white border border-border-main text-text-primary">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-brand-primary mr-2" />
+                                            GST &amp; Statutory Tax
+                                        </span>
+                                        <span className="inline-flex items-center text-xs font-semibold px-3.5 py-1.5 rounded-full bg-white border border-border-main text-text-primary">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-brand-primary mr-2" />
+                                            Company Registration &amp; Trademark
+                                        </span>
+                                        <span className="inline-flex items-center text-xs font-semibold px-3.5 py-1.5 rounded-full bg-white border border-border-main text-text-primary">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-brand-primary mr-2" />
+                                            eCommerce Multi-State Scale
+                                        </span>
                                     </div>
                                 </div>
-                            ))}
+
+                                {/* Clean Supporting Visual Card */}
+                                <div className="lg:col-span-5 relative">
+                                    <div className="relative h-72 md:h-80 w-full rounded-2xl overflow-hidden border border-border-main bg-white shadow-xs">
+                                        <Image
+                                            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000"
+                                            alt="Comprehensive Business and Financial Capabilities"
+                                            fill
+                                            className="object-cover"
+                                            sizes="(max-width: 1024px) 100vw, 40vw"
+                                        />
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
 
                     </div>
                 </section>
 
                 {/* ─── 04 OUR EXPERTS SECTION ─────────────────────────── */}
-                <section className="py-24 md:py-32 bg-background relative overflow-hidden text-text-primary border-t border-border-main/60">
-                    <div className="max-w-7xl mx-auto px-6 relative z-10">
+                <section className="py-20 md:py-32 bg-background relative overflow-hidden text-text-primary border-t border-border-main">
+                    <div className="public-container relative z-10">
                         
                         <div className="flex items-center gap-3 mb-5" data-animate="fade-up" data-once="true">
                             <div className="w-8 h-0.5 bg-brand-primary" />
@@ -475,12 +417,12 @@ export default function AboutPage() {
                                 >
                                     <div>
                                         {/* Image Card */}
-                                        <div className="relative aspect-square w-full rounded-xl overflow-hidden mb-5 bg-slate-100 border border-border-main/60">
+                                        <div className="relative aspect-square w-full rounded-xl overflow-hidden mb-5 bg-surface-muted border border-border-main">
                                             <Image
                                                 src={expert.image}
                                                 alt={expert.name}
                                                 fill
-                                                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+                                                className="object-cover transition-transform duration-500 group-hover:scale-105"
                                                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                                             />
                                         </div>
@@ -500,7 +442,7 @@ export default function AboutPage() {
                                         </p>
                                     </div>
 
-                                    <div className="pt-4 mt-4 border-t border-border-main/60 flex items-center justify-between text-[11px] font-semibold text-brand-deep">
+                                    <div className="pt-4 mt-4 border-t border-border-main flex items-center justify-between text-[11px] font-semibold text-brand-deep">
                                         <span>Acclevate Practice</span>
                                         <span className="text-brand-primary group-hover:translate-x-1 transition-transform">→</span>
                                     </div>
