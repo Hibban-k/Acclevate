@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
 import HeroBackground from '@/components/HeroBackground';
-import WhatWeProvide from '@/components/WhatWeProvide';
-import OurStory from '@/components/OurStory';
-import FounderAndClients from '@/components/FounderAndClients';
+import AboutFounder from '@/components/AboutFounder';
+import CompanyStory from '@/components/CompanyStory';
+import OurExpertise from '@/components/OurExpertise';
 import CTASection from '@/components/CTASection';
 import AboutAnimations from '@/components/AboutAnimations';
 
 export const metadata: Metadata = {
     title: 'About Acclevate | Top Corporate Consulting & Financial Advisory',
-    description: 'Learn about Acclevate — a dedicated team of Chartered Accountants, corporate legal advisors, and growth operators supporting 150+ scaling enterprises across India.',
+    description: 'Learn about Acclevate — led by experienced Chartered Accountants and corporate advisors to deliver zero-defect accounting, tax compliance, corporate law, and eCommerce growth.',
     keywords: 'business consultant India, accounting services India, accounting and finance services, GST consultant India, tax consultant India, GST compliance services, business registration India, company registration services, trademark registration India, legal compliance services, eCommerce business support, eCommerce services India, startup business consultant, MSME business services',
     alternates: {
         canonical: 'https://www.acclevate.com/about',
@@ -54,7 +54,7 @@ export default function AboutPage() {
                             data-delay="0.2"
                             className="text-base sm:text-lg md:text-xl text-text-secondary font-light max-w-2xl leading-relaxed"
                         >
-                            A dedicated multidisciplinary team of Chartered Accountants, corporate legal counsel, and digital growth operators built to safeguard and scale your enterprise.
+                            A dedicated multidisciplinary advisory practice founded to deliver zero-defect accounting, rigorous tax compliance, corporate law, and high-velocity growth.
                         </p>
 
                         {/* Quick Trust Indicators */}
@@ -66,6 +66,11 @@ export default function AboutPage() {
                         >
                             <div className="flex items-center gap-2">
                                 <span className="w-2 h-2 rounded-full bg-brand-primary" />
+                                <span>Direct CA Oversight</span>
+                            </div>
+                            <span className="hidden sm:inline text-slate-300">•</span>
+                            <div className="flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-brand-primary" />
                                 <span>150+ Enterprises Scaled</span>
                             </div>
                             <span className="hidden sm:inline text-slate-300">•</span>
@@ -73,29 +78,24 @@ export default function AboutPage() {
                                 <span className="w-2 h-2 rounded-full bg-brand-primary" />
                                 <span>Zero-Delay Compliance</span>
                             </div>
-                            <span className="hidden sm:inline text-slate-300">•</span>
-                            <div className="flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-brand-primary" />
-                                <span>Direct CA Oversight</span>
-                            </div>
                         </div>
 
                     </div>
                 </section>
 
-                {/* ─── 01 WHAT WE PROVIDE ─────────────────────────────── */}
-                <WhatWeProvide />
+                {/* ─── 01 ABOUT ACCLEVATE FOUNDER & EXPERTISE ─────────── */}
+                <AboutFounder />
 
-                {/* ─── 02 OUR STORY ───────────────────────────────────── */}
-                <OurStory />
+                {/* ─── 02 OUR COMPANY STORY ───────────────────────────── */}
+                <CompanyStory />
 
-                {/* ─── 03 OUR CLIENTS & FOUNDER PORTFOLIO ─────────────── */}
-                <FounderAndClients />
+                {/* ─── 03 OUR EXPERTISE ───────────────────────────────── */}
+                <OurExpertise />
 
-                {/* ─── FINAL CTA ──────────────────────────────────────── */}
+                {/* ─── 04 CTA SECTION ─────────────────────────────────── */}
                 <CTASection 
-                    title="Ready to elevate your operational & financial standing?"
-                    description="Tell us about your business goals. Our senior partners will analyze your structure and recommend the right roadmap."
+                    title="Ready to elevate your financial & regulatory standing?"
+                    description="Tell us what you need. Our senior partners will analyze your business structure and recommend the right next step."
                     primaryButtonText="Schedule a Consultation"
                     primaryButtonHref="/contact"
                 />

@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 850" width="1200" height="850">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCFCFA" />
+      <stop offset="100%" stop-color="#F4F4EE" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D4AF37" />
+      <stop offset="50%" stop-color="#F3E5AB" />
+      <stop offset="100%" stop-color="#AA771C" />
+    </linearGradient>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#678782" />
+      <stop offset="100%" stop-color="#26363A" />
+    </linearGradient>
+    <pattern id="guilloche" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 0 20 Q 10 0, 20 20 T 40 20" fill="none" stroke="#678782" stroke-width="0.3" opacity="0.15" />
+      <path d="M 0 20 Q 10 40, 20 20 T 40 20" fill="none" stroke="#678782" stroke-width="0.3" opacity="0.15" />
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="850" fill="url(#bgGrad)" />
+  <rect width="1200" height="850" fill="url(#guilloche)" />
+
+  <!-- Outer Borders -->
+  <rect x="35" y="35" width="1130" height="780" fill="none" stroke="#26363A" stroke-width="3" />
+  <rect x="45" y="45" width="1110" height="760" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" />
+  <rect x="55" y="55" width="1090" height="740" fill="none" stroke="#678782" stroke-width="0.75" stroke-dasharray="6 3" />
+
+  <!-- Corner Ornaments -->
+  <g fill="none" stroke="url(#goldGrad)" stroke-width="2">
+    <path d="M 35 75 L 75 75 L 75 35" />
+    <path d="M 1165 75 L 1125 75 L 1125 35" />
+    <path d="M 35 775 L 75 775 L 75 815" />
+    <path d="M 1165 775 L 1125 775 L 1125 815" />
+  </g>
+
+  <!-- Header Emblem -->
+  <g transform="translate(600, 140)">
+    <circle r="42" fill="url(#tealGrad)" />
+    <circle r="36" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" />
+    <polygon points="0,-22 6,-8 21,-8 9,2 14,16 0,8 -14,16 -9,2 -21,-8 -6,-8" fill="url(#goldGrad)" />
+  </g>
+
+  <!-- Institution Title -->
+  <text x="600" y="225" font-family="'DM Serif Display', Georgia, serif" font-size="28" font-weight="bold" fill="#26363A" text-anchor="middle" letter-spacing="4">
+    THE INSTITUTE OF CHARTERED ACCOUNTANTS OF INDIA
+  </text>
+  <text x="600" y="255" font-family="'Manrope', sans-serif" font-size="13" font-weight="600" fill="#678782" text-anchor="middle" letter-spacing="6">
+    STATUTORY PROFESSIONAL BODY · ESTABLISHED BY ACT OF PARLIAMENT
+  </text>
+
+  <!-- Certificate Heading -->
+  <text x="600" y="330" font-family="'DM Serif Display', Georgia, serif" font-size="44" font-weight="bold" fill="#26363A" text-anchor="middle" letter-spacing="2">
+    Certificate of Practice &amp; Fellowship
+  </text>
+  
+  <line x1="450" y1="355" x2="750" y2="355" stroke="url(#goldGrad)" stroke-width="2" />
+
+  <!-- Body Text -->
+  <text x="600" y="405" font-family="'Manrope', sans-serif" font-size="15" fill="#4E5255" text-anchor="middle" letter-spacing="1">
+    This is to certify that
+  </text>
+
+  <!-- Founder Name -->
+  <text x="600" y="460" font-family="'DM Serif Display', Georgia, serif" font-size="38" font-weight="bold" fill="#26363A" text-anchor="middle" letter-spacing="1">
+    CA HIBBAN K.
+  </text>
+
+  <text x="600" y="495" font-family="'Manrope', sans-serif" font-size="14" font-weight="bold" fill="#678782" text-anchor="middle" letter-spacing="3">
+    FELLOW CHARTERED ACCOUNTANT (FCA) · B.COM (HONS)
+  </text>
+
+  <!-- Statement -->
+  <text x="600" y="545" font-family="'Manrope', sans-serif" font-size="15" fill="#4E5255" text-anchor="middle" max-width="800">
+    has been duly admitted as a Fellow of the Institute and is entitled to practice as a
+  </text>
+  <text x="600" y="575" font-family="'Manrope', sans-serif" font-size="16" font-weight="bold" fill="#26363A" text-anchor="middle" letter-spacing="2">
+    CHARTERED ACCOUNTANT &amp; CORPORATE TAX ADVISOR
+  </text>
+
+  <!-- Gold Seal -->
+  <g transform="translate(230, 680)">
+    <circle r="46" fill="url(#goldGrad)" />
+    <circle r="40" fill="#26363A" />
+    <circle r="36" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" stroke-dasharray="4 2" />
+    <text x="0" y="-8" font-family="'Manrope', sans-serif" font-size="8" font-weight="bold" fill="#F3E5AB" text-anchor="middle" letter-spacing="2">SEAL OF</text>
+    <text x="0" y="6" font-family="'DM Serif Display', Georgia, serif" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">OFFICIAL</text>
+    <text x="0" y="18" font-family="'Manrope', sans-serif" font-size="8" font-weight="bold" fill="#F3E5AB" text-anchor="middle" letter-spacing="2">PRACTICE</text>
+  </g>
+
+  <!-- Signature 1 -->
+  <g transform="translate(600, 680)">
+    <path d="M -80 0 Q -40 -30, 0 -5 T 60 -15 T 80 5" fill="none" stroke="#26363A" stroke-width="1.8" />
+    <line x1="-100" y1="15" x2="100" y2="15" stroke="#DDE4E2" stroke-width="1" />
+    <text x="0" y="32" font-family="'Manrope', sans-serif" font-size="11" font-weight="bold" fill="#26363A" text-anchor="middle">SECRETARY</text>
+    <text x="0" y="46" font-family="'Manrope', sans-serif" font-size="9" fill="#687579" text-anchor="middle">The Institute of Chartered Accountants</text>
+  </g>
+
+  <!-- Signature 2 -->
+  <g transform="translate(970, 680)">
+    <path d="M -70 5 Q -20 -35, 10 -10 T 70 -5" fill="none" stroke="#26363A" stroke-width="1.8" />
+    <line x1="-100" y1="15" x2="100" y2="15" stroke="#DDE4E2" stroke-width="1" />
+    <text x="0" y="32" font-family="'Manrope', sans-serif" font-size="11" font-weight="bold" fill="#26363A" text-anchor="middle">PRESIDENT</text>
+    <text x="0" y="46" font-family="'Manrope', sans-serif" font-size="9" fill="#687579" text-anchor="middle">National Council of Corporate Advisors</text>
+  </g>
+
+  <!-- Bottom Details -->
+  <text x="80" y="775" font-family="'Manrope', sans-serif" font-size="11" font-mono="true" fill="#687579">
+    REGISTRATION NO: ICAI/FCA/492810
+  </text>
+  <text x="1120" y="775" font-family="'Manrope', sans-serif" font-size="11" font-mono="true" fill="#687579" text-anchor="end">
+    CERTIFICATE NO: COP-2024-BLR-8921
+  </text>
+</svg>
