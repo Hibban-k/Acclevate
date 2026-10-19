@@ -50,17 +50,16 @@ export default function AboutPage() {
         <AboutAnimations>
             <div className="public-design min-h-screen bg-white selection:bg-surface-muted selection:text-brand-deep">
 
-                {/* ─── 00 HERO (BG-WHITE) ─────────────────────────────── */}
-                <section className="page-hero relative overflow-hidden flex flex-col items-center justify-center text-center pt-32 pb-20 md:pt-40 md:pb-24">
+                {/* ─── 00 HERO (COMPACT & BALANCED) ───────────────────── */}
+                <section className="page-hero relative overflow-hidden flex flex-col items-center justify-center text-center pt-28 pb-14 md:pt-36 md:pb-20">
                     <HeroBackground />
                     
-                    <div className="w-full max-w-250 mx-auto px-6 relative z-10 flex flex-col items-center justify-center gap-6">
-                        
-                        {/* Clean breadcrumb (No capsule/pill styling) */}
+                    <div className="w-full max-w-225 mx-auto px-6 relative z-10 flex flex-col items-center justify-center gap-4">
+                        {/* Clean breadcrumb */}
                         <div
                             data-animate="fade-up"
                             data-once="true"
-                            className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold tracking-widest text-slate-400 uppercase mb-2"
+                            className="flex items-center justify-center gap-2 text-xs font-bold tracking-widest text-slate-400 uppercase"
                         >
                             <Link href="/" className="hover:text-text-primary transition-colors">Home</Link>
                             <span>/</span>
@@ -71,7 +70,7 @@ export default function AboutPage() {
                             data-animate="fade-up"
                             data-once="true"
                             data-delay="0.1"
-                            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-text-primary leading-tight tracking-tight uppercase"
+                            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary leading-tight tracking-tight uppercase"
                         >
                             About <span className="text-brand-primary">Acclevate</span>
                         </h1>
@@ -79,30 +78,30 @@ export default function AboutPage() {
                         <p
                             data-animate="fade-up"
                             data-once="true"
-                            data-delay="0.2"
-                            className="text-base md:text-lg text-text-secondary font-light max-w-xl leading-relaxed mt-2"
+                            data-delay="0.15"
+                            className="text-sm sm:text-base md:text-lg text-text-secondary font-light max-w-lg leading-relaxed"
                         >
-                            Built on direct execution, operational precision, and relentless dedication to your business&apos;s financial health.
+                            Hands-on financial execution, tax compliance, and corporate operations built for growing enterprises.
                         </p>
                     </div>
                 </section>
 
-                {/* ─── 01 OUR STORY SECTION (MAIN: BG-WHITE, INNER: BG-BACKGROUND, WIDE PANEL) ─── */}
-                <section className="py-16 md:py-24 bg-white relative overflow-hidden text-text-primary border-t border-border-main">
+                {/* ─── 01 OUR STORY SECTION (LIGHT & CONCISE) ─────────── */}
+                <section className="py-12 md:py-20 bg-white relative overflow-hidden text-text-primary border-t border-border-main">
                     <div className="public-container panel-container !max-w-[94rem] mx-auto relative z-10">
                         
                         {/* Section Header */}
-                        <div className="flex items-center gap-3 mb-5" data-animate="fade-up" data-once="true">
+                        <div className="flex items-center gap-3 mb-3" data-animate="fade-up" data-once="true">
                             <div className="w-8 h-0.5 bg-brand-primary" />
-                            <span className="text-sm font-bold text-text-secondary uppercase tracking-widest">Our Story</span>
+                            <span className="text-xs font-bold text-text-secondary uppercase tracking-widest">Our Story</span>
                         </div>
 
-                        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 md:mb-16">
+                        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-8 md:mb-12">
                             <h2
                                 data-animate="fade-up"
                                 data-once="true"
                                 data-delay="0.1"
-                                className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-text-primary uppercase leading-tight max-w-2xl"
+                                className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-text-primary uppercase leading-snug max-w-xl"
                             >
                                 Built For Direct Execution, <br className="hidden sm:inline" />
                                 <span className="text-brand-primary">Not Theoretical Advice</span>
@@ -111,74 +110,61 @@ export default function AboutPage() {
                                 data-animate="fade-up"
                                 data-once="true"
                                 data-delay="0.15"
-                                className="text-base text-text-secondary font-light max-w-md leading-relaxed"
+                                className="text-sm text-text-secondary font-light max-w-md leading-relaxed"
                             >
-                                How a team in Bangalore stepped in to replace disconnected consulting slide decks with hands-on back-office execution.
+                                Replacing disconnected consulting decks with disciplined, boots-on-the-ground operational execution.
                             </p>
                         </div>
 
-                        {/* Inner Child Div: Wide Panel Width */}
+                        {/* Inner Card */}
                         <div
-                            className="w-full rounded-2xl p-6 sm:p-10 lg:p-14 bg-background border border-border-main shadow-xs"
+                            className="w-full rounded-2xl p-6 sm:p-8 lg:p-12 bg-background border border-border-main shadow-xs"
                             data-animate="fade-up"
                             data-once="true"
                         >
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                                 
-                                {/* Left Story Narrative */}
-                                <div className="lg:col-span-7 flex flex-col gap-6">
-                                    <div className="space-y-4 text-base md:text-lg text-text-secondary font-light leading-relaxed">
-                                        <p>
-                                            In early 2024, our founding journey began with a glaring problem: modern startups and growing enterprises were burning valuable founder hours trapped between expensive corporate consultants who gave high-level presentations and local vendors who made recurring filing errors.
-                                        </p>
-                                        <p>
-                                            Books were neglected until tax season, GST input tax credits were lost, and departmental notices accumulated. Acclevate was built from the ground up to solve this permanently.
-                                        </p>
-                                        <p>
-                                            We roll up our sleeves and become your dedicated back-office engine — maintaining clean day-to-day ledgers, filing every GST and income tax return on time, registering trademarks, and enabling seamless multi-state eCommerce fulfillment.
-                                        </p>
-                                    </div>
+                                {/* Concise Story Text */}
+                                <div className="lg:col-span-7 flex flex-col gap-5">
+                                    <p className="text-sm sm:text-base md:text-lg text-text-secondary font-light leading-relaxed">
+                                        Founded in Bangalore in 2024, Acclevate was built to solve a critical founder pain point: growing companies were wasting weeks between expensive advisors who offered high-level theory and local vendors who made recurring filing mistakes. We roll up our sleeves and handle your books, GST returns, and corporate legalities with complete institutional precision.
+                                    </p>
 
-                                    {/* Story Milestones Row */}
-                                    <div className="grid grid-cols-3 gap-4 pt-6 border-t border-border-main">
+                                    {/* Compact Milestones */}
+                                    <div className="grid grid-cols-3 gap-3 pt-5 border-t border-border-main">
                                         <div>
-                                            <div className="text-2xl md:text-3xl font-extrabold text-text-primary">2024</div>
-                                            <div className="text-[11px] font-bold text-text-secondary uppercase tracking-wider mt-1">Founded in Bangalore</div>
+                                            <div className="text-xl sm:text-2xl md:text-3xl font-extrabold text-text-primary">2024</div>
+                                            <div className="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-wider mt-0.5">Bangalore Inception</div>
                                         </div>
                                         <div>
-                                            <div className="text-2xl md:text-3xl font-extrabold text-text-primary">150+</div>
-                                            <div className="text-[11px] font-bold text-text-secondary uppercase tracking-wider mt-1">Enterprises Scaled</div>
+                                            <div className="text-xl sm:text-2xl md:text-3xl font-extrabold text-text-primary">150+</div>
+                                            <div className="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-wider mt-0.5">Enterprises Scaled</div>
                                         </div>
                                         <div>
-                                            <div className="text-2xl md:text-3xl font-extrabold text-text-primary">100%</div>
-                                            <div className="text-[11px] font-bold text-text-secondary uppercase tracking-wider mt-1">On-Time Filings</div>
+                                            <div className="text-xl sm:text-2xl md:text-3xl font-extrabold text-text-primary">100%</div>
+                                            <div className="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-wider mt-0.5">On-Time Filings</div>
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* Right Interactive & Mobile Responsive Editorial Image Card */}
+                                {/* Responsive Image */}
                                 <div className="lg:col-span-5 relative w-full">
-                                    <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-full min-h-[260px] sm:min-h-[340px] lg:min-h-[390px] w-full rounded-2xl overflow-hidden shadow-xs border border-border-main bg-white group cursor-pointer">
+                                    <div className="relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-auto lg:h-full min-h-[220px] sm:min-h-[280px] lg:min-h-[320px] w-full rounded-xl overflow-hidden shadow-xs border border-border-main bg-white group cursor-pointer">
                                         <Image
                                             src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1200"
                                             alt="Acclevate Team Strategic Collaboration"
                                             fill
-                                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                                             sizes="(max-width: 1024px) 100vw, 45vw"
                                         />
 
-                                        {/* Floating Interactive Badge */}
-                                        <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 p-3.5 sm:p-4 rounded-xl bg-white/95 backdrop-blur-md border border-border-main shadow-md flex items-center justify-between transition-all duration-300 group-hover:-translate-y-1">
-                                            <div className="flex items-center gap-3">
-                                                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-surface-muted flex items-center justify-center text-brand-primary font-bold text-xs sm:text-sm">
-                                                    ✓
-                                                </div>
-                                                <div>
-                                                    <div className="text-xs sm:text-sm font-bold text-text-primary">Direct Operator Execution</div>
-                                                    <div className="text-[10px] sm:text-xs text-text-secondary">Hands-on corporate &amp; filing teams</div>
-                                                </div>
+                                        {/* Floating Badge */}
+                                        <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 p-3 rounded-lg bg-white/95 backdrop-blur-md border border-border-main shadow-xs flex items-center justify-between transition-all duration-300 group-hover:-translate-y-0.5">
+                                            <div className="flex items-center gap-2.5">
+                                                <span className="w-2 h-2 rounded-full bg-brand-primary shrink-0" />
+                                                <span className="text-xs font-bold text-text-primary">Direct Operator Execution</span>
                                             </div>
-                                            <span className="text-[10px] sm:text-xs font-mono font-bold text-brand-deep">Est. 2024</span>
+                                            <span className="text-[10px] font-mono font-bold text-brand-deep">Est. 2024</span>
                                         </div>
                                     </div>
                                 </div>
@@ -189,29 +175,28 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                {/* ─── 02 OUR FOUNDER (MAIN: BG-BACKGROUND, INNER: BG-INK DARK, WIDE PANEL) ─── */}
-                <section className="py-16 md:py-24 bg-background relative overflow-hidden border-t border-border-main">
+                {/* ─── 02 OUR FOUNDER (DARK INNER CARD, COMPACT COPY) ─── */}
+                <section className="py-12 md:py-20 bg-background relative overflow-hidden border-t border-border-main">
                     <div className="public-container panel-container !max-w-[94rem] mx-auto relative z-10">
                         
                         {/* Section Header */}
-                        <div className="flex items-center gap-3 mb-5" data-animate="fade-up" data-once="true">
+                        <div className="flex items-center gap-3 mb-3" data-animate="fade-up" data-once="true">
                             <div className="w-8 h-0.5 bg-brand-primary" />
-                            <span className="text-sm font-bold text-text-secondary uppercase tracking-widest">Leadership</span>
+                            <span className="text-xs font-bold text-text-secondary uppercase tracking-widest">Leadership</span>
                         </div>
 
-                        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 md:mb-16">
+                        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-8 md:mb-12">
                             <div>
                                 <h2
                                     data-animate="fade-up"
                                     data-once="true"
                                     data-delay="0.1"
-                                    className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-text-primary uppercase leading-tight"
+                                    className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-text-primary uppercase leading-snug"
                                 >
-                                    Our Founder, <br />
-                                    <span className="text-brand-primary">Ahamed Kaab</span>
+                                    Our Founder, <span className="text-brand-primary">Ahamed Kaab</span>
                                 </h2>
-                                <p className="text-sm md:text-base font-bold text-brand-deep uppercase tracking-wider mt-2">
-                                    CA Aspirant · Intensive Articleship &amp; Corporate Audit Experience
+                                <p className="text-xs sm:text-sm font-bold text-brand-deep uppercase tracking-wider mt-1">
+                                    CA Aspirant · Corporate Audit &amp; Tax Articleship
                                 </p>
                             </div>
 
@@ -219,96 +204,79 @@ export default function AboutPage() {
                                 data-animate="fade-up"
                                 data-once="true"
                                 data-delay="0.15"
-                                className="text-base text-text-secondary font-light max-w-md leading-relaxed"
+                                className="text-sm text-text-secondary font-light max-w-md leading-relaxed"
                             >
-                                Combining modern financial acumen and intensive internship training to build high-accuracy compliance systems for growing businesses.
+                                Applying rigorous practical audit training to eliminate compliance vulnerabilities for modern businesses.
                             </p>
                         </div>
 
-                        {/* Inner Child Div: Wide Panel Width, bg-ink (Dark Container) */}
+                        {/* Dark Inner Card */}
                         <div
-                            className="w-full rounded-2xl p-6 sm:p-10 lg:p-14 bg-ink border border-white/10 text-white shadow-xl"
+                            className="w-full rounded-2xl p-6 sm:p-8 lg:p-12 bg-ink border border-white/10 text-white shadow-xl"
                             data-animate="fade-up"
                             data-once="true"
                         >
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                                 
-                                {/* Left: Founder Portrait Card (Interactive & Mobile Responsive) */}
+                                {/* Founder Portrait */}
                                 <div className="lg:col-span-5 relative w-full">
-                                    <div className="relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] w-full rounded-2xl overflow-hidden border border-white/10 bg-white/5 shadow-inner group cursor-pointer">
+                                    <div className="relative aspect-[4/5] sm:aspect-[16/10] lg:aspect-[4/5] w-full min-h-[240px] sm:min-h-[280px] lg:min-h-[340px] rounded-xl overflow-hidden border border-white/10 bg-white/5 shadow-inner group cursor-pointer">
                                         <Image
                                             src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000"
                                             alt="Ahamed Kaab - Founder of Acclevate"
                                             fill
-                                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                                             sizes="(max-width: 1024px) 100vw, 40vw"
                                         />
 
-                                        {/* Floating Interactive Founder Badge */}
-                                        <div className="absolute bottom-4 left-4 right-4 p-3.5 sm:p-4 rounded-xl bg-ink/90 backdrop-blur-md border border-white/10 shadow-lg flex items-center justify-between transition-all duration-300 group-hover:-translate-y-1">
+                                        {/* Name Tag */}
+                                        <div className="absolute bottom-3 left-3 right-3 p-3 rounded-lg bg-ink/90 backdrop-blur-md border border-white/10 flex items-center justify-between">
                                             <div>
                                                 <div className="text-xs sm:text-sm font-bold text-white">Ahamed Kaab</div>
-                                                <div className="text-[10px] sm:text-xs text-slate-300">CA Aspirant · Bangalore</div>
+                                                <div className="text-[10px] text-slate-300">CA Aspirant · Bangalore</div>
                                             </div>
-                                            <span className="text-[10px] font-bold text-brand-primary uppercase tracking-wider bg-white/10 px-2.5 py-1 rounded-md border border-white/10">
+                                            <span className="text-[10px] font-bold text-brand-primary uppercase tracking-wider bg-white/10 px-2 py-0.5 rounded border border-white/10">
                                                 Founder
                                             </span>
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* Right: Founder Profile & Practical Articleship Background */}
-                                <div className="lg:col-span-7 flex flex-col gap-6">
-                                    
-                                    <div className="rounded-2xl p-6 sm:p-8 bg-white/5 border border-white/10">
-                                        <div className="flex items-center gap-2 mb-3">
-                                            <span className="w-2 h-2 rounded-full bg-brand-primary" />
-                                            <span className="text-xs font-bold text-brand-primary uppercase tracking-widest">
-                                                Articleship &amp; Practical Foundation
-                                            </span>
-                                        </div>
-
-                                        <h4 className="text-xl sm:text-2xl font-bold text-white mb-4 tracking-tight">
-                                            Bridging Academic Rigor with Real-World Execution
-                                        </h4>
-
-                                        <div className="space-y-4 text-sm sm:text-base text-slate-300 font-light leading-relaxed">
-                                            <p>
-                                                As a dedicated Chartered Accountancy aspirant undergoing rigorous articleship and corporate audit internship training, Ahamed Kaab observed firsthand how fast-growing businesses stumble into severe financial and tax compliance traps.
-                                            </p>
-                                            <p>
-                                                Having worked hands-on through statutory audits, GST reconciliation pipelines, ledger scrutiny, and departmental compliance across emerging enterprises, he established Acclevate to provide accessible, institutional-grade financial discipline without unnecessary corporate overhead.
-                                            </p>
-                                        </div>
-
-                                        {/* Founder Philosophy Quote */}
-                                        <div className="mt-6 p-4 rounded-xl bg-white/5 border-l-4 border-brand-primary">
-                                            <p className="text-sm italic font-medium text-white leading-relaxed">
-                                                &ldquo;True business agility is built on clean numbers and ironclad compliance. When a founder knows their books and taxes are handled flawlessly, they can focus 100% on building.&rdquo;
-                                            </p>
-                                        </div>
+                                {/* Founder Profile & Practice Pillars */}
+                                <div className="lg:col-span-7 flex flex-col gap-5">
+                                    <div className="space-y-3 text-sm sm:text-base text-slate-300 font-light leading-relaxed">
+                                        <p>
+                                            Undergoing intensive articleship and corporate audit training across complex enterprise engagements, Ahamed Kaab observed firsthand how rapidly growing ventures stumble into costly compliance and tax traps.
+                                        </p>
+                                        <p>
+                                            He founded Acclevate to provide agile, institutional-grade financial discipline — handling ledgers, GST pipelines, and statutory governance without corporate red tape.
+                                        </p>
                                     </div>
 
-                                    {/* Core Competencies Grid (Dark Tile Variant) */}
-                                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                                        <div className="p-3.5 sm:p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-                                            <div className="text-xs font-bold text-white uppercase tracking-wider">Direct Tax</div>
-                                            <div className="text-[10px] text-slate-400 mt-1">Audit &amp; Planning</div>
-                                        </div>
-                                        <div className="p-3.5 sm:p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-                                            <div className="text-xs font-bold text-white uppercase tracking-wider">GST Audit</div>
-                                            <div className="text-[10px] text-slate-400 mt-1">ITC Reconciliation</div>
-                                        </div>
-                                        <div className="p-3.5 sm:p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-                                            <div className="text-xs font-bold text-white uppercase tracking-wider">Bookkeeping</div>
-                                            <div className="text-[10px] text-slate-400 mt-1">MIS &amp; Ledgers</div>
-                                        </div>
-                                        <div className="p-3.5 sm:p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-                                            <div className="text-xs font-bold text-white uppercase tracking-wider">Compliance</div>
-                                            <div className="text-[10px] text-slate-400 mt-1">ROC &amp; Corporate</div>
-                                        </div>
+                                    {/* Quote Box */}
+                                    <div className="p-3.5 rounded-lg bg-white/5 border-l-3 border-brand-primary text-xs sm:text-sm italic text-white leading-relaxed">
+                                        &ldquo;Agile business scale starts with clean numbers, audit-proof books, and zero-delay compliance.&rdquo;
                                     </div>
 
+                                    {/* Core Practice Tiles */}
+                                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-2">
+                                        <div className="p-3 rounded-lg bg-white/5 border border-white/10 text-center">
+                                            <div className="text-xs font-bold text-white uppercase">Direct Tax</div>
+                                            <div className="text-[10px] text-slate-400 mt-0.5">Audits &amp; Planning</div>
+                                        </div>
+                                        <div className="p-3 rounded-lg bg-white/5 border border-white/10 text-center">
+                                            <div className="text-xs font-bold text-white uppercase">GST Audit</div>
+                                            <div className="text-[10px] text-slate-400 mt-0.5">ITC Reconciliation</div>
+                                        </div>
+                                        <div className="p-3 rounded-lg bg-white/5 border border-white/10 text-center">
+                                            <div className="text-xs font-bold text-white uppercase">Bookkeeping</div>
+                                            <div className="text-[10px] text-slate-400 mt-0.5">MIS &amp; Ledgers</div>
+                                        </div>
+                                        <div className="p-3 rounded-lg bg-white/5 border border-white/10 text-center">
+                                            <div className="text-xs font-bold text-white uppercase">Compliance</div>
+                                            <div className="text-[10px] text-slate-400 mt-0.5">ROC &amp; Corporate</div>
+                                        </div>
+                                    </div>
                                 </div>
 
                             </div>
@@ -317,96 +285,90 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                {/* ─── 03 WHAT WE PROVIDE (MAIN: BG-WHITE, INNER: BG-BACKGROUND, WIDE PANEL) ─── */}
-                <section className="py-16 md:py-24 bg-white relative overflow-hidden text-text-primary border-t border-border-main">
+                {/* ─── 03 WHAT WE PROVIDE (CONCISE SUMMARY & CLEAN GRID) ─── */}
+                <section className="py-12 md:py-20 bg-white relative overflow-hidden text-text-primary border-t border-border-main">
                     <div className="public-container panel-container !max-w-[94rem] mx-auto relative z-10">
                         
                         {/* Section Header */}
-                        <div className="flex items-center gap-3 mb-5" data-animate="fade-up" data-once="true">
+                        <div className="flex items-center gap-3 mb-3" data-animate="fade-up" data-once="true">
                             <div className="w-8 h-0.5 bg-brand-primary" />
-                            <span className="text-sm font-bold text-text-secondary uppercase tracking-widest">What We Provide</span>
+                            <span className="text-xs font-bold text-text-secondary uppercase tracking-widest">What We Provide</span>
                         </div>
 
-                        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 md:mb-16">
+                        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-8 md:mb-12">
                             <div>
                                 <h2
                                     data-animate="fade-up"
                                     data-once="true"
                                     data-delay="0.1"
-                                    className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-text-primary uppercase leading-tight max-w-2xl"
+                                    className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-text-primary uppercase leading-snug max-w-xl"
                                 >
                                     Unified Operational &amp; <br />
                                     <span className="text-brand-primary">Financial Infrastructure</span>
                                 </h2>
-                                <p className="text-base text-text-secondary font-light max-w-xl leading-relaxed mt-2">
-                                    A single, dependable team taking complete care of your numbers, statutory filings, corporate legalities, and growth channels.
+                                <p className="text-sm text-text-secondary font-light max-w-lg leading-relaxed mt-1">
+                                    Complete operational oversight across your balance sheets, tax filings, and corporate legal standing.
                                 </p>
                             </div>
 
                             <Link
                                 href="/services"
-                                className="inline-flex items-center gap-2 text-sm font-bold text-brand-deep hover:text-brand-primary transition-colors group"
+                                className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-brand-deep hover:text-brand-primary transition-colors group"
                                 data-animate="fade-up"
                                 data-once="true"
                             >
-                                <span>View Full Service Catalog</span>
+                                <span>Explore Services</span>
                                 <span className="group-hover:translate-x-1 transition-transform">→</span>
                             </Link>
                         </div>
 
-                        {/* Inner Child Div: Wide Panel Width */}
+                        {/* Inner Card */}
                         <div
-                            className="w-full rounded-2xl p-6 sm:p-10 lg:p-14 bg-background border border-border-main shadow-xs"
+                            className="w-full rounded-2xl p-6 sm:p-8 lg:p-12 bg-background border border-border-main shadow-xs"
                             data-animate="fade-up"
                             data-once="true"
                         >
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                                 
-                                {/* 2-Paragraph Summary Narrative */}
-                                <div className="lg:col-span-7 flex flex-col gap-6">
-                                    <div className="space-y-4 text-base md:text-lg text-text-secondary font-light leading-relaxed">
-                                        <p>
-                                            Acclevate delivers an integrated, full-stack back-office ecosystem covering accounting, taxation, corporate legal setup, and digital marketplace scaling. Rather than forcing founders to coordinate between disconnected vendors, our dedicated team takes complete ownership of your day-to-day bookkeeping, monthly MIS reporting, advance tax forecasting, and zero-defect GST return filings (GSTR-1, 3B, and 9C).
-                                        </p>
-                                        <p>
-                                            From fast-tracking Private Limited and LLP incorporations with trademark protection to establishing multi-state GST warehouses (APOB/VPOB) for Amazon, Flipkart, Blinkit, and Shopify brands, we ensure your business remains legally sound, financially transparent, and positioned for sustained commercial growth.
-                                        </p>
-                                    </div>
+                                {/* Concise 1-Paragraph Summary & Clean 4-Item List */}
+                                <div className="lg:col-span-7 flex flex-col gap-5">
+                                    <p className="text-sm sm:text-base md:text-lg text-text-secondary font-light leading-relaxed">
+                                        Acclevate delivers an integrated operational back-office for high-growth businesses. We manage your daily ledgers, monthly MIS reports, corporate tax assessments, and zero-defect GST return filings (GSTR-1, 3B, 9C). From Pvt Ltd incorporations and trademark protection to multi-state eCommerce fulfillment (APOB/VPOB), our team ensures complete statutory peace of mind.
+                                    </p>
 
-                                    {/* Clean Feature List (NO capsule/pill styling) */}
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-6 border-t border-border-main">
-                                        <div className="flex items-center gap-2.5 text-xs sm:text-sm font-bold text-text-primary">
-                                            <span className="w-2 h-2 rounded-full bg-brand-primary shrink-0" />
+                                    {/* Clean Feature Grid (No capsule styling) */}
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-border-main">
+                                        <div className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-text-primary">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-brand-primary shrink-0" />
                                             <span>Accounting &amp; Virtual CFO</span>
                                         </div>
-                                        <div className="flex items-center gap-2.5 text-xs sm:text-sm font-bold text-text-primary">
-                                            <span className="w-2 h-2 rounded-full bg-brand-primary shrink-0" />
+                                        <div className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-text-primary">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-brand-primary shrink-0" />
                                             <span>GST &amp; Statutory Tax</span>
                                         </div>
-                                        <div className="flex items-center gap-2.5 text-xs sm:text-sm font-bold text-text-primary">
-                                            <span className="w-2 h-2 rounded-full bg-brand-primary shrink-0" />
+                                        <div className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-text-primary">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-brand-primary shrink-0" />
                                             <span>Company Registration &amp; Trademark</span>
                                         </div>
-                                        <div className="flex items-center gap-2.5 text-xs sm:text-sm font-bold text-text-primary">
-                                            <span className="w-2 h-2 rounded-full bg-brand-primary shrink-0" />
+                                        <div className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-text-primary">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-brand-primary shrink-0" />
                                             <span>eCommerce Multi-State Scale</span>
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* Clean Supporting Visual Card (Interactive & Responsive) */}
+                                {/* Responsive Supporting Visual */}
                                 <div className="lg:col-span-5 relative w-full">
-                                    <div className="relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-auto lg:h-full min-h-[260px] sm:min-h-[320px] w-full rounded-2xl overflow-hidden border border-border-main bg-white shadow-xs group cursor-pointer">
+                                    <div className="relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-auto lg:h-full min-h-[220px] sm:min-h-[280px] lg:min-h-[300px] w-full rounded-xl overflow-hidden border border-border-main bg-white shadow-xs group cursor-pointer">
                                         <Image
                                             src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000"
                                             alt="Comprehensive Business and Financial Capabilities"
                                             fill
-                                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                                             sizes="(max-width: 1024px) 100vw, 40vw"
                                         />
 
-                                        {/* Floating Badge */}
-                                        <div className="absolute top-4 left-4 p-3 rounded-xl bg-white/95 backdrop-blur-md border border-border-main shadow-xs text-xs font-bold text-text-primary flex items-center gap-2 group-hover:-translate-y-0.5 transition-transform duration-300">
+                                        <div className="absolute top-3 left-3 p-2.5 rounded-lg bg-white/95 backdrop-blur-md border border-border-main shadow-xs text-xs font-bold text-text-primary flex items-center gap-2">
                                             <span className="w-2 h-2 rounded-full bg-brand-primary animate-pulse" />
                                             <span>Full-Stack Back-Office Infrastructure</span>
                                         </div>
@@ -419,46 +381,45 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                {/* ─── 04 OUR EXPERTS (MAIN: BG-BACKGROUND, INNER: BG-INK DARK CARDS, WIDE PANEL) ─── */}
-                <section className="py-16 md:py-24 bg-background relative overflow-hidden text-text-primary border-t border-border-main">
+                {/* ─── 04 OUR EXPERTS (COMPACT DARK CARDS) ────────────── */}
+                <section className="py-12 md:py-20 bg-background relative overflow-hidden text-text-primary border-t border-border-main">
                     <div className="public-container panel-container !max-w-[94rem] mx-auto relative z-10">
                         
                         {/* Section Header */}
-                        <div className="flex items-center gap-3 mb-5" data-animate="fade-up" data-once="true">
+                        <div className="flex items-center gap-3 mb-3" data-animate="fade-up" data-once="true">
                             <div className="w-8 h-0.5 bg-brand-primary" />
-                            <span className="text-sm font-bold text-text-secondary uppercase tracking-widest">Our Experts</span>
+                            <span className="text-xs font-bold text-text-secondary uppercase tracking-widest">Our Experts</span>
                         </div>
 
-                        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 md:mb-16">
+                        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-8 md:mb-12">
                             <div>
                                 <h2
                                     data-animate="fade-up"
                                     data-once="true"
                                     data-delay="0.1"
-                                    className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-text-primary uppercase leading-tight"
+                                    className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-text-primary uppercase leading-snug"
                                 >
-                                    The Specialized Minds <br />
-                                    <span className="text-brand-primary">Behind Your Growth</span>
+                                    The Specialized Minds <span className="text-brand-primary">Behind Your Growth</span>
                                 </h2>
-                                <p className="text-base text-text-secondary font-light max-w-xl leading-relaxed mt-2">
-                                    Qualified Chartered Accountants, corporate legal practitioners, and operational specialists executing your filings daily.
+                                <p className="text-xs sm:text-sm text-text-secondary font-light max-w-lg leading-relaxed mt-1">
+                                    Experienced Chartered Accountants, legal counsel, and operational analysts managing your accounts.
                                 </p>
                             </div>
                         </div>
 
-                        {/* Experts Grid: Wide Panel Layout */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                        {/* Experts Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
                             {ourExperts.map((expert, idx) => (
                                 <div
                                     key={idx}
                                     data-animate="fade-up"
                                     data-once="true"
                                     data-delay={String(idx * 0.1)}
-                                    className="group rounded-2xl bg-ink p-5 border border-white/10 hover:border-brand-primary/60 transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between text-white cursor-pointer"
+                                    className="group rounded-xl bg-ink p-4 sm:p-5 border border-white/10 hover:border-brand-primary/60 transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between text-white cursor-pointer"
                                 >
                                     <div>
-                                        {/* Image Card (Interactive Hover Scale) */}
-                                        <div className="relative aspect-square w-full rounded-xl overflow-hidden mb-5 bg-white/5 border border-white/10">
+                                        {/* Image */}
+                                        <div className="relative aspect-square w-full rounded-lg overflow-hidden mb-4 bg-white/5 border border-white/10">
                                             <Image
                                                 src={expert.image}
                                                 alt={expert.name}
@@ -468,14 +429,14 @@ export default function AboutPage() {
                                             />
                                         </div>
 
-                                        {/* Expert Details */}
-                                        <span className="text-[10px] font-bold text-brand-primary uppercase tracking-widest block mb-1">
+                                        {/* Details */}
+                                        <span className="text-[10px] font-bold text-brand-primary uppercase tracking-widest block mb-0.5">
                                             {expert.credentials}
                                         </span>
-                                        <h3 className="text-lg font-bold text-white tracking-tight group-hover:text-brand-primary transition-colors mb-1">
+                                        <h3 className="text-base font-bold text-white tracking-tight group-hover:text-brand-primary transition-colors">
                                             {expert.name}
                                         </h3>
-                                        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+                                        <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">
                                             {expert.role}
                                         </p>
                                         <p className="text-xs text-slate-300 font-light leading-relaxed">
@@ -483,7 +444,7 @@ export default function AboutPage() {
                                         </p>
                                     </div>
 
-                                    <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between text-[11px] font-semibold text-brand-primary">
+                                    <div className="pt-3 mt-3 border-t border-white/10 flex items-center justify-between text-[11px] font-semibold text-brand-primary">
                                         <span>Acclevate Practice</span>
                                         <span className="text-brand-primary group-hover:translate-x-1 transition-transform">→</span>
                                     </div>
@@ -494,10 +455,10 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                {/* ─── 05 CTA SECTION (FROM-SLATE-50 TO-WHITE) ────────── */}
+                {/* ─── 05 CTA SECTION (COMPACT & BALANCED) ─────────────── */}
                 <CTASection 
                     title="Have an important business requirement to sort out?"
-                    description="Tell us what you need. Our founding team and senior advisors will analyze your structure and guide you forward."
+                    description="Tell us what you need. Our team will analyze your structure and recommend the right roadmap."
                     primaryButtonText="Talk to Acclevate"
                     primaryButtonHref="/contact"
                 />
