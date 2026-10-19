@@ -5,6 +5,7 @@ import HeroBackground from '@/components/HeroBackground';
 import CTASection from '@/components/CTASection';
 import AboutAnimations from '@/components/AboutAnimations';
 import AboutBulletSlider from '@/components/AboutBulletSlider';
+import AboutExpertsCarousel from '@/components/AboutExpertsCarousel';
 
 export const metadata: Metadata = {
     title: 'About Acclevate | Top Corporate Consulting & Financial Advisory',
@@ -426,50 +427,8 @@ export default function AboutPage() {
                             </div>
                         </div>
 
-                        {/* Experts Grid */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                            {ourExperts.map((expert, idx) => (
-                                <div
-                                    key={idx}
-                                    data-animate="fade-up"
-                                    data-once="true"
-                                    data-delay={String(idx * 0.1)}
-                                    className="group rounded-2xl bg-ink p-6 border border-white/10 hover:border-brand-primary/60 transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1.5 flex flex-col justify-between text-white cursor-pointer"
-                                >
-                                    <div>
-                                        {/* Image */}
-                                        <div className="relative aspect-square w-full rounded-xl overflow-hidden mb-5 bg-white/5 border border-white/10">
-                                            <Image
-                                                src={expert.image}
-                                                alt={expert.name}
-                                                fill
-                                                className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                                            />
-                                        </div>
-
-                                        {/* Details */}
-                                        <span className="text-[10px] font-bold text-brand-primary uppercase tracking-widest block mb-1">
-                                            {expert.credentials}
-                                        </span>
-                                        <h3 className="text-lg font-bold text-white tracking-tight group-hover:text-brand-primary transition-colors">
-                                            {expert.name}
-                                        </h3>
-                                        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2.5">
-                                            {expert.role}
-                                        </p>
-                                        <p className="text-xs text-slate-300 font-light leading-relaxed">
-                                            {expert.domain}
-                                        </p>
-                                    </div>
-
-                                    <div className="pt-4 mt-4 border-t border-white/10 flex items-center justify-between text-[11px] font-semibold text-brand-primary">
-                                        <span>Acclevate Practice</span>
-                                        <span className="text-brand-primary group-hover:translate-x-1 transition-transform">→</span>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                        {/* Experts Carousel (Mobile snap slider with animated indicators + Desktop 4-col grid) */}
+                        <AboutExpertsCarousel experts={ourExperts} />
 
                     </div>
                 </section>
