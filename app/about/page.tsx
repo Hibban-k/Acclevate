@@ -129,7 +129,7 @@ export default function AboutPage() {
                                         <p>
                                             <strong className="font-semibold text-text-primary">Founded in Bangalore in 2024,</strong> Acclevate was built around a singular premise: fast-growing businesses don&apos;t need more theoretical slide decks. They need <strong className="font-semibold text-text-primary">hands-on operators</strong> who sit in the trenches and execute.
                                         </p>
-                                        <p className="font-thin italic">
+                                        <p className="text-sm sm:text-base md:text-lg italic text-text-secondary">
                                             We eliminate costly compliance mistakes and penalty risks by taking complete ownership of your day-to-day ledgers, statutory GST filings, and corporate legal frameworks — so your leadership stays 100% focused on growth.
                                         </p>
                                     </div>
@@ -241,7 +241,7 @@ export default function AboutPage() {
                                         <p>
                                             <strong className="font-semibold text-white">Undergoing intensive CA articleship and corporate audit training,</strong> Ahamed Kaab observed firsthand how rapidly growing ventures stumble into severe financial and tax compliance traps.
                                         </p>
-                                        <p>
+                                        <p className="text-sm sm:text-base italic text-slate-300">
                                             He established Acclevate to bridge the divide between theoretical advice and actual execution — delivering <strong className="font-semibold text-white">accessible, institutional-grade financial discipline</strong> with zero corporate red tape.
                                         </p>
                                     </div>
@@ -328,7 +328,7 @@ export default function AboutPage() {
                                         <p>
                                             <strong className="font-semibold text-text-primary">One integrated ecosystem for your corporate back-office.</strong> We take full operational ownership of your daily ledgers, monthly MIS intelligence, corporate tax assessments, and zero-defect GST return filings (GSTR-1, 3B, 9C).
                                         </p>
-                                        <p>
+                                        <p className="text-sm sm:text-base md:text-lg italic text-text-secondary">
                                             From fast-tracking Pvt Ltd and LLP incorporations with trademark IP to setting up multi-state GST warehouses (APOB/VPOB) for Amazon, Flipkart, Blinkit, and Shopify brands, our team ensures complete statutory peace of mind.
                                         </p>
                                     </div>
