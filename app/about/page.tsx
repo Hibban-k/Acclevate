@@ -124,7 +124,7 @@ export default function AboutPage() {
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
                                 
                                 {/* Left Story Narrative (Bold Key Anchors, Thin Body) */}
-                                <div className="lg:col-span-7 flex flex-col justify-center gap-8">
+                                <div className="lg:col-span-7 flex flex-col justify-center gap-6">
                                     <div className="space-y-5 text-base sm:text-lg md:text-xl text-text-secondary leading-relaxed font-light">
                                         <p>
                                             <strong className="font-semibold text-text-primary">Founded in Bangalore in 2024,</strong> Acclevate was built around a singular premise: fast-growing businesses don&apos;t need more theoretical slide decks. They need <strong className="font-semibold text-text-primary">hands-on operators</strong> who sit in the trenches and execute.
@@ -133,25 +133,9 @@ export default function AboutPage() {
                                             We eliminate costly compliance mistakes and penalty risks by taking complete ownership of your day-to-day ledgers, statutory GST filings, and corporate legal frameworks — so your leadership stays 100% focused on growth.
                                         </p>
                                     </div>
-
-                                    {/* Prominent Milestones Row */}
-                                    <div className="grid grid-cols-3 gap-6 pt-8 border-t border-border-main">
-                                        <div>
-                                            <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text-primary tracking-tight">2024</div>
-                                            <div className="text-xs font-bold text-text-secondary uppercase tracking-widest mt-1">Bangalore Founded</div>
-                                        </div>
-                                        <div>
-                                            <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text-primary tracking-tight">150+</div>
-                                            <div className="text-xs font-bold text-text-secondary uppercase tracking-widest mt-1">Enterprises Scaled</div>
-                                        </div>
-                                        <div>
-                                            <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-text-primary tracking-tight">100%</div>
-                                            <div className="text-xs font-bold text-text-secondary uppercase tracking-widest mt-1">On-Time Filings</div>
-                                        </div>
-                                    </div>
                                 </div>
 
-                                {/* Right Editorial Image Card with Cinematic Desktop Height */}
+                                {/* Right Editorial Image Card with Floating Stats */}
                                 <div className="lg:col-span-5 relative w-full h-full">
                                     <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-full min-h-[280px] sm:min-h-[360px] lg:min-h-[460px] w-full rounded-2xl overflow-hidden shadow-xs border border-border-main bg-white group cursor-pointer">
                                         <Image
@@ -162,18 +146,18 @@ export default function AboutPage() {
                                             sizes="(max-width: 1024px) 100vw, 45vw"
                                         />
 
-                                        {/* Floating Interactive Badge */}
-                                        <div className="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6 p-4 rounded-xl bg-white/95 backdrop-blur-md border border-border-main shadow-md flex items-center justify-between transition-all duration-300 group-hover:-translate-y-1">
-                                            <div className="flex items-center gap-3">
-                                                <div className="w-9 h-9 rounded-lg bg-surface-muted flex items-center justify-center text-brand-primary font-bold text-sm">
-                                                    ✓
+                                        {/* Floating Stats Badge (2024 Bangalore Founded & 100% On-Time Filings) */}
+                                        <div className="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6 p-4 sm:p-5 rounded-xl bg-white/95 backdrop-blur-md border border-border-main shadow-lg transition-all duration-300 group-hover:-translate-y-1">
+                                            <div className="grid grid-cols-2 gap-6 divide-x divide-border-main">
+                                                <div className="text-left">
+                                                    <div className="text-2xl sm:text-3xl font-extrabold text-text-primary tracking-tight">2024</div>
+                                                    <div className="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-widest mt-0.5">Bangalore Founded</div>
                                                 </div>
-                                                <div>
-                                                    <div className="text-sm font-bold text-text-primary">Direct Operator Execution</div>
-                                                    <div className="text-xs text-text-secondary font-light">Dedicated corporate back-office team</div>
+                                                <div className="text-left pl-6">
+                                                    <div className="text-2xl sm:text-3xl font-extrabold text-text-primary tracking-tight">100%</div>
+                                                    <div className="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-widest mt-0.5">On-Time Filings</div>
                                                 </div>
                                             </div>
-                                            <span className="text-xs font-mono font-bold text-brand-deep">Est. 2024</span>
                                         </div>
                                     </div>
                                 </div>
