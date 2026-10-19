@@ -55,13 +55,15 @@ export default function AboutPage() {
                     <HeroBackground />
                     
                     <div className="w-full max-w-250 mx-auto px-6 relative z-10 flex flex-col items-center justify-center gap-6">
+                        
+                        {/* Clean breadcrumb (No capsule/pill styling) */}
                         <div
                             data-animate="fade-up"
                             data-once="true"
-                            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-muted/80 border border-border-main text-xs font-bold tracking-widest text-text-secondary uppercase"
+                            className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold tracking-widest text-slate-400 uppercase mb-2"
                         >
                             <Link href="/" className="hover:text-text-primary transition-colors">Home</Link>
-                            <span className="text-slate-300">/</span>
+                            <span>/</span>
                             <span className="text-text-primary">About Us</span>
                         </div>
                         
@@ -87,7 +89,7 @@ export default function AboutPage() {
 
                 {/* ─── 01 OUR STORY SECTION (MAIN: BG-WHITE, INNER: BG-BACKGROUND) ─── */}
                 <section className="py-16 md:py-24 bg-white relative overflow-hidden text-text-primary border-t border-border-main">
-                    <div className="public-container relative z-10">
+                    <div className="public-container max-w-[88rem] relative z-10">
                         
                         {/* Section Header */}
                         <div className="flex items-center gap-3 mb-5" data-animate="fade-up" data-once="true">
@@ -115,13 +117,13 @@ export default function AboutPage() {
                             </p>
                         </div>
 
-                        {/* Inner Child Div: bg-background with border-border-main */}
+                        {/* Inner Child Div: Increased Width (max-w-[88rem]), bg-background with border-border-main */}
                         <div
-                            className="rounded-2xl p-8 md:p-12 bg-background border border-border-main shadow-xs"
+                            className="rounded-2xl p-6 sm:p-8 md:p-12 bg-background border border-border-main shadow-xs"
                             data-animate="fade-up"
                             data-once="true"
                         >
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
                                 
                                 {/* Left Story Narrative */}
                                 <div className="lg:col-span-7 flex flex-col gap-6">
@@ -154,16 +156,30 @@ export default function AboutPage() {
                                     </div>
                                 </div>
 
-                                {/* Right Editorial Image Card */}
-                                <div className="lg:col-span-5 relative">
-                                    <div className="relative h-72 md:h-96 w-full rounded-2xl overflow-hidden shadow-xs border border-border-main bg-white">
+                                {/* Right Interactive & Mobile Responsive Editorial Image Card */}
+                                <div className="lg:col-span-5 relative w-full">
+                                    <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-full min-h-[260px] sm:min-h-[340px] lg:min-h-[390px] w-full rounded-2xl overflow-hidden shadow-xs border border-border-main bg-white group cursor-pointer">
                                         <Image
                                             src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1200"
                                             alt="Acclevate Team Strategic Collaboration"
                                             fill
-                                            className="object-cover"
+                                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                                             sizes="(max-width: 1024px) 100vw, 45vw"
                                         />
+
+                                        {/* Floating Interactive Badge (elevates smoothly on hover) */}
+                                        <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 p-3.5 sm:p-4 rounded-xl bg-white/95 backdrop-blur-md border border-border-main shadow-md flex items-center justify-between transition-all duration-300 group-hover:-translate-y-1">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-surface-muted flex items-center justify-center text-brand-primary font-bold text-xs sm:text-sm">
+                                                    ✓
+                                                </div>
+                                                <div>
+                                                    <div className="text-xs sm:text-sm font-bold text-text-primary">Direct Operator Execution</div>
+                                                    <div className="text-[10px] sm:text-xs text-text-secondary">Hands-on corporate &amp; filing teams</div>
+                                                </div>
+                                            </div>
+                                            <span className="text-[10px] sm:text-xs font-mono font-bold text-brand-deep">Est. 2024</span>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -175,7 +191,7 @@ export default function AboutPage() {
 
                 {/* ─── 02 OUR FOUNDER (MAIN: BG-BACKGROUND, INNER: BG-INK DARK) ─── */}
                 <section className="py-16 md:py-24 bg-background relative overflow-hidden border-t border-border-main">
-                    <div className="public-container relative z-10">
+                    <div className="public-container max-w-[88rem] relative z-10">
                         
                         {/* Section Header */}
                         <div className="flex items-center gap-3 mb-5" data-animate="fade-up" data-once="true">
@@ -209,40 +225,34 @@ export default function AboutPage() {
                             </p>
                         </div>
 
-                        {/* Inner Child Div: bg-ink (Dark Container) with border-white/10 and text-white */}
+                        {/* Inner Child Div: Increased Width (max-w-[88rem]), bg-ink (Dark Container) */}
                         <div
-                            className="rounded-2xl p-8 md:p-12 bg-ink border border-white/10 text-white shadow-xl"
+                            className="rounded-2xl p-6 sm:p-8 md:p-12 bg-ink border border-white/10 text-white shadow-xl"
                             data-animate="fade-up"
                             data-once="true"
                         >
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
                                 
-                                {/* Left: Founder Portrait Card (Dark Theme Frame) */}
-                                <div className="lg:col-span-5 relative">
-                                    <div className="rounded-2xl p-6 bg-white/5 border border-white/10 shadow-inner flex flex-col gap-5">
-                                        <div className="relative aspect-4/5 w-full rounded-xl overflow-hidden border border-white/10 bg-white/5 group">
-                                            <Image
-                                                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000"
-                                                alt="Ahamed Kaab - Founder of Acclevate"
-                                                fill
-                                                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                                sizes="(max-width: 1024px) 100vw, 40vw"
-                                            />
-                                        </div>
+                                {/* Left: Founder Portrait Card (Interactive & Mobile Responsive) */}
+                                <div className="lg:col-span-5 relative w-full">
+                                    <div className="relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] w-full rounded-2xl overflow-hidden border border-white/10 bg-white/5 shadow-inner group cursor-pointer">
+                                        <Image
+                                            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000"
+                                            alt="Ahamed Kaab - Founder of Acclevate"
+                                            fill
+                                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                                            sizes="(max-width: 1024px) 100vw, 40vw"
+                                        />
 
-                                        {/* Name & Credentials Details */}
-                                        <div className="flex flex-col">
-                                            <div className="flex items-center justify-between mb-1">
-                                                <h3 className="text-xl font-bold text-white tracking-tight">
-                                                    Ahamed Kaab
-                                                </h3>
-                                                <span className="text-[11px] font-bold text-brand-primary uppercase tracking-wider bg-white/10 px-2.5 py-0.5 rounded-full border border-white/10">
-                                                    Founder
-                                                </span>
+                                        {/* Floating Interactive Founder Badge (Smooth elevation on hover) */}
+                                        <div className="absolute bottom-4 left-4 right-4 p-3.5 sm:p-4 rounded-xl bg-ink/90 backdrop-blur-md border border-white/10 shadow-lg flex items-center justify-between transition-all duration-300 group-hover:-translate-y-1">
+                                            <div>
+                                                <div className="text-xs sm:text-sm font-bold text-white">Ahamed Kaab</div>
+                                                <div className="text-[10px] sm:text-xs text-slate-300">CA Aspirant · Bangalore</div>
                                             </div>
-                                            <p className="text-xs text-slate-400 font-medium">
-                                                Chartered Accountancy Aspirant · Bangalore
-                                            </p>
+                                            <span className="text-[10px] font-bold text-brand-primary uppercase tracking-wider bg-white/10 px-2.5 py-1 rounded-md border border-white/10">
+                                                Founder
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -258,11 +268,11 @@ export default function AboutPage() {
                                             </span>
                                         </div>
 
-                                        <h4 className="text-2xl font-bold text-white mb-4 tracking-tight">
+                                        <h4 className="text-xl sm:text-2xl font-bold text-white mb-4 tracking-tight">
                                             Bridging Academic Rigor with Real-World Execution
                                         </h4>
 
-                                        <div className="space-y-4 text-base text-slate-300 font-light leading-relaxed">
+                                        <div className="space-y-4 text-sm sm:text-base text-slate-300 font-light leading-relaxed">
                                             <p>
                                                 As a dedicated Chartered Accountancy aspirant undergoing rigorous articleship and corporate audit internship training, Ahamed Kaab observed firsthand how fast-growing businesses stumble into severe financial and tax compliance traps.
                                             </p>
@@ -281,19 +291,19 @@ export default function AboutPage() {
 
                                     {/* Core Competencies Grid (Dark Tile Variant) */}
                                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                                        <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+                                        <div className="p-3.5 sm:p-4 rounded-xl bg-white/5 border border-white/10 text-center">
                                             <div className="text-xs font-bold text-white uppercase tracking-wider">Direct Tax</div>
                                             <div className="text-[10px] text-slate-400 mt-1">Audit &amp; Planning</div>
                                         </div>
-                                        <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+                                        <div className="p-3.5 sm:p-4 rounded-xl bg-white/5 border border-white/10 text-center">
                                             <div className="text-xs font-bold text-white uppercase tracking-wider">GST Audit</div>
                                             <div className="text-[10px] text-slate-400 mt-1">ITC Reconciliation</div>
                                         </div>
-                                        <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+                                        <div className="p-3.5 sm:p-4 rounded-xl bg-white/5 border border-white/10 text-center">
                                             <div className="text-xs font-bold text-white uppercase tracking-wider">Bookkeeping</div>
                                             <div className="text-[10px] text-slate-400 mt-1">MIS &amp; Ledgers</div>
                                         </div>
-                                        <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+                                        <div className="p-3.5 sm:p-4 rounded-xl bg-white/5 border border-white/10 text-center">
                                             <div className="text-xs font-bold text-white uppercase tracking-wider">Compliance</div>
                                             <div className="text-[10px] text-slate-400 mt-1">ROC &amp; Corporate</div>
                                         </div>
@@ -309,7 +319,7 @@ export default function AboutPage() {
 
                 {/* ─── 03 WHAT WE PROVIDE (MAIN: BG-WHITE, INNER: BG-BACKGROUND) ─── */}
                 <section className="py-16 md:py-24 bg-white relative overflow-hidden text-text-primary border-t border-border-main">
-                    <div className="public-container relative z-10">
+                    <div className="public-container max-w-[88rem] relative z-10">
                         
                         {/* Section Header */}
                         <div className="flex items-center gap-3 mb-5" data-animate="fade-up" data-once="true">
@@ -344,9 +354,9 @@ export default function AboutPage() {
                             </Link>
                         </div>
 
-                        {/* Inner Child Div: bg-background with border-border-main */}
+                        {/* Inner Child Div: Increased Width (max-w-[88rem]), bg-background with border-border-main */}
                         <div
-                            className="rounded-2xl p-8 md:p-12 bg-background border border-border-main shadow-xs"
+                            className="rounded-2xl p-6 sm:p-8 md:p-12 bg-background border border-border-main shadow-xs"
                             data-animate="fade-up"
                             data-once="true"
                         >
@@ -363,37 +373,43 @@ export default function AboutPage() {
                                         </p>
                                     </div>
 
-                                    {/* Integrated Key Pillars Pills */}
-                                    <div className="flex flex-wrap gap-2.5 pt-4 border-t border-border-main">
-                                        <span className="inline-flex items-center text-xs font-semibold px-3.5 py-1.5 rounded-full bg-white border border-border-main text-text-primary">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-brand-primary mr-2" />
-                                            Accounting &amp; Virtual CFO
-                                        </span>
-                                        <span className="inline-flex items-center text-xs font-semibold px-3.5 py-1.5 rounded-full bg-white border border-border-main text-text-primary">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-brand-primary mr-2" />
-                                            GST &amp; Statutory Tax
-                                        </span>
-                                        <span className="inline-flex items-center text-xs font-semibold px-3.5 py-1.5 rounded-full bg-white border border-border-main text-text-primary">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-brand-primary mr-2" />
-                                            Company Registration &amp; Trademark
-                                        </span>
-                                        <span className="inline-flex items-center text-xs font-semibold px-3.5 py-1.5 rounded-full bg-white border border-border-main text-text-primary">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-brand-primary mr-2" />
-                                            eCommerce Multi-State Scale
-                                        </span>
+                                    {/* Clean Feature List (NO capsule/pill styling) */}
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-6 border-t border-border-main">
+                                        <div className="flex items-center gap-2.5 text-xs sm:text-sm font-bold text-text-primary">
+                                            <span className="w-2 h-2 rounded-full bg-brand-primary shrink-0" />
+                                            <span>Accounting &amp; Virtual CFO</span>
+                                        </div>
+                                        <div className="flex items-center gap-2.5 text-xs sm:text-sm font-bold text-text-primary">
+                                            <span className="w-2 h-2 rounded-full bg-brand-primary shrink-0" />
+                                            <span>GST &amp; Statutory Tax</span>
+                                        </div>
+                                        <div className="flex items-center gap-2.5 text-xs sm:text-sm font-bold text-text-primary">
+                                            <span className="w-2 h-2 rounded-full bg-brand-primary shrink-0" />
+                                            <span>Company Registration &amp; Trademark</span>
+                                        </div>
+                                        <div className="flex items-center gap-2.5 text-xs sm:text-sm font-bold text-text-primary">
+                                            <span className="w-2 h-2 rounded-full bg-brand-primary shrink-0" />
+                                            <span>eCommerce Multi-State Scale</span>
+                                        </div>
                                     </div>
                                 </div>
 
-                                {/* Clean Supporting Visual Card */}
-                                <div className="lg:col-span-5 relative">
-                                    <div className="relative h-72 md:h-80 w-full rounded-2xl overflow-hidden border border-border-main bg-white shadow-xs">
+                                {/* Clean Supporting Visual Card (Interactive & Responsive) */}
+                                <div className="lg:col-span-5 relative w-full">
+                                    <div className="relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-auto lg:h-full min-h-[260px] sm:min-h-[320px] w-full rounded-2xl overflow-hidden border border-border-main bg-white shadow-xs group cursor-pointer">
                                         <Image
                                             src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000"
                                             alt="Comprehensive Business and Financial Capabilities"
                                             fill
-                                            className="object-cover"
+                                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                                             sizes="(max-width: 1024px) 100vw, 40vw"
                                         />
+
+                                        {/* Floating Badge (elevates on hover) */}
+                                        <div className="absolute top-4 left-4 p-3 rounded-xl bg-white/95 backdrop-blur-md border border-border-main shadow-xs text-xs font-bold text-text-primary flex items-center gap-2 group-hover:-translate-y-0.5 transition-transform duration-300">
+                                            <span className="w-2 h-2 rounded-full bg-brand-primary animate-pulse" />
+                                            <span>Full-Stack Back-Office Infrastructure</span>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -405,7 +421,7 @@ export default function AboutPage() {
 
                 {/* ─── 04 OUR EXPERTS (MAIN: BG-BACKGROUND, INNER: BG-INK DARK CARDS) ─── */}
                 <section className="py-16 md:py-24 bg-background relative overflow-hidden text-text-primary border-t border-border-main">
-                    <div className="public-container relative z-10">
+                    <div className="public-container max-w-[88rem] relative z-10">
                         
                         {/* Section Header */}
                         <div className="flex items-center gap-3 mb-5" data-animate="fade-up" data-once="true">
@@ -430,7 +446,7 @@ export default function AboutPage() {
                             </div>
                         </div>
 
-                        {/* Experts Grid: Inner cards in bg-ink (Dark Cards) with border-white/10 and text-white */}
+                        {/* Experts Grid: Inner cards in bg-ink (Dark Cards) with Interactive Hover Elevation */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                             {ourExperts.map((expert, idx) => (
                                 <div
@@ -438,16 +454,16 @@ export default function AboutPage() {
                                     data-animate="fade-up"
                                     data-once="true"
                                     data-delay={String(idx * 0.1)}
-                                    className="group rounded-2xl bg-ink p-5 border border-white/10 hover:border-brand-primary/50 transition-all duration-300 shadow-md flex flex-col justify-between text-white"
+                                    className="group rounded-2xl bg-ink p-5 border border-white/10 hover:border-brand-primary/60 transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between text-white cursor-pointer"
                                 >
                                     <div>
-                                        {/* Image Card */}
+                                        {/* Image Card (Interactive Hover Scale) */}
                                         <div className="relative aspect-square w-full rounded-xl overflow-hidden mb-5 bg-white/5 border border-white/10">
                                             <Image
                                                 src={expert.image}
                                                 alt={expert.name}
                                                 fill
-                                                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                                className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                                                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                                             />
                                         </div>
