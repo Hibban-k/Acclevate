@@ -333,22 +333,38 @@ export default function AboutPage() {
                                         </p>
                                     </div>
 
-                                    {/* Clean Feature Grid (No capsule styling) */}
+                                    {/* Clean Feature Grid (Hero section style marks) */}
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-border-main">
                                         <div className="flex items-center gap-3 text-sm font-semibold text-text-primary">
-                                            <span className="w-2 h-2 rounded-full bg-brand-primary shrink-0" />
+                                            <div className="shrink-0 text-brand-deep flex items-center justify-center">
+                                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                                </svg>
+                                            </div>
                                             <span>Accounting &amp; Virtual CFO</span>
                                         </div>
                                         <div className="flex items-center gap-3 text-sm font-semibold text-text-primary">
-                                            <span className="w-2 h-2 rounded-full bg-brand-primary shrink-0" />
+                                            <div className="shrink-0 text-brand-deep flex items-center justify-center">
+                                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                                </svg>
+                                            </div>
                                             <span>GST &amp; Statutory Tax</span>
                                         </div>
                                         <div className="flex items-center gap-3 text-sm font-semibold text-text-primary">
-                                            <span className="w-2 h-2 rounded-full bg-brand-primary shrink-0" />
+                                            <div className="shrink-0 text-brand-deep flex items-center justify-center">
+                                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                                </svg>
+                                            </div>
                                             <span>Company Registration &amp; Trademark</span>
                                         </div>
                                         <div className="flex items-center gap-3 text-sm font-semibold text-text-primary">
-                                            <span className="w-2 h-2 rounded-full bg-brand-primary shrink-0" />
+                                            <div className="shrink-0 text-brand-deep flex items-center justify-center">
+                                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                                </svg>
+                                            </div>
                                             <span>eCommerce Multi-State Scale</span>
                                         </div>
                                     </div>
