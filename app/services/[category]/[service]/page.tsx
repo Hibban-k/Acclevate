@@ -44,11 +44,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
 }
 
-// Helper to parse description and inject internal links
-function renderDescriptionWithLinks(description: string, internalLinks: any[]) {
+// Helper to parse description and inject internal links with theme awareness
+function renderDescriptionWithLinks(description: string, internalLinks: any[], theme: 'light' | 'dark' = 'light') {
     if (!description) return null;
+    const isDark = theme === 'dark';
+    const textClass = isDark
+        ? "text-slate-300 leading-relaxed text-base sm:text-lg font-light whitespace-pre-wrap"
+        : "text-text-secondary leading-relaxed text-base sm:text-lg font-light whitespace-pre-wrap";
+    const linkClass = isDark
+        ? "text-[#b8d4c8] font-medium underline decoration-brand-primary/40 underline-offset-4 hover:decoration-[#b8d4c8] hover:text-white transition-colors"
+        : "text-brand-deep font-medium underline decoration-brand-primary/40 underline-offset-4 hover:decoration-brand-deep hover:text-brand-primary transition-colors";
+
     if (!internalLinks || internalLinks.length === 0) {
-        return <p className="text-text-secondary leading-relaxed text-base sm:text-lg font-light whitespace-pre-wrap">{description}</p>;
+        return <p className={textClass}>{description}</p>;
     }
 
     let parsedDescription = description;
@@ -68,7 +76,7 @@ function renderDescriptionWithLinks(description: string, internalLinks: any[]) {
     const parts = parsedDescription.split(/(__LINK_PLACEHOLDER_\d+__)/);
     
     return (
-        <p className="text-text-secondary leading-relaxed text-base sm:text-lg font-light whitespace-pre-wrap">
+        <p className={textClass}>
             {parts.map((part, i) => {
                 const match = part.match(/__LINK_PLACEHOLDER_(\d+)__/);
                 if (match) {
@@ -80,7 +88,7 @@ function renderDescriptionWithLinks(description: string, internalLinks: any[]) {
                         <Link 
                             key={i} 
                             href={`/services/${link.targetService.category?.slug || 'service'}/${link.targetService.slug}`}
-                            className="text-brand-deep font-medium underline decoration-brand-primary/40 underline-offset-4 hover:decoration-brand-deep hover:text-brand-primary transition-colors"
+                            className={linkClass}
                         >
                             {link.anchorText}
                         </Link>
@@ -118,16 +126,16 @@ export default async function CoreServicePage({ params }: PageProps) {
                     />
                 )}
 
-                {/* ─── 01 HERO SECTION (CENTERED TITLE, SHORT DESC & CTA + LONG DESC WITH IMAGE) ─── */}
+                {/* ─── 01 HERO SECTION (CENTERED TITLE, SHORT DESC & CTA + DARK INNER CARD) ─── */}
                 <section className="relative pt-28 pb-16 sm:pt-36 sm:pb-20 lg:pt-44 lg:pb-24 bg-background overflow-hidden border-b border-border-main">
                     <HeroBackground />
 
                     <div className="public-container panel-container !max-w-[94rem] mx-auto relative z-10 flex flex-col items-center">
                         
-                        {/* Centered Top Block: Breadcrumb, Category Pill, Title, Short Desc, CTA Button */}
+                        {/* Centered Top Block: Breadcrumb, Title, Short Desc, CTA Button (NO CAPSULE) */}
                         <div className="w-full max-w-4xl mx-auto flex flex-col items-center text-center gap-6 mb-12 sm:mb-16 lg:mb-20">
                             
-                            {/* Breadcrumbs */}
+                            {/* Breadcrumbs (Clean uppercase text navigation without capsule) */}
                             <div data-animate="fade-up" data-once="true" className="flex flex-wrap items-center justify-center gap-2 text-xs font-semibold tracking-wide text-text-secondary uppercase">
                                 <Link href="/" className="hover:text-text-primary transition-colors">Home</Link>
                                 <span>/</span>
@@ -138,12 +146,6 @@ export default async function CoreServicePage({ params }: PageProps) {
                                 </Link>
                                 <span>/</span>
                                 <span className="text-text-primary font-bold">{serviceData.title}</span>
-                            </div>
-
-                            {/* Category Pill */}
-                            <div data-animate="fade-up" data-once="true" data-delay="0.05" className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface border border-border-main shadow-xs text-xs font-semibold text-brand-deep uppercase tracking-wider">
-                                <span className="w-2 h-2 rounded-full bg-brand-primary animate-pulse" />
-                                <span>{categoryName}</span>
                             </div>
 
                             {/* Centralized Main Heading */}
@@ -181,9 +183,9 @@ export default async function CoreServicePage({ params }: PageProps) {
                             </div>
                         </div>
 
-                        {/* Long Description with Image Card */}
+                        {/* Long Description with Image in Dark Inner Card (Outer Light, Inner Dark) */}
                         <div
-                            className="w-full rounded-2xl p-8 sm:p-12 lg:p-16 bg-white border border-border-main shadow-xs"
+                            className="w-full rounded-2xl p-8 sm:p-12 lg:p-16 bg-ink border border-white/10 text-white shadow-xl"
                             data-animate="fade-up"
                             data-once="true"
                             data-delay="0.25"
@@ -194,25 +196,25 @@ export default async function CoreServicePage({ params }: PageProps) {
                                 <div className="lg:col-span-7 flex flex-col justify-center gap-6">
                                     <div className="flex items-center gap-3">
                                         <div className="w-8 h-0.5 bg-brand-primary" />
-                                        <span className="text-xs font-bold text-text-secondary uppercase tracking-widest">
+                                        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
                                             Service Scope &amp; Purpose
                                         </span>
                                     </div>
 
                                     {serviceData.tagline && (
-                                        <h2 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight">
+                                        <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                                             {serviceData.tagline}
                                         </h2>
                                     )}
 
                                     <div className="service-copy space-y-4">
-                                        {renderDescriptionWithLinks(serviceData.description, serviceData.internalLinks || [])}
+                                        {renderDescriptionWithLinks(serviceData.description, serviceData.internalLinks || [], 'dark')}
                                     </div>
                                 </div>
 
-                                {/* Right: Image */}
+                                {/* Right: Image Showcase */}
                                 <div className="lg:col-span-5 relative w-full h-full">
-                                    <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-full min-h-[300px] sm:min-h-[380px] lg:min-h-[440px] w-full rounded-2xl overflow-hidden shadow-xs border border-border-main bg-background group cursor-pointer">
+                                    <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-full min-h-[300px] sm:min-h-[380px] lg:min-h-[440px] w-full rounded-2xl overflow-hidden shadow-inner border border-white/10 bg-white/5 group cursor-pointer">
                                         <ServiceImage
                                             src={serviceData.image}
                                             alt={serviceData.title}
@@ -221,16 +223,16 @@ export default async function CoreServicePage({ params }: PageProps) {
                                         />
 
                                         {/* Floating Badge */}
-                                        <div className="absolute bottom-5 left-5 right-5 p-4 rounded-xl bg-white/95 backdrop-blur-md border border-border-main shadow-md flex items-center justify-between transition-all duration-300 group-hover:-translate-y-1">
+                                        <div className="absolute bottom-5 left-5 right-5 p-4 rounded-xl bg-ink/90 backdrop-blur-md border border-white/10 shadow-lg flex items-center justify-between transition-all duration-300 group-hover:-translate-y-1">
                                             <div>
-                                                <div className="text-xs font-bold text-brand-deep uppercase tracking-widest">
+                                                <div className="text-xs font-bold text-slate-300 uppercase tracking-widest">
                                                     Acclevate Practice
                                                 </div>
-                                                <div className="text-sm font-semibold text-text-primary mt-0.5">
+                                                <div className="text-sm font-semibold text-white mt-0.5">
                                                     Dedicated Back-Office Ownership
                                                 </div>
                                             </div>
-                                            <span className="text-[10px] font-bold text-brand-primary uppercase tracking-widest bg-surface-muted px-2.5 py-1 rounded-md border border-border-main/50">
+                                            <span className="text-[10px] font-bold text-brand-primary uppercase tracking-widest bg-white/10 px-2.5 py-1 rounded-md border border-white/10">
                                                 Active
                                             </span>
                                         </div>
