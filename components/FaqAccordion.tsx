@@ -4,7 +4,12 @@ import { useState, useRef, useId } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStaggerReveal } from '@/hooks/useGSAP';
 
-const faqs = [
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+const defaultFaqs: FaqItem[] = [
   {
     question: "What exactly do you deliver?",
     answer: "We deliver a comprehensive operational audit, a strategic roadmap, and hands-on execution support. Our goal is to ensure your business plugs revenue leaks, optimizes taxes, and maximizes operational efficiency."
@@ -31,7 +36,11 @@ const faqs = [
   }
 ];
 
-export default function FaqAccordion() {
+interface FaqAccordionProps {
+  items?: FaqItem[];
+}
+
+export default function FaqAccordion({ items }: FaqAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const accordionId = useId();
@@ -47,9 +56,11 @@ export default function FaqAccordion() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const faqList = items && items.length > 0 ? items : defaultFaqs;
+
   return (
     <div ref={containerRef} className="w-full flex flex-col gap-4">
-      {faqs.map((faq, index) => {
+      {faqList.map((faq, index) => {
         const isOpen = openIndex === index;
 
         return (
@@ -103,7 +114,7 @@ export default function FaqAccordion() {
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
                 >
-                  <div className="px-6 pb-6 md:px-7 md:pb-7 text-text-secondary font-light leading-relaxed text-sm md:text-base">
+                  <div className="px-6 pb-6 md:px-7 md:pb-7 text-text-secondary font-light leading-relaxed text-sm md:text-base whitespace-pre-wrap">
                     {faq.answer}
                   </div>
                 </motion.div>
