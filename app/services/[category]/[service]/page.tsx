@@ -126,119 +126,161 @@ export default async function CoreServicePage({ params }: PageProps) {
                     />
                 )}
 
-                {/* ─── 01 HERO SECTION (CENTERED TITLE, SHORT DESC & CTA + DARK INNER CARD) ─── */}
-                <section className="relative pt-28 pb-16 sm:pt-36 sm:pb-20 lg:pt-44 lg:pb-24 bg-background overflow-hidden border-b border-border-main">
+                {/* ─── 00 HERO SECTION (CLEAN CENTERED TITLE, SHORT DESC & CTA) ─── */}
+                <section className="page-hero relative overflow-hidden flex flex-col items-center justify-center text-center pt-32 pb-16 sm:pt-40 sm:pb-24 lg:pt-48 lg:pb-28 bg-white border-b border-border-main">
                     <HeroBackground />
 
-                    <div className="public-container panel-container !max-w-[94rem] mx-auto relative z-10 flex flex-col items-center">
-                        
-                        {/* Centered Top Block: Breadcrumb, Title, Short Desc, CTA Button (NO CAPSULE) */}
-                        <div className="w-full max-w-4xl mx-auto flex flex-col items-center text-center gap-6 mb-12 sm:mb-16 lg:mb-20">
-                            
-                            {/* Breadcrumbs (Clean uppercase text navigation without capsule) */}
-                            <div data-animate="fade-up" data-once="true" className="flex flex-wrap items-center justify-center gap-2 text-xs font-semibold tracking-wide text-text-secondary uppercase">
-                                <Link href="/" className="hover:text-text-primary transition-colors">Home</Link>
-                                <span>/</span>
-                                <Link href="/services" className="hover:text-text-primary transition-colors">Services</Link>
-                                <span>/</span>
-                                <Link href={`/${categorySlug}`} className="text-brand-deep hover:text-text-primary transition-colors">
-                                    {categoryName}
-                                </Link>
-                                <span>/</span>
-                                <span className="text-text-primary font-bold">{serviceData.title}</span>
-                            </div>
-
-                            {/* Centralized Main Heading */}
-                            <h1
-                                data-animate="fade-up"
-                                data-once="true"
-                                data-delay="0.1"
-                                className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-text-primary leading-[1.12] uppercase max-w-4xl"
-                            >
-                                {serviceData.title}
-                            </h1>
-
-                            {/* Centralized Short Description / Tagline */}
-                            {(serviceData.shortDescription || serviceData.tagline) && (
-                                <p
-                                    data-animate="fade-up"
-                                    data-once="true"
-                                    data-delay="0.15"
-                                    className="text-base sm:text-lg md:text-xl text-text-secondary font-light max-w-2xl leading-relaxed"
-                                >
-                                    {serviceData.shortDescription || serviceData.tagline}
-                                </p>
-                            )}
-
-                            {/* Centralized Primary CTA */}
-                            <div
-                                data-animate="fade-up"
-                                data-once="true"
-                                data-delay="0.2"
-                                className="flex items-center justify-center pt-2"
-                            >
-                                <Button href="/contact" variant="primary" size="lg" withArrow>
-                                    Schedule Free Consultation
-                                </Button>
-                            </div>
+                    <div className="w-full max-w-4xl mx-auto px-6 relative z-10 flex flex-col items-center justify-center gap-6">
+                        {/* Breadcrumbs (Clean uppercase text navigation without capsule) */}
+                        <div data-animate="fade-up" data-once="true" className="flex flex-wrap items-center justify-center gap-2 text-xs font-semibold tracking-wide text-text-secondary uppercase">
+                            <Link href="/" className="hover:text-text-primary transition-colors">Home</Link>
+                            <span>/</span>
+                            <Link href="/services" className="hover:text-text-primary transition-colors">Services</Link>
+                            <span>/</span>
+                            <Link href={`/${categorySlug}`} className="text-brand-deep hover:text-text-primary transition-colors">
+                                {categoryName}
+                            </Link>
+                            <span>/</span>
+                            <span className="text-text-primary font-bold">{serviceData.title}</span>
                         </div>
 
-                        {/* Long Description with Image in Dark Inner Card (Outer Light, Inner Dark) */}
-                        <div
-                            className="w-full rounded-2xl p-8 sm:p-12 lg:p-16 bg-ink border border-white/10 text-white shadow-xl"
+                        {/* Centralized Main Heading */}
+                        <h1
                             data-animate="fade-up"
                             data-once="true"
-                            data-delay="0.25"
+                            data-delay="0.1"
+                            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-text-primary leading-[1.12] uppercase max-w-4xl"
                         >
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-                                
-                                {/* Left: Long Description */}
-                                <div className="lg:col-span-7 flex flex-col justify-center gap-6">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-8 h-0.5 bg-brand-primary" />
-                                        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
-                                            Service Scope &amp; Purpose
-                                        </span>
-                                    </div>
+                            {serviceData.title}
+                        </h1>
 
-                                    {serviceData.tagline && (
-                                        <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                                            {serviceData.tagline}
-                                        </h2>
-                                    )}
+                        {/* Centralized Short Description / Tagline */}
+                        {(serviceData.shortDescription || serviceData.tagline) && (
+                            <p
+                                data-animate="fade-up"
+                                data-once="true"
+                                data-delay="0.15"
+                                className="text-base sm:text-lg md:text-xl text-text-secondary font-light max-w-2xl leading-relaxed"
+                            >
+                                {serviceData.shortDescription || serviceData.tagline}
+                            </p>
+                        )}
 
-                                    <div className="service-copy space-y-4">
-                                        {renderDescriptionWithLinks(serviceData.description, serviceData.internalLinks || [], 'dark')}
-                                    </div>
+                        {/* Centralized Primary CTA */}
+                        <div
+                            data-animate="fade-up"
+                            data-once="true"
+                            data-delay="0.2"
+                            className="flex items-center justify-center pt-2"
+                        >
+                            <Button href="/contact" variant="primary" size="lg" withArrow>
+                                Schedule Free Consultation
+                            </Button>
+                        </div>
+                    </div>
+                </section>
+
+                {/* ─── 01 SERVICE OVERVIEW / SCOPE (BG-BACKGROUND WITH DARK INNER CARD) ─── */}
+                <section className="py-16 md:py-24 lg:py-32 bg-background relative overflow-hidden border-b border-border-main">
+                    <div className="public-container panel-container !max-w-[94rem] mx-auto relative z-10">
+                        
+                        {/* Section Header */}
+                        <div className="flex items-center gap-3 mb-4" data-animate="fade-up" data-once="true">
+                            <div className="w-8 h-0.5 bg-brand-primary" />
+                            <span className="text-xs font-bold text-text-secondary uppercase tracking-widest">
+                                Service Overview
+                            </span>
+                        </div>
+
+                        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 md:mb-16">
+                            <div>
+                                <h2
+                                    data-animate="fade-up"
+                                    data-once="true"
+                                    data-delay="0.1"
+                                    className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-text-primary uppercase leading-tight"
+                                >
+                                    Service Scope &amp; <span className="text-brand-primary">Purpose</span>
+                                </h2>
+                                <p className="text-xs sm:text-sm font-bold text-brand-deep uppercase tracking-widest mt-1.5">
+                                    {serviceData.tagline || 'Strategic Advisory & Operational Execution'}
+                                </p>
+                            </div>
+
+                            <p
+                                data-animate="fade-up"
+                                data-once="true"
+                                data-delay="0.15"
+                                className="text-sm md:text-base text-text-secondary font-light max-w-md leading-relaxed"
+                            >
+                                Hands-on operational ownership designed to eliminate vulnerabilities and drive scalable financial discipline.
+                            </p>
+                        </div>
+
+                        {/* Inner Card (Dark Inner Card with Slanted Bleed Image matching ServicesCategoryCards) */}
+                        <div
+                            className="w-full rounded-2xl bg-ink border border-white/10 text-white shadow-xl overflow-hidden flex flex-col lg:flex-row relative"
+                            data-animate="fade-up"
+                            data-once="true"
+                        >
+                            {/* Left Content Area (58% width) */}
+                            <div className="w-full lg:w-[58%] p-8 sm:p-12 lg:p-16 flex flex-col justify-center gap-6 relative z-10">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-8 h-0.5 bg-brand-primary" />
+                                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+                                        Execution Model
+                                    </span>
                                 </div>
 
-                                {/* Right: Image Showcase */}
-                                <div className="lg:col-span-5 relative w-full h-full">
-                                    <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-full min-h-[300px] sm:min-h-[380px] lg:min-h-[440px] w-full rounded-2xl overflow-hidden shadow-inner border border-white/10 bg-white/5 group cursor-pointer">
-                                        <ServiceImage
-                                            src={serviceData.image}
-                                            alt={serviceData.title}
-                                            priority
-                                            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                                        />
+                                {serviceData.tagline && (
+                                    <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                                        {serviceData.tagline}
+                                    </h3>
+                                )}
 
-                                        {/* Floating Badge */}
-                                        <div className="absolute bottom-5 left-5 right-5 p-4 rounded-xl bg-ink/90 backdrop-blur-md border border-white/10 shadow-lg flex items-center justify-between transition-all duration-300 group-hover:-translate-y-1">
-                                            <div>
-                                                <div className="text-xs font-bold text-slate-300 uppercase tracking-widest">
-                                                    Acclevate Practice
-                                                </div>
-                                                <div className="text-sm font-semibold text-white mt-0.5">
-                                                    Dedicated Back-Office Ownership
-                                                </div>
-                                            </div>
-                                            <span className="text-[10px] font-bold text-brand-primary uppercase tracking-widest bg-white/10 px-2.5 py-1 rounded-md border border-white/10">
-                                                Active
-                                            </span>
+                                <div className="service-copy space-y-4">
+                                    {renderDescriptionWithLinks(serviceData.description, serviceData.internalLinks || [], 'dark')}
+                                </div>
+                            </div>
+
+                            {/* Right Image Area (42% width) with Diagonal Slanted Cut matching ServicesCategoryCards */}
+                            <div className="w-full lg:w-[42%] relative h-72 sm:h-96 lg:h-auto lg:min-h-[460px] group cursor-pointer">
+                                {/* Desktop Slanted image */}
+                                <div className="absolute inset-0 hidden lg:block" style={{ clipPath: 'polygon(15% 0, 100% 0, 100% 100%, 0 100%)' }}>
+                                    <ServiceImage
+                                        src={serviceData.image}
+                                        alt={serviceData.title}
+                                        priority
+                                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                    />
+                                    <div className="absolute inset-0 bg-ink/10 mix-blend-multiply" />
+                                </div>
+
+                                {/* Mobile Slanted image */}
+                                <div className="absolute inset-0 lg:hidden block" style={{ clipPath: 'polygon(0 8%, 100% 0, 100% 100%, 0 100%)' }}>
+                                    <ServiceImage
+                                        src={serviceData.image}
+                                        alt={serviceData.title}
+                                        priority
+                                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                    />
+                                    <div className="absolute inset-0 bg-ink/10 mix-blend-multiply" />
+                                </div>
+
+                                {/* Floating Badge */}
+                                <div className="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6 lg:bottom-6 lg:left-6 lg:right-6 p-4 rounded-xl bg-ink/90 backdrop-blur-md border border-white/10 shadow-lg flex items-center justify-between transition-all duration-300 group-hover:-translate-y-1 z-20">
+                                    <div>
+                                        <div className="text-xs font-bold text-slate-300 uppercase tracking-widest">
+                                            Acclevate Practice
+                                        </div>
+                                        <div className="text-sm font-semibold text-white mt-0.5">
+                                            Dedicated Back-Office Ownership
                                         </div>
                                     </div>
+                                    <span className="text-[10px] font-bold text-brand-primary uppercase tracking-widest bg-white/10 px-2.5 py-1 rounded-md border border-white/10">
+                                        Active
+                                    </span>
                                 </div>
-
                             </div>
                         </div>
 
