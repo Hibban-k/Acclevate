@@ -217,9 +217,9 @@ export default async function CoreServicePage({ params }: PageProps) {
                             </p>
                         </div>
 
-                        {/* Inner Card (Dark Inner Card with Slanted Bleed Image matching ServicesCategoryCards) */}
+                        {/* Inner Card (Light Inner Card matching ServicesCategoryCards when outer is white) */}
                         <div
-                            className="w-full rounded-2xl bg-ink border border-white/10 text-white shadow-xl overflow-hidden flex flex-col lg:flex-row relative"
+                            className="w-full rounded-2xl bg-background border border-border-main text-text-primary shadow-xs overflow-hidden flex flex-col lg:flex-row relative"
                             data-animate="fade-up"
                             data-once="true"
                         >
@@ -227,19 +227,19 @@ export default async function CoreServicePage({ params }: PageProps) {
                             <div className="w-full lg:w-[58%] p-8 sm:p-12 lg:p-16 flex flex-col justify-center gap-6 relative z-10">
                                 <div className="flex items-center gap-3">
                                     <div className="w-8 h-0.5 bg-brand-primary" />
-                                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+                                    <span className="text-xs font-bold text-text-secondary uppercase tracking-widest">
                                         Execution Model
                                     </span>
                                 </div>
 
                                 {serviceData.tagline && (
-                                    <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                                    <h3 className="text-2xl sm:text-3xl font-bold text-text-primary tracking-tight">
                                         {serviceData.tagline}
                                     </h3>
                                 )}
 
                                 <div className="service-copy space-y-4">
-                                    {renderDescriptionWithLinks(serviceData.description, serviceData.internalLinks || [], 'dark')}
+                                    {renderDescriptionWithLinks(serviceData.description, serviceData.internalLinks || [], 'light')}
                                 </div>
                             </div>
 
@@ -268,16 +268,16 @@ export default async function CoreServicePage({ params }: PageProps) {
                                 </div>
 
                                 {/* Floating Badge */}
-                                <div className="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6 lg:bottom-6 lg:left-6 lg:right-6 p-4 rounded-xl bg-ink/90 backdrop-blur-md border border-white/10 shadow-lg flex items-center justify-between transition-all duration-300 group-hover:-translate-y-1 z-20">
+                                <div className="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6 lg:bottom-6 lg:left-6 lg:right-6 p-4 rounded-xl bg-white/95 backdrop-blur-md border border-border-main shadow-md flex items-center justify-between transition-all duration-300 group-hover:-translate-y-1 z-20">
                                     <div>
-                                        <div className="text-xs font-bold text-slate-300 uppercase tracking-widest">
+                                        <div className="text-xs font-bold text-text-secondary uppercase tracking-widest">
                                             Acclevate Practice
                                         </div>
-                                        <div className="text-sm font-semibold text-white mt-0.5">
+                                        <div className="text-sm font-semibold text-text-primary mt-0.5">
                                             Dedicated Back-Office Ownership
                                         </div>
                                     </div>
-                                    <span className="text-[10px] font-bold text-brand-primary uppercase tracking-widest bg-white/10 px-2.5 py-1 rounded-md border border-white/10">
+                                    <span className="text-[10px] font-bold text-brand-primary uppercase tracking-widest bg-surface-muted px-2.5 py-1 rounded-md border border-border-main/50">
                                         Active
                                     </span>
                                 </div>
@@ -323,9 +323,9 @@ export default async function CoreServicePage({ params }: PageProps) {
                                 </p>
                             </div>
 
-                            {/* Inner Surface Card */}
+                            {/* Inner Surface Card (Dark Inner Card when outer is bg-background) */}
                             <div
-                                className="w-full rounded-2xl p-6 sm:p-10 lg:p-14 bg-white border border-border-main shadow-xs"
+                                className="w-full rounded-2xl p-6 sm:p-10 lg:p-14 bg-ink border border-white/10 text-white shadow-xl"
                                 data-animate="fade-up"
                                 data-once="true"
                             >
@@ -333,9 +333,9 @@ export default async function CoreServicePage({ params }: PageProps) {
                                     {coveredServices.map((service, index) => (
                                         <div
                                             key={`${service.name}-${index}`}
-                                            className="rounded-xl bg-background border border-border-main p-6 sm:p-7 shadow-2xs hover:border-brand-primary/60 transition-all duration-200 flex items-start gap-4"
+                                            className="rounded-xl bg-white/5 border border-white/10 p-6 sm:p-7 shadow-2xs hover:border-brand-primary/60 transition-all duration-200 flex items-start gap-4"
                                         >
-                                            <div className="shrink-0 w-8 h-8 rounded-lg bg-surface-muted text-brand-deep flex items-center justify-center mt-0.5 border border-border-main/50">
+                                            <div className="shrink-0 w-8 h-8 rounded-lg bg-white/10 text-brand-primary flex items-center justify-center mt-0.5 border border-white/10">
                                                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                                                 </svg>
@@ -346,10 +346,10 @@ export default async function CoreServicePage({ params }: PageProps) {
                                                         Item {String(index + 1).padStart(2, '0')}
                                                     </span>
                                                 </div>
-                                                <h3 className="text-lg font-bold text-text-primary tracking-tight mb-2">
+                                                <h3 className="text-lg font-bold text-white tracking-tight mb-2">
                                                     {service.name}
                                                 </h3>
-                                                <p className="text-sm text-text-secondary font-light leading-relaxed whitespace-pre-wrap">
+                                                <p className="text-sm text-slate-300 font-light leading-relaxed whitespace-pre-wrap">
                                                     {service.description}
                                                 </p>
                                             </div>
@@ -492,8 +492,8 @@ export default async function CoreServicePage({ params }: PageProps) {
                                 </div>
 
                                 <div className="lg:col-span-4 w-full">
-                                    <div className="rounded-2xl p-8 bg-white border border-border-main flex flex-col items-start text-left shadow-xs sticky top-28">
-                                        <div className="w-12 h-12 rounded-xl bg-surface-muted flex items-center justify-center mb-6 text-brand-primary border border-border-main/50">
+                                    <div className="rounded-2xl p-8 bg-ink border border-white/10 text-white shadow-xl flex flex-col items-start text-left sticky top-28">
+                                        <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-6 text-brand-primary border border-white/10">
                                             <svg
                                                 width="24"
                                                 height="24"
@@ -508,17 +508,17 @@ export default async function CoreServicePage({ params }: PageProps) {
                                             </svg>
                                         </div>
 
-                                        <h3 className="text-xl font-bold text-text-primary mb-3 tracking-tight">
+                                        <h3 className="text-xl font-bold text-white mb-3 tracking-tight">
                                             Have specific engagement questions?
                                         </h3>
 
-                                        <p className="text-text-secondary font-light leading-relaxed text-sm mb-8">
+                                        <p className="text-slate-300 font-light leading-relaxed text-sm mb-8">
                                             Our senior consultants and audit team are available to review your current setup and suggest the optimal service roadmap.
                                         </p>
 
                                         <Link
                                             href="/contact"
-                                            className="inline-flex items-center justify-between w-full py-3.5 px-6 bg-background hover:bg-surface-muted rounded-xl text-text-primary font-medium text-sm transition-all border border-border-main shadow-xs"
+                                            className="inline-flex items-center justify-between w-full py-3.5 px-6 bg-white hover:bg-surface-muted rounded-xl text-text-primary font-semibold text-sm transition-all shadow-xs"
                                         >
                                             <span>Schedule Consultation</span>
                                             <span className="text-brand-primary">→</span>
