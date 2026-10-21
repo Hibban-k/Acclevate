@@ -117,53 +117,63 @@ export default function AboutPage() {
                             </p>
                         </div>
 
-                        {/* Spacious Inner Card with Generous Desktop Height */}
+                        {/* Spacious Inner Card with Generous Desktop Height & Slanted Image Bleed */}
                         <div
-                            className="w-full rounded-2xl p-8 sm:p-12 lg:p-16 bg-background border border-border-main shadow-xs"
+                            className="w-full rounded-2xl bg-background border border-border-main shadow-xs overflow-hidden flex flex-col lg:flex-row relative"
                             data-animate="fade-up"
                             data-once="true"
                         >
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-                                
-                                {/* Left Story Narrative (Bold Key Anchors, Thin Body) */}
-                                <div className="lg:col-span-7 flex flex-col justify-center gap-6">
-                                    <div className="space-y-5 text-base sm:text-lg md:text-xl text-text-secondary leading-relaxed font-light">
-                                        <p>
-                                            <strong className="font-semibold text-text-primary">Founded in Bangalore in 2024,</strong> Acclevate was built around a singular premise: fast-growing businesses don&apos;t need more theoretical slide decks. They need <strong className="font-semibold text-text-primary">hands-on operators</strong> who sit in the trenches and execute.
-                                        </p>
-                                        <p className="text-sm sm:text-base md:text-lg italic text-text-secondary">
-                                            We eliminate costly compliance mistakes and penalty risks by taking complete ownership of your day-to-day ledgers, statutory GST filings, and corporate legal frameworks — so your leadership stays 100% focused on growth.
-                                        </p>
-                                    </div>
+                            {/* Left Story Narrative (Bold Key Anchors, Thin Body) */}
+                            <div className="w-full lg:w-[58%] p-8 sm:p-12 lg:p-16 flex flex-col justify-center gap-6 relative z-10">
+                                <div className="space-y-5 text-base sm:text-lg md:text-xl text-text-secondary leading-relaxed font-light">
+                                    <p>
+                                        <strong className="font-semibold text-text-primary">Founded in Bangalore in 2024,</strong> Acclevate was built around a singular premise: fast-growing businesses don&apos;t need more theoretical slide decks. They need <strong className="font-semibold text-text-primary">hands-on operators</strong> who sit in the trenches and execute.
+                                    </p>
+                                    <p className="text-sm sm:text-base md:text-lg italic text-text-secondary">
+                                        We eliminate costly compliance mistakes and penalty risks by taking complete ownership of your day-to-day ledgers, statutory GST filings, and corporate legal frameworks — so your leadership stays 100% focused on growth.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Right Editorial Image Area with Diagonal Slanted Cut */}
+                            <div className="w-full lg:w-[42%] relative h-72 sm:h-96 lg:h-auto lg:min-h-[460px] group cursor-pointer">
+                                {/* Desktop Slanted image */}
+                                <div className="absolute inset-0 hidden lg:block" style={{ clipPath: 'polygon(15% 0, 100% 0, 100% 100%, 0 100%)' }}>
+                                    <Image
+                                        src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1200"
+                                        alt="Acclevate Team Strategic Collaboration"
+                                        fill
+                                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                        sizes="(max-width: 1024px) 100vw, 42vw"
+                                    />
+                                    <div className="absolute inset-0 bg-ink/10 mix-blend-multiply" />
                                 </div>
 
-                                {/* Right Editorial Image Card with Floating Stats */}
-                                <div className="lg:col-span-5 relative w-full h-full">
-                                    <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-full min-h-[280px] sm:min-h-[360px] lg:min-h-[460px] w-full rounded-2xl overflow-hidden shadow-xs border border-border-main bg-white group cursor-pointer">
-                                        <Image
-                                            src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1200"
-                                            alt="Acclevate Team Strategic Collaboration"
-                                            fill
-                                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                                            sizes="(max-width: 1024px) 100vw, 45vw"
-                                        />
+                                {/* Mobile Slanted image */}
+                                <div className="absolute inset-0 lg:hidden block" style={{ clipPath: 'polygon(0 8%, 100% 0, 100% 100%, 0 100%)' }}>
+                                    <Image
+                                        src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1200"
+                                        alt="Acclevate Team Strategic Collaboration"
+                                        fill
+                                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                        sizes="(max-width: 1024px) 100vw, 100vw"
+                                    />
+                                    <div className="absolute inset-0 bg-ink/10 mix-blend-multiply" />
+                                </div>
 
-                                        {/* Floating Stats Badge (2024 Bangalore Founded & 100% On-Time Filings) */}
-                                        <div className="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6 p-4 sm:p-5 rounded-xl bg-white/95 backdrop-blur-md border border-border-main shadow-lg transition-all duration-300 group-hover:-translate-y-1">
-                                            <div className="grid grid-cols-2 gap-6 divide-x divide-border-main">
-                                                <div className="text-left">
-                                                    <div className="text-2xl sm:text-3xl font-extrabold text-text-primary tracking-tight">2024</div>
-                                                    <div className="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-widest mt-0.5">Bangalore Founded</div>
-                                                </div>
-                                                <div className="text-left pl-6">
-                                                    <div className="text-2xl sm:text-3xl font-extrabold text-text-primary tracking-tight">100%</div>
-                                                    <div className="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-widest mt-0.5">On-Time Filings</div>
-                                                </div>
-                                            </div>
+                                {/* Floating Stats Badge (2024 Bangalore Founded & 100% On-Time Filings) */}
+                                <div className="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6 p-4 sm:p-5 rounded-xl bg-white/95 backdrop-blur-md border border-border-main shadow-lg transition-all duration-300 group-hover:-translate-y-1 z-20">
+                                    <div className="grid grid-cols-2 gap-6 divide-x divide-border-main">
+                                        <div className="text-left">
+                                            <div className="text-2xl sm:text-3xl font-extrabold text-text-primary tracking-tight">2024</div>
+                                            <div className="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-widest mt-0.5">Bangalore Founded</div>
+                                        </div>
+                                        <div className="text-left pl-6">
+                                            <div className="text-2xl sm:text-3xl font-extrabold text-text-primary tracking-tight">100%</div>
+                                            <div className="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-widest mt-0.5">On-Time Filings</div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
 
@@ -316,85 +326,95 @@ export default function AboutPage() {
                             </Link>
                         </div>
 
-                        {/* Spacious Inner Card with Generous Desktop Height */}
+                        {/* Spacious Inner Card with Generous Desktop Height & Slanted Image Bleed */}
                         <div
-                            className="w-full rounded-2xl p-8 sm:p-12 lg:p-16 bg-background border border-border-main shadow-xs"
+                            className="w-full rounded-2xl bg-background border border-border-main shadow-xs overflow-hidden flex flex-col lg:flex-row relative"
                             data-animate="fade-up"
                             data-once="true"
                         >
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-                                
-                                {/* Left Content: Bold Key Statement, Thin Narrative, Clean Pillars */}
-                                <div className="lg:col-span-7 flex flex-col justify-center gap-8">
-                                    <div className="space-y-4 text-base sm:text-lg md:text-xl text-text-secondary font-light leading-relaxed">
-                                        <p>
-                                            <strong className="font-semibold text-text-primary">One integrated ecosystem for your corporate back-office.</strong> We take full operational ownership of your daily ledgers, monthly MIS intelligence, corporate tax assessments, and zero-defect GST return filings (GSTR-1, 3B, 9C).
-                                        </p>
-                                        <p className="text-sm sm:text-base md:text-lg italic text-text-secondary">
-                                            From fast-tracking Pvt Ltd and LLP incorporations with trademark IP to setting up multi-state GST warehouses (APOB/VPOB) for Amazon, Flipkart, Blinkit, and Shopify brands, our team ensures complete statutory peace of mind.
-                                        </p>
-                                    </div>
-
-                                    {/* Mobile view only: single sliding category rotator */}
-                                    <div className="sm:hidden w-full pt-6 border-t border-border-main">
-                                        <AboutBulletSlider />
-                                    </div>
-
-                                    {/* Desktop & Tablet view: 2-column grid */}
-                                    <div className="hidden sm:grid grid-cols-2 gap-4 pt-6 border-t border-border-main">
-                                        <div className="flex items-center gap-3 text-sm font-semibold text-text-primary">
-                                            <div className="shrink-0 text-brand-deep flex items-center justify-center">
-                                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </div>
-                                            <span>Accounting &amp; Virtual CFO</span>
-                                        </div>
-                                        <div className="flex items-center gap-3 text-sm font-semibold text-text-primary">
-                                            <div className="shrink-0 text-brand-deep flex items-center justify-center">
-                                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </div>
-                                            <span>GST &amp; Statutory Tax</span>
-                                        </div>
-                                        <div className="flex items-center gap-3 text-sm font-semibold text-text-primary">
-                                            <div className="shrink-0 text-brand-deep flex items-center justify-center">
-                                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </div>
-                                            <span>Company Registration &amp; Trademark</span>
-                                        </div>
-                                        <div className="flex items-center gap-3 text-sm font-semibold text-text-primary">
-                                            <div className="shrink-0 text-brand-deep flex items-center justify-center">
-                                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </div>
-                                            <span>eCommerce Multi-State Scale</span>
-                                        </div>
-                                    </div>
+                            {/* Left Content: Bold Key Statement, Thin Narrative, Clean Pillars */}
+                            <div className="w-full lg:w-[58%] p-8 sm:p-12 lg:p-16 flex flex-col justify-center gap-8 relative z-10">
+                                <div className="space-y-4 text-base sm:text-lg md:text-xl text-text-secondary font-light leading-relaxed">
+                                    <p>
+                                        <strong className="font-semibold text-text-primary">One integrated ecosystem for your corporate back-office.</strong> We take full operational ownership of your daily ledgers, monthly MIS intelligence, corporate tax assessments, and zero-defect GST return filings (GSTR-1, 3B, 9C).
+                                    </p>
+                                    <p className="text-sm sm:text-base md:text-lg italic text-text-secondary">
+                                        From fast-tracking Pvt Ltd and LLP incorporations with trademark IP to setting up multi-state GST warehouses (APOB/VPOB) for Amazon, Flipkart, Blinkit, and Shopify brands, our team ensures complete statutory peace of mind.
+                                    </p>
                                 </div>
 
-                                {/* Right Supporting Visual Card with Cinematic Desktop Height */}
-                                <div className="lg:col-span-5 relative w-full h-full">
-                                    <div className="relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-auto lg:h-full min-h-[280px] sm:min-h-[360px] lg:min-h-[440px] w-full rounded-2xl overflow-hidden border border-border-main bg-white shadow-xs group cursor-pointer">
-                                        <Image
-                                            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000"
-                                            alt="Comprehensive Business and Financial Capabilities"
-                                            fill
-                                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                                            sizes="(max-width: 1024px) 100vw, 40vw"
-                                        />
-
-                                        <div className="absolute top-5 left-5 p-3.5 rounded-xl bg-white/95 backdrop-blur-md border border-border-main shadow-xs text-xs font-bold text-text-primary flex items-center gap-2.5 transition-all duration-300 group-hover:-translate-y-0.5">
-                                            <span className="w-2 h-2 rounded-full bg-brand-primary animate-pulse" />
-                                            <span>Full-Stack Back-Office Infrastructure</span>
-                                        </div>
-                                    </div>
+                                {/* Mobile view only: single sliding category rotator */}
+                                <div className="sm:hidden w-full pt-6 border-t border-border-main">
+                                    <AboutBulletSlider />
                                 </div>
 
+                                {/* Desktop & Tablet view: 2-column grid */}
+                                <div className="hidden sm:grid grid-cols-2 gap-4 pt-6 border-t border-border-main">
+                                    <div className="flex items-center gap-3 text-sm font-semibold text-text-primary">
+                                        <div className="shrink-0 text-brand-deep flex items-center justify-center">
+                                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </div>
+                                        <span>Accounting &amp; Virtual CFO</span>
+                                    </div>
+                                    <div className="flex items-center gap-3 text-sm font-semibold text-text-primary">
+                                        <div className="shrink-0 text-brand-deep flex items-center justify-center">
+                                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </div>
+                                        <span>GST &amp; Statutory Tax</span>
+                                    </div>
+                                    <div className="flex items-center gap-3 text-sm font-semibold text-text-primary">
+                                        <div className="shrink-0 text-brand-deep flex items-center justify-center">
+                                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </div>
+                                        <span>Company Registration &amp; Trademark</span>
+                                    </div>
+                                    <div className="flex items-center gap-3 text-sm font-semibold text-text-primary">
+                                        <div className="shrink-0 text-brand-deep flex items-center justify-center">
+                                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </div>
+                                        <span>eCommerce Multi-State Scale</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Right Supporting Visual Area with Diagonal Slanted Cut */}
+                            <div className="w-full lg:w-[42%] relative h-72 sm:h-96 lg:h-auto lg:min-h-[460px] group cursor-pointer">
+                                {/* Desktop Slanted image */}
+                                <div className="absolute inset-0 hidden lg:block" style={{ clipPath: 'polygon(15% 0, 100% 0, 100% 100%, 0 100%)' }}>
+                                    <Image
+                                        src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000"
+                                        alt="Comprehensive Business and Financial Capabilities"
+                                        fill
+                                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                        sizes="(max-width: 1024px) 100vw, 42vw"
+                                    />
+                                    <div className="absolute inset-0 bg-ink/10 mix-blend-multiply" />
+                                </div>
+
+                                {/* Mobile Slanted image */}
+                                <div className="absolute inset-0 lg:hidden block" style={{ clipPath: 'polygon(0 8%, 100% 0, 100% 100%, 0 100%)' }}>
+                                    <Image
+                                        src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000"
+                                        alt="Comprehensive Business and Financial Capabilities"
+                                        fill
+                                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                        sizes="(max-width: 1024px) 100vw, 100vw"
+                                    />
+                                    <div className="absolute inset-0 bg-ink/10 mix-blend-multiply" />
+                                </div>
+
+                                <div className="absolute top-5 right-5 sm:top-6 sm:right-6 lg:top-6 lg:right-6 p-3.5 rounded-xl bg-white/95 backdrop-blur-md border border-border-main shadow-md text-xs font-bold text-text-primary flex items-center gap-2.5 transition-all duration-300 group-hover:-translate-y-0.5 z-20">
+                                    <span className="w-2 h-2 rounded-full bg-brand-primary animate-pulse" />
+                                    <span>Full-Stack Back-Office Infrastructure</span>
+                                </div>
                             </div>
                         </div>
 
