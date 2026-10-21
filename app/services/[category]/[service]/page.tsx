@@ -127,7 +127,7 @@ export default async function CoreServicePage({ params }: PageProps) {
                 )}
 
                 {/* ─── 00 HERO SECTION (CLEAN CENTERED TITLE, SHORT DESC & CTA) ─── */}
-                <section className="page-hero relative overflow-hidden flex flex-col items-center justify-center text-center pt-32 pb-16 sm:pt-40 sm:pb-24 lg:pt-48 lg:pb-28 bg-white border-b border-border-main">
+                <section className="page-hero relative overflow-hidden flex flex-col items-center justify-center text-center pt-32 pb-16 sm:pt-40 sm:pb-24 lg:pt-48 lg:pb-28 bg-background border-b border-border-main">
                     <HeroBackground />
 
                     <div className="w-full max-w-4xl mx-auto px-6 relative z-10 flex flex-col items-center justify-center gap-6">
@@ -180,8 +180,8 @@ export default async function CoreServicePage({ params }: PageProps) {
                     </div>
                 </section>
 
-                {/* ─── 01 SERVICE OVERVIEW / SCOPE (BG-BACKGROUND WITH DARK INNER CARD) ─── */}
-                <section className="py-16 md:py-24 lg:py-32 bg-background relative overflow-hidden border-b border-border-main">
+                {/* ─── 01 SERVICE OVERVIEW / SCOPE (BG-WHITE WITH DARK INNER CARD) ─── */}
+                <section className="py-16 md:py-24 lg:py-32 bg-white relative overflow-hidden border-b border-border-main">
                     <div className="public-container panel-container !max-w-[94rem] mx-auto relative z-10">
                         
                         {/* Section Header */}
@@ -287,9 +287,9 @@ export default async function CoreServicePage({ params }: PageProps) {
                     </div>
                 </section>
 
-                {/* ─── 02 WHAT SERVICES COVERED (BG-WHITE) ────────────────────── */}
+                {/* ─── 02 WHAT SERVICES COVERED (BG-BACKGROUND) ────────────────────── */}
                 {coveredServices.length > 0 && (
-                    <section className="py-16 md:py-24 lg:py-32 bg-white relative overflow-hidden border-t border-border-main">
+                    <section className="py-16 md:py-24 lg:py-32 bg-background relative overflow-hidden border-t border-border-main">
                         <div className="public-container panel-container !max-w-[94rem] mx-auto relative z-10">
                             
                             {/* Section Header */}
@@ -325,7 +325,7 @@ export default async function CoreServicePage({ params }: PageProps) {
 
                             {/* Inner Surface Card */}
                             <div
-                                className="w-full rounded-2xl p-6 sm:p-10 lg:p-14 bg-background border border-border-main shadow-xs"
+                                className="w-full rounded-2xl p-6 sm:p-10 lg:p-14 bg-white border border-border-main shadow-xs"
                                 data-animate="fade-up"
                                 data-once="true"
                             >
@@ -333,7 +333,7 @@ export default async function CoreServicePage({ params }: PageProps) {
                                     {coveredServices.map((service, index) => (
                                         <div
                                             key={`${service.name}-${index}`}
-                                            className="rounded-xl bg-white border border-border-main p-6 sm:p-7 shadow-2xs hover:border-brand-primary/60 transition-all duration-200 flex items-start gap-4"
+                                            className="rounded-xl bg-background border border-border-main p-6 sm:p-7 shadow-2xs hover:border-brand-primary/60 transition-all duration-200 flex items-start gap-4"
                                         >
                                             <div className="shrink-0 w-8 h-8 rounded-lg bg-surface-muted text-brand-deep flex items-center justify-center mt-0.5 border border-border-main/50">
                                                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
@@ -362,9 +362,9 @@ export default async function CoreServicePage({ params }: PageProps) {
                     </section>
                 )}
 
-                {/* ─── 03 FEATURES (BG-BACKGROUND) ────────────────────────────── */}
+                {/* ─── 03 FEATURES (BG-WHITE) ────────────────────────────── */}
                 {serviceData.features && serviceData.features.length > 0 && (
-                    <section className="py-16 md:py-24 lg:py-32 bg-background relative overflow-hidden border-t border-border-main">
+                    <section className="py-16 md:py-24 lg:py-32 bg-white relative overflow-hidden border-t border-border-main">
                         <div className="public-container panel-container !max-w-[94rem] mx-auto relative z-10">
                             
                             {/* Section Header */}
@@ -406,7 +406,7 @@ export default async function CoreServicePage({ params }: PageProps) {
                                         data-animate="fade-up"
                                         data-once="true"
                                         data-delay={String(index * 0.1)}
-                                        className="group rounded-2xl bg-white p-7 sm:p-8 border border-border-main hover:border-brand-primary/60 transition-all duration-300 shadow-xs hover:shadow-md hover:-translate-y-1 flex flex-col justify-between"
+                                        className="group rounded-2xl bg-background p-7 sm:p-8 border border-border-main hover:border-brand-primary/60 transition-all duration-300 shadow-xs hover:shadow-md hover:-translate-y-1 flex flex-col justify-between"
                                     >
                                         <div>
                                             {feature.image && (
@@ -423,7 +423,7 @@ export default async function CoreServicePage({ params }: PageProps) {
                                                 <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-surface-muted text-xs font-mono font-bold text-brand-deep border border-border-main/50">
                                                     {String(index + 1).padStart(2, '0')}
                                                 </span>
-                                                <span className="text-[10px] font-bold text-brand-deep uppercase tracking-widest bg-background px-2.5 py-1 rounded-md">
+                                                <span className="text-[10px] font-bold text-brand-deep uppercase tracking-widest bg-white px-2.5 py-1 rounded-md border border-border-main/40">
                                                     Core Feature
                                                 </span>
                                             </div>
@@ -449,9 +449,9 @@ export default async function CoreServicePage({ params }: PageProps) {
                     </section>
                 )}
 
-                {/* ─── 04 FAQS (BG-WHITE) ─────────────────────────────────────── */}
+                {/* ─── 04 FAQS (BG-BACKGROUND) ─────────────────────────────────── */}
                 {serviceData.faqs && serviceData.faqs.length > 0 && (
-                    <section className="py-16 md:py-24 lg:py-32 bg-white relative overflow-hidden border-t border-border-main">
+                    <section className="py-16 md:py-24 lg:py-32 bg-background relative overflow-hidden border-t border-border-main">
                         <div className="public-container panel-container !max-w-[94rem] mx-auto relative z-10">
                             
                             {/* Section Header */}
@@ -492,7 +492,7 @@ export default async function CoreServicePage({ params }: PageProps) {
                                 </div>
 
                                 <div className="lg:col-span-4 w-full">
-                                    <div className="rounded-2xl p-8 bg-background border border-border-main flex flex-col items-start text-left shadow-xs sticky top-28">
+                                    <div className="rounded-2xl p-8 bg-white border border-border-main flex flex-col items-start text-left shadow-xs sticky top-28">
                                         <div className="w-12 h-12 rounded-xl bg-surface-muted flex items-center justify-center mb-6 text-brand-primary border border-border-main/50">
                                             <svg
                                                 width="24"
@@ -518,7 +518,7 @@ export default async function CoreServicePage({ params }: PageProps) {
 
                                         <Link
                                             href="/contact"
-                                            className="inline-flex items-center justify-between w-full py-3.5 px-6 bg-white hover:bg-surface-muted rounded-xl text-text-primary font-medium text-sm transition-all border border-border-main shadow-xs"
+                                            className="inline-flex items-center justify-between w-full py-3.5 px-6 bg-background hover:bg-surface-muted rounded-xl text-text-primary font-medium text-sm transition-all border border-border-main shadow-xs"
                                         >
                                             <span>Schedule Consultation</span>
                                             <span className="text-brand-primary">→</span>
@@ -531,9 +531,9 @@ export default async function CoreServicePage({ params }: PageProps) {
                     </section>
                 )}
 
-                {/* ─── 05 RELATED SERVICES (BG-BACKGROUND) ────────────────────── */}
+                {/* ─── 05 RELATED SERVICES (BG-WHITE) ────────────────────── */}
                 {serviceData.relatedServices && serviceData.relatedServices.length > 0 && (
-                    <section className="py-16 md:py-24 lg:py-32 bg-background relative overflow-hidden border-t border-border-main">
+                    <section className="py-16 md:py-24 lg:py-32 bg-white relative overflow-hidden border-t border-border-main">
                         <div className="public-container panel-container !max-w-[94rem] mx-auto relative z-10">
                             
                             {/* Section Header */}
