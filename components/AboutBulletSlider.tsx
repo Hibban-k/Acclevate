@@ -5,9 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const items = [
   "Accounting & Virtual CFO",
-  "GST & Statutory Tax",
+  "GST & Tax Compliance",
   "Company Registration & Trademark",
-  "eCommerce Multi-State Scale"
+  "Digital Marketing & eCommerce"
 ];
 
 export default function AboutBulletSlider() {

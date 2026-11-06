@@ -3,19 +3,19 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 
-export interface Expert {
+export interface PracticeArea {
   name: string;
-  role: string;
-  credentials: string;
+  focus: string;
+  services: string;
   domain: string;
   image: string;
 }
 
 interface AboutExpertsCarouselProps {
-  experts: Expert[];
+  practiceAreas: PracticeArea[];
 }
 
-export default function AboutExpertsCarousel({ experts }: AboutExpertsCarouselProps) {
+export default function AboutExpertsCarousel({ practiceAreas }: AboutExpertsCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -25,8 +25,8 @@ export default function AboutExpertsCarousel({ experts }: AboutExpertsCarouselPr
     const { scrollLeft, clientWidth } = scrollRef.current;
     if (clientWidth === 0) return;
     const newIndex = Math.round(scrollLeft / (clientWidth * 0.84));
-    setActiveIndex(Math.min(Math.max(0, newIndex), experts.length - 1));
-  }, [experts.length]);
+    setActiveIndex(Math.min(Math.max(0, newIndex), practiceAreas.length - 1));
+  }, [practiceAreas.length]);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -53,7 +53,7 @@ export default function AboutExpertsCarousel({ experts }: AboutExpertsCarouselPr
           className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth px-4 py-2 -mx-4 no-scrollbar"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {experts.map((expert, idx) => (
+          {practiceAreas.map((item, idx) => (
             <div
               key={idx}
               className="w-[82vw] max-w-[340px] shrink-0 snap-center rounded-2xl bg-ink p-6 border border-white/10 shadow-lg flex flex-col justify-between text-white cursor-pointer active:scale-[0.99] transition-transform duration-200"
@@ -62,8 +62,8 @@ export default function AboutExpertsCarousel({ experts }: AboutExpertsCarouselPr
                 {/* Image */}
                 <div className="relative aspect-square w-full rounded-xl overflow-hidden mb-5 bg-white/5 border border-white/10">
                   <Image
-                    src={expert.image}
-                    alt={expert.name}
+                    src={item.image}
+                    alt={item.name}
                     fill
                     className="object-cover"
                     sizes="85vw"
@@ -72,16 +72,16 @@ export default function AboutExpertsCarousel({ experts }: AboutExpertsCarouselPr
 
                 {/* Details */}
                 <span className="text-[10px] font-bold text-brand-primary uppercase tracking-widest block mb-1">
-                  {expert.credentials}
+                  Focus: {item.focus}
                 </span>
                 <h3 className="text-lg font-bold text-white tracking-tight">
-                  {expert.name}
+                  {item.name}
                 </h3>
                 <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2.5">
-                  {expert.role}
+                  {item.services}
                 </p>
                 <p className="text-xs text-slate-300 font-light leading-relaxed">
-                  {expert.domain}
+                  {item.domain}
                 </p>
               </div>
 
@@ -95,7 +95,7 @@ export default function AboutExpertsCarousel({ experts }: AboutExpertsCarouselPr
 
         {/* Mobile Swipe Indicators (Interactive Animated Pill Dots) */}
         <div className="flex items-center justify-center gap-2 mt-6">
-          {experts.map((_, idx) => (
+          {practiceAreas.map((_, idx) => (
             <button
               key={idx}
               onClick={() => scrollToCard(idx)}
@@ -112,7 +112,7 @@ export default function AboutExpertsCarousel({ experts }: AboutExpertsCarouselPr
 
       {/* ─── Tablet & Desktop View: 4-Column Grid ──────────────────────── */}
       <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-        {experts.map((expert, idx) => (
+        {practiceAreas.map((item, idx) => (
           <div
             key={idx}
             data-animate="fade-up"
@@ -124,8 +124,8 @@ export default function AboutExpertsCarousel({ experts }: AboutExpertsCarouselPr
               {/* Image */}
               <div className="relative aspect-square w-full rounded-xl overflow-hidden mb-5 bg-white/5 border border-white/10">
                 <Image
-                  src={expert.image}
-                  alt={expert.name}
+                  src={item.image}
+                  alt={item.name}
                   fill
                   className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                   sizes="(max-width: 1024px) 50vw, 25vw"
@@ -134,16 +134,16 @@ export default function AboutExpertsCarousel({ experts }: AboutExpertsCarouselPr
 
               {/* Details */}
               <span className="text-[10px] font-bold text-brand-primary uppercase tracking-widest block mb-1">
-                {expert.credentials}
+                Focus: {item.focus}
               </span>
               <h3 className="text-lg font-bold text-white tracking-tight group-hover:text-brand-primary transition-colors">
-                {expert.name}
+                {item.name}
               </h3>
               <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2.5">
-                {expert.role}
+                {item.services}
               </p>
               <p className="text-xs text-slate-300 font-light leading-relaxed">
-                {expert.domain}
+                {item.domain}
               </p>
             </div>
 

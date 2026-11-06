@@ -5,45 +5,45 @@ import HeroBackground from '@/components/HeroBackground';
 import CTASection from '@/components/CTASection';
 import AboutAnimations from '@/components/AboutAnimations';
 import AboutBulletSlider from '@/components/AboutBulletSlider';
-import AboutExpertsCarousel from '@/components/AboutExpertsCarousel';
+import AboutExpertsCarousel, { PracticeArea } from '@/components/AboutExpertsCarousel';
 
 export const metadata: Metadata = {
-    title: 'About Acclevate | Top Corporate Consulting & Financial Advisory',
-    description: 'Learn about Acclevate, founded by Ahamed Kaab (CA Aspirant). We provide hands-on accounting, tax compliance, corporate legal setup, and eCommerce scaling for 150+ growing businesses across India.',
-    keywords: 'business consultant India, accounting services India, accounting and finance services, GST consultant India, tax consultant India, GST compliance services, business registration India, company registration services, trademark registration India, legal compliance services, eCommerce business support, startup business consultant, MSME business services, Ahamed Kaab, Acclevate',
+    title: 'About Acclevate | Business Consulting in Bangalore',
+    description: 'Meet Acclevate and founder Ahamed Kaab. Explore accounting, tax compliance, business registration and digital services for startups and MSMEs.',
+    keywords: 'business consultant India, business consulting Bangalore, accounting services Bangalore, tax compliance, company registration, digital services, startups, MSMEs, Ahamed Kaab, Acclevate',
     alternates: {
         canonical: 'https://www.acclevate.com/about',
     },
 };
 
-const ourExperts = [
+const practiceAreas: PracticeArea[] = [
     {
-        name: 'Zaid Rahman',
-        role: 'Senior Tax Advisor',
-        credentials: 'FCA · Chartered Accountant',
-        domain: 'Corporate Taxation & GST Audits',
-        image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800',
+        name: 'Accounting & Finance',
+        focus: 'Financial Management',
+        services: 'Bookkeeping · Virtual CFO',
+        domain: 'Financial Projections & Business Planning',
+        image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=800',
     },
     {
-        name: 'Adv. Sneha Kulkarni',
-        role: 'Principal Legal Counsel',
-        credentials: 'Advocate · High Court',
-        domain: 'Corporate Governance & Trademark IP',
-        image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800',
+        name: 'Tax & Compliance',
+        focus: 'Business Compliance',
+        services: 'GST · Income Tax · TDS',
+        domain: 'Registrations, Returns & Corporate Filings',
+        image: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=800',
     },
     {
-        name: 'Farhan Siddiqui',
-        role: 'Senior Financial Controller',
-        credentials: 'CMA · Audit Specialist',
-        domain: 'Bookkeeping & Executive MIS Packages',
-        image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800',
+        name: 'Business & Legal',
+        focus: 'Setup & Documentation',
+        services: 'Incorporation · Legal Drafting',
+        domain: 'Company Structures & Trademark Registration',
+        image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800',
     },
     {
-        name: 'Ananya Roy',
-        role: 'eCommerce Operations Lead',
-        credentials: 'Ex-Marketplace Specialist',
-        domain: 'Marketplace Setup & Multi-State GST',
-        image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800',
+        name: 'Digital & eCommerce',
+        focus: 'Online Business Development',
+        services: 'Websites · Marketing · Branding',
+        domain: 'Online Stores & Marketplace Management',
+        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800',
     },
 ];
 
@@ -83,7 +83,7 @@ export default function AboutPage() {
                             data-delay="0.15"
                             className="text-base sm:text-lg md:text-xl text-text-secondary font-light max-w-xl leading-relaxed"
                         >
-                            <strong className="font-semibold text-text-primary">Direct execution</strong> and corporate financial precision built for scaling enterprises.
+                            Practical business support for entrepreneurs ready to build, manage, and grow with confidence.
                         </p>
                     </div>
                 </section>
@@ -105,7 +105,7 @@ export default function AboutPage() {
                                 data-delay="0.1"
                                 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-text-primary uppercase leading-tight max-w-xl"
                             >
-                                Execution <span className="text-brand-primary">Over Theory</span>
+                                Built Around <span className="text-brand-primary">Your Business</span>
                             </h2>
                             <p
                                 data-animate="fade-up"
@@ -113,7 +113,7 @@ export default function AboutPage() {
                                 data-delay="0.15"
                                 className="text-sm md:text-base text-text-secondary font-light max-w-md leading-relaxed"
                             >
-                                How an agile team in Bangalore replaced disconnected consulting decks with hands-on back-office ownership.
+                                Bringing business essentials together, so founders can give their next stage of growth the attention it deserves.
                             </p>
                         </div>
 
@@ -127,10 +127,10 @@ export default function AboutPage() {
                             <div className="w-full lg:w-[58%] p-8 sm:p-12 lg:p-16 flex flex-col justify-center gap-6 relative z-10">
                                 <div className="space-y-5 text-base sm:text-lg md:text-xl text-text-secondary leading-relaxed font-light">
                                     <p>
-                                        <strong className="font-semibold text-text-primary">Founded in Bangalore in 2024,</strong> Acclevate was built around a singular premise: fast-growing businesses don&apos;t need more theoretical slide decks. They need <strong className="font-semibold text-text-primary">hands-on operators</strong> who sit in the trenches and execute.
+                                        <strong className="font-semibold text-text-primary">Founded in 2024 and based in Bangalore,</strong> Acclevate supports startups, MSMEs, and growing brands. We bring registration, compliance, finance, and digital services together around the needs of your business.
                                     </p>
                                     <p className="text-sm sm:text-base md:text-lg italic text-text-secondary">
-                                        We eliminate costly compliance mistakes and penalty risks by taking complete ownership of your day-to-day ledgers, statutory GST filings, and corporate legal frameworks — so your leadership stays 100% focused on growth.
+                                        Starting and running a company means making decisions that reach beyond your immediate expertise. Our purpose is to make that journey easier to navigate. Whether you are laying the groundwork or preparing to expand, the focus is simple: help you understand what comes next and move forward with a clearer sense of direction.
                                     </p>
                                 </div>
                             </div>
@@ -161,16 +161,16 @@ export default function AboutPage() {
                                     <div className="absolute inset-0 bg-ink/10 mix-blend-multiply" />
                                 </div>
 
-                                {/* Floating Stats Badge (2024 Bangalore Founded & 100% On-Time Filings) */}
+                                {/* Floating Stats Badge (2024 Year Established & Bangalore Our Home Base) */}
                                 <div className="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6 p-4 sm:p-5 rounded-xl bg-white/95 backdrop-blur-md border border-border-main shadow-lg transition-all duration-300 group-hover:-translate-y-1 z-20">
                                     <div className="grid grid-cols-2 gap-6 divide-x divide-border-main">
                                         <div className="text-left">
                                             <div className="text-2xl sm:text-3xl font-extrabold text-text-primary tracking-tight">2024</div>
-                                            <div className="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-widest mt-0.5">Bangalore Founded</div>
+                                            <div className="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-widest mt-0.5">Year Established</div>
                                         </div>
                                         <div className="text-left pl-6">
-                                            <div className="text-2xl sm:text-3xl font-extrabold text-text-primary tracking-tight">100%</div>
-                                            <div className="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-widest mt-0.5">On-Time Filings</div>
+                                            <div className="text-2xl sm:text-3xl font-extrabold text-text-primary tracking-tight">Bangalore</div>
+                                            <div className="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-widest mt-0.5">Our Home Base</div>
                                         </div>
                                     </div>
                                 </div>
@@ -201,7 +201,7 @@ export default function AboutPage() {
                                     Ahamed <span className="text-brand-primary">Kaab</span>
                                 </h2>
                                 <p className="text-xs sm:text-sm font-bold text-brand-deep uppercase tracking-widest mt-1.5">
-                                    Founder &amp; CA Aspirant · Corporate Audit &amp; Tax Articleship
+                                    Founder · Accounting &amp; Finance Background
                                 </p>
                             </div>
 
@@ -211,7 +211,7 @@ export default function AboutPage() {
                                 data-delay="0.15"
                                 className="text-sm md:text-base text-text-secondary font-light max-w-md leading-relaxed"
                             >
-                                Applying rigorous practical audit training to eliminate compliance vulnerabilities for modern businesses.
+                                Bringing an accounting foundation and attention to detail to the everyday challenges of running a business.
                             </p>
                         </div>
 
@@ -238,7 +238,7 @@ export default function AboutPage() {
                                         <div className="absolute bottom-5 left-5 right-5 p-4 rounded-xl bg-ink/90 backdrop-blur-md border border-white/10 shadow-lg flex items-center justify-between transition-all duration-300 group-hover:-translate-y-1">
                                             <div>
                                                 <div className="text-sm font-bold text-white">Ahamed Kaab</div>
-                                                <div className="text-xs text-slate-300 font-light">CA Aspirant · Bangalore</div>
+                                                <div className="text-xs text-slate-300 font-light">Founder · Bangalore</div>
                                             </div>
                                             <span className="text-[10px] font-bold text-brand-primary uppercase tracking-widest bg-white/10 px-3 py-1 rounded-md border border-white/10">
                                                 Founder
@@ -251,35 +251,35 @@ export default function AboutPage() {
                                 <div className="lg:col-span-7 flex flex-col justify-center gap-7">
                                     <div className="space-y-4 text-base sm:text-lg text-slate-300 font-light leading-relaxed">
                                         <p>
-                                            <strong className="font-semibold text-white">Undergoing intensive CA articleship and corporate audit training,</strong> Ahamed Kaab observed firsthand how rapidly growing ventures stumble into severe financial and tax compliance traps.
+                                            <strong className="font-semibold text-white">Ahamed Kaab’s background spans accounting, bookkeeping, budgeting, tax preparation, and payroll services.</strong> He holds a Bachelor of Commerce with a specialisation in Accounting and Finance, grounding his work in the financial fundamentals businesses depend on.
                                         </p>
                                         <p className="text-sm sm:text-base italic text-slate-300">
-                                            He established Acclevate to bridge the divide between theoretical advice and actual execution — delivering <strong className="font-semibold text-white">accessible, institutional-grade financial discipline</strong> with zero corporate red tape.
+                                            His professional development includes ICAI’s ICITSS Information Technology course. At Acclevate, that accounting background sits alongside a wider business offering, connecting financial requirements with the practical needs of entrepreneurs building and managing their companies.
                                         </p>
                                     </div>
 
-                                    {/* Quote Box */}
+                                    {/* Featured Statement / Quote Box */}
                                     <div className="p-4 sm:p-5 rounded-xl bg-white/5 border-l-4 border-brand-primary text-sm sm:text-base italic font-light text-white leading-relaxed">
-                                        &ldquo;Agile business scale starts with clean numbers, audit-proof books, and zero-delay compliance.&rdquo;
+                                        &ldquo;Clear records. Better-informed decisions. A stronger foundation for the next stage of your business.&rdquo;
                                     </div>
 
                                     {/* Core Practice Competencies Grid */}
                                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
                                         <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-                                            <div className="text-xs font-bold text-white uppercase tracking-wider">Direct Tax</div>
-                                            <div className="text-[11px] text-slate-400 mt-1 font-light">Audits &amp; Planning</div>
-                                        </div>
-                                        <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-                                            <div className="text-xs font-bold text-white uppercase tracking-wider">GST Audit</div>
-                                            <div className="text-[11px] text-slate-400 mt-1 font-light">ITC Reconciliation</div>
+                                            <div className="text-xs font-bold text-white uppercase tracking-wider">Accounting</div>
+                                            <div className="text-[11px] text-slate-400 mt-1 font-light">Financial Records</div>
                                         </div>
                                         <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
                                             <div className="text-xs font-bold text-white uppercase tracking-wider">Bookkeeping</div>
-                                            <div className="text-[11px] text-slate-400 mt-1 font-light">MIS &amp; Ledgers</div>
+                                            <div className="text-[11px] text-slate-400 mt-1 font-light">Day-to-Day Ledgers</div>
                                         </div>
                                         <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-                                            <div className="text-xs font-bold text-white uppercase tracking-wider">Compliance</div>
-                                            <div className="text-[11px] text-slate-400 mt-1 font-light">ROC &amp; Corporate</div>
+                                            <div className="text-xs font-bold text-white uppercase tracking-wider">Tax Preparation</div>
+                                            <div className="text-[11px] text-slate-400 mt-1 font-light">Filing Support</div>
+                                        </div>
+                                        <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+                                            <div className="text-xs font-bold text-white uppercase tracking-wider">Budgeting</div>
+                                            <div className="text-[11px] text-slate-400 mt-1 font-light">Planning &amp; Payroll</div>
                                         </div>
                                     </div>
                                 </div>
@@ -311,7 +311,7 @@ export default function AboutPage() {
                                     What We <span className="text-brand-primary">Provide</span>
                                 </h2>
                                 <p className="text-sm md:text-base text-text-secondary font-light max-w-md leading-relaxed mt-1.5">
-                                    Complete operational oversight across your balance sheets, tax filings, and corporate legal standing.
+                                    Connected support for business setup, financial management, compliance, and your presence in the digital marketplace.
                                 </p>
                             </div>
 
@@ -336,10 +336,10 @@ export default function AboutPage() {
                             <div className="w-full lg:w-[58%] p-8 sm:p-12 lg:p-16 flex flex-col justify-center gap-8 relative z-10">
                                 <div className="space-y-4 text-base sm:text-lg md:text-xl text-text-secondary font-light leading-relaxed">
                                     <p>
-                                        <strong className="font-semibold text-text-primary">One integrated ecosystem for your corporate back-office.</strong> We take full operational ownership of your daily ledgers, monthly MIS intelligence, corporate tax assessments, and zero-defect GST return filings (GSTR-1, 3B, 9C).
+                                        <strong className="font-semibold text-text-primary">Our services include bookkeeping, virtual CFO support, GST and income tax compliance, company registration, and trademarks.</strong> For businesses developing their online presence, we also offer website development, digital marketing, and eCommerce support.
                                     </p>
                                     <p className="text-sm sm:text-base md:text-lg italic text-text-secondary">
-                                        From fast-tracking Pvt Ltd and LLP incorporations with trademark IP to setting up multi-state GST warehouses (APOB/VPOB) for Amazon, Flipkart, Blinkit, and Shopify brands, our team ensures complete statutory peace of mind.
+                                        The right starting point depends on where your business stands today. You may be choosing a company structure, organising your accounts, or preparing an online store for customers. Bringing these requirements into one conversation helps establish priorities and gives each next step a clear purpose.
                                     </p>
                                 </div>
 
@@ -364,7 +364,7 @@ export default function AboutPage() {
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                                             </svg>
                                         </div>
-                                        <span>GST &amp; Statutory Tax</span>
+                                        <span>GST &amp; Tax Compliance</span>
                                     </div>
                                     <div className="flex items-center gap-3 text-sm font-semibold text-text-primary">
                                         <div className="shrink-0 text-brand-deep flex items-center justify-center">
@@ -380,7 +380,7 @@ export default function AboutPage() {
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                                             </svg>
                                         </div>
-                                        <span>eCommerce Multi-State Scale</span>
+                                        <span>Digital Marketing &amp; eCommerce</span>
                                     </div>
                                 </div>
                             </div>
@@ -413,7 +413,7 @@ export default function AboutPage() {
 
                                 <div className="absolute top-5 right-5 sm:top-6 sm:right-6 lg:top-6 lg:right-6 p-3.5 rounded-xl bg-white/95 backdrop-blur-md border border-border-main shadow-md text-xs font-bold text-text-primary flex items-center gap-2.5 transition-all duration-300 group-hover:-translate-y-0.5 z-20">
                                     <span className="w-2 h-2 rounded-full bg-brand-primary animate-pulse" />
-                                    <span>Full-Stack Back-Office Infrastructure</span>
+                                    <span>Connected Support for Business Growth</span>
                                 </div>
                             </div>
                         </div>
@@ -421,7 +421,7 @@ export default function AboutPage() {
                     </div>
                 </section>
 
-                {/* ─── 04 OUR EXPERTS (SPACIOUS DARK CARDS) ───────────── */}
+                {/* ─── 04 OUR TEAM (SPACIOUS DARK CARDS) ───────────── */}
                 <section className="py-16 md:py-24 lg:py-32 bg-background relative overflow-hidden text-text-primary border-t border-border-main">
                     <div className="public-container panel-container !max-w-[94rem] mx-auto relative z-10">
                         
@@ -442,13 +442,13 @@ export default function AboutPage() {
                                     Domain <span className="text-brand-primary">Experts</span>
                                 </h2>
                                 <p className="text-sm md:text-base text-text-secondary font-light max-w-lg leading-relaxed mt-1.5">
-                                    Experienced Chartered Accountants, legal counsel, and operational analysts managing your accounts.
+                                    Chartered Accountants, advocates, and digital professionals contributing expertise across the different needs of your business.
                                 </p>
                             </div>
                         </div>
 
-                        {/* Experts Carousel (Mobile snap slider with animated indicators + Desktop 4-col grid) */}
-                        <AboutExpertsCarousel experts={ourExperts} />
+                        {/* Practice-Area Cards Carousel (Mobile snap slider with animated indicators + Desktop 4-col grid) */}
+                        <AboutExpertsCarousel practiceAreas={practiceAreas} />
 
                     </div>
                 </section>
@@ -456,7 +456,7 @@ export default function AboutPage() {
                 {/* ─── 05 CTA SECTION ─────────────────────────────────── */}
                 <CTASection 
                     title="Have an important business requirement to sort out?"
-                    description="Tell us what you need. Our team will analyze your structure and recommend the right roadmap."
+                    description="Tell us where your business stands and what you want to achieve. Let’s work out the next step together."
                     primaryButtonText="Talk to Acclevate"
                     primaryButtonHref="/contact"
                 />
