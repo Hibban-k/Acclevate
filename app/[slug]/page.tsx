@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { categoryService } from '@/lib/services/category.service';
 import { serviceService } from '@/lib/services/service.service';
 import ServiceCard from '@/components/ServiceCard';
@@ -87,9 +88,21 @@ export default async function CollectionPage({ params }: PageProps) {
                             <span className="text-text-primary">{entity.name}</span>
                         </div>
 
-                        <div data-animate="fade-up" data-once="true" data-delay="0.05" className="inline-flex items-center gap-2 px-4 py-2 bg-background rounded-full text-sm font-semibold text-text-secondary">
-                            <span className="text-lg">{(entity as any).icon || '📁'}</span>
-                            Service Category
+                        <div data-animate="fade-up" data-once="true" data-delay="0.05" className="inline-flex items-center gap-2.5 px-4 py-2 bg-background border border-border-main/60 rounded-full text-xs font-semibold uppercase tracking-wider text-text-secondary">
+                            {entity.image || (entity as any).img ? (
+                                <div className="relative w-4 h-4 rounded-full overflow-hidden shrink-0 border border-border-main/50">
+                                    <Image
+                                        src={entity.image || (entity as any).img}
+                                        alt={entity.name}
+                                        fill
+                                        className="object-cover"
+                                        sizes="16px"
+                                    />
+                                </div>
+                            ) : (
+                                <span className="w-2 h-2 rounded-full bg-brand-primary animate-pulse" />
+                            )}
+                            <span>Service Category</span>
                         </div>
 
                         <h1 data-animate="fade-up" data-once="true" data-delay="0.1" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-text-primary leading-tight tracking-tight uppercase">
@@ -243,8 +256,20 @@ export default async function CollectionPage({ params }: PageProps) {
                                         data-animate="fade-up"
                                         data-delay={String(0.04 + (i % 4) * 0.07)}
                                     >
-                                        <div className="w-11 h-11 bg-background rounded-xl flex items-center justify-center mb-5 text-xl group-hover:bg-ink transition-all duration-300">
-                                            <span>{item.icon || '📁'}</span>
+                                        <div className="w-12 h-12 bg-background border border-border-main/60 rounded-xl flex items-center justify-center mb-5 overflow-hidden relative group-hover:border-brand-primary/50 transition-all duration-300">
+                                            {item.image || item.img ? (
+                                                <Image
+                                                    src={item.image || item.img}
+                                                    alt={item.name}
+                                                    fill
+                                                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                                    sizes="48px"
+                                                />
+                                            ) : (
+                                                <svg className="w-5 h-5 text-brand-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                                </svg>
+                                            )}
                                         </div>
                                         <h3 className="text-base font-bold text-text-primary mb-2 group-hover:text-text-primary transition-colors leading-snug">
                                             {item.name}
