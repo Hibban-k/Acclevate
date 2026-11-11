@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import { getCategoriesAction } from "@/lib/actions/categories";
@@ -20,6 +20,12 @@ interface FAQ {
   answer: string;
 }
 
+interface InternalLink {
+  targetService: string;
+  anchorText: string;
+  isPrimary: boolean;
+}
+
 interface Service {
   _id: string;
   title: string;
@@ -28,7 +34,12 @@ interface Service {
   description: string;
   category: string | { _id: string; name: string };
   coveredServices: { name: string; description: string }[];
-  relatedServices: (string | { _id: string; title: string })[];
+  relatedServices: (string | { _id: string; title: string; category?: any })[];
+  internalLinks?: {
+    targetService: string | { _id: string; title: string; category?: any };
+    anchorText: string;
+    isPrimary: boolean;
+  }[];
   features: Feature[];
   faqs: FAQ[];
   isActive: boolean;
@@ -55,6 +66,7 @@ interface FormData {
   category: string;
   coveredServices: { name: string; description: string }[];
   relatedServices: string[];
+  internalLinks: InternalLink[];
   features: Feature[];
   faqs: FAQ[];
   isActive: boolean;
@@ -79,6 +91,7 @@ const emptyFormData: FormData = {
   category: "strategy",
   coveredServices: [],
   relatedServices: [],
+  internalLinks: [],
   features: [],
   faqs: [],
   isActive: true,
@@ -134,7 +147,8 @@ export default function AdminServicesPage() {
     }
   };
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [relatedServicesStr, setRelatedServicesStr] = useState<string>("");
+  const [relatedSearch, setRelatedSearch] = useState<string>("");
+  const [relatedCategoryFilter, setRelatedCategoryFilter] = useState<string>("all");
   
   async function fetchData() {
     try {
@@ -178,10 +192,10 @@ export default function AdminServicesPage() {
       ...formData,
       keywords: formData.keywords.split(",").map((k) => k.trim()).filter(Boolean),
       structuredData: parsedStructuredData,
-      relatedServices: relatedServicesStr
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean),
+      relatedServices: formData.relatedServices,
+      internalLinks: formData.internalLinks.filter(
+        (l) => l.targetService && l.anchorText.trim()
+      ),
     };
 
     try {
@@ -193,7 +207,8 @@ export default function AdminServicesPage() {
       setShowForm(false);
       setEditingId(null);
       setFormData(emptyFormData);
-      setRelatedServicesStr("");
+      setRelatedSearch("");
+      setRelatedCategoryFilter("all");
       fetchData();
     } catch (error: any) {
       console.error("Error saving service:", error);
@@ -211,7 +226,23 @@ export default function AdminServicesPage() {
       description: service.description,
       category: typeof service.category === "object" && service.category !== null ? (service.category as any)._id : service.category,
       coveredServices: service.coveredServices?.map(cs => ({ name: cs.name || "", description: cs.description || "" })) || [],
-      relatedServices: service.relatedServices?.map(rs => typeof rs === "object" ? (rs as any)._id : rs) || [],
+      relatedServices: Array.isArray(service.relatedServices)
+        ? service.relatedServices
+            .map((rs: any) => (typeof rs === "object" && rs !== null ? rs._id : rs))
+            .filter(Boolean)
+        : [],
+      internalLinks: Array.isArray(service.internalLinks)
+        ? service.internalLinks
+            .map((il: any) => ({
+              targetService:
+                typeof il.targetService === "object" && il.targetService !== null
+                  ? il.targetService._id
+                  : il.targetService || "",
+              anchorText: il.anchorText || "",
+              isPrimary: !!il.isPrimary,
+            }))
+            .filter((il: any) => Boolean(il.targetService))
+        : [],
       features: service.features || [],
       faqs: service.faqs || [],
       isActive: service.isActive,
@@ -219,18 +250,17 @@ export default function AdminServicesPage() {
       shortDescription: service.shortDescription || "",
       metaTitle: service.metaTitle || "",
       metaDescription: service.metaDescription || "",
-        image: service.image || "",
-        keywords: service.keywords?.join(", ") || "",
-        ogTitle: service.ogTitle || "",
-        ogDescription: service.ogDescription || "",
-        ogImage: service.ogImage || "",
-        canonicalUrl: service.canonicalUrl || "",
-        structuredData: service.structuredData ? JSON.stringify(service.structuredData, null, 2) : "",
-      });
-    setRelatedServicesStr(
-      service.relatedServices ? service.relatedServices.map(rs => typeof rs === "object" ? (rs as any)._id : rs).join(", ") : "",
-    );
-        setEditingId(service._id);
+      image: service.image || "",
+      keywords: service.keywords?.join(", ") || "",
+      ogTitle: service.ogTitle || "",
+      ogDescription: service.ogDescription || "",
+      ogImage: service.ogImage || "",
+      canonicalUrl: service.canonicalUrl || "",
+      structuredData: service.structuredData ? JSON.stringify(service.structuredData, null, 2) : "",
+    });
+    setEditingId(service._id);
+    setRelatedSearch("");
+    setRelatedCategoryFilter("all");
     setShowForm(true);
   };
 
@@ -261,8 +291,68 @@ export default function AdminServicesPage() {
     setShowForm(false);
     setEditingId(null);
     setFormData(emptyFormData);
-    setRelatedServicesStr("");
+    setRelatedSearch("");
+    setRelatedCategoryFilter("all");
+  };
+
+  // Cross Services (Related) management
+  const toggleRelatedService = (serviceId: string) => {
+    setFormData((prev) => {
+      const exists = prev.relatedServices.includes(serviceId);
+      return {
+        ...prev,
+        relatedServices: exists
+          ? prev.relatedServices.filter((id) => id !== serviceId)
+          : [...prev.relatedServices, serviceId],
       };
+    });
+  };
+
+  const removeRelatedService = (serviceId: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      relatedServices: prev.relatedServices.filter((id) => id !== serviceId),
+    }));
+  };
+
+  const clearAllRelatedServices = () => {
+    setFormData((prev) => ({
+      ...prev,
+      relatedServices: [],
+    }));
+  };
+
+  // Internal Links management
+  const addInternalLink = () => {
+    const selectable = services.filter((s) => s._id !== editingId);
+    const defaultTarget = selectable[0]?._id || "";
+    setFormData((prev) => ({
+      ...prev,
+      internalLinks: [
+        ...prev.internalLinks,
+        { targetService: defaultTarget, anchorText: "", isPrimary: false },
+      ],
+    }));
+  };
+
+  const updateInternalLink = (
+    index: number,
+    field: keyof InternalLink,
+    value: any
+  ) => {
+    setFormData((prev) => {
+      const updated = [...prev.internalLinks];
+      updated[index] = { ...updated[index], [field]: value };
+      return { ...prev, internalLinks: updated };
+    });
+  };
+
+  const removeInternalLink = (index: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      internalLinks: prev.internalLinks.filter((_, i) => i !== index),
+    }));
+  };
 
   // Covered Services management
   const addCoveredService = () => {
@@ -330,6 +420,15 @@ export default function AdminServicesPage() {
       faqs: formData.faqs.filter((_, i) => i !== index),
     });
   };
+
+  const getCategoryName = (cat: any) => {
+    if (!cat) return "General";
+    if (typeof cat === "object" && cat.name) return cat.name;
+    const found = categories.find((c) => c._id === cat || c.slug === cat);
+    return found ? found.name : "General";
+  };
+
+  const selectableServices = services.filter((s) => s._id !== editingId);
 
   return (
     <div>
@@ -470,22 +569,277 @@ export default function AdminServicesPage() {
                       />
                     </label>
                   </div>
+                  {formData.image && (
+                    <div className="mt-2.5 flex items-center gap-3 p-2 bg-slate-50 border border-slate-200 rounded-lg">
+                      <div className="relative w-12 h-12 rounded-md overflow-hidden bg-white border border-slate-200 shrink-0">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={formData.image}
+                          alt="Main Preview"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-medium text-slate-700 truncate">
+                          {formData.image}
+                        </p>
+                        <p className="text-[10px] text-slate-400">Current service image</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setFormData((prev) => ({ ...prev, image: "" }))}
+                        className="text-xs text-red-600 hover:text-red-700 px-2 py-1 hover:bg-red-50 rounded"
+                        title="Remove image"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
 
               {/* Lists and Relationships */}
               <div className="mb-6 space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-text-secondary mb-1">
-                    Related Services (Comma-separated ObjectIds)
-                  </label>
-                  <input
-                    type="text"
-                    value={relatedServicesStr}
-                    onChange={(e) => setRelatedServicesStr(e.target.value)}
-                    className="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-navy-600 focus:border-charcoal outline-none border border-slate-200"
-                    placeholder="e.g., 60f1b..."
-                  />
+                {/* Connected Cross Services Section */}
+                <div className="pt-2">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <label className="block text-sm font-semibold text-text-primary">
+                          Connected Cross Services (Related Solutions)
+                        </label>
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-medium">
+                          {formData.relatedServices.length} selected
+                        </span>
+                      </div>
+                      <p className="text-xs text-text-secondary mt-0.5">
+                        Select complementary services to showcase in the &ldquo;Related Services&rdquo; section on this service&rsquo;s page.
+                      </p>
+                    </div>
+                    {formData.relatedServices.length > 0 && (
+                      <button
+                        type="button"
+                        onClick={clearAllRelatedServices}
+                        className="text-xs text-red-600 hover:text-red-700 font-medium self-start sm:self-auto"
+                      >
+                        Clear all
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Selected Chips */}
+                  {formData.relatedServices.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5 mb-3 p-3 bg-slate-50 border border-slate-200 rounded-lg">
+                      {formData.relatedServices.map((id) => {
+                        const s = services.find((item) => item._id === id);
+                        return (
+                          <span
+                            key={id}
+                            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-charcoal text-white shadow-xs"
+                          >
+                            <span className="opacity-70 text-[10px] uppercase tracking-wider">
+                              {getCategoryName(s?.category)}
+                            </span>
+                            <span>•</span>
+                            <span className="max-w-[200px] truncate">{s?.title || id}</span>
+                            <button
+                              type="button"
+                              onClick={() => removeRelatedService(id)}
+                              className="ml-1 hover:text-red-300 font-bold"
+                              title="Remove"
+                            >
+                              ×
+                            </button>
+                          </span>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {/* Search & Category Filter */}
+                  <div className="flex flex-col sm:flex-row gap-2 mb-3">
+                    <div className="relative flex-1">
+                      <input
+                        type="text"
+                        value={relatedSearch}
+                        onChange={(e) => setRelatedSearch(e.target.value)}
+                        placeholder="Filter services by title or slug..."
+                        className="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg border border-slate-200 focus:ring-1 focus:ring-navy-600 outline-none bg-white"
+                      />
+                      <svg
+                        className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      </svg>
+                    </div>
+                    <select
+                      value={relatedCategoryFilter}
+                      onChange={(e) => setRelatedCategoryFilter(e.target.value)}
+                      className="px-2.5 py-1.5 text-xs rounded-lg border border-slate-200 focus:ring-1 focus:ring-navy-600 outline-none bg-white text-slate-700"
+                    >
+                      <option value="all">All Categories</option>
+                      {categories.map((c) => (
+                        <option key={c._id} value={c._id}>
+                          {c.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Scrollable Selection Grid */}
+                  <div className="max-h-56 overflow-y-auto border border-slate-200 rounded-lg p-2 bg-white space-y-1">
+                    {selectableServices
+                      .filter((s) => {
+                        const matchesSearch =
+                          relatedSearch.trim() === "" ||
+                          s.title.toLowerCase().includes(relatedSearch.toLowerCase()) ||
+                          (s.slug && s.slug.toLowerCase().includes(relatedSearch.toLowerCase()));
+                        const sCatId =
+                          typeof s.category === "object" && s.category !== null
+                            ? (s.category as any)._id
+                            : s.category;
+                        const matchesCategory =
+                          relatedCategoryFilter === "all" || sCatId === relatedCategoryFilter;
+                        return matchesSearch && matchesCategory;
+                      })
+                      .map((s) => {
+                        const isSelected = formData.relatedServices.includes(s._id);
+                        return (
+                          <div
+                            key={s._id}
+                            onClick={() => toggleRelatedService(s._id)}
+                            className={`flex items-center justify-between p-2 rounded-lg cursor-pointer text-xs transition-colors border ${
+                              isSelected
+                                ? "bg-slate-100 border-charcoal/40 text-charcoal font-medium"
+                                : "border-transparent hover:bg-slate-50 text-slate-700"
+                            }`}
+                          >
+                            <div className="flex items-center gap-2.5 min-w-0">
+                              <input
+                                type="checkbox"
+                                checked={isSelected}
+                                onChange={() => {}}
+                                className="rounded border-slate-300 text-charcoal focus:ring-navy-600 pointer-events-none"
+                              />
+                              <span className="truncate">{s.title}</span>
+                            </div>
+                            <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 shrink-0 uppercase tracking-wider">
+                              {getCategoryName(s.category)}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    {selectableServices.length === 0 && (
+                      <p className="text-xs text-slate-400 py-3 text-center">
+                        No other services available to link.
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Internal Service Linking Section */}
+                <div className="pt-6 border-t border-slate-100">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <label className="block text-sm font-semibold text-text-primary">
+                          Internal Service Linking (In-Content Keywords)
+                        </label>
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-medium">
+                          {formData.internalLinks.length} configured
+                        </span>
+                      </div>
+                      <p className="text-xs text-text-secondary mt-0.5">
+                        Specific keywords in the description will automatically convert into hyperlinks pointing to other services.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={addInternalLink}
+                      className="text-xs px-3 py-1.5 bg-background text-text-secondary rounded-lg hover:bg-slate-200 flex items-center gap-1 self-start sm:self-auto font-medium"
+                    >
+                      + Add Internal Link
+                    </button>
+                  </div>
+
+                  {formData.internalLinks.length === 0 ? (
+                    <div className="p-4 bg-slate-50 border border-dashed border-slate-200 rounded-lg text-center">
+                      <p className="text-xs text-text-secondary">
+                        No internal link keywords configured yet. Click &ldquo;+ Add Internal Link&rdquo; to auto-link keywords in your description to related services.
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      {formData.internalLinks.map((link, index) => (
+                        <div
+                          key={index}
+                          className="p-3.5 bg-slate-50 border border-slate-200 rounded-lg flex flex-col md:flex-row md:items-center gap-3"
+                        >
+                          {/* Target Service Select */}
+                          <div className="flex-1">
+                            <label className="block text-[11px] font-medium text-slate-600 mb-1">
+                              Target Service
+                            </label>
+                            <select
+                              value={link.targetService}
+                              onChange={(e) => updateInternalLink(index, "targetService", e.target.value)}
+                              className="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-200 focus:ring-1 focus:ring-navy-600 outline-none bg-white"
+                            >
+                              <option value="" disabled>Select target service...</option>
+                              {selectableServices.map((s) => (
+                                <option key={s._id} value={s._id}>
+                                  {s.title} ({getCategoryName(s.category)})
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
+                          {/* Anchor Text / Keyword */}
+                          <div className="flex-1">
+                            <label className="block text-[11px] font-medium text-slate-600 mb-1">
+                              Exact Anchor Text / Keyword
+                            </label>
+                            <input
+                              type="text"
+                              value={link.anchorText}
+                              onChange={(e) => updateInternalLink(index, "anchorText", e.target.value)}
+                              placeholder="e.g., virtual CFO, company registration"
+                              className="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-200 focus:ring-1 focus:ring-navy-600 outline-none bg-white"
+                            />
+                          </div>
+
+                          {/* Primary Toggle & Delete */}
+                          <div className="flex items-center justify-between md:justify-end gap-3 pt-2 md:pt-4">
+                            <label className="flex items-center gap-1.5 cursor-pointer text-xs text-slate-600">
+                              <input
+                                type="checkbox"
+                                checked={link.isPrimary}
+                                onChange={(e) => updateInternalLink(index, "isPrimary", e.target.checked)}
+                                className="rounded border-slate-300 text-charcoal focus:ring-navy-600"
+                              />
+                              <span>Primary</span>
+                            </label>
+                            <button
+                              type="button"
+                              onClick={() => removeInternalLink(index)}
+                              className="text-red-500 hover:text-red-700 p-1 rounded hover:bg-red-50"
+                              title="Remove internal link"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                      <p className="text-[11px] text-slate-500 italic">
+                        Tip: When this anchor text appears anywhere in the description text, it will be rendered as a clickable link leading directly to the target service.
+                      </p>
+                    </div>
+                  )}
                 </div>
 
                 {/* Covered Services Section */}
@@ -792,6 +1146,31 @@ export default function AdminServicesPage() {
                               />
                             </label>
                           </div>
+                          {formData.ogImage && (
+                            <div className="mt-2 flex items-center gap-3 p-2 bg-white border border-slate-200 rounded-lg">
+                              <div className="relative w-12 h-12 rounded-md overflow-hidden bg-slate-100 border border-slate-200 shrink-0">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                  src={formData.ogImage}
+                                  alt="OG Preview"
+                                  className="w-full h-full object-cover"
+                                />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-xs font-medium text-slate-700 truncate">
+                                  {formData.ogImage}
+                                </p>
+                                <p className="text-[10px] text-slate-400">Social share preview</p>
+                              </div>
+                              <button
+                                type="button"
+                                onClick={() => setFormData((prev) => ({ ...prev, ogImage: "" }))}
+                                className="text-xs text-red-600 hover:text-red-700 px-2 py-1 hover:bg-red-50 rounded"
+                              >
+                                Remove
+                              </button>
+                            </div>
+                          )}
                       </div>
                     </div>
                     <div>

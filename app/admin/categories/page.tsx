@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { getCategoriesAction, createCategoryAction, updateCategoryAction, deleteCategoryAction } from '@/lib/actions/categories';
+import { uploadImageAction } from '@/lib/actions/upload';
 import slugify from 'slugify';
 
 interface CategoryDetail {
@@ -16,6 +17,7 @@ interface Category {
     details: CategoryDetail[];
     shortDescription: string;
     img: string;
+    image?: string;
     isActive: boolean;
     order: number;
     metaTitle?: string;
@@ -53,6 +55,26 @@ export default function AdminCategoriesPage() {
     }>(emptyForm);
     const [editingId, setEditingId] = useState<string | null>(null);
     const [saving, setSaving] = useState(false);
+    const [uploadingImage, setUploadingImage] = useState(false);
+
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setUploadingImage(true);
+        const uploadData = new FormData();
+        uploadData.append('file', file);
+
+        try {
+            const url = await uploadImageAction(uploadData, 'categories');
+            setFormData(prev => ({ ...prev, img: url }));
+        } catch (error: any) {
+            console.error('Upload failed', error);
+            alert('Failed to upload image: ' + (error.message || 'Unknown error'));
+        } finally {
+            setUploadingImage(false);
+        }
+    };
 
     async function fetchCategories() {
         try {
@@ -95,7 +117,7 @@ export default function AdminCategoriesPage() {
             slug: cat.slug,
             details: cat.details || [],
             shortDescription: cat.shortDescription || '',
-            img: cat.img || '',
+            img: cat.img || cat.image || '',
             isActive: cat.isActive,
             order: cat.order || 0,
             metaTitle: cat.metaTitle || '',
@@ -129,7 +151,7 @@ export default function AdminCategoriesPage() {
         e.preventDefault();
         setSaving(true);
         try {
-            const submitData = { ...formData };
+            const submitData: any = { ...formData, image: formData.img };
             if (!submitData.slug) {
                 submitData.slug = slugify(submitData.name, { lower: true, strict: true });
             }
@@ -219,13 +241,65 @@ export default function AdminCategoriesPage() {
                                 />
                             </div>
                             <div className="md:col-span-2">
-                                <label className="block text-sm font-medium text-text-secondary mb-2">Image URL</label>
-                                <input
-                                    type="text"
-                                    value={formData.img}
-                                    onChange={(e) => setFormData({ ...formData, img: e.target.value })}
-                                    className="w-full px-4 py-2 border border-border rounded-lg"
-                                />
+                                <label className="block text-sm font-medium text-text-secondary mb-2">Category Image</label>
+                                <div className="flex gap-2 items-center">
+                                    <input
+                                        type="text"
+                                        value={formData.img}
+                                        onChange={(e) => setFormData({ ...formData, img: e.target.value })}
+                                        placeholder="Paste image URL or click Upload"
+                                        className="flex-1 px-4 py-2 border border-border rounded-lg outline-none focus:ring-2 focus:ring-brand-primary"
+                                    />
+                                    <label className="cursor-pointer px-4 py-2 bg-slate-100 hover:bg-slate-200 text-sm font-medium text-slate-700 rounded-lg flex items-center justify-center transition-colors border border-border shrink-0">
+                                        {uploadingImage ? (
+                                            <span className="flex items-center gap-2">
+                                                <svg className="animate-spin h-4 w-4 text-brand-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                                Uploading...
+                                            </span>
+                                        ) : (
+                                            <span className="flex items-center gap-1.5">
+                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                                                </svg>
+                                                Upload Image
+                                            </span>
+                                        )}
+                                        <input 
+                                            type="file" 
+                                            accept="image/*" 
+                                            className="hidden" 
+                                            onChange={handleImageUpload}
+                                            disabled={uploadingImage}
+                                        />
+                                    </label>
+                                    {formData.img && (
+                                        <button
+                                            type="button"
+                                            onClick={() => setFormData({ ...formData, img: '' })}
+                                            className="px-3 py-2 text-xs text-red-600 hover:bg-red-50 rounded-lg border border-red-200 transition-colors shrink-0"
+                                            title="Clear image"
+                                        >
+                                            Clear
+                                        </button>
+                                    )}
+                                </div>
+                                {formData.img && (
+                                    <div className="mt-3 flex items-center gap-3 p-2 bg-slate-50 border border-border rounded-lg w-fit">
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img 
+                                            src={formData.img} 
+                                            alt="Category preview" 
+                                            className="w-16 h-12 object-cover rounded-md border border-border"
+                                        />
+                                        <div className="text-xs text-text-secondary pr-2">
+                                            <span className="font-medium text-text-primary block">Current Image Preview</span>
+                                            <span className="truncate max-w-[280px] block text-slate-400">{formData.img}</span>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
 
                             {/* Details Array */}

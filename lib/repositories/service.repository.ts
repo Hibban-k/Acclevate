@@ -25,8 +25,16 @@ export class ServiceRepository {
         await connectDB();
         return Service.findOne({ slug, isActive: true })
             .populate('category', 'name slug')
-            .populate('relatedServices', 'title slug category shortDescription')
-            .populate('internalLinks.targetService', 'title slug')
+            .populate({
+                path: 'relatedServices',
+                select: 'title slug category shortDescription image',
+                populate: { path: 'category', select: 'name slug' },
+            })
+            .populate({
+                path: 'internalLinks.targetService',
+                select: 'title slug category',
+                populate: { path: 'category', select: 'name slug' },
+            })
             .lean();
     }
 
